@@ -19,19 +19,26 @@ class DashboardScreen extends ConsumerWidget {
     final canCreateTask = user?.role == 'client';
     final isTasker = user?.role == 'tasker';
     final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
+    final isDark = brightness == Brightness.dark;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 84,
+        elevation: 0,
+        scrolledUnderElevation: 2,
         centerTitle: false,
         titleSpacing: 20,
+        backgroundColor: Colors.transparent,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               l10n.dashboard,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w700,
                   ),
             ),
@@ -54,9 +61,19 @@ class DashboardScreen extends ConsumerWidget {
             tooltip: l10n.languageAction,
           ),
           const AppThemeModeButton(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none_rounded),
+          Container(
+            margin: const EdgeInsets.only(right: 4),
+            decoration: BoxDecoration(
+              color: isDark 
+                  ? colorScheme.primaryContainer.withValues(alpha: 0.2)
+                  : colorScheme.primaryContainer.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.notifications_none_rounded),
+              tooltip: l10n.notifications,
+            ),
           ),
           IconButton(
             onPressed: () async {
@@ -69,14 +86,33 @@ class DashboardScreen extends ConsumerWidget {
           const SizedBox(width: 4),
         ],
       ),
-      body: SafeArea(
-        bottom: false,
-        child: AppResponsiveCenter(
-          maxWidth: 920,
-          padding: EdgeInsets.zero,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 6, 20, 24),
-            children: [
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: isDark
+                ? [
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.15),
+                    colorScheme.surface,
+                    colorScheme.surface,
+                  ]
+                : [
+                    colorScheme.primaryContainer.withValues(alpha: 0.25),
+                    colorScheme.surface,
+                    colorScheme.surface,
+                  ],
+            stops: const [0.0, 0.35, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          bottom: false,
+          child: AppResponsiveCenter(
+            maxWidth: 920,
+            padding: EdgeInsets.zero,
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(20, 90, 20, 24),
+              children: [
               AppHeroPromoCard(
                 title: isTasker ? 'Ready to take on new tasks today?' : l10n.promoTodayTitle,
                 subtitle: isTasker ? 'Browse nearby, high-priority jobs matched to your skills.' : l10n.promoTodaySubtitle,
