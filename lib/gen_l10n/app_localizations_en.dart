@@ -1,0 +1,1109 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appName => 'lem3alam';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get register => 'Create account';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get requiredField => 'Required';
+
+  @override
+  String get passwordTooShort => 'Minimum 8 characters';
+
+  @override
+  String get passwordMismatch => 'Passwords do not match';
+
+  @override
+  String get passwordConfirm => 'Confirm password';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get client => 'Client';
+
+  @override
+  String get tasker => 'Tasker';
+
+  @override
+  String get dashboard => 'Dashboard';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get welcomeBack => 'Welcome back';
+
+  @override
+  String get loginSubtitle => 'Sign in to access your account';
+
+  @override
+  String get createAccountTitle => 'Create your account';
+
+  @override
+  String get createAccountSubtitle =>
+      'Enter your details to create a new account';
+
+  @override
+  String get tasks => 'Tasks';
+
+  @override
+  String get tasksSubtitle => 'Browse tasks';
+
+  @override
+  String get createTask => 'Create task';
+
+  @override
+  String get editTask => 'Edit task';
+
+  @override
+  String get taskDetails => 'Task details';
+
+  @override
+  String get deleteTask => 'Delete task';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get applyToTask => 'Apply to task';
+
+  @override
+  String get proposal => 'Proposal';
+
+  @override
+  String get proposedBudget => 'Proposed budget';
+
+  @override
+  String get estimatedDuration => 'Estimated duration';
+
+  @override
+  String get submitApplication => 'Submit application';
+
+  @override
+  String get applicationSubmitted => 'Application submitted';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirmDeleteTask => 'Are you sure you want to delete this task?';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get unableToLoad => 'Unable to load data';
+
+  @override
+  String get emptyTasksTitle => 'No tasks';
+
+  @override
+  String get emptyTasksSubtitle => 'Create a new task or refresh the page.';
+
+  @override
+  String get shortcuts => 'Shortcuts';
+
+  @override
+  String get tip => 'Tip';
+
+  @override
+  String get tipText => 'Start by creating a task then choose the best offer.';
+
+  @override
+  String get remote => 'Remote';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get addressOptional => 'Address (optional)';
+
+  @override
+  String get budgetMin => 'Minimum budget';
+
+  @override
+  String get budgetMax => 'Maximum budget';
+
+  @override
+  String get budgetType => 'Budget type';
+
+  @override
+  String get urgency => 'Urgency';
+
+  @override
+  String get paymentMethodOptional => 'Payment method (optional)';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get card => 'Card';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get fixed => 'Fixed';
+
+  @override
+  String get hourly => 'Hourly';
+
+  @override
+  String get negotiable => 'Negotiable';
+
+  @override
+  String get urgencyLow => 'Low';
+
+  @override
+  String get urgencyMedium => 'Medium';
+
+  @override
+  String get urgencyHigh => 'High';
+
+  @override
+  String get urgencyUrgent => 'Urgent';
+
+  @override
+  String get statusOpen => 'Open';
+
+  @override
+  String get statusAssigned => 'Assigned';
+
+  @override
+  String get statusInProgress => 'In progress';
+
+  @override
+  String get statusCompleted => 'Completed';
+
+  @override
+  String get statusCancelled => 'Cancelled';
+
+  @override
+  String get lang => 'Language';
+
+  @override
+  String get langAr => 'Arabic';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get langFr => 'French';
+
+  @override
+  String get languageAction => 'Language';
+
+  @override
+  String get refreshAction => 'Refresh';
+
+  @override
+  String get reload => 'Reload';
+
+  @override
+  String get popularCategories => 'Popular categories';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get browseTasksByCategory => 'Browse tasks by category';
+
+  @override
+  String get nearbyArtisans => 'Nearby artisans';
+
+  @override
+  String get seeTaskersOnMap => 'See taskers on the map';
+
+  @override
+  String get nearbyTasks => 'Nearby tasks';
+
+  @override
+  String get jobsMatchedToYourLocation => 'Jobs matched to your location';
+
+  @override
+  String get myProfile => 'My profile';
+
+  @override
+  String get publicTaskerProfile => 'Public tasker profile';
+
+  @override
+  String get myReviews => 'My reviews';
+
+  @override
+  String get ratingsAndFeedback => 'Ratings & feedback';
+
+  @override
+  String get hello => 'Hello';
+
+  @override
+  String helloName(Object name) {
+    return 'Hello, $name';
+  }
+
+  @override
+  String get photos => 'Photos';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get addPhotosHelper =>
+      'Add up to 5 photos to help taskers understand the job.';
+
+  @override
+  String get locationSelected => 'Location selected';
+
+  @override
+  String get pickOnMap => 'Pick on map';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get cameraCaptureNotAvailableOnWeb =>
+      'Camera capture is not available on web';
+
+  @override
+  String get maxTaskPhotos => 'You can attach up to 5 photos';
+
+  @override
+  String get cameraPermission => 'Camera permission';
+
+  @override
+  String get cameraPermissionPermanentlyDenied =>
+      'Camera permission is permanently denied. Please enable it in Settings.';
+
+  @override
+  String get cameraPermissionRequired =>
+      'Camera permission is required to take photos.';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get openSettings => 'Open Settings';
+
+  @override
+  String cameraError(Object error) {
+    return 'Camera error: $error';
+  }
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get switchCamera => 'Switch camera';
+
+  @override
+  String get noCameraFound => 'No camera found on this device.';
+
+  @override
+  String get retake => 'Retake';
+
+  @override
+  String get usePhoto => 'Use Photo';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get viewProfile => 'View profile';
+
+  @override
+  String newHighPriorityNearbyTasksFound(int count) {
+    return '$count new high-priority nearby task(s) found.';
+  }
+
+  @override
+  String get enableNearbyTaskMatching => 'Enable nearby task matching';
+
+  @override
+  String get nearbyTasksConsentSubtitle =>
+      'We only use your location after you consent, and the feed refreshes at a battery-friendly interval.';
+
+  @override
+  String get nearbyTasksConsentBody =>
+      'Location is used to find nearby jobs within your chosen radius and improve task relevance based on your tasker profile.';
+
+  @override
+  String get allowLocationBasedNearbyTasks =>
+      'Allow location-based nearby tasks';
+
+  @override
+  String get feedControls => 'Feed controls';
+
+  @override
+  String radiusAdjustable(int min, int max) {
+    return 'Radius is adjustable from ${min}km to ${max}km.';
+  }
+
+  @override
+  String lastRefreshedAt(Object time) {
+    return 'Last refreshed $time';
+  }
+
+  @override
+  String radiusLabel(int radius) {
+    return 'Radius: $radius km';
+  }
+
+  @override
+  String get savedOnly => 'Saved only';
+
+  @override
+  String get savedStatus => 'Saved';
+
+  @override
+  String get locationAccuracyLow =>
+      'Location accuracy is currently low. Move to an open area or refresh for better nearby matching.';
+
+  @override
+  String get noNearbyTasks => 'No nearby tasks';
+
+  @override
+  String get noNearbyTasksSubtitle =>
+      'Try increasing the radius or switch back from saved-only mode.';
+
+  @override
+  String get locationDisabled => 'Location disabled';
+
+  @override
+  String get locationServicesRequired => 'Please enable GPS/location services.';
+
+  @override
+  String get locationDisabledNearbyTasksMessage =>
+      'Please enable device location services to keep nearby tasks accurate.';
+
+  @override
+  String get permissionRequired => 'Permission required';
+
+  @override
+  String get permissionBlocked => 'Permission blocked';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'Location permission is permanently denied. Enable it in Settings.';
+
+  @override
+  String get locationPermissionRequiredNearbyArtisans =>
+      'Location permission is required to show nearby artisans.';
+
+  @override
+  String get allowLocationAccessNearbyTasks =>
+      'Allow location access to load nearby tasks.';
+
+  @override
+  String get enablePermissionInSettings =>
+      'Location permission was denied permanently. Enable it in app settings.';
+
+  @override
+  String get unableToLoadNearbyTasks => 'Unable to load nearby tasks';
+
+  @override
+  String get distanceUnavailable => 'Distance n/a';
+
+  @override
+  String clientRatingLabel(Object rating) {
+    return 'Client $rating';
+  }
+
+  @override
+  String get applicationSubmittedNearbyTask =>
+      'Application submitted for this nearby task.';
+
+  @override
+  String get accept => 'Accept';
+
+  @override
+  String get dismiss => 'Dismiss';
+
+  @override
+  String get goToHome => 'Go to home';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get openLocationSettings => 'Open Location Settings';
+
+  @override
+  String get loginRequired => 'Login required';
+
+  @override
+  String get couldNotLoadNearbyArtisans => 'Could not load nearby artisans.';
+
+  @override
+  String get noLocation => 'No location';
+
+  @override
+  String get artisans => 'Artisans';
+
+  @override
+  String get noArtisansFoundNearby => 'No artisans found nearby.';
+
+  @override
+  String get go => 'Go';
+
+  @override
+  String get center => 'Center';
+
+  @override
+  String get directions => 'Directions';
+
+  @override
+  String distanceAway(Object distance) {
+    return '$distance km away';
+  }
+
+  @override
+  String get couldNotOpenNavigationApp => 'Could not open navigation app.';
+
+  @override
+  String get goToFirstPage => 'Go to first page';
+
+  @override
+  String get goToPreviousPage => 'Go to previous page';
+
+  @override
+  String get goToNextPage => 'Go to next page';
+
+  @override
+  String get goToLastPage => 'Go to last page';
+
+  @override
+  String get reviews => 'Reviews';
+
+  @override
+  String get noReviews => 'No reviews';
+
+  @override
+  String get noReviewsMatchFilters => 'No reviews match your filters.';
+
+  @override
+  String get allRatings => 'All ratings';
+
+  @override
+  String starsCount(int count) {
+    return '$count stars';
+  }
+
+  @override
+  String get oneStar => '1 star';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get sort => 'Sort';
+
+  @override
+  String get newest => 'Newest';
+
+  @override
+  String get oldest => 'Oldest';
+
+  @override
+  String get highestRating => 'Highest rating';
+
+  @override
+  String get lowestRating => 'Lowest rating';
+
+  @override
+  String get fromDate => 'From';
+
+  @override
+  String get toDate => 'To';
+
+  @override
+  String get clearDates => 'Clear dates';
+
+  @override
+  String get anonymous => 'Anonymous';
+
+  @override
+  String get taskerProfile => 'Tasker Profile';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get noBioProvided => 'No bio provided.';
+
+  @override
+  String get seeAll => 'See all';
+
+  @override
+  String get greetingMorning => 'Good morning,';
+
+  @override
+  String get greetingEvening => 'Good evening,';
+
+  @override
+  String get searchTasksHint => 'Search services or tasks...';
+
+  @override
+  String get promoTodayTitle => 'Need help with something today?';
+
+  @override
+  String get promoTodaySubtitle => 'Book trusted experts in minutes.';
+
+  @override
+  String get bookNow => 'Book now';
+
+  @override
+  String get recommendedForYou => 'Recommended for you';
+
+  @override
+  String get pickedForYourNeeds => 'Based on your activity and location';
+
+  @override
+  String get inCategory => 'Selected in this category';
+
+  @override
+  String get allTasks => 'All tasks';
+
+  @override
+  String tasksAvailableCount(int count) {
+    return '$count available';
+  }
+
+  @override
+  String get nearby => 'Near me';
+
+  @override
+  String get needService => 'I need a service';
+
+  @override
+  String get needServiceSubtitle => 'Book a professional in minutes.';
+
+  @override
+  String get wantWork => 'I want to work';
+
+  @override
+  String get wantWorkSubtitle => 'Offer your services and earn.';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get personalInformation => 'Personal information';
+
+  @override
+  String get personalInformationSubtitle =>
+      'We\'ll use this to build your profile.';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get securitySubtitle => 'Use a strong, unique password.';
+
+  @override
+  String get noAccountYet => 'Don\'t have an account?';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get passwordHint =>
+      'Use 8+ characters with a mix of letters, numbers, and symbols.';
+
+  @override
+  String reviewsCount(Object rating, int count) {
+    return '$rating · $count reviews';
+  }
+
+  @override
+  String get noReviewsYet => 'No reviews yet.';
+
+  @override
+  String get whatPeopleSayAboutThisTasker =>
+      'What people say about this tasker.';
+
+  @override
+  String get available => 'Available';
+
+  @override
+  String get busy => 'Busy';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get bookService => 'Book Service';
+
+  @override
+  String serviceRequestForName(Object name) {
+    return 'Service request for $name';
+  }
+
+  @override
+  String bookServiceDescription(Object name) {
+    return 'Hi $name, I would like to book a service. Please contact me.';
+  }
+
+  @override
+  String get noPhoneNumber => 'No phone number';
+
+  @override
+  String get serviceArea => 'Service area';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get pricing => 'Pricing';
+
+  @override
+  String get verification => 'Verification';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get verified => 'Verified';
+
+  @override
+  String get unverified => 'Unverified';
+
+  @override
+  String get skills => 'Skills';
+
+  @override
+  String get noSkillsListed => 'No skills listed.';
+
+  @override
+  String yearsCount(int count) {
+    return '$count years';
+  }
+
+  @override
+  String get availability => 'Availability';
+
+  @override
+  String get availableToTakeNewWork => 'Available to take new work';
+
+  @override
+  String get currentlyBusy => 'Currently busy';
+
+  @override
+  String get social => 'Social';
+
+  @override
+  String get noSocialAccounts => 'No social accounts.';
+
+  @override
+  String get gallery => 'Gallery';
+
+  @override
+  String get noPhotosYet => 'No photos yet.';
+
+  @override
+  String get noCategories => 'No categories';
+
+  @override
+  String get tryAgainLater => 'Try again later.';
+
+  @override
+  String get pickLocation => 'Pick location';
+
+  @override
+  String get confirmLocation => 'Confirm location';
+
+  @override
+  String get locationPermissionRequiredToPick =>
+      'Location permission is required to pick a location.';
+
+  @override
+  String get couldNotLoadMap => 'Could not load map.';
+
+  @override
+  String get searchUsers => 'Search users';
+
+  @override
+  String get searchCity => 'Search city';
+
+  @override
+  String get adminWorkspace => 'Admin Workspace';
+
+  @override
+  String get overview => 'Overview';
+
+  @override
+  String get users => 'Users';
+
+  @override
+  String get reports => 'Reports';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String signedInAs(Object email, Object role) {
+    return 'Signed in as $email ($role)';
+  }
+
+  @override
+  String get usersMetric => 'Users';
+
+  @override
+  String get tasksMetric => 'Tasks';
+
+  @override
+  String get openDisputes => 'Open disputes';
+
+  @override
+  String get revenue => 'Revenue';
+
+  @override
+  String get operationalSnapshot => 'Operational snapshot';
+
+  @override
+  String get operationalSnapshotSubtitle =>
+      'Matches the backend admin datasets already used by the web app.';
+
+  @override
+  String get verifiedUsersLoadedPage => 'Verified users on loaded page';
+
+  @override
+  String get openReportsLoadedPage => 'Open reports on loaded page';
+
+  @override
+  String get mobileAdminParityPhase => 'Mobile admin parity phase';
+
+  @override
+  String get overviewModerationReports => 'Overview, moderation, reports';
+
+  @override
+  String get unableToLoadAdminOverview => 'Unable to load admin overview';
+
+  @override
+  String get checkConnectionOrAdminPermissions =>
+      'Check your connection or admin permissions, then try again.';
+
+  @override
+  String get userModeration => 'User Moderation';
+
+  @override
+  String loadedUsersFromAdminApi(int loaded, int total) {
+    return 'Loaded $loaded of $total users from the admin API.';
+  }
+
+  @override
+  String get noUsersFound => 'No users found';
+
+  @override
+  String get tryDifferentSearchOrRefresh =>
+      'Try a different search term or refresh the page.';
+
+  @override
+  String get unableToLoadUsers => 'Unable to load users';
+
+  @override
+  String get adminUsersEndpointFailed =>
+      'The admin users endpoint failed to respond.';
+
+  @override
+  String get reportsComplaints => 'Reports & Complaints';
+
+  @override
+  String loadedReportsFromSharedBackend(int loaded, int total) {
+    return 'Loaded $loaded of $total reports from the shared backend.';
+  }
+
+  @override
+  String get noReportsFound => 'No reports found';
+
+  @override
+  String get noUserReportsToModerate =>
+      'There are no user reports to moderate right now.';
+
+  @override
+  String get unableToLoadReports => 'Unable to load reports';
+
+  @override
+  String get adminReportsEndpointFailed =>
+      'The admin reports endpoint failed to respond.';
+
+  @override
+  String get nearbyTaskSettingsUpdated => 'Nearby task settings updated.';
+
+  @override
+  String get nearbyTaskControls => 'Nearby task controls';
+
+  @override
+  String get nearbyTaskControlsSubtitle =>
+      'Adjust default radius, limits, refresh cadence, and priority alerts for taskers.';
+
+  @override
+  String get defaultRadiusKm => 'Default radius (km)';
+
+  @override
+  String get minimumRadiusKm => 'Minimum radius (km)';
+
+  @override
+  String get maximumRadiusKm => 'Maximum radius (km)';
+
+  @override
+  String get refreshIntervalMinutes => 'Refresh interval (minutes)';
+
+  @override
+  String get notifyFromUrgency => 'Notify from urgency';
+
+  @override
+  String get enableHighPriorityAlerts => 'Enable high-priority alerts';
+
+  @override
+  String get saveSettings => 'Save settings';
+
+  @override
+  String get unableToLoadSettings => 'Unable to load settings';
+
+  @override
+  String get nearbyTaskSettingsEndpointFailed =>
+      'The nearby task settings endpoint failed to respond.';
+
+  @override
+  String get noDescriptionProvided => 'No description provided.';
+
+  @override
+  String get verifyAction => 'Verify';
+
+  @override
+  String get ban => 'Ban';
+
+  @override
+  String get unban => 'Unban';
+
+  @override
+  String get suspend7Days => 'Suspend 7 days';
+
+  @override
+  String get unsuspend => 'Unsuspend';
+
+  @override
+  String get resolve => 'Resolve';
+
+  @override
+  String get mondayShort => 'Mon';
+
+  @override
+  String get tuesdayShort => 'Tue';
+
+  @override
+  String get wednesdayShort => 'Wed';
+
+  @override
+  String get thursdayShort => 'Thu';
+
+  @override
+  String get fridayShort => 'Fri';
+
+  @override
+  String get saturdayShort => 'Sat';
+
+  @override
+  String get sundayShort => 'Sun';
+
+  @override
+  String get errNetwork =>
+      'Couldn\'t reach the server. Check your internet and try again.';
+
+  @override
+  String get errTimeout => 'Connection timed out. Try again.';
+
+  @override
+  String get errCancelled => 'Request cancelled.';
+
+  @override
+  String get errUnauthorized => 'You need to login to continue.';
+
+  @override
+  String get errForbidden => 'You don\'t have permission to do that.';
+
+  @override
+  String get errNotFound => 'Resource not found.';
+
+  @override
+  String get errServer => 'Server error. Please try later.';
+
+  @override
+  String get errUnknown => 'Something went wrong. Please try again.';
+
+  @override
+  String get chat => 'Chat';
+
+  @override
+  String get readMore => 'Read more';
+
+  @override
+  String get readLess => 'Read less';
+
+  @override
+  String get services => 'Services';
+
+  @override
+  String get topRated => 'Top Rated';
+
+  @override
+  String verifiedYears(int count) {
+    return '$count+ Years';
+  }
+
+  @override
+  String get verifiedIdentity => 'Verified';
+
+  @override
+  String daysAgo(int count) {
+    return '$count days ago';
+  }
+
+  @override
+  String weeksAgo(int count) {
+    return '$count weeks ago';
+  }
+
+  @override
+  String get writeReview => 'Write a review';
+
+  @override
+  String get helpful => 'Helpful';
+
+  @override
+  String get notHelpful => 'Not helpful';
+
+  @override
+  String showReviewsForRating(int rating) {
+    return 'Show $rating★ only';
+  }
+
+  @override
+  String get sortByNewest => 'Newest first';
+
+  @override
+  String get sortByTopRated => 'Top rated first';
+
+  @override
+  String get noCommentProvided => 'No comment provided.';
+
+  @override
+  String get shareYourExperience => 'Share your experience with this tasker…';
+
+  @override
+  String get submitReview => 'Submit review';
+
+  @override
+  String get selectRatingFirst => 'Select a rating first';
+
+  @override
+  String get notProvided => 'Not provided';
+
+  @override
+  String get acceptingNewBookings => 'Accepting new bookings';
+
+  @override
+  String get mon => 'Mon';
+
+  @override
+  String get tue => 'Tue';
+
+  @override
+  String get wed => 'Wed';
+
+  @override
+  String get thu => 'Thu';
+
+  @override
+  String get fri => 'Fri';
+
+  @override
+  String get sat => 'Sat';
+
+  @override
+  String get sun => 'Sun';
+
+  @override
+  String get unavailable => 'Unavailable';
+
+  @override
+  String get socialLinks => 'Social links';
+
+  @override
+  String get portfolio => 'Portfolio';
+
+  @override
+  String portfolioSubtitle(int count) {
+    return '$count works';
+  }
+
+  @override
+  String get availableTodayHint => 'Available today';
+
+  @override
+  String get features => 'What I bring';
+
+  @override
+  String get statJobsCompleted => 'Jobs completed';
+
+  @override
+  String get statResponseTime => 'Response time';
+
+  @override
+  String get statCompletionRate => 'Completion rate';
+
+  @override
+  String get slotMorning => 'Morning';
+
+  @override
+  String get slotAfternoon => 'Afternoon';
+
+  @override
+  String get slotEvening => 'Evening';
+}

@@ -1,0 +1,494 @@
+{
+  "@@locale": "fr",
+  "appName": "lem3alam",
+  "loading": "Chargement...",
+  "login": "Connexion",
+  "register": "Créer un compte",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "requiredField": "Obligatoire",
+  "passwordTooShort": "Minimum 8 caractères",
+  "passwordMismatch": "Les mots de passe ne correspondent pas",
+  "passwordConfirm": "Confirmer le mot de passe",
+  "name": "Nom",
+  "phone": "Téléphone",
+  "city": "Ville",
+  "role": "Rôle",
+  "client": "Client",
+  "tasker": "Prestataire",
+  "dashboard": "Tableau de bord",
+  "logout": "Déconnexion",
+  "welcomeBack": "Bon retour",
+  "loginSubtitle": "Connectez-vous pour accéder à votre compte",
+  "createAccountTitle": "Créez votre compte",
+  "createAccountSubtitle": "Saisissez vos informations pour créer un compte",
+  "tasks": "Tâches",
+  "tasksSubtitle": "Parcourir les tâches",
+  "createTask": "Créer une tâche",
+  "editTask": "Modifier la tâche",
+  "taskDetails": "Détails de la tâche",
+  "deleteTask": "Supprimer la tâche",
+  "apply": "Postuler",
+  "applyToTask": "Postuler à la tâche",
+  "proposal": "Proposition",
+  "proposedBudget": "Budget proposé",
+  "estimatedDuration": "Durée estimée",
+  "submitApplication": "Envoyer la proposition",
+  "applicationSubmitted": "Proposition envoyée",
+  "delete": "Supprimer",
+  "cancel": "Annuler",
+  "confirmDeleteTask": "Êtes-vous sûr de vouloir supprimer cette tâche ?",
+  "retry": "Réessayer",
+  "unableToLoad": "Impossible de charger les données",
+  "emptyTasksTitle": "Aucune tâche",
+  "emptyTasksSubtitle": "Créez une nouvelle tâche ou actualisez la page.",
+  "shortcuts": "Raccourcis",
+  "tip": "Astuce",
+  "tipText": "Commencez par créer une tâche puis choisissez la meilleure offre.",
+  "remote": "À distance",
+  "title": "Titre",
+  "description": "Description",
+  "category": "Catégorie",
+  "addressOptional": "Adresse (optionnel)",
+  "budgetMin": "Budget minimum",
+  "budgetMax": "Budget maximum",
+  "budgetType": "Type de budget",
+  "urgency": "Urgence",
+  "paymentMethodOptional": "Mode de paiement (optionnel)",
+  "cash": "Espèces",
+  "card": "Carte",
+  "online": "En ligne",
+  "save": "Enregistrer",
+  "fixed": "Fixe",
+  "hourly": "Horaire",
+  "negotiable": "Négociable",
+  "urgencyLow": "Faible",
+  "urgencyMedium": "Moyenne",
+  "urgencyHigh": "Élevée",
+  "urgencyUrgent": "Urgente",
+  "statusOpen": "Ouverte",
+  "statusAssigned": "Assignée",
+  "statusInProgress": "En cours",
+  "statusCompleted": "Terminée",
+  "statusCancelled": "Annulée",
+  "lang": "Langue",
+  "langAr": "Arabe",
+  "langEn": "Anglais",
+  "langFr": "Français",
+  "languageAction": "Langue",
+  "refreshAction": "Actualiser",
+  "reload": "Recharger",
+  "popularCategories": "Catégories populaires",
+  "all": "Toutes",
+  "categories": "Catégories",
+  "browseTasksByCategory": "Parcourir les tâches par catégorie",
+  "nearbyArtisans": "Artisans à proximité",
+  "seeTaskersOnMap": "Voir les prestataires sur la carte",
+  "nearbyTasks": "Tâches à proximité",
+  "jobsMatchedToYourLocation": "Tâches adaptées à votre position",
+  "myProfile": "Mon profil",
+  "publicTaskerProfile": "Profil public du prestataire",
+  "myReviews": "Mes avis",
+  "ratingsAndFeedback": "Notes et retours",
+  "hello": "Bonjour",
+  "helloName": "Bonjour, {name}",
+  "@helloName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "photos": "Photos",
+  "add": "Ajouter",
+  "addPhotosHelper": "Ajoutez jusqu'à 5 photos pour aider les prestataires à comprendre la mission.",
+  "locationSelected": "Position sélectionnée",
+  "pickOnMap": "Choisir sur la carte",
+  "clear": "Effacer",
+  "cameraCaptureNotAvailableOnWeb": "La capture photo n'est pas disponible sur le web",
+  "maxTaskPhotos": "Vous pouvez joindre jusqu'à 5 photos",
+  "cameraPermission": "Autorisation caméra",
+  "cameraPermissionPermanentlyDenied": "L'autorisation caméra est refusée de façon permanente. Veuillez l'activer dans les réglages.",
+  "cameraPermissionRequired": "L'autorisation caméra est nécessaire pour prendre des photos.",
+  "close": "Fermer",
+  "openSettings": "Ouvrir les réglages",
+  "cameraError": "Erreur caméra : {error}",
+  "@cameraError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "camera": "Caméra",
+  "switchCamera": "Changer de caméra",
+  "noCameraFound": "Aucune caméra trouvée sur cet appareil.",
+  "retake": "Reprendre",
+  "usePhoto": "Utiliser la photo",
+  "location": "Position",
+  "viewProfile": "Voir le profil",
+  "newHighPriorityNearbyTasksFound": "{count} nouvelle(s) tâche(s) proche(s) à haute priorité trouvée(s).",
+  "@newHighPriorityNearbyTasksFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "enableNearbyTaskMatching": "Activer la détection des tâches à proximité",
+  "nearbyTasksConsentSubtitle": "Nous utilisons votre position uniquement après votre consentement, et le flux se rafraîchit à un rythme respectueux de la batterie.",
+  "nearbyTasksConsentBody": "La position sert à trouver des missions proches dans le rayon choisi et à améliorer la pertinence selon votre profil de prestataire.",
+  "allowLocationBasedNearbyTasks": "Autoriser les tâches proches basées sur la position",
+  "feedControls": "Contrôles du flux",
+  "radiusAdjustable": "Le rayon peut être ajusté de {min} km à {max} km.",
+  "@radiusAdjustable": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "lastRefreshedAt": "Dernière actualisation {time}",
+  "@lastRefreshedAt": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "radiusLabel": "Rayon : {radius} km",
+  "@radiusLabel": {
+    "placeholders": {
+      "radius": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOnly": "Enregistrées uniquement",
+  "savedStatus": "Enregistrée",
+  "locationAccuracyLow": "La précision de la position est actuellement faible. Déplacez-vous dans un endroit dégagé ou actualisez pour de meilleurs résultats.",
+  "noNearbyTasks": "Aucune tâche à proximité",
+  "noNearbyTasksSubtitle": "Essayez d'augmenter le rayon ou de désactiver le mode enregistrées uniquement.",
+  "locationDisabled": "Localisation désactivée",
+  "locationServicesRequired": "Veuillez activer les services GPS/localisation.",
+  "locationDisabledNearbyTasksMessage": "Veuillez activer les services de localisation pour garder les tâches proches précises.",
+  "permissionRequired": "Autorisation requise",
+  "permissionBlocked": "Autorisation bloquée",
+  "locationPermissionPermanentlyDenied": "L'autorisation de localisation est refusée définitivement. Activez-la dans les réglages.",
+  "locationPermissionRequiredNearbyArtisans": "L'autorisation de localisation est requise pour afficher les artisans proches.",
+  "allowLocationAccessNearbyTasks": "Autorisez l'accès à la position pour charger les tâches proches.",
+  "enablePermissionInSettings": "L'autorisation de localisation a été refusée définitivement. Activez-la dans les réglages de l'application.",
+  "unableToLoadNearbyTasks": "Impossible de charger les tâches proches",
+  "distanceUnavailable": "Distance indisponible",
+  "clientRatingLabel": "Client {rating}",
+  "@clientRatingLabel": {
+    "placeholders": {
+      "rating": {}
+    }
+  },
+  "applicationSubmittedNearbyTask": "Candidature envoyée pour cette tâche proche.",
+  "accept": "Accepter",
+  "dismiss": "Ignorer",
+  "goToHome": "Aller à l'accueil",
+  "home": "Accueil",
+  "openLocationSettings": "Ouvrir les réglages de localisation",
+  "loginRequired": "Connexion requise",
+  "couldNotLoadNearbyArtisans": "Impossible de charger les artisans proches.",
+  "noLocation": "Aucune position",
+  "artisans": "Artisans",
+  "noArtisansFoundNearby": "Aucun artisan trouvé à proximité.",
+  "go": "Aller",
+  "center": "Centrer",
+  "directions": "Itinéraire",
+  "distanceAway": "À {distance} km",
+  "@distanceAway": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "couldNotOpenNavigationApp": "Impossible d'ouvrir l'application de navigation.",
+  "goToFirstPage": "Aller à la première page",
+  "goToPreviousPage": "Aller à la page précédente",
+  "goToNextPage": "Aller à la page suivante",
+  "goToLastPage": "Aller à la dernière page",
+  "reviews": "Avis",
+  "noReviews": "Aucun avis",
+  "noReviewsMatchFilters": "Aucun avis ne correspond à vos filtres.",
+  "allRatings": "Toutes les notes",
+  "starsCount": "{count} étoiles",
+  "@starsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "oneStar": "1 étoile",
+  "rating": "Note",
+  "sort": "Tri",
+  "newest": "Plus récents",
+  "oldest": "Plus anciens",
+  "highestRating": "Meilleure note",
+  "lowestRating": "Note la plus basse",
+  "fromDate": "Du",
+  "toDate": "Au",
+  "clearDates": "Effacer les dates",
+  "anonymous": "Anonyme",
+  "taskerProfile": "Profil du prestataire",
+  "about": "À propos",
+  "noBioProvided": "Aucune biographie fournie.",
+  "seeAll": "Voir tout",
+  "greetingMorning": "Bonjour,",
+  "greetingEvening": "Bonsoir,",
+  "searchTasksHint": "Rechercher un service ou une tâche...",
+  "promoTodayTitle": "Besoin d'aide aujourd'hui ?",
+  "promoTodaySubtitle": "Réservez un expert de confiance en quelques minutes.",
+  "bookNow": "Réserver maintenant",
+  "recommendedForYou": "Recommandé pour vous",
+  "pickedForYourNeeds": "Basé sur votre activité et votre localisation",
+  "inCategory": "Sélectionné dans cette catégorie",
+  "allTasks": "Toutes les tâches",
+  "tasksAvailableCount": "{count} disponibles",
+  "@tasksAvailableCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "nearby": "Proche de moi",
+  "needService": "Je cherche un service",
+  "needServiceSubtitle": "Réservez un professionnel en quelques minutes.",
+  "wantWork": "Je veux travailler",
+  "wantWorkSubtitle": "Proposez vos services et gagnez de l'argent.",
+  "more": "Plus",
+  "personalInformation": "Informations personnelles",
+  "personalInformationSubtitle": "Nous utiliserons ces informations pour créer votre profil.",
+  "security": "Sécurité",
+  "securitySubtitle": "Utilisez un mot de passe fort et unique.",
+  "noAccountYet": "Vous n'avez pas de compte ?",
+  "alreadyHaveAccount": "Vous avez déjà un compte ?",
+  "passwordHint": "Utilisez 8 caractères minimum, avec des lettres, chiffres et symboles.",
+  "reviewsCount": "{rating} · {count} avis",
+  "@reviewsCount": {
+    "placeholders": {
+      "rating": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noReviewsYet": "Aucun avis pour le moment.",
+  "whatPeopleSayAboutThisTasker": "Ce que les gens disent de ce prestataire.",
+  "available": "Disponible",
+  "busy": "Occupé",
+  "contact": "Contacter",
+  "bookService": "Réserver un service",
+  "serviceRequestForName": "Demande de service pour {name}",
+  "@serviceRequestForName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "bookServiceDescription": "Bonjour {name}, je souhaite réserver un service. Merci de me contacter.",
+  "@bookServiceDescription": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "noPhoneNumber": "Aucun numéro de téléphone",
+  "serviceArea": "Zone de service",
+  "address": "Adresse",
+  "pricing": "Tarification",
+  "verification": "Vérification",
+  "details": "Détails",
+  "verified": "Vérifié",
+  "unverified": "Non vérifié",
+  "skills": "Compétences",
+  "noSkillsListed": "Aucune compétence renseignée.",
+  "yearsCount": "{count} ans",
+  "@yearsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availability": "Disponibilité",
+  "availableToTakeNewWork": "Disponible pour de nouveaux travaux",
+  "currentlyBusy": "Actuellement occupé",
+  "social": "Réseaux sociaux",
+  "noSocialAccounts": "Aucun compte social.",
+  "gallery": "Galerie",
+  "noPhotosYet": "Aucune photo pour le moment.",
+  "noCategories": "Aucune catégorie",
+  "tryAgainLater": "Réessayez plus tard.",
+  "pickLocation": "Choisir l'emplacement",
+  "confirmLocation": "Confirmer l'emplacement",
+  "locationPermissionRequiredToPick": "L'autorisation de localisation est requise pour choisir un emplacement.",
+  "couldNotLoadMap": "Impossible de charger la carte.",
+  "searchUsers": "Rechercher des utilisateurs",
+  "searchCity": "Rechercher une ville",
+  "adminWorkspace": "Espace administrateur",
+  "overview": "Vue d'ensemble",
+  "users": "Utilisateurs",
+  "reports": "Signalements",
+  "settings": "Paramètres",
+  "signedInAs": "Connecté en tant que {email} ({role})",
+  "@signedInAs": {
+    "placeholders": {
+      "email": {},
+      "role": {}
+    }
+  },
+  "usersMetric": "Utilisateurs",
+  "tasksMetric": "Tâches",
+  "openDisputes": "Litiges ouverts",
+  "revenue": "Revenus",
+  "operationalSnapshot": "Aperçu opérationnel",
+  "operationalSnapshotSubtitle": "Correspond aux données admin déjà utilisées par la version web.",
+  "verifiedUsersLoadedPage": "Utilisateurs vérifiés sur la page chargée",
+  "openReportsLoadedPage": "Signalements ouverts sur la page chargée",
+  "mobileAdminParityPhase": "Phase de parité admin mobile",
+  "overviewModerationReports": "Vue d'ensemble, modération, signalements",
+  "unableToLoadAdminOverview": "Impossible de charger l'aperçu administrateur",
+  "checkConnectionOrAdminPermissions": "Vérifiez votre connexion ou vos droits administrateur, puis réessayez.",
+  "userModeration": "Modération des utilisateurs",
+  "loadedUsersFromAdminApi": "{loaded} utilisateurs chargés sur {total} depuis l'API admin.",
+  "@loadedUsersFromAdminApi": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noUsersFound": "Aucun utilisateur trouvé",
+  "tryDifferentSearchOrRefresh": "Essayez un autre terme de recherche ou actualisez la page.",
+  "unableToLoadUsers": "Impossible de charger les utilisateurs",
+  "adminUsersEndpointFailed": "Le point d'accès admin des utilisateurs n'a pas répondu.",
+  "reportsComplaints": "Signalements et réclamations",
+  "loadedReportsFromSharedBackend": "{loaded} signalements chargés sur {total} depuis le backend partagé.",
+  "@loadedReportsFromSharedBackend": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noReportsFound": "Aucun signalement trouvé",
+  "noUserReportsToModerate": "Il n'y a actuellement aucun signalement utilisateur à modérer.",
+  "unableToLoadReports": "Impossible de charger les signalements",
+  "adminReportsEndpointFailed": "Le point d'accès admin des signalements n'a pas répondu.",
+  "nearbyTaskSettingsUpdated": "Les paramètres des tâches proches ont été mis à jour.",
+  "nearbyTaskControls": "Contrôles des tâches proches",
+  "nearbyTaskControlsSubtitle": "Ajustez le rayon par défaut, les limites, la fréquence de rafraîchissement et les alertes prioritaires pour les prestataires.",
+  "defaultRadiusKm": "Rayon par défaut (km)",
+  "minimumRadiusKm": "Rayon minimum (km)",
+  "maximumRadiusKm": "Rayon maximum (km)",
+  "refreshIntervalMinutes": "Intervalle d'actualisation (minutes)",
+  "notifyFromUrgency": "Notifier à partir de l'urgence",
+  "enableHighPriorityAlerts": "Activer les alertes haute priorité",
+  "saveSettings": "Enregistrer les paramètres",
+  "unableToLoadSettings": "Impossible de charger les paramètres",
+  "nearbyTaskSettingsEndpointFailed": "Le point d'accès des paramètres des tâches proches n'a pas répondu.",
+  "noDescriptionProvided": "Aucune description fournie.",
+  "verifyAction": "Vérifier",
+  "ban": "Bannir",
+  "unban": "Débannir",
+  "suspend7Days": "Suspendre 7 jours",
+  "unsuspend": "Lever la suspension",
+  "resolve": "Résoudre",
+  "mondayShort": "Lun",
+  "tuesdayShort": "Mar",
+  "wednesdayShort": "Mer",
+  "thursdayShort": "Jeu",
+  "fridayShort": "Ven",
+  "saturdayShort": "Sam",
+  "sundayShort": "Dim",
+  "errNetwork": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+  "errTimeout": "Délai de connexion dépassé. Réessayez.",
+  "errCancelled": "Requête annulée.",
+  "errUnauthorized": "Vous devez vous connecter pour continuer.",
+  "errForbidden": "Vous n'avez pas la permission.",
+  "errNotFound": "Ressource introuvable.",
+  "errServer": "Erreur serveur. Réessayez plus tard.",
+  "errUnknown": "Une erreur est survenue. Réessayez.",
+  "chat": "Discuter",
+  "readMore": "Lire la suite",
+  "readLess": "Réduire",
+  "services": "Services",
+  "topRated": "Top noté",
+  "verifiedYears": "{count}+ ans",
+  "@verifiedYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "verifiedIdentity": "Vérifié",
+  "daysAgo": "Il y a {count} jours",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeksAgo": "Il y a {count} semaines",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "writeReview": "Écrire un avis",
+  "helpful": "Utile",
+  "notHelpful": "Pas utile",
+  "showReviewsForRating": "Afficher {rating}★ seulement",
+  "@showReviewsForRating": {
+    "placeholders": {
+      "rating": {
+        "type": "int"
+      }
+    }
+  },
+  "sortByNewest": "Plus récents",
+  "sortByTopRated": "Mieux notés",
+  "noCommentProvided": "Aucun commentaire fourni.",
+  "shareYourExperience": "Partagez votre expérience avec ce prestataire…",
+  "submitReview": "Envoyer l'avis",
+  "selectRatingFirst": "Sélectionnez d'abord une note",
+  "notProvided": "Non renseigné",
+  "acceptingNewBookings": "Accepte de nouvelles réservations",
+  "mon": "Lun",
+  "tue": "Mar",
+  "wed": "Mer",
+  "thu": "Jeu",
+  "fri": "Ven",
+  "sat": "Sam",
+  "sun": "Dim",
+  "unavailable": "Indisponible",
+  "socialLinks": "Réseaux sociaux",
+  "portfolio": "Portfolio",
+  "portfolioSubtitle": "{count} réalisations",
+  "@portfolioSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availableTodayHint": "Disponible aujourd'hui",
+  "features": "Mes atouts",
+  "statJobsCompleted": "Tâches effectuées",
+  "statResponseTime": "Temps de réponse",
+  "statCompletionRate": "Taux de réussite",
+  "slotMorning": "Matin",
+  "slotAfternoon": "Après-midi",
+  "slotEvening": "Soir"
+}

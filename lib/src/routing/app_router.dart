@@ -1,0 +1,400 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
+
+import '../core/l10n/l10n.dart';
+import '../features/auth/presentation/auth_controller.dart';
+import '../features/auth/presentation/auth_state.dart';
+import '../features/admin/presentation/admin_home_screen.dart';
+import '../features/auth/presentation/login_screen.dart';
+import '../features/auth/presentation/register_screen.dart';
+import '../features/dashboard/presentation/dashboard_screen.dart';
+import '../features/dashboard/presentation/tasker_categories_screen.dart';
+import '../features/location/presentation/map_picker_screen.dart';
+import '../features/location/presentation/nearby_providers_map_screen.dart';
+import '../features/taskers/presentation/tasker_profile_screen.dart';
+import '../features/taskers/presentation/tasker_reviews_screen.dart';
+import '../features/tasks/presentation/task_detail_screen.dart';
+import '../features/tasks/presentation/task_form_screen.dart';
+import '../features/tasks/presentation/nearby_tasks_screen.dart';
+import '../features/tasks/presentation/task_list_screen.dart';
+import '../presentation/splash/splash_screen.dart';
+import 'router_notifier.dart';
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final _tasksBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'tasksBranch');
+final _dashboardBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboardBranch');
+
+abstract class AppRouteNames {
+  static const splash = 'splash';
+  static const login = 'login';
+  static const register = 'register';
+  static const adminHome = 'adminHome';
+
+  static const tasks = 'tasks';
+  static const taskCreate = 'taskCreate';
+  static const taskDetail = 'taskDetail';
+  static const taskEdit = 'taskEdit';
+
+  static const dashboard = 'dashboard';
+  static const dashboardCategories = 'dashboardCategories';
+  static const nearbyProvidersMap = 'nearbyProvidersMap';
+  static const nearbyTasks = 'nearbyTasks';
+  static const mapPicker = 'mapPicker';
+
+  static const taskerProfile = 'taskerProfile';
+  static const taskerReviews = 'taskerReviews';
+}
+
+final goRouterProvider = Provider<GoRouter>((ref) {
+  final notifier = ref.watch(routerNotifierProvider);
+
+  return GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: '/splash',
+    refreshListenable: notifier,
+    redirect: (context, state) {
+      final auth = notifier.authState;
+      final splash = notifier.splashState;
+
+      final location = state.uri.path;
+      final isSplash = location == '/splash';
+      final isAuthRoute = location == '/login' || location == '/register';
+      final isAdminHome = location == '/admin';
+      final isTaskList = location == '/tasks';
+      final isTaskDetail = RegExp(r'^/tasks/\d+$').hasMatch(location);
+      final isNearbyTasks = location == '/nearby-tasks';
+      final isTaskerProfile = RegExp(r'^/taskers/\d+$').hasMatch(location);
+      final isTaskerReviews = RegExp(r'^/taskers/\d+/reviews$').hasMatch(location);
+      final isPublicRoute = isAuthRoute || isTaskerProfile || isTaskerReviews;
+      final isProtectedTaskRoute = location == '/tasks/create' || RegExp(r'^/tasks/\d+/edit$').hasMatch(location);
+      final isTaskDataRoute = isTaskList || isTaskDetail || isNearbyTasks || isProtectedTaskRoute;
+      final isClient = auth.user?.role == 'client';
+      final isTasker = auth.user?.role == 'tasker';
+      final isAdmin = auth.user?.isAdmin == true;
+      // #region debug-point D:router-redirect
+      (() { try { final client = HttpClient(); client.postUrl(Uri.parse('http://127.0.0.1:7778/event')).then((req) { req.headers.contentType = ContentType.json; req.write(jsonEncode({'sessionId': 'tasker-tasks-crash', 'runId': 'pre-fix', 'hypothesisId': 'D', 'location': 'app_router.dart:71', 'msg': '[DEBUG] router redirect evaluated', 'data': {'location': location, 'authStatus': auth.status.name, 'role': auth.user?.role, 'splashReady': splash.isReady, 'targetLocation': splash.targetLocation}, 'ts': DateTime.now().millisecondsSinceEpoch})); return req.close(); }).then((res) => res.drain<void>()).whenComplete(client.close).catchError((_) {}); } catch (_) {} })();
+      // #endregion
+
+      if (!splash.isReady) {
+        return isSplash ? null : '/splash';
+      }
+
+      if (isSplash) {
+        return splash.targetLocation ?? '/login';
+      }
+
+      if (auth.status == AuthStatus.unauthenticated) {
+        if (isTaskDataRoute) return '/login';
+        if (isPublicRoute) return null;
+        return '/login';
+      }
+
+      if (auth.status == AuthStatus.authenticated) {
+        if (isAuthRoute) return isAdmin ? '/admin' : '/dashboard';
+        if (isAdmin && !isAdminHome && location == '/dashboard') return '/admin';
+        if (isProtectedTaskRoute && !isClient) return '/tasks';
+        if (isNearbyTasks && !isTasker) return '/tasks';
+      }
+
+      return null;
+    },
+    routes: [
+      GoRoute(
+        path: '/splash',
+        name: AppRouteNames.splash,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(milliseconds: 300),
+            reverseTransitionDuration: const Duration(milliseconds: 300),
+            child: const SplashScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation.drive(CurveTween(curve: Curves.easeOut)),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/login',
+        name: AppRouteNames.login,
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/register',
+        name: AppRouteNames.register,
+        builder: (context, state) => const RegisterScreen(),
+      ),
+      GoRoute(
+        path: '/admin',
+        name: AppRouteNames.adminHome,
+        builder: (context, state) => const AdminHomeScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/nearby',
+        name: AppRouteNames.nearbyProvidersMap,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const NearbyProvidersMapScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation.drive(CurveTween(curve: Curves.easeOutCubic)),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/nearby-tasks',
+        name: AppRouteNames.nearbyTasks,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const NearbyTasksScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation.drive(CurveTween(curve: Curves.easeOutCubic)),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/map/pick',
+        name: AppRouteNames.mapPicker,
+        pageBuilder: (context, state) {
+          final initial = state.extra;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: MapPickerScreen(initialLocation: initial is LatLng ? initial : null),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(
+                  Tween<Offset>(begin: const Offset(0.06, 0), end: Offset.zero)
+                      .chain(CurveTween(curve: Curves.easeOutCubic)),
+                ),
+                child: FadeTransition(opacity: animation, child: child),
+              );
+            },
+          );
+        },
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) => _AppShell(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            navigatorKey: _tasksBranchNavigatorKey,
+            routes: [
+              GoRoute(
+                path: '/tasks',
+                name: AppRouteNames.tasks,
+                pageBuilder: (context, state) => const NoTransitionPage(child: TaskListScreen()),
+                routes: [
+                  GoRoute(
+                    path: 'create',
+                    name: AppRouteNames.taskCreate,
+                    pageBuilder: (context, state) {
+                      final qp = state.uri.queryParameters;
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        child: TaskFormScreen(
+                          prefillTitle: qp['prefill_title'],
+                          prefillDescription: qp['prefill_description'],
+                        ),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(begin: const Offset(0.06, 0), end: Offset.zero)
+                                  .chain(CurveTween(curve: Curves.easeOutCubic)),
+                            ),
+                            child: FadeTransition(opacity: animation, child: child),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: ':id',
+                    name: AppRouteNames.taskDetail,
+                    pageBuilder: (context, state) {
+                      final id = int.parse(state.pathParameters['id']!);
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        child: TaskDetailScreen(taskId: id),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(
+                            opacity: animation.drive(CurveTween(curve: Curves.easeOutCubic)),
+                            child: child,
+                          );
+                        },
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'edit',
+                        name: AppRouteNames.taskEdit,
+                        pageBuilder: (context, state) {
+                          final id = int.parse(state.pathParameters['id']!);
+                          return CustomTransitionPage(
+                            key: state.pageKey,
+                            child: TaskFormScreen(editTaskId: id),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: animation.drive(
+                                  Tween<Offset>(begin: const Offset(0.06, 0), end: Offset.zero)
+                                      .chain(CurveTween(curve: Curves.easeOutCubic)),
+                                ),
+                                child: FadeTransition(opacity: animation, child: child),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: '/taskers/:id',
+                name: AppRouteNames.taskerProfile,
+                pageBuilder: (context, state) {
+                  final id = int.parse(state.pathParameters['id']!);
+                  return CustomTransitionPage(
+                    key: state.pageKey,
+                    child: TaskerProfileScreen(taskerId: id),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return FadeTransition(
+                        opacity: animation.drive(CurveTween(curve: Curves.easeOutCubic)),
+                        child: child,
+                      );
+                    },
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: 'reviews',
+                    name: AppRouteNames.taskerReviews,
+                    pageBuilder: (context, state) {
+                      final id = int.parse(state.pathParameters['id']!);
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        child: TaskerReviewsScreen(taskerId: id),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(begin: const Offset(0.06, 0), end: Offset.zero)
+                                  .chain(CurveTween(curve: Curves.easeOutCubic)),
+                            ),
+                            child: FadeTransition(opacity: animation, child: child),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _dashboardBranchNavigatorKey,
+            routes: [
+              GoRoute(
+                path: '/dashboard',
+                name: AppRouteNames.dashboard,
+                pageBuilder: (context, state) => const NoTransitionPage(child: DashboardScreen()),
+                routes: [
+                  GoRoute(
+                    path: 'categories',
+                    name: AppRouteNames.dashboardCategories,
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
+                        key: state.pageKey,
+                        child: const TaskerCategoriesScreen(),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(begin: const Offset(0.06, 0), end: Offset.zero)
+                                  .chain(CurveTween(curve: Curves.easeOutCubic)),
+                            ),
+                            child: FadeTransition(opacity: animation, child: child),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
+});
+
+class _AppShell extends ConsumerWidget {
+  const _AppShell({required this.navigationShell});
+
+  final StatefulNavigationShell navigationShell;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+
+    final currentNavigator = switch (navigationShell.currentIndex) {
+      0 => _tasksBranchNavigatorKey.currentState,
+      _ => _dashboardBranchNavigatorKey.currentState,
+    };
+    final currentBranchCanPop = currentNavigator?.canPop() ?? false;
+    final canPop = currentBranchCanPop || navigationShell.currentIndex == 0;
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (navigationShell.currentIndex != 0) {
+          navigationShell.goBranch(0);
+        }
+      },
+      child: Scaffold(
+        body: navigationShell,
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: navigationShell.currentIndex,
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.work_outline),
+              selectedIcon: const Icon(Icons.work),
+              label: l10n.tasks,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.dashboard_outlined),
+              selectedIcon: const Icon(Icons.dashboard),
+              label: l10n.dashboard,
+            ),
+          ],
+          onDestinationSelected: (index) {
+            if (index == 1 &&
+                ref.read(authControllerProvider).status != AuthStatus.authenticated) {
+              context.goNamed(AppRouteNames.login);
+              return;
+            }
+            navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+          },
+        ),
+      ),
+    );
+  }
+}

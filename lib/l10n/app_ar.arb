@@ -1,0 +1,494 @@
+{
+  "@@locale": "ar",
+  "appName": "لمعلم",
+  "loading": "تحميل...",
+  "login": "تسجيل الدخول",
+  "register": "إنشاء حساب",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "requiredField": "مطلوب",
+  "passwordTooShort": "الحد الأدنى 8 أحرف",
+  "passwordMismatch": "غير متطابق",
+  "passwordConfirm": "تأكيد كلمة المرور",
+  "name": "الاسم",
+  "phone": "الهاتف",
+  "city": "المدينة",
+  "role": "الدور",
+  "client": "عميل",
+  "tasker": "محترف",
+  "dashboard": "لوحة التحكم",
+  "logout": "تسجيل الخروج",
+  "welcomeBack": "مرحباً بعودتك",
+  "loginSubtitle": "سجّل دخولك للوصول إلى حسابك",
+  "createAccountTitle": "أنشئ حسابك",
+  "createAccountSubtitle": "أدخل بياناتك لإنشاء حساب جديد",
+  "tasks": "المهام",
+  "tasksSubtitle": "تصفح المهام",
+  "createTask": "إنشاء مهمة",
+  "editTask": "تعديل مهمة",
+  "taskDetails": "تفاصيل المهمة",
+  "deleteTask": "حذف المهمة",
+  "apply": "تقديم عرض",
+  "applyToTask": "تقديم عرض للمهمة",
+  "proposal": "العرض",
+  "proposedBudget": "الميزانية المقترحة",
+  "estimatedDuration": "المدة المتوقعة",
+  "submitApplication": "إرسال العرض",
+  "applicationSubmitted": "تم إرسال العرض",
+  "delete": "حذف",
+  "cancel": "إلغاء",
+  "confirmDeleteTask": "هل أنت متأكد من حذف هذه المهمة؟",
+  "retry": "إعادة المحاولة",
+  "unableToLoad": "تعذر تحميل البيانات",
+  "emptyTasksTitle": "لا توجد مهام",
+  "emptyTasksSubtitle": "أنشئ مهمة جديدة أو حدّث الصفحة.",
+  "shortcuts": "الاختصارات",
+  "tip": "نصيحة",
+  "tipText": "ابدأ بإنشاء مهمة ثم اختر أفضل عرض.",
+  "remote": "عن بعد",
+  "title": "العنوان",
+  "description": "الوصف",
+  "category": "الفئة",
+  "addressOptional": "العنوان التفصيلي (اختياري)",
+  "budgetMin": "الحد الأدنى",
+  "budgetMax": "الحد الأقصى",
+  "budgetType": "نوع الميزانية",
+  "urgency": "درجة الاستعجال",
+  "paymentMethodOptional": "طريقة الدفع (اختياري)",
+  "cash": "نقداً",
+  "card": "بطاقة",
+  "online": "أونلاين",
+  "save": "حفظ",
+  "fixed": "ثابت",
+  "hourly": "بالساعة",
+  "negotiable": "قابل للتفاوض",
+  "urgencyLow": "منخفض",
+  "urgencyMedium": "متوسط",
+  "urgencyHigh": "مرتفع",
+  "urgencyUrgent": "عاجل",
+  "statusOpen": "مفتوحة",
+  "statusAssigned": "مُعيّنة",
+  "statusInProgress": "قيد التنفيذ",
+  "statusCompleted": "مكتملة",
+  "statusCancelled": "ملغاة",
+  "lang": "اللغة",
+  "langAr": "العربية",
+  "langEn": "الإنجليزية",
+  "langFr": "الفرنسية",
+  "languageAction": "اللغة",
+  "refreshAction": "تحديث",
+  "reload": "إعادة التحميل",
+  "popularCategories": "الفئات الشائعة",
+  "all": "الكل",
+  "categories": "الفئات",
+  "browseTasksByCategory": "تصفح المهام حسب الفئة",
+  "nearbyArtisans": "المهنيون القريبون",
+  "seeTaskersOnMap": "عرض المهنيين على الخريطة",
+  "nearbyTasks": "المهام القريبة",
+  "jobsMatchedToYourLocation": "مهام مناسبة لموقعك",
+  "myProfile": "ملفي الشخصي",
+  "publicTaskerProfile": "الملف العام للمهني",
+  "myReviews": "تقييماتي",
+  "ratingsAndFeedback": "التقييمات والملاحظات",
+  "hello": "مرحباً",
+  "helloName": "مرحباً، {name}",
+  "@helloName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "photos": "الصور",
+  "add": "إضافة",
+  "addPhotosHelper": "أضف حتى 5 صور لمساعدة المهنيين على فهم المهمة.",
+  "locationSelected": "تم اختيار الموقع",
+  "pickOnMap": "اختيار من الخريطة",
+  "clear": "مسح",
+  "cameraCaptureNotAvailableOnWeb": "التقاط الصور بالكاميرا غير متاح على الويب",
+  "maxTaskPhotos": "يمكنك إرفاق حتى 5 صور",
+  "cameraPermission": "إذن الكاميرا",
+  "cameraPermissionPermanentlyDenied": "تم رفض إذن الكاميرا نهائياً. يرجى تفعيله من الإعدادات.",
+  "cameraPermissionRequired": "إذن الكاميرا مطلوب لالتقاط الصور.",
+  "close": "إغلاق",
+  "openSettings": "فتح الإعدادات",
+  "cameraError": "خطأ في الكاميرا: {error}",
+  "@cameraError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "camera": "الكاميرا",
+  "switchCamera": "تبديل الكاميرا",
+  "noCameraFound": "لم يتم العثور على كاميرا على هذا الجهاز.",
+  "retake": "إعادة الالتقاط",
+  "usePhoto": "استخدام الصورة",
+  "location": "الموقع",
+  "viewProfile": "عرض الملف الشخصي",
+  "newHighPriorityNearbyTasksFound": "تم العثور على {count} مهمة قريبة جديدة ذات أولوية عالية.",
+  "@newHighPriorityNearbyTasksFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "enableNearbyTaskMatching": "تفعيل مطابقة المهام القريبة",
+  "nearbyTasksConsentSubtitle": "لن نستخدم موقعك إلا بعد موافقتك، ويتم تحديث القائمة بفاصل زمني مناسب للبطارية.",
+  "nearbyTasksConsentBody": "يتم استخدام الموقع للعثور على وظائف قريبة ضمن النطاق الذي تختاره وتحسين ملاءمة المهام حسب ملفك المهني.",
+  "allowLocationBasedNearbyTasks": "السماح بالمهام القريبة المعتمدة على الموقع",
+  "feedControls": "عناصر التحكم في القائمة",
+  "radiusAdjustable": "يمكن تعديل النطاق من {min}كم إلى {max}كم.",
+  "@radiusAdjustable": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "lastRefreshedAt": "آخر تحديث {time}",
+  "@lastRefreshedAt": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "radiusLabel": "النطاق: {radius} كم",
+  "@radiusLabel": {
+    "placeholders": {
+      "radius": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOnly": "المحفوظة فقط",
+  "savedStatus": "محفوظة",
+  "locationAccuracyLow": "دقة الموقع منخفضة حالياً. انتقل إلى مكان مفتوح أو حدّث لتحسين المطابقة القريبة.",
+  "noNearbyTasks": "لا توجد مهام قريبة",
+  "noNearbyTasksSubtitle": "جرّب زيادة النطاق أو إلغاء وضع المحفوظة فقط.",
+  "locationDisabled": "الموقع معطل",
+  "locationServicesRequired": "يرجى تفعيل خدمات GPS/الموقع.",
+  "locationDisabledNearbyTasksMessage": "يرجى تفعيل خدمات الموقع للحفاظ على دقة المهام القريبة.",
+  "permissionRequired": "الإذن مطلوب",
+  "permissionBlocked": "الإذن محظور",
+  "locationPermissionPermanentlyDenied": "تم رفض إذن الموقع نهائياً. فعّله من الإعدادات.",
+  "locationPermissionRequiredNearbyArtisans": "إذن الموقع مطلوب لعرض المهنيين القريبين.",
+  "allowLocationAccessNearbyTasks": "اسمح بالوصول إلى الموقع لتحميل المهام القريبة.",
+  "enablePermissionInSettings": "تم رفض إذن الموقع نهائياً. فعّله من إعدادات التطبيق.",
+  "unableToLoadNearbyTasks": "تعذر تحميل المهام القريبة",
+  "distanceUnavailable": "المسافة غير متاحة",
+  "clientRatingLabel": "تقييم العميل {rating}",
+  "@clientRatingLabel": {
+    "placeholders": {
+      "rating": {}
+    }
+  },
+  "applicationSubmittedNearbyTask": "تم إرسال طلب لهذه المهمة القريبة.",
+  "accept": "قبول",
+  "dismiss": "تجاهل",
+  "goToHome": "العودة إلى الرئيسية",
+  "home": "الرئيسية",
+  "openLocationSettings": "فتح إعدادات الموقع",
+  "loginRequired": "تسجيل الدخول مطلوب",
+  "couldNotLoadNearbyArtisans": "تعذر تحميل المهنيين القريبين.",
+  "noLocation": "لا يوجد موقع",
+  "artisans": "المهنيون",
+  "noArtisansFoundNearby": "لم يتم العثور على مهنيين قريبين.",
+  "go": "اذهب",
+  "center": "توسيط",
+  "directions": "الاتجاهات",
+  "distanceAway": "يبعد {distance} كم",
+  "@distanceAway": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "couldNotOpenNavigationApp": "تعذر فتح تطبيق الملاحة.",
+  "goToFirstPage": "الانتقال إلى الصفحة الأولى",
+  "goToPreviousPage": "الانتقال إلى الصفحة السابقة",
+  "goToNextPage": "الانتقال إلى الصفحة التالية",
+  "goToLastPage": "الانتقال إلى الصفحة الأخيرة",
+  "reviews": "التقييمات",
+  "noReviews": "لا توجد تقييمات",
+  "noReviewsMatchFilters": "لا توجد تقييمات تطابق عوامل التصفية.",
+  "allRatings": "كل التقييمات",
+  "starsCount": "{count} نجوم",
+  "@starsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "oneStar": "نجمة واحدة",
+  "rating": "التقييم",
+  "sort": "الترتيب",
+  "newest": "الأحدث",
+  "oldest": "الأقدم",
+  "highestRating": "الأعلى تقييماً",
+  "lowestRating": "الأقل تقييماً",
+  "fromDate": "من",
+  "toDate": "إلى",
+  "clearDates": "مسح التواريخ",
+  "anonymous": "مجهول",
+  "taskerProfile": "ملف المهني",
+  "about": "نبذة",
+  "noBioProvided": "لا توجد نبذة.",
+  "seeAll": "عرض الكل",
+  "greetingMorning": "صباح الخير،",
+  "greetingEvening": "مساء الخير،",
+  "searchTasksHint": "ابحث عن خدمة أو مهمة...",
+  "promoTodayTitle": "تحتاج مساعدة في شيء ما اليوم؟",
+  "promoTodaySubtitle": "احجز خبراء موثوقين خلال دقائق.",
+  "bookNow": "احجز الآن",
+  "recommendedForYou": "مقترحة لك",
+  "pickedForYourNeeds": "بناءً على نشاطك وموقعك الجغرافي",
+  "inCategory": "مختارة في هذا القسم",
+  "allTasks": "كل المهام",
+  "tasksAvailableCount": "{count} متاحة",
+  "@tasksAvailableCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "nearby": "قريب مني",
+  "needService": "أحتاج خدمة",
+  "needServiceSubtitle": "احجز محترفاً خلال دقائق.",
+  "wantWork": "أريد العمل",
+  "wantWorkSubtitle": "قدم خدماتك واربح.",
+  "more": "المزيد",
+  "personalInformation": "المعلومات الشخصية",
+  "personalInformationSubtitle": "سنستخدمها لإنشاء ملفك الشخصي.",
+  "security": "الأمان",
+  "securitySubtitle": "استخدم كلمة مرور قوية وفريدة.",
+  "noAccountYet": "ليس لديك حساب؟",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟",
+  "passwordHint": "استخدم 8 أحرف على الأقل مع مزيج من الحروف والأرقام والرموز.",
+  "reviewsCount": "{rating} · {count} تقييم",
+  "@reviewsCount": {
+    "placeholders": {
+      "rating": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noReviewsYet": "لا توجد تقييمات بعد.",
+  "whatPeopleSayAboutThisTasker": "ماذا يقول الناس عن هذا المهني.",
+  "available": "متاح",
+  "busy": "مشغول",
+  "contact": "تواصل",
+  "bookService": "احجز الخدمة",
+  "serviceRequestForName": "طلب خدمة لـ {name}",
+  "@serviceRequestForName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "bookServiceDescription": "مرحباً {name}، أود حجز خدمة. يرجى التواصل معي.",
+  "@bookServiceDescription": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "noPhoneNumber": "لا يوجد رقم هاتف",
+  "serviceArea": "منطقة الخدمة",
+  "address": "العنوان",
+  "pricing": "التسعير",
+  "verification": "التحقق",
+  "details": "التفاصيل",
+  "verified": "موثّق",
+  "unverified": "غير موثّق",
+  "skills": "المهارات",
+  "noSkillsListed": "لا توجد مهارات مدرجة.",
+  "yearsCount": "{count} سنوات",
+  "@yearsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availability": "التوفر",
+  "availableToTakeNewWork": "متاح لاستقبال أعمال جديدة",
+  "currentlyBusy": "مشغول حالياً",
+  "social": "الحسابات الاجتماعية",
+  "noSocialAccounts": "لا توجد حسابات اجتماعية.",
+  "gallery": "المعرض",
+  "noPhotosYet": "لا توجد صور بعد.",
+  "noCategories": "لا توجد فئات",
+  "tryAgainLater": "حاول مرة أخرى لاحقاً.",
+  "pickLocation": "اختيار الموقع",
+  "confirmLocation": "تأكيد الموقع",
+  "locationPermissionRequiredToPick": "إذن الموقع مطلوب لاختيار موقع.",
+  "couldNotLoadMap": "تعذر تحميل الخريطة.",
+  "searchUsers": "البحث عن المستخدمين",
+  "searchCity": "ابحث عن مدينة",
+  "adminWorkspace": "مساحة الإدارة",
+  "overview": "نظرة عامة",
+  "users": "المستخدمون",
+  "reports": "البلاغات",
+  "settings": "الإعدادات",
+  "signedInAs": "تم تسجيل الدخول باسم {email} ({role})",
+  "@signedInAs": {
+    "placeholders": {
+      "email": {},
+      "role": {}
+    }
+  },
+  "usersMetric": "المستخدمون",
+  "tasksMetric": "المهام",
+  "openDisputes": "النزاعات المفتوحة",
+  "revenue": "الإيرادات",
+  "operationalSnapshot": "لقطة تشغيلية",
+  "operationalSnapshotSubtitle": "مطابقة لبيانات الإدارة في الويب.",
+  "verifiedUsersLoadedPage": "المستخدمون الموثقون في الصفحة المحمّلة",
+  "openReportsLoadedPage": "البلاغات المفتوحة في الصفحة المحمّلة",
+  "mobileAdminParityPhase": "مرحلة التطابق الإداري على الجوال",
+  "overviewModerationReports": "نظرة عامة، إشراف، بلاغات",
+  "unableToLoadAdminOverview": "تعذر تحميل نظرة الإدارة العامة",
+  "checkConnectionOrAdminPermissions": "تحقق من الاتصال أو صلاحيات الإدارة ثم حاول مرة أخرى.",
+  "userModeration": "إدارة المستخدمين",
+  "loadedUsersFromAdminApi": "تم تحميل {loaded} من أصل {total} مستخدم من واجهة الإدارة.",
+  "@loadedUsersFromAdminApi": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noUsersFound": "لم يتم العثور على مستخدمين",
+  "tryDifferentSearchOrRefresh": "جرّب كلمة بحث أخرى أو حدّث الصفحة.",
+  "unableToLoadUsers": "تعذر تحميل المستخدمين",
+  "adminUsersEndpointFailed": "فشلت نقطة نهاية مستخدمي الإدارة في الاستجابة.",
+  "reportsComplaints": "البلاغات والشكايات",
+  "loadedReportsFromSharedBackend": "تم تحميل {loaded} من أصل {total} بلاغ من الواجهة الخلفية المشتركة.",
+  "@loadedReportsFromSharedBackend": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noReportsFound": "لا توجد بلاغات",
+  "noUserReportsToModerate": "لا توجد بلاغات مستخدمين تحتاج إلى إشراف حالياً.",
+  "unableToLoadReports": "تعذر تحميل البلاغات",
+  "adminReportsEndpointFailed": "فشلت نقطة نهاية بلاغات الإدارة في الاستجابة.",
+  "nearbyTaskSettingsUpdated": "تم تحديث إعدادات المهام القريبة.",
+  "nearbyTaskControls": "إعدادات المهام القريبة",
+  "nearbyTaskControlsSubtitle": "اضبط النطاق الافتراضي والحدود وفاصل التحديث والتنبيهات للمهنيين.",
+  "defaultRadiusKm": "النطاق الافتراضي (كم)",
+  "minimumRadiusKm": "الحد الأدنى للنطاق (كم)",
+  "maximumRadiusKm": "الحد الأقصى للنطاق (كم)",
+  "refreshIntervalMinutes": "فاصل التحديث (دقائق)",
+  "notifyFromUrgency": "الإشعار بدءاً من درجة الاستعجال",
+  "enableHighPriorityAlerts": "تفعيل تنبيهات الأولوية العالية",
+  "saveSettings": "حفظ الإعدادات",
+  "unableToLoadSettings": "تعذر تحميل الإعدادات",
+  "nearbyTaskSettingsEndpointFailed": "فشلت نقطة نهاية إعدادات المهام القريبة في الاستجابة.",
+  "noDescriptionProvided": "لا يوجد وصف.",
+  "verifyAction": "توثيق",
+  "ban": "حظر",
+  "unban": "إلغاء الحظر",
+  "suspend7Days": "تعليق 7 أيام",
+  "unsuspend": "إلغاء التعليق",
+  "resolve": "حل",
+  "mondayShort": "الإث",
+  "tuesdayShort": "الثل",
+  "wednesdayShort": "الأر",
+  "thursdayShort": "الخ",
+  "fridayShort": "الجم",
+  "saturdayShort": "السب",
+  "sundayShort": "الأحد",
+  "errNetwork": "تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.",
+  "errTimeout": "انتهت مهلة الاتصال. حاول مرة أخرى.",
+  "errCancelled": "تم إلغاء الطلب.",
+  "errUnauthorized": "يجب تسجيل الدخول للمتابعة.",
+  "errForbidden": "ليس لديك صلاحية لتنفيذ هذا الإجراء.",
+  "errNotFound": "المورد غير موجود.",
+  "errServer": "حدث خطأ في الخادم. حاول لاحقاً.",
+  "errUnknown": "حدث خطأ غير متوقع. حاول مرة أخرى.",
+  "chat": "محادثة",
+  "readMore": "اقرأ المزيد",
+  "readLess": "إخفاء",
+  "services": "الخدمات",
+  "topRated": "الأعلى تقييماً",
+  "verifiedYears": "{count}+ سنوات",
+  "@verifiedYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "verifiedIdentity": "موثّق",
+  "daysAgo": "قبل {count} أيام",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeksAgo": "قبل {count} أسابيع",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "writeReview": "اكتب مراجعة",
+  "helpful": "مفيد",
+  "notHelpful": "غير مفيد",
+  "showReviewsForRating": "إظهار {rating} نجوم فقط",
+  "@showReviewsForRating": {
+    "placeholders": {
+      "rating": {
+        "type": "int"
+      }
+    }
+  },
+  "sortByNewest": "الأحدث أولاً",
+  "sortByTopRated": "الأعلى تقييماً أولاً",
+  "noCommentProvided": "لا يوجد تعليق.",
+  "shareYourExperience": "شارك تجربتك مع هذا الحرفي…",
+  "submitReview": "إرسال المراجعة",
+  "selectRatingFirst": "اختر تقييماً أولاً",
+  "notProvided": "غير متوفر",
+  "acceptingNewBookings": "يقبل حجوزات جديدة",
+  "mon": "اث",
+  "tue": "ثل",
+  "wed": "أر",
+  "thu": "خم",
+  "fri": "جم",
+  "sat": "سب",
+  "sun": "أح",
+  "unavailable": "غير متاح",
+  "socialLinks": "روابط التواصل",
+  "portfolio": "الأعمال",
+  "portfolioSubtitle": "{count} عمل",
+  "@portfolioSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availableTodayHint": "متاح اليوم",
+  "features": "ما أقدمه",
+  "statJobsCompleted": "المهام المنجزة",
+  "statResponseTime": "وقت الاستجابة",
+  "statCompletionRate": "نسبة الإنجاز",
+  "slotMorning": "صباحاً",
+  "slotAfternoon": "ظهراً",
+  "slotEvening": "مساءً"
+}

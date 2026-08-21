@@ -1,0 +1,494 @@
+{
+  "@@locale": "en",
+  "appName": "lem3alam",
+  "loading": "Loading...",
+  "login": "Login",
+  "register": "Create account",
+  "email": "Email",
+  "password": "Password",
+  "requiredField": "Required",
+  "passwordTooShort": "Minimum 8 characters",
+  "passwordMismatch": "Passwords do not match",
+  "passwordConfirm": "Confirm password",
+  "name": "Name",
+  "phone": "Phone",
+  "city": "City",
+  "role": "Role",
+  "client": "Client",
+  "tasker": "Tasker",
+  "dashboard": "Dashboard",
+  "logout": "Logout",
+  "welcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in to access your account",
+  "createAccountTitle": "Create your account",
+  "createAccountSubtitle": "Enter your details to create a new account",
+  "tasks": "Tasks",
+  "tasksSubtitle": "Browse tasks",
+  "createTask": "Create task",
+  "editTask": "Edit task",
+  "taskDetails": "Task details",
+  "deleteTask": "Delete task",
+  "apply": "Apply",
+  "applyToTask": "Apply to task",
+  "proposal": "Proposal",
+  "proposedBudget": "Proposed budget",
+  "estimatedDuration": "Estimated duration",
+  "submitApplication": "Submit application",
+  "applicationSubmitted": "Application submitted",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "confirmDeleteTask": "Are you sure you want to delete this task?",
+  "retry": "Retry",
+  "unableToLoad": "Unable to load data",
+  "emptyTasksTitle": "No tasks",
+  "emptyTasksSubtitle": "Create a new task or refresh the page.",
+  "shortcuts": "Shortcuts",
+  "tip": "Tip",
+  "tipText": "Start by creating a task then choose the best offer.",
+  "remote": "Remote",
+  "title": "Title",
+  "description": "Description",
+  "category": "Category",
+  "addressOptional": "Address (optional)",
+  "budgetMin": "Minimum budget",
+  "budgetMax": "Maximum budget",
+  "budgetType": "Budget type",
+  "urgency": "Urgency",
+  "paymentMethodOptional": "Payment method (optional)",
+  "cash": "Cash",
+  "card": "Card",
+  "online": "Online",
+  "save": "Save",
+  "fixed": "Fixed",
+  "hourly": "Hourly",
+  "negotiable": "Negotiable",
+  "urgencyLow": "Low",
+  "urgencyMedium": "Medium",
+  "urgencyHigh": "High",
+  "urgencyUrgent": "Urgent",
+  "statusOpen": "Open",
+  "statusAssigned": "Assigned",
+  "statusInProgress": "In progress",
+  "statusCompleted": "Completed",
+  "statusCancelled": "Cancelled",
+  "lang": "Language",
+  "langAr": "Arabic",
+  "langEn": "English",
+  "langFr": "French",
+  "languageAction": "Language",
+  "refreshAction": "Refresh",
+  "reload": "Reload",
+  "popularCategories": "Popular categories",
+  "all": "All",
+  "categories": "Categories",
+  "browseTasksByCategory": "Browse tasks by category",
+  "nearbyArtisans": "Nearby artisans",
+  "seeTaskersOnMap": "See taskers on the map",
+  "nearbyTasks": "Nearby tasks",
+  "jobsMatchedToYourLocation": "Jobs matched to your location",
+  "myProfile": "My profile",
+  "publicTaskerProfile": "Public tasker profile",
+  "myReviews": "My reviews",
+  "ratingsAndFeedback": "Ratings & feedback",
+  "hello": "Hello",
+  "helloName": "Hello, {name}",
+  "@helloName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "photos": "Photos",
+  "add": "Add",
+  "addPhotosHelper": "Add up to 5 photos to help taskers understand the job.",
+  "locationSelected": "Location selected",
+  "pickOnMap": "Pick on map",
+  "clear": "Clear",
+  "cameraCaptureNotAvailableOnWeb": "Camera capture is not available on web",
+  "maxTaskPhotos": "You can attach up to 5 photos",
+  "cameraPermission": "Camera permission",
+  "cameraPermissionPermanentlyDenied": "Camera permission is permanently denied. Please enable it in Settings.",
+  "cameraPermissionRequired": "Camera permission is required to take photos.",
+  "close": "Close",
+  "openSettings": "Open Settings",
+  "cameraError": "Camera error: {error}",
+  "@cameraError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "camera": "Camera",
+  "switchCamera": "Switch camera",
+  "noCameraFound": "No camera found on this device.",
+  "retake": "Retake",
+  "usePhoto": "Use Photo",
+  "location": "Location",
+  "viewProfile": "View profile",
+  "newHighPriorityNearbyTasksFound": "{count} new high-priority nearby task(s) found.",
+  "@newHighPriorityNearbyTasksFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "enableNearbyTaskMatching": "Enable nearby task matching",
+  "nearbyTasksConsentSubtitle": "We only use your location after you consent, and the feed refreshes at a battery-friendly interval.",
+  "nearbyTasksConsentBody": "Location is used to find nearby jobs within your chosen radius and improve task relevance based on your tasker profile.",
+  "allowLocationBasedNearbyTasks": "Allow location-based nearby tasks",
+  "feedControls": "Feed controls",
+  "radiusAdjustable": "Radius is adjustable from {min}km to {max}km.",
+  "@radiusAdjustable": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "lastRefreshedAt": "Last refreshed {time}",
+  "@lastRefreshedAt": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "radiusLabel": "Radius: {radius} km",
+  "@radiusLabel": {
+    "placeholders": {
+      "radius": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOnly": "Saved only",
+  "savedStatus": "Saved",
+  "locationAccuracyLow": "Location accuracy is currently low. Move to an open area or refresh for better nearby matching.",
+  "noNearbyTasks": "No nearby tasks",
+  "noNearbyTasksSubtitle": "Try increasing the radius or switch back from saved-only mode.",
+  "locationDisabled": "Location disabled",
+  "locationServicesRequired": "Please enable GPS/location services.",
+  "locationDisabledNearbyTasksMessage": "Please enable device location services to keep nearby tasks accurate.",
+  "permissionRequired": "Permission required",
+  "permissionBlocked": "Permission blocked",
+  "locationPermissionPermanentlyDenied": "Location permission is permanently denied. Enable it in Settings.",
+  "locationPermissionRequiredNearbyArtisans": "Location permission is required to show nearby artisans.",
+  "allowLocationAccessNearbyTasks": "Allow location access to load nearby tasks.",
+  "enablePermissionInSettings": "Location permission was denied permanently. Enable it in app settings.",
+  "unableToLoadNearbyTasks": "Unable to load nearby tasks",
+  "distanceUnavailable": "Distance n/a",
+  "clientRatingLabel": "Client {rating}",
+  "@clientRatingLabel": {
+    "placeholders": {
+      "rating": {}
+    }
+  },
+  "applicationSubmittedNearbyTask": "Application submitted for this nearby task.",
+  "accept": "Accept",
+  "dismiss": "Dismiss",
+  "goToHome": "Go to home",
+  "home": "Home",
+  "openLocationSettings": "Open Location Settings",
+  "loginRequired": "Login required",
+  "couldNotLoadNearbyArtisans": "Could not load nearby artisans.",
+  "noLocation": "No location",
+  "artisans": "Artisans",
+  "noArtisansFoundNearby": "No artisans found nearby.",
+  "go": "Go",
+  "center": "Center",
+  "directions": "Directions",
+  "distanceAway": "{distance} km away",
+  "@distanceAway": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "couldNotOpenNavigationApp": "Could not open navigation app.",
+  "goToFirstPage": "Go to first page",
+  "goToPreviousPage": "Go to previous page",
+  "goToNextPage": "Go to next page",
+  "goToLastPage": "Go to last page",
+  "reviews": "Reviews",
+  "noReviews": "No reviews",
+  "noReviewsMatchFilters": "No reviews match your filters.",
+  "allRatings": "All ratings",
+  "starsCount": "{count} stars",
+  "@starsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "oneStar": "1 star",
+  "rating": "Rating",
+  "sort": "Sort",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "highestRating": "Highest rating",
+  "lowestRating": "Lowest rating",
+  "fromDate": "From",
+  "toDate": "To",
+  "clearDates": "Clear dates",
+  "anonymous": "Anonymous",
+  "taskerProfile": "Tasker Profile",
+  "about": "About",
+  "noBioProvided": "No bio provided.",
+  "seeAll": "See all",
+  "greetingMorning": "Good morning,",
+  "greetingEvening": "Good evening,",
+  "searchTasksHint": "Search services or tasks...",
+  "promoTodayTitle": "Need help with something today?",
+  "promoTodaySubtitle": "Book trusted experts in minutes.",
+  "bookNow": "Book now",
+  "recommendedForYou": "Recommended for you",
+  "pickedForYourNeeds": "Based on your activity and location",
+  "inCategory": "Selected in this category",
+  "allTasks": "All tasks",
+  "tasksAvailableCount": "{count} available",
+  "@tasksAvailableCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "nearby": "Near me",
+  "needService": "I need a service",
+  "needServiceSubtitle": "Book a professional in minutes.",
+  "wantWork": "I want to work",
+  "wantWorkSubtitle": "Offer your services and earn.",
+  "more": "More",
+  "personalInformation": "Personal information",
+  "personalInformationSubtitle": "We'll use this to build your profile.",
+  "security": "Security",
+  "securitySubtitle": "Use a strong, unique password.",
+  "noAccountYet": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "passwordHint": "Use 8+ characters with a mix of letters, numbers, and symbols.",
+  "reviewsCount": "{rating} · {count} reviews",
+  "@reviewsCount": {
+    "placeholders": {
+      "rating": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noReviewsYet": "No reviews yet.",
+  "whatPeopleSayAboutThisTasker": "What people say about this tasker.",
+  "available": "Available",
+  "busy": "Busy",
+  "contact": "Contact",
+  "bookService": "Book Service",
+  "serviceRequestForName": "Service request for {name}",
+  "@serviceRequestForName": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "bookServiceDescription": "Hi {name}, I would like to book a service. Please contact me.",
+  "@bookServiceDescription": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "noPhoneNumber": "No phone number",
+  "serviceArea": "Service area",
+  "address": "Address",
+  "pricing": "Pricing",
+  "verification": "Verification",
+  "details": "Details",
+  "verified": "Verified",
+  "unverified": "Unverified",
+  "skills": "Skills",
+  "noSkillsListed": "No skills listed.",
+  "yearsCount": "{count} years",
+  "@yearsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availability": "Availability",
+  "availableToTakeNewWork": "Available to take new work",
+  "currentlyBusy": "Currently busy",
+  "social": "Social",
+  "noSocialAccounts": "No social accounts.",
+  "gallery": "Gallery",
+  "noPhotosYet": "No photos yet.",
+  "noCategories": "No categories",
+  "tryAgainLater": "Try again later.",
+  "pickLocation": "Pick location",
+  "confirmLocation": "Confirm location",
+  "locationPermissionRequiredToPick": "Location permission is required to pick a location.",
+  "couldNotLoadMap": "Could not load map.",
+  "searchUsers": "Search users",
+  "searchCity": "Search city",
+  "adminWorkspace": "Admin Workspace",
+  "overview": "Overview",
+  "users": "Users",
+  "reports": "Reports",
+  "settings": "Settings",
+  "signedInAs": "Signed in as {email} ({role})",
+  "@signedInAs": {
+    "placeholders": {
+      "email": {},
+      "role": {}
+    }
+  },
+  "usersMetric": "Users",
+  "tasksMetric": "Tasks",
+  "openDisputes": "Open disputes",
+  "revenue": "Revenue",
+  "operationalSnapshot": "Operational snapshot",
+  "operationalSnapshotSubtitle": "Matches the backend admin datasets already used by the web app.",
+  "verifiedUsersLoadedPage": "Verified users on loaded page",
+  "openReportsLoadedPage": "Open reports on loaded page",
+  "mobileAdminParityPhase": "Mobile admin parity phase",
+  "overviewModerationReports": "Overview, moderation, reports",
+  "unableToLoadAdminOverview": "Unable to load admin overview",
+  "checkConnectionOrAdminPermissions": "Check your connection or admin permissions, then try again.",
+  "userModeration": "User Moderation",
+  "loadedUsersFromAdminApi": "Loaded {loaded} of {total} users from the admin API.",
+  "@loadedUsersFromAdminApi": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noUsersFound": "No users found",
+  "tryDifferentSearchOrRefresh": "Try a different search term or refresh the page.",
+  "unableToLoadUsers": "Unable to load users",
+  "adminUsersEndpointFailed": "The admin users endpoint failed to respond.",
+  "reportsComplaints": "Reports & Complaints",
+  "loadedReportsFromSharedBackend": "Loaded {loaded} of {total} reports from the shared backend.",
+  "@loadedReportsFromSharedBackend": {
+    "placeholders": {
+      "loaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noReportsFound": "No reports found",
+  "noUserReportsToModerate": "There are no user reports to moderate right now.",
+  "unableToLoadReports": "Unable to load reports",
+  "adminReportsEndpointFailed": "The admin reports endpoint failed to respond.",
+  "nearbyTaskSettingsUpdated": "Nearby task settings updated.",
+  "nearbyTaskControls": "Nearby task controls",
+  "nearbyTaskControlsSubtitle": "Adjust default radius, limits, refresh cadence, and priority alerts for taskers.",
+  "defaultRadiusKm": "Default radius (km)",
+  "minimumRadiusKm": "Minimum radius (km)",
+  "maximumRadiusKm": "Maximum radius (km)",
+  "refreshIntervalMinutes": "Refresh interval (minutes)",
+  "notifyFromUrgency": "Notify from urgency",
+  "enableHighPriorityAlerts": "Enable high-priority alerts",
+  "saveSettings": "Save settings",
+  "unableToLoadSettings": "Unable to load settings",
+  "nearbyTaskSettingsEndpointFailed": "The nearby task settings endpoint failed to respond.",
+  "noDescriptionProvided": "No description provided.",
+  "verifyAction": "Verify",
+  "ban": "Ban",
+  "unban": "Unban",
+  "suspend7Days": "Suspend 7 days",
+  "unsuspend": "Unsuspend",
+  "resolve": "Resolve",
+  "mondayShort": "Mon",
+  "tuesdayShort": "Tue",
+  "wednesdayShort": "Wed",
+  "thursdayShort": "Thu",
+  "fridayShort": "Fri",
+  "saturdayShort": "Sat",
+  "sundayShort": "Sun",
+  "errNetwork": "Couldn't reach the server. Check your internet and try again.",
+  "errTimeout": "Connection timed out. Try again.",
+  "errCancelled": "Request cancelled.",
+  "errUnauthorized": "You need to login to continue.",
+  "errForbidden": "You don't have permission to do that.",
+  "errNotFound": "Resource not found.",
+  "errServer": "Server error. Please try later.",
+  "errUnknown": "Something went wrong. Please try again.",
+  "chat": "Chat",
+  "readMore": "Read more",
+  "readLess": "Read less",
+  "services": "Services",
+  "topRated": "Top Rated",
+  "verifiedYears": "{count}+ Years",
+  "@verifiedYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "verifiedIdentity": "Verified",
+  "daysAgo": "{count} days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeksAgo": "{count} weeks ago",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "writeReview": "Write a review",
+  "helpful": "Helpful",
+  "notHelpful": "Not helpful",
+  "showReviewsForRating": "Show {rating}★ only",
+  "@showReviewsForRating": {
+    "placeholders": {
+      "rating": {
+        "type": "int"
+      }
+    }
+  },
+  "sortByNewest": "Newest first",
+  "sortByTopRated": "Top rated first",
+  "noCommentProvided": "No comment provided.",
+  "shareYourExperience": "Share your experience with this tasker…",
+  "submitReview": "Submit review",
+  "selectRatingFirst": "Select a rating first",
+  "notProvided": "Not provided",
+  "acceptingNewBookings": "Accepting new bookings",
+  "mon": "Mon",
+  "tue": "Tue",
+  "wed": "Wed",
+  "thu": "Thu",
+  "fri": "Fri",
+  "sat": "Sat",
+  "sun": "Sun",
+  "unavailable": "Unavailable",
+  "socialLinks": "Social links",
+  "portfolio": "Portfolio",
+  "portfolioSubtitle": "{count} works",
+  "@portfolioSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availableTodayHint": "Available today",
+  "features": "What I bring",
+  "statJobsCompleted": "Jobs completed",
+  "statResponseTime": "Response time",
+  "statCompletionRate": "Completion rate",
+  "slotMorning": "Morning",
+  "slotAfternoon": "Afternoon",
+  "slotEvening": "Evening"
+}

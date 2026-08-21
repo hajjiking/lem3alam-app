@@ -1,0 +1,66 @@
+name: lem3alam_mobile
+description: Flutter mobile app for the lem3alam Laravel backend.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  camera: ^0.11.0+2
+  cached_network_image: ^3.4.1
+  dio: ^5.7.0
+  flutter_riverpod: ^3.3.1
+  flutter_image_compress: ^2.4.0
+  go_router: ^17.0.0
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  flutter_secure_storage: ^10.0.0
+  intl: ^0.20.2
+  geolocator: ^13.0.2
+  geocoding: ^3.0.0
+  google_fonts: ^6.3.0
+  flutter_map: ^8.0.0
+  latlong2: ^0.9.1
+  url_launcher: ^6.3.0
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/background_pattern.png
+    - assets/logo_character.png
+    - assets/app_name.png
+    - assets/logo.png
+    - assets/branding/lem3alam-logo.png
+    - assets/artisan_cutout.png
+    
+
+flutter_launcher_icons:
+  image_path: assets/branding/lem3alam-logo.png
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: assets/branding/lem3alam-logo.png
+    background_color: "#F8FBFB"
+    theme_color: "#0E355A"
+  windows:
+    generate: true
+    image_path: assets/branding/lem3alam-logo.png
+    icon_size: 256
+  macos:
+    generate: true
+    image_path: assets/branding/lem3alam-logo.png
