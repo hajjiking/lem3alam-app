@@ -28,18 +28,38 @@ class DashboardScreen extends ConsumerWidget {
       appBar: AppBar(
         toolbarHeight: 84,
         elevation: 0,
-        scrolledUnderElevation: 2,
+        scrolledUnderElevation: 3,
         centerTitle: false,
         titleSpacing: 20,
         backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: isDark
+                  ? [
+                      colorScheme.primaryContainer.withValues(alpha: 0.08),
+                      Colors.transparent,
+                    ]
+                  : [
+                      colorScheme.primaryContainer.withValues(alpha: 0.15),
+                      Colors.transparent,
+                    ],
+              stops: const [0.0, 1.0],
+            ),
+          ),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
               l10n.dashboard,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5,
                   ),
             ),
             const SizedBox(height: 2),
@@ -50,40 +70,107 @@ class DashboardScreen extends ConsumerWidget {
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w900,
                     height: 1.1,
+                    letterSpacing: -0.5,
                   ),
             ),
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () => showLanguagePicker(context),
-            icon: const Icon(Icons.language),
-            tooltip: l10n.languageAction,
+          Container(
+            margin: const EdgeInsets.only(right: 6),
+            decoration: BoxDecoration(
+              color: isDark 
+                  ? colorScheme.primaryContainer.withValues(alpha: 0.15)
+                  : colorScheme.primaryContainer.withValues(alpha: 0.25),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: IconButton(
+              onPressed: () => showLanguagePicker(context),
+              icon: const Icon(Icons.language_outlined),
+              tooltip: l10n.languageAction,
+              style: IconButton.styleFrom(
+                minimumSize: const Size(44, 44),
+              ),
+            ),
           ),
-          const AppThemeModeButton(),
+          Container(
+            margin: const EdgeInsets.only(right: 6),
+            decoration: BoxDecoration(
+              color: isDark 
+                  ? colorScheme.secondaryContainer.withValues(alpha: 0.15)
+                  : colorScheme.secondaryContainer.withValues(alpha: 0.25),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: const AppThemeModeButton(),
+          ),
           Container(
             margin: const EdgeInsets.only(right: 4),
             decoration: BoxDecoration(
               color: isDark 
-                  ? colorScheme.primaryContainer.withValues(alpha: 0.2)
-                  : colorScheme.primaryContainer.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(12),
+                  ? colorScheme.tertiaryContainer.withValues(alpha: 0.15)
+                  : colorScheme.tertiaryContainer.withValues(alpha: 0.25),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+              boxShadow: isDark
+                  ? []
+                  : [
+                      BoxShadow(
+                        color: colorScheme.primary.withValues(alpha: 0.08),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
             ),
             child: IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.notifications_none_rounded),
+              icon: Badge(
+                smallSize: 10,
+                largeSize: 20,
+                offset: const Offset(6, -6),
+                child: const Icon(Icons.notifications_none_rounded),
+              ),
               tooltip: l10n.notifications,
+              style: IconButton.styleFrom(
+                minimumSize: const Size(44, 44),
+              ),
             ),
           ),
-          IconButton(
-            onPressed: () async {
-              await ref.read(authControllerProvider.notifier).logout();
-              if (context.mounted) context.goNamed(AppRouteNames.login);
-            },
-            icon: const Icon(Icons.logout),
-            tooltip: l10n.logout,
+          Container(
+            margin: const EdgeInsets.only(right: 4),
+            decoration: BoxDecoration(
+              color: isDark 
+                  ? colorScheme.errorContainer.withValues(alpha: 0.15)
+                  : colorScheme.errorContainer.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: IconButton(
+              onPressed: () async {
+                await ref.read(authControllerProvider.notifier).logout();
+                if (context.mounted) context.goNamed(AppRouteNames.login);
+              },
+              icon: const Icon(Icons.logout_rounded),
+              tooltip: l10n.logout,
+              style: IconButton.styleFrom(
+                minimumSize: const Size(44, 44),
+              ),
+            ),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 8),
         ],
       ),
       body: Container(
@@ -131,11 +218,11 @@ class DashboardScreen extends ConsumerWidget {
               const SizedBox(height: 22),
               AppSectionHeader(
                 title: l10n.shortcuts,
-                subtitle: 'Everything you need, one tap away.',
+                subtitle: 'Quick actions tailored for you.',
                 actionLabel: l10n.more,
                 onActionTap: () {},
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
               _ShortcutGrid(
                 canCreateTask: canCreateTask,
                 userId: user?.id,
@@ -144,11 +231,11 @@ class DashboardScreen extends ConsumerWidget {
               const SizedBox(height: 24),
               AppSectionHeader(
                 title: 'My activity',
-                subtitle: 'Track your most recent bookings and requests.',
+                subtitle: 'Track your recent bookings and task history.',
                 actionLabel: l10n.seeAll,
                 onActionTap: () => context.goNamed(AppRouteNames.tasks),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
               _ActivityTabs(),
             ],
           ),
@@ -292,61 +379,84 @@ class _ShortcutTile extends StatelessWidget {
         ? <BoxShadow>[]
         : [
             BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.04),
-              blurRadius: 14,
-              offset: const Offset(0, 4),
+              color: colorScheme.shadow.withValues(alpha: 0.06),
+              blurRadius: 18,
+              offset: const Offset(0, 5),
             ),
           ];
 
-    return InkWell(
+    return Material(
+      elevation: 0,
       borderRadius: BorderRadius.circular(22),
-      onTap: data.onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
-          color: colorScheme.surface,
-          border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
-          boxShadow: shadow,
-        ),
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: data.accentColor.withValues(alpha: 0.10),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Icon(data.icon, color: data.accentColor, size: 22),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: data.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                colorScheme.surface,
+                colorScheme.surface.withValues(alpha: 0.95),
+              ],
             ),
-            const SizedBox(height: 10),
-            Text(
-              data.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w900,
-                    height: 1.05,
+            border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.4),
+              width: 1,
+            ),
+            boxShadow: shadow,
+          ),
+          padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 42,
+                width: 42,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      data.accentColor.withValues(alpha: 0.15),
+                      data.accentColor.withValues(alpha: 0.08),
+                    ],
                   ),
-            ),
-            const SizedBox(height: 2),
-            Expanded(
-              child: Text(
-                data.subtitle,
-                maxLines: 2,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(data.icon, color: data.accentColor, size: 24),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                data.title,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                      height: 1.15,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w900,
+                      height: 1.05,
+                      letterSpacing: -0.3,
                     ),
               ),
-            ),
-          ],
+              const SizedBox(height: 3),
+              Expanded(
+                child: Text(
+                  data.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                        height: 1.2,
+                      ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -501,60 +611,95 @@ class _ActivityTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return InkWell(
+    return Material(
+      elevation: 0,
       borderRadius: BorderRadius.circular(22),
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Row(
-          children: [
-            Container(
-              height: 48,
-              width: 48,
-              decoration: BoxDecoration(
-                color: accentColor.withValues(alpha: 0.10),
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Icon(icon, color: accentColor, size: 26),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(22),
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(22),
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                colorScheme.surface,
+                colorScheme.surface.withValues(alpha: 0.98),
+              ],
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      AppStatusChip(label: statusLabel, tone: statusTone),
+            border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.35),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                height: 52,
+                width: 52,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      accentColor.withValues(alpha: 0.18),
+                      accentColor.withValues(alpha: 0.08),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant, fontWeight: FontWeight.w600),
-                  ),
-                ],
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Icon(icon, color: accentColor, size: 28),
               ),
-            ),
-            const SizedBox(width: 10),
-            Text(
-              trailing,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Lem3alamColors.primaryBlue,
-                    fontWeight: FontWeight.w900,
-                  ),
-            ),
-          ],
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        AppStatusChip(label: statusLabel, tone: statusTone),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                        height: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                trailing,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Lem3alamColors.primaryBlue,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -0.5,
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );
