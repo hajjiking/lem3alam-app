@@ -65,10 +65,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final backTooltip = MaterialLocalizations.of(context).backButtonTooltip;
     final canPop = context.canPop();
     final colorScheme = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
+    final isDark = brightness == Brightness.dark;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 2,
         leading: canPop
             ? IconButton(
                 onPressed: () => context.pop(),
@@ -86,144 +91,169 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           const AppThemeModeButton(),
         ],
       ),
-      body: SafeArea(
-        top: false,
-        child: AppResponsiveCenter(
-          maxWidth: 560,
-          padding: EdgeInsets.zero,
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      _AuthHeader(
-                        eyebrow: 'Lem3alam',
-                        title: l10n.welcomeBack,
-                        subtitle: l10n.loginSubtitle,
-                      ),
-                      const SizedBox(height: 22),
-                      AppSectionCard(
-                        padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: AppRoleCard(
-                                    title: l10n.needService,
-                                    subtitle: l10n.needServiceSubtitle,
-                                    icon: Icons.handyman_outlined,
-                                    selected: true,
-                                    accentColor: Lem3alamColors.primaryBlue,
-                                    onTap: () {},
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: AppRoleCard(
-                                    title: l10n.wantWork,
-                                    subtitle: l10n.wantWorkSubtitle,
-                                    icon: Icons.work_history_outlined,
-                                    selected: false,
-                                    accentColor: Lem3alamColors.accentGreen,
-                                    onTap: () => context.goNamed(AppRouteNames.register),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 18),
-                            _dividerWithLabel(context, l10n.login),
-                            const SizedBox(height: 18),
-                            Form(
-                              key: _formKey,
-                              child: AutofillGroup(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    if (_error != null) AppInlineBanner(message: _error!, tone: AppBannerTone.error),
-                                    if (_error != null) const SizedBox(height: 14),
-                                    TextFormField(
-                                      controller: _emailController,
-                                      keyboardType: TextInputType.emailAddress,
-                                      textInputAction: TextInputAction.next,
-                                      autofillHints: const [AutofillHints.username, AutofillHints.email],
-                                      decoration: InputDecoration(
-                                        labelText: l10n.email,
-                                        prefixIcon: const Icon(Icons.email_outlined),
-                                        errorText: _fieldErrors['email']?.first,
-                                      ),
-                                      validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: isDark
+                ? [
+                    colorScheme.surface,
+                    colorScheme.surface,
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  ]
+                : [
+                    colorScheme.surface,
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                    colorScheme.surfaceContainerHighest.withValues(alpha: 0.2),
+                  ],
+            stops: const [0.0, 0.4, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          child: AppResponsiveCenter(
+            maxWidth: 560,
+            padding: EdgeInsets.zero,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 80, 20, 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _AuthHeader(
+                          eyebrow: 'Lem3alam',
+                          title: l10n.welcomeBack,
+                          subtitle: l10n.loginSubtitle,
+                        ),
+                        const SizedBox(height: 24),
+                        AppSectionCard(
+                          padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: AppRoleCard(
+                                      title: l10n.needService,
+                                      subtitle: l10n.needServiceSubtitle,
+                                      icon: Icons.handyman_outlined,
+                                      selected: true,
+                                      accentColor: Lem3alamColors.primaryBlue,
+                                      onTap: () {},
                                     ),
-                                    const SizedBox(height: 14),
-                                    TextFormField(
-                                      controller: _passwordController,
-                                      obscureText: _obscurePassword,
-                                      textInputAction: TextInputAction.done,
-                                      autofillHints: const [AutofillHints.password],
-                                      onFieldSubmitted: (_) {
-                                        if (_formKey.currentState?.validate() ?? false) {
-                                          _submit();
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        labelText: l10n.password,
-                                        prefixIcon: const Icon(Icons.lock_outline),
-                                        errorText: _fieldErrors['password']?.first,
-                                        suffixIcon: IconButton(
-                                          onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
-                                          icon: Icon(
-                                            _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: AppRoleCard(
+                                      title: l10n.wantWork,
+                                      subtitle: l10n.wantWorkSubtitle,
+                                      icon: Icons.work_history_outlined,
+                                      selected: false,
+                                      accentColor: Lem3alamColors.accentGreen,
+                                      onTap: () => context.goNamed(AppRouteNames.register),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 18),
+                              _dividerWithLabel(context, l10n.login),
+                              const SizedBox(height: 18),
+                              Form(
+                                key: _formKey,
+                                child: AutofillGroup(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: [
+                                      if (_error != null) AppInlineBanner(message: _error!, tone: AppBannerTone.error),
+                                      if (_error != null) const SizedBox(height: 14),
+                                      TextFormField(
+                                        controller: _emailController,
+                                        keyboardType: TextInputType.emailAddress,
+                                        textInputAction: TextInputAction.next,
+                                        autofillHints: const [AutofillHints.username, AutofillHints.email],
+                                        decoration: InputDecoration(
+                                          labelText: l10n.email,
+                                          prefixIcon: const Icon(Icons.email_outlined),
+                                          errorText: _fieldErrors['email']?.first,
+                                        ),
+                                        validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
+                                      ),
+                                      const SizedBox(height: 14),
+                                      TextFormField(
+                                        controller: _passwordController,
+                                        obscureText: _obscurePassword,
+                                        textInputAction: TextInputAction.done,
+                                        autofillHints: const [AutofillHints.password],
+                                        onFieldSubmitted: (_) {
+                                          if (_formKey.currentState?.validate() ?? false) {
+                                            _submit();
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          labelText: l10n.password,
+                                          prefixIcon: const Icon(Icons.lock_outline),
+                                          errorText: _fieldErrors['password']?.first,
+                                          suffixIcon: IconButton(
+                                            onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                                            icon: Icon(
+                                              _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                            ),
                                           ),
                                         ),
+                                        validator: (v) => (v == null || v.isEmpty) ? l10n.requiredField : null,
                                       ),
-                                      validator: (v) => (v == null || v.isEmpty) ? l10n.requiredField : null,
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Align(
-                                      alignment: AlignmentDirectional.centerEnd,
-                                      child: TextButton(
-                                        onPressed: _loading ? null : () {},
-                                        style: TextButton.styleFrom(
-                                          textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
+                                      const SizedBox(height: 10),
+                                      Align(
+                                        alignment: AlignmentDirectional.centerEnd,
+                                        child: TextButton(
+                                          onPressed: _loading ? null : () {},
+                                          style: TextButton.styleFrom(
+                                            textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
+                                          ),
+                                          child: const Text('Forgot password?'),
                                         ),
-                                        child: const Text('Forgot password?'),
                                       ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    FilledButton(
-                                      onPressed: _loading
-                                          ? null
-                                          : () {
-                                              if (_formKey.currentState?.validate() ?? false) {
-                                                _submit();
-                                              }
-                                            },
-                                      child: _loading
-                                          ? const SizedBox(
-                                              width: 22,
-                                              height: 22,
-                                              child: CircularProgressIndicator(strokeWidth: 3, color: Colors.white),
-                                            )
-                                          : Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(l10n.login),
-                                                const SizedBox(width: 6),
-                                                const Icon(Icons.arrow_forward_rounded, size: 18),
-                                              ],
-                                            ),
-                                    ),
-                                    const SizedBox(height: 14),
-                                    _continueWith(context),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
+                                      const SizedBox(height: 6),
+                                      FilledButton(
+                                        onPressed: _loading
+                                            ? null
+                                            : () {
+                                                if (_formKey.currentState?.validate() ?? false) {
+                                                  _submit();
+                                                }
+                                              },
+                                        style: FilledButton.styleFrom(
+                                          minimumSize: const Size.fromHeight(52),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(14),
+                                          ),
+                                        ),
+                                        child: _loading
+                                            ? const SizedBox(
+                                                width: 22,
+                                                height: 22,
+                                                child: CircularProgressIndicator(strokeWidth: 3, color: Colors.white),
+                                              )
+                                            : Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(l10n.login),
+                                                  const SizedBox(width: 6),
+                                                  const Icon(Icons.arrow_forward_rounded, size: 18),
+                                                ],
+                                              ),
+                                      ),
+                                      const SizedBox(height: 14),
+                                      _continueWith(context),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
                                         Text(
                                           l10n.noAccountYet,
                                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -301,6 +331,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     required BoxBorder border,
     VoidCallback? onTap,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -311,11 +342,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: border,
+            gradient: isDark
+                ? LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.15),
+                      colorScheme.surfaceContainerHighest.withValues(alpha: 0.05),
+                    ],
+                  )
+                : null,
+            color: isDark ? null : colorScheme.surface,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: colorScheme.onSurfaceVariant),
+              Icon(icon, color: colorScheme.onSurfaceVariant, size: 20),
               const SizedBox(width: 8),
               Text(
                 label,
@@ -343,6 +385,9 @@ class _AuthHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
+    final isDark = brightness == Brightness.dark;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -350,8 +395,29 @@ class _AuthHeader extends StatelessWidget {
           height: 64,
           width: 64,
           decoration: BoxDecoration(
-            color: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDark
+                  ? [
+                      Lem3alamColors.primaryBlue.withValues(alpha: 0.25),
+                      Lem3alamColors.primaryBlue.withValues(alpha: 0.15),
+                    ]
+                  : [
+                      Lem3alamColors.primaryBlue.withValues(alpha: 0.15),
+                      Lem3alamColors.primaryBlue.withValues(alpha: 0.08),
+                    ],
+            ),
             borderRadius: BorderRadius.circular(20),
+            boxShadow: isDark
+                ? []
+                : [
+                    BoxShadow(
+                      color: Lem3alamColors.primaryBlue.withValues(alpha: 0.12),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
           ),
           child: Icon(Icons.handyman_rounded, color: Lem3alamColors.primaryBlue, size: 30),
         ),
