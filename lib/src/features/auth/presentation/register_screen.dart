@@ -227,11 +227,42 @@ class _RegisterPanel extends StatelessWidget {
             InkWell(
               onTap: () => onTermsChanged(!acceptedTerms),
               borderRadius: BorderRadius.circular(10),
-              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Checkbox(value: acceptedTerms, onChanged: (value) => onTermsChanged(value ?? false), activeColor: blue, visualDensity: VisualDensity.compact),
-                const SizedBox(width: 4),
-                Expanded(child: Padding(padding: const EdgeInsets.only(top: 7), child: RichText(text: TextSpan(style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF66789F)), children: const [TextSpan(text: 'I agree to the '), TextSpan(text: 'Terms & Conditions', style: TextStyle(color: blue, fontWeight: FontWeight.w800)), TextSpan(text: ' and '), TextSpan(text: 'Privacy Policy', style: TextStyle(color: blue, fontWeight: FontWeight.w800))]))),
-              ]),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Checkbox(
+                    value: acceptedTerms,
+                    onChanged: (value) => onTermsChanged(value ?? false),
+                    activeColor: blue,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 7),
+                      child: RichText(
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: const Color(0xFF66789F),
+                              ),
+                          children: const [
+                            TextSpan(text: 'I agree to the '),
+                            TextSpan(
+                              text: 'Terms & Conditions',
+                              style: TextStyle(color: Lem3alamColors.primaryBlue, fontWeight: FontWeight.w800),
+                            ),
+                            TextSpan(text: ' and '),
+                            TextSpan(
+                              text: 'Privacy Policy',
+                              style: TextStyle(color: Lem3alamColors.primaryBlue, fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 14),
             SizedBox(height: 58, child: FilledButton(
