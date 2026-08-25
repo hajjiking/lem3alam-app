@@ -325,9 +325,17 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
     final categoriesAsync = ref.watch(categoryOptionsProvider);
     final l10n = context.l10n;
     final languageCode = Localizations.localeOf(context).languageCode;
+    const headerBlue = Lem3alamColors.primaryBlue;
 
     return Scaffold(
+      backgroundColor: headerBlue,
       appBar: AppBar(
+        backgroundColor: headerBlue,
+        foregroundColor: Colors.white,
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
         title: Text(widget.editTaskId == null ? l10n.createTask : l10n.editTask),
         actions: [
           IconButton(
@@ -339,14 +347,22 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
         ],
       ),
       body: SafeArea(
+        top: false,
         child: _loading && widget.editTaskId != null
             ? const _TaskFormSkeleton()
-            : AppResponsiveCenter(
-                maxWidth: 760,
-                padding: EdgeInsets.zero,
-                child: ListView(
-                  padding: const EdgeInsets.all(16),
+            : Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+                ),
+                child: AppResponsiveCenter(
+                  maxWidth: 640,
+                  padding: EdgeInsets.zero,
+                  child: ListView(
+                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
                   children: [
+                    _TaskFormIntro(message: l10n.tipText),
+                    const SizedBox(height: 16),
                     if (_error != null) AppInlineBanner(message: _error!, tone: AppBannerTone.error),
                     if (_error != null) const SizedBox(height: 12),
                     Form(
@@ -445,7 +461,7 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                           ),
                           const SizedBox(height: 12),
                           AppSectionCard(
-                            title: l10n.city,
+                            title: l10n.location,
                             child: Column(
                               children: [
                                 categoriesAsync.when(
@@ -552,7 +568,7 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                           ),
                           const SizedBox(height: 12),
                           AppSectionCard(
-                            title: l10n.budgetMin,
+                            title: l10n.proposedBudget,
                             child: Column(
                               children: [
                                 Row(
@@ -645,7 +661,7 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                           const SizedBox(height: 16),
                           SizedBox(
                             width: double.infinity,
-                            child: FilledButton(
+                            child: FilledButton.icon(
                               onPressed: _loading
                                   ? null
                                   : () {
@@ -653,13 +669,14 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                                         _submit();
                                       }
                                     },
-                              child: _loading
+                              icon: _loading
                                   ? const SizedBox(
                                       width: 22,
                                       height: 22,
                                       child: CircularProgressIndicator(strokeWidth: 3),
                                     )
-                                  : Text(l10n.save),
+                                  : const Icon(Icons.send_rounded),
+                              label: Text(widget.editTaskId == null ? l10n.createTask : l10n.save),
                             ),
                           ),
                         ],
@@ -668,6 +685,49 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                   ],
                 ),
               ),
+                ),
+      ),
+    );
+  }
+}
+
+class _TaskFormIntro extends StatelessWidget {
+  const _TaskFormIntro({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Icon(Icons.lightbulb_outline_rounded, color: Lem3alamColors.primaryBlue),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Text(
+              message,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: colorScheme.onSurface,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+        ],
       ),
     );
   }
