@@ -87,30 +87,27 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             child: CustomScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               slivers: [
-                SliverToBoxAdapter(child: _RegisterHero(compact: compact)),
+                const SliverToBoxAdapter(child: _RegisterHero()),
                 SliverToBoxAdapter(
-                  child: Transform.translate(
-                    offset: const Offset(0, -18),
-                    child: _RegisterPanel(
-                      compact: compact,
-                      formKey: _formKey,
-                      l10n: l10n,
-                      nameController: _nameController,
-                      emailController: _emailController,
-                      phoneController: _phoneController,
-                      cityController: _cityController,
-                      passwordController: _passwordController,
-                      role: _role,
-                      acceptedTerms: _acceptedTerms,
-                      loading: _loading,
-                      obscurePassword: _obscurePassword,
-                      error: _error,
-                      errors: _fieldErrors,
-                      onRoleChanged: (role) => setState(() => _role = role),
-                      onTermsChanged: (accepted) => setState(() => _acceptedTerms = accepted),
-                      onPasswordVisibilityChanged: () => setState(() => _obscurePassword = !_obscurePassword),
-                      onSubmit: _submit,
-                    ),
+                  child: _RegisterPanel(
+                    compact: compact,
+                    formKey: _formKey,
+                    l10n: l10n,
+                    nameController: _nameController,
+                    emailController: _emailController,
+                    phoneController: _phoneController,
+                    cityController: _cityController,
+                    passwordController: _passwordController,
+                    role: _role,
+                    acceptedTerms: _acceptedTerms,
+                    loading: _loading,
+                    obscurePassword: _obscurePassword,
+                    error: _error,
+                    errors: _fieldErrors,
+                    onRoleChanged: (role) => setState(() => _role = role),
+                    onTermsChanged: (accepted) => setState(() => _acceptedTerms = accepted),
+                    onPasswordVisibilityChanged: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onSubmit: _submit,
                   ),
                 ),
               ],
@@ -123,38 +120,16 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 }
 
 class _RegisterHero extends StatelessWidget {
-  const _RegisterHero({required this.compact});
-  final bool compact;
+  const _RegisterHero();
 
   @override
-  Widget build(BuildContext context) => Container(
-        height: compact ? 268 : 300,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFFEAF2FF), Color(0xFFD7E7FF), Color(0xFFF0F6FF)]),
-        ),
-        child: Stack(
-          children: [
-            Positioned(right: -60, bottom: -90, child: Container(width: 320, height: 320, decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withValues(alpha: .27)))),
-            Positioned(
-              left: 26,
-              top: compact ? 52 : 64,
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Image.asset('assets/logo.png', width: compact ? 180 : 218),
-                const SizedBox(height: 10),
-                Text('Skilled Professionals,\nRight at Your Service', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF435887), fontWeight: FontWeight.w600, height: 1.45)),
-              ]),
-            ),
-            Positioned(
-              right: -16,
-              bottom: -32,
-              child: SizedBox(
-                height: compact ? 225 : 248,
-                width: compact ? 170 : 190,
-                child: Image.asset('assets/artisan_cutout.png', fit: BoxFit.cover, alignment: Alignment.topCenter, color: Colors.white, colorBlendMode: BlendMode.screen),
-              ),
-            ),
-          ],
+  Widget build(BuildContext context) => AspectRatio(
+        aspectRatio: 1733 / 675,
+        child: Image.asset(
+          'assets/register_header.png',
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
+          semanticLabel: 'Create your Lem3alam account',
         ),
       );
 }
