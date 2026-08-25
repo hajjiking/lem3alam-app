@@ -337,14 +337,13 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
               color: Colors.white,
               fontWeight: FontWeight.w800,
             ),
-        title: Text(widget.editTaskId == null ? l10n.createTask : l10n.editTask),
+        title: _TaskFormHeader(title: widget.editTaskId == null ? l10n.createTask : l10n.editTask),
         actions: [
           IconButton(
             onPressed: () => showLanguagePicker(context),
             icon: const Icon(Icons.language),
             tooltip: l10n.languageAction,
           ),
-          const AppThemeModeButton(),
         ],
       ),
       body: SafeArea(
@@ -409,12 +408,24 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                               label: Text(_images.isEmpty ? l10n.add : '${_images.length}/5'),
                             ),
                             child: _images.isEmpty
-                                ? Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 6),
-                                    child: Text(
-                                      l10n.addPhotosHelper,
-                                      style: Theme.of(context).textTheme.bodyMedium,
-                                    ),
+                                ? Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(l10n.addPhotosHelper, style: Theme.of(context).textTheme.bodyMedium),
+                                      const SizedBox(height: 14),
+                                      Wrap(
+                                        spacing: 10,
+                                        runSpacing: 10,
+                                        children: [
+                                          _PhotoAddSlot(
+                                            icon: Icons.image_outlined,
+                                            onTap: _loading || _addingPhoto ? null : _addPhoto,
+                                          ),
+                                          for (var index = 0; index < 4; index++)
+                                            _PhotoAddSlot(onTap: _loading || _addingPhoto ? null : _addPhoto),
+                                        ],
+                                      ),
+                                    ],
                                   )
                                 : GridView.builder(
                                     shrinkWrap: true,
@@ -729,6 +740,88 @@ class _TaskFormIntro extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _TaskFormHeader extends StatelessWidget {
+  const _TaskFormHeader({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(Icons.home_work_outlined, size: 30),
+        const SizedBox(width: 6),
+        Flexible(
+          child: Text(
+            'lem3alam',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            title,
+            textAlign: TextAlign.end,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ),
+        const SizedBox(width: 6),
+        const Icon(Icons.playlist_add_rounded, size: 28),
+      ],
+    );
+  }
+}
+
+class _PhotoAddSlot extends StatelessWidget {
+  const _PhotoAddSlot({this.icon, this.onTap});
+
+  final IconData? icon;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final isPreview = icon != null;
+    return Material(
+      color: isPreview
+          ? Lem3alamColors.primaryBlue.withValues(alpha: 0.10)
+          : Colors.transparent,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: 74,
+          height: 74,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: isPreview
+                ? null
+                : Border.all(
+                    color: Lem3alamColors.primaryBlue.withValues(alpha: 0.45),
+                    style: BorderStyle.solid,
+                  ),
+          ),
+          child: Icon(
+            icon ?? Icons.add_rounded,
+            color: Lem3alamColors.primaryBlue.withValues(alpha: isPreview ? 1 : 0.55),
+            size: isPreview ? 34 : 30,
+          ),
+        ),
       ),
     );
   }
