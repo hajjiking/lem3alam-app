@@ -2151,6 +2151,246 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Evening'**
   String get slotEvening;
+
+  /// No description provided for @dashboardGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name} 👋'**
+  String dashboardGreeting(Object name);
+
+  /// No description provided for @dashboardReadySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to help and earn today?'**
+  String get dashboardReadySubtitle;
+
+  /// No description provided for @dashboardOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get dashboardOnline;
+
+  /// No description provided for @dashboardMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Open dashboard menu'**
+  String get dashboardMenu;
+
+  /// No description provided for @dashboardNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get dashboardNotifications;
+
+  /// No description provided for @dashboardProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get dashboardProfile;
+
+  /// No description provided for @dashboardAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get dashboardAppearance;
+
+  /// No description provided for @dashboardLightMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Light mode'**
+  String get dashboardLightMode;
+
+  /// No description provided for @dashboardDarkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark mode'**
+  String get dashboardDarkMode;
+
+  /// No description provided for @dashboardActiveTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Tasks'**
+  String get dashboardActiveTasks;
+
+  /// No description provided for @dashboardCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get dashboardCompleted;
+
+  /// No description provided for @dashboardSuccessRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Success Rate'**
+  String get dashboardSuccessRate;
+
+  /// No description provided for @dashboardViewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View details'**
+  String get dashboardViewDetails;
+
+  /// No description provided for @dashboardRecentTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Tasks'**
+  String get dashboardRecentTasks;
+
+  /// No description provided for @dashboardViewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get dashboardViewAll;
+
+  /// No description provided for @dashboardPendingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending ({count})'**
+  String dashboardPendingCount(int count);
+
+  /// No description provided for @dashboardAcceptedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted ({count})'**
+  String dashboardAcceptedCount(int count);
+
+  /// No description provided for @dashboardCompletedFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get dashboardCompletedFilter;
+
+  /// No description provided for @dashboardRepairWashingMachine.
+  ///
+  /// In en, this message translates to:
+  /// **'Repair washing machine'**
+  String get dashboardRepairWashingMachine;
+
+  /// No description provided for @dashboardFixKitchenFaucet.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix kitchen faucet'**
+  String get dashboardFixKitchenFaucet;
+
+  /// No description provided for @dashboardInstallLedLights.
+  ///
+  /// In en, this message translates to:
+  /// **'Install LED lights'**
+  String get dashboardInstallLedLights;
+
+  /// No description provided for @dashboardRabatMorocco.
+  ///
+  /// In en, this message translates to:
+  /// **'Rabat, Morocco'**
+  String get dashboardRabatMorocco;
+
+  /// No description provided for @dashboardCasablancaMorocco.
+  ///
+  /// In en, this message translates to:
+  /// **'Casablanca, Morocco'**
+  String get dashboardCasablancaMorocco;
+
+  /// No description provided for @dashboardMarrakechMorocco.
+  ///
+  /// In en, this message translates to:
+  /// **'Marrakech, Morocco'**
+  String get dashboardMarrakechMorocco;
+
+  /// No description provided for @dashboardHomeAppliance.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Appliance'**
+  String get dashboardHomeAppliance;
+
+  /// No description provided for @dashboardPlumbing.
+  ///
+  /// In en, this message translates to:
+  /// **'Plumbing'**
+  String get dashboardPlumbing;
+
+  /// No description provided for @dashboardElectrical.
+  ///
+  /// In en, this message translates to:
+  /// **'Electrical'**
+  String get dashboardElectrical;
+
+  /// No description provided for @dashboardHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 hour ago} other{{count} hours ago}}'**
+  String dashboardHoursAgo(int count);
+
+  /// No description provided for @dashboardDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day ago} other{{count} days ago}}'**
+  String dashboardDaysAgo(int count);
+
+  /// No description provided for @dashboardStatusNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get dashboardStatusNew;
+
+  /// No description provided for @dashboardStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get dashboardStatusPending;
+
+  /// No description provided for @dashboardPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} MAD'**
+  String dashboardPrice(Object amount);
+
+  /// No description provided for @dashboardGrowBusiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Grow Your Business'**
+  String get dashboardGrowBusiness;
+
+  /// No description provided for @dashboardGrowBusinessSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get more tasks and increase your earnings'**
+  String get dashboardGrowBusinessSubtitle;
+
+  /// No description provided for @dashboardBoostProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Boost Profile'**
+  String get dashboardBoostProfile;
+
+  /// No description provided for @dashboardPostTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Post Task'**
+  String get dashboardPostTask;
+
+  /// No description provided for @dashboardMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get dashboardMessages;
+
+  /// No description provided for @dashboardEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings'**
+  String get dashboardEarnings;
+
+  /// No description provided for @dashboardNoFilteredTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks in this category yet.'**
+  String get dashboardNoFilteredTasks;
+
+  /// No description provided for @dashboardFeatureUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'{feature} is coming soon.'**
+  String dashboardFeatureUnavailable(Object feature);
 }
 
 class _AppLocalizationsDelegate

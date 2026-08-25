@@ -490,5 +490,88 @@
   "statCompletionRate": "Taux de réussite",
   "slotMorning": "Matin",
   "slotAfternoon": "Après-midi",
-  "slotEvening": "Soir"
+  "slotEvening": "Soir",
+  "dashboardGreeting": "Bonjour, {name} 👋",
+  "@dashboardGreeting": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "dashboardReadySubtitle": "Prêt à aider et à gagner aujourd’hui ?",
+  "dashboardOnline": "En ligne",
+  "dashboardMenu": "Ouvrir le menu du tableau de bord",
+  "dashboardNotifications": "Notifications",
+  "dashboardProfile": "Profil",
+  "dashboardAppearance": "Apparence",
+  "dashboardLightMode": "Mode clair",
+  "dashboardDarkMode": "Mode sombre",
+  "dashboardActiveTasks": "Tâches actives",
+  "dashboardCompleted": "Terminées",
+  "dashboardSuccessRate": "Taux de réussite",
+  "dashboardViewDetails": "Voir les détails",
+  "dashboardRecentTasks": "Tâches récentes",
+  "dashboardViewAll": "Tout voir",
+  "dashboardPendingCount": "En attente ({count})",
+  "@dashboardPendingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardAcceptedCount": "Acceptées ({count})",
+  "@dashboardAcceptedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardCompletedFilter": "Terminées",
+  "dashboardRepairWashingMachine": "Réparer une machine à laver",
+  "dashboardFixKitchenFaucet": "Réparer le robinet de cuisine",
+  "dashboardInstallLedLights": "Installer des éclairages LED",
+  "dashboardRabatMorocco": "Rabat, Maroc",
+  "dashboardCasablancaMorocco": "Casablanca, Maroc",
+  "dashboardMarrakechMorocco": "Marrakech, Maroc",
+  "dashboardHomeAppliance": "Électroménager",
+  "dashboardPlumbing": "Plomberie",
+  "dashboardElectrical": "Électricité",
+  "dashboardHoursAgo": "{count, plural, =1{Il y a 1 heure} other{Il y a {count} heures}}",
+  "@dashboardHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardDaysAgo": "{count, plural, =1{Il y a 1 jour} other{Il y a {count} jours}}",
+  "@dashboardDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatusNew": "Nouveau",
+  "dashboardStatusPending": "En attente",
+  "dashboardPrice": "{amount} MAD",
+  "@dashboardPrice": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "dashboardGrowBusiness": "Développez votre activité",
+  "dashboardGrowBusinessSubtitle": "Recevez plus de tâches et augmentez vos revenus",
+  "dashboardBoostProfile": "Booster le profil",
+  "dashboardPostTask": "Publier",
+  "dashboardMessages": "Messages",
+  "dashboardEarnings": "Revenus",
+  "dashboardNoFilteredTasks": "Aucune tâche dans cette catégorie pour le moment.",
+  "dashboardFeatureUnavailable": "La fonctionnalité {feature} arrive bientôt.",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": {
+      "feature": {}
+    }
+  }
 }

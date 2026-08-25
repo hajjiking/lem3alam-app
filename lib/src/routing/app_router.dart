@@ -14,6 +14,7 @@ import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/dashboard/presentation/dashboard_screen.dart';
 import '../features/dashboard/presentation/tasker_categories_screen.dart';
+import '../features/dashboard/presentation/widgets/dashboard_components.dart';
 import '../features/location/presentation/map_picker_screen.dart';
 import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
@@ -96,7 +97,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
       if (auth.status == AuthStatus.authenticated) {
         if (isAuthRoute) return isAdmin ? '/admin' : '/dashboard';
-        if (isAdmin && !isAdminHome && location == '/dashboard') return '/admin';
+        if (isAdmin && !isAdminHome && location == '/dashboard') {
+          return '/admin';
+        }
         if (isProtectedTaskRoute && !isClient) return '/tasks';
         if (isNearbyTasks && !isTasker) return '/tasks';
       }
@@ -353,6 +356,7 @@ class _AppShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final auth = ref.watch(authControllerProvider);
 
     final currentNavigator = switch (navigationShell.currentIndex) {
       0 => _tasksBranchNavigatorKey.currentState,
@@ -371,30 +375,59 @@ class _AppShell extends ConsumerWidget {
       },
       child: Scaffold(
         body: navigationShell,
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: navigationShell.currentIndex,
-          destinations: [
-            NavigationDestination(
-              icon: const Icon(Icons.work_outline),
-              selectedIcon: const Icon(Icons.work),
-              label: l10n.tasks,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.dashboard_outlined),
-              selectedIcon: const Icon(Icons.dashboard),
-              label: l10n.dashboard,
-            ),
-          ],
-          onDestinationSelected: (index) {
-            if (index == 1 &&
-                ref.read(authControllerProvider).status != AuthStatus.authenticated) {
-              context.goNamed(AppRouteNames.login);
-              return;
+        bottomNavigationBar: DashboardBottomNavigation(
+          selectedIndex: navigationShell.currentIndex == 1 ? 0 : 1,
+          homeLabel: l10n.home,
+          tasksLabel: l10n.tasks,
+          postTaskLabel: l10n.dashboardPostTask,
+          messagesLabel: l10n.dashboardMessages,
+          earningsLabel: l10n.dashboardEarnings,
+          onSelected: (index) {
+            switch (index) {
+              case 0:
+                if (auth.status != AuthStatus.authenticated) {
+                  context.goNamed(AppRouteNames.login);
+                  return;
+                }
+                navigationShell.goBranch(
+                  1,
+                  initialLocation: navigationShell.currentIndex == 1,
+                );
+                return;
+              case 1:
+                navigationShell.goBranch(
+                  0,
+                  initialLocation: navigationShell.currentIndex == 0,
+                );
+                return;
+              case 2:
+                if (auth.status != AuthStatus.authenticated) {
+                  context.goNamed(AppRouteNames.login);
+                } else if (auth.user?.isClient == true) {
+                  context.goNamed(AppRouteNames.taskCreate);
+                } else if (auth.user?.isTasker == true) {
+                  context.goNamed(AppRouteNames.nearbyTasks);
+                }
+                return;
+              case 3:
+                _showUnavailable(context, l10n.dashboardMessages);
+                return;
+              case 4:
+                _showUnavailable(context, l10n.dashboardEarnings);
+                return;
             }
-            navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
           },
         ),
       ),
     );
+  }
+
+  void _showUnavailable(BuildContext context, String feature) {
+    final l10n = context.l10n;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(l10n.dashboardFeatureUnavailable(feature))),
+      );
   }
 }

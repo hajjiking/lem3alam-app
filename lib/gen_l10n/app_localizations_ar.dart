@@ -1102,4 +1102,138 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get slotEvening => 'مساءً';
+
+  @override
+  String dashboardGreeting(Object name) {
+    return 'مرحباً، $name 👋';
+  }
+
+  @override
+  String get dashboardReadySubtitle => 'هل أنت مستعد للمساعدة والربح اليوم؟';
+
+  @override
+  String get dashboardOnline => 'متصل';
+
+  @override
+  String get dashboardMenu => 'فتح قائمة لوحة التحكم';
+
+  @override
+  String get dashboardNotifications => 'الإشعارات';
+
+  @override
+  String get dashboardProfile => 'الملف الشخصي';
+
+  @override
+  String get dashboardAppearance => 'المظهر';
+
+  @override
+  String get dashboardLightMode => 'الوضع الفاتح';
+
+  @override
+  String get dashboardDarkMode => 'الوضع الداكن';
+
+  @override
+  String get dashboardActiveTasks => 'المهام النشطة';
+
+  @override
+  String get dashboardCompleted => 'المكتملة';
+
+  @override
+  String get dashboardSuccessRate => 'نسبة النجاح';
+
+  @override
+  String get dashboardViewDetails => 'عرض التفاصيل';
+
+  @override
+  String get dashboardRecentTasks => 'المهام الأخيرة';
+
+  @override
+  String get dashboardViewAll => 'عرض الكل';
+
+  @override
+  String dashboardPendingCount(int count) {
+    return 'قيد الانتظار ($count)';
+  }
+
+  @override
+  String dashboardAcceptedCount(int count) {
+    return 'المقبولة ($count)';
+  }
+
+  @override
+  String get dashboardCompletedFilter => 'المكتملة';
+
+  @override
+  String get dashboardRepairWashingMachine => 'إصلاح غسالة الملابس';
+
+  @override
+  String get dashboardFixKitchenFaucet => 'إصلاح صنبور المطبخ';
+
+  @override
+  String get dashboardInstallLedLights => 'تركيب مصابيح LED';
+
+  @override
+  String get dashboardRabatMorocco => 'الرباط، المغرب';
+
+  @override
+  String get dashboardCasablancaMorocco => 'الدار البيضاء، المغرب';
+
+  @override
+  String get dashboardMarrakechMorocco => 'مراكش، المغرب';
+
+  @override
+  String get dashboardHomeAppliance => 'أجهزة منزلية';
+
+  @override
+  String get dashboardPlumbing => 'السباكة';
+
+  @override
+  String get dashboardElectrical => 'الكهرباء';
+
+  @override
+  String dashboardHoursAgo(int count) {
+    return 'قبل $count ساعة';
+  }
+
+  @override
+  String dashboardDaysAgo(int count) {
+    return 'قبل $count يوم';
+  }
+
+  @override
+  String get dashboardStatusNew => 'جديد';
+
+  @override
+  String get dashboardStatusPending => 'قيد الانتظار';
+
+  @override
+  String dashboardPrice(Object amount) {
+    return '$amount درهم';
+  }
+
+  @override
+  String get dashboardGrowBusiness => 'طوّر نشاطك';
+
+  @override
+  String get dashboardGrowBusinessSubtitle => 'احصل على مهام أكثر وزِد أرباحك';
+
+  @override
+  String get dashboardBoostProfile => 'عزّز ملفك';
+
+  @override
+  String get dashboardPostTask => 'انشر مهمة';
+
+  @override
+  String get dashboardMessages => 'الرسائل';
+
+  @override
+  String get dashboardEarnings => 'الأرباح';
+
+  @override
+  String get dashboardNoFilteredTasks => 'لا توجد مهام في هذه الفئة بعد.';
+
+  @override
+  String dashboardFeatureUnavailable(Object feature) {
+    return 'ميزة $feature ستتوفر قريباً.';
+  }
 }

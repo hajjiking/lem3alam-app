@@ -490,5 +490,88 @@
   "statCompletionRate": "Completion rate",
   "slotMorning": "Morning",
   "slotAfternoon": "Afternoon",
-  "slotEvening": "Evening"
+  "slotEvening": "Evening",
+  "dashboardGreeting": "Hello, {name} 👋",
+  "@dashboardGreeting": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "dashboardReadySubtitle": "Ready to help and earn today?",
+  "dashboardOnline": "Online",
+  "dashboardMenu": "Open dashboard menu",
+  "dashboardNotifications": "Notifications",
+  "dashboardProfile": "Profile",
+  "dashboardAppearance": "Appearance",
+  "dashboardLightMode": "Light mode",
+  "dashboardDarkMode": "Dark mode",
+  "dashboardActiveTasks": "Active Tasks",
+  "dashboardCompleted": "Completed",
+  "dashboardSuccessRate": "Success Rate",
+  "dashboardViewDetails": "View details",
+  "dashboardRecentTasks": "Recent Tasks",
+  "dashboardViewAll": "View All",
+  "dashboardPendingCount": "Pending ({count})",
+  "@dashboardPendingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardAcceptedCount": "Accepted ({count})",
+  "@dashboardAcceptedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardCompletedFilter": "Completed",
+  "dashboardRepairWashingMachine": "Repair washing machine",
+  "dashboardFixKitchenFaucet": "Fix kitchen faucet",
+  "dashboardInstallLedLights": "Install LED lights",
+  "dashboardRabatMorocco": "Rabat, Morocco",
+  "dashboardCasablancaMorocco": "Casablanca, Morocco",
+  "dashboardMarrakechMorocco": "Marrakech, Morocco",
+  "dashboardHomeAppliance": "Home Appliance",
+  "dashboardPlumbing": "Plumbing",
+  "dashboardElectrical": "Electrical",
+  "dashboardHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@dashboardHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardDaysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "@dashboardDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatusNew": "New",
+  "dashboardStatusPending": "Pending",
+  "dashboardPrice": "{amount} MAD",
+  "@dashboardPrice": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "dashboardGrowBusiness": "Grow Your Business",
+  "dashboardGrowBusinessSubtitle": "Get more tasks and increase your earnings",
+  "dashboardBoostProfile": "Boost Profile",
+  "dashboardPostTask": "Post Task",
+  "dashboardMessages": "Messages",
+  "dashboardEarnings": "Earnings",
+  "dashboardNoFilteredTasks": "No tasks in this category yet.",
+  "dashboardFeatureUnavailable": "{feature} is coming soon.",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": {
+      "feature": {}
+    }
+  }
 }

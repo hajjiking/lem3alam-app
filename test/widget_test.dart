@@ -98,7 +98,7 @@ void main() {
 
     expect(find.byType(TaskListScreen), findsOneWidget);
 
-    await tester.tap(find.byIcon(Icons.dashboard_outlined));
+    await tester.tap(find.byIcon(Icons.home_outlined));
     await tester.pumpAndSettle();
 
     expect(find.byType(LoginScreen), findsOneWidget);

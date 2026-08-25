@@ -1106,4 +1106,151 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get slotEvening => 'Evening';
+
+  @override
+  String dashboardGreeting(Object name) {
+    return 'Hello, $name 👋';
+  }
+
+  @override
+  String get dashboardReadySubtitle => 'Ready to help and earn today?';
+
+  @override
+  String get dashboardOnline => 'Online';
+
+  @override
+  String get dashboardMenu => 'Open dashboard menu';
+
+  @override
+  String get dashboardNotifications => 'Notifications';
+
+  @override
+  String get dashboardProfile => 'Profile';
+
+  @override
+  String get dashboardAppearance => 'Appearance';
+
+  @override
+  String get dashboardLightMode => 'Light mode';
+
+  @override
+  String get dashboardDarkMode => 'Dark mode';
+
+  @override
+  String get dashboardActiveTasks => 'Active Tasks';
+
+  @override
+  String get dashboardCompleted => 'Completed';
+
+  @override
+  String get dashboardSuccessRate => 'Success Rate';
+
+  @override
+  String get dashboardViewDetails => 'View details';
+
+  @override
+  String get dashboardRecentTasks => 'Recent Tasks';
+
+  @override
+  String get dashboardViewAll => 'View All';
+
+  @override
+  String dashboardPendingCount(int count) {
+    return 'Pending ($count)';
+  }
+
+  @override
+  String dashboardAcceptedCount(int count) {
+    return 'Accepted ($count)';
+  }
+
+  @override
+  String get dashboardCompletedFilter => 'Completed';
+
+  @override
+  String get dashboardRepairWashingMachine => 'Repair washing machine';
+
+  @override
+  String get dashboardFixKitchenFaucet => 'Fix kitchen faucet';
+
+  @override
+  String get dashboardInstallLedLights => 'Install LED lights';
+
+  @override
+  String get dashboardRabatMorocco => 'Rabat, Morocco';
+
+  @override
+  String get dashboardCasablancaMorocco => 'Casablanca, Morocco';
+
+  @override
+  String get dashboardMarrakechMorocco => 'Marrakech, Morocco';
+
+  @override
+  String get dashboardHomeAppliance => 'Home Appliance';
+
+  @override
+  String get dashboardPlumbing => 'Plumbing';
+
+  @override
+  String get dashboardElectrical => 'Electrical';
+
+  @override
+  String dashboardHoursAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count hours ago',
+      one: '1 hour ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dashboardDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days ago',
+      one: '1 day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dashboardStatusNew => 'New';
+
+  @override
+  String get dashboardStatusPending => 'Pending';
+
+  @override
+  String dashboardPrice(Object amount) {
+    return '$amount MAD';
+  }
+
+  @override
+  String get dashboardGrowBusiness => 'Grow Your Business';
+
+  @override
+  String get dashboardGrowBusinessSubtitle =>
+      'Get more tasks and increase your earnings';
+
+  @override
+  String get dashboardBoostProfile => 'Boost Profile';
+
+  @override
+  String get dashboardPostTask => 'Post Task';
+
+  @override
+  String get dashboardMessages => 'Messages';
+
+  @override
+  String get dashboardEarnings => 'Earnings';
+
+  @override
+  String get dashboardNoFilteredTasks => 'No tasks in this category yet.';
+
+  @override
+  String dashboardFeatureUnavailable(Object feature) {
+    return '$feature is coming soon.';
+  }
 }

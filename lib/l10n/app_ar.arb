@@ -490,5 +490,88 @@
   "statCompletionRate": "نسبة الإنجاز",
   "slotMorning": "صباحاً",
   "slotAfternoon": "ظهراً",
-  "slotEvening": "مساءً"
+  "slotEvening": "مساءً",
+  "dashboardGreeting": "مرحباً، {name} 👋",
+  "@dashboardGreeting": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "dashboardReadySubtitle": "هل أنت مستعد للمساعدة والربح اليوم؟",
+  "dashboardOnline": "متصل",
+  "dashboardMenu": "فتح قائمة لوحة التحكم",
+  "dashboardNotifications": "الإشعارات",
+  "dashboardProfile": "الملف الشخصي",
+  "dashboardAppearance": "المظهر",
+  "dashboardLightMode": "الوضع الفاتح",
+  "dashboardDarkMode": "الوضع الداكن",
+  "dashboardActiveTasks": "المهام النشطة",
+  "dashboardCompleted": "المكتملة",
+  "dashboardSuccessRate": "نسبة النجاح",
+  "dashboardViewDetails": "عرض التفاصيل",
+  "dashboardRecentTasks": "المهام الأخيرة",
+  "dashboardViewAll": "عرض الكل",
+  "dashboardPendingCount": "قيد الانتظار ({count})",
+  "@dashboardPendingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardAcceptedCount": "المقبولة ({count})",
+  "@dashboardAcceptedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardCompletedFilter": "المكتملة",
+  "dashboardRepairWashingMachine": "إصلاح غسالة الملابس",
+  "dashboardFixKitchenFaucet": "إصلاح صنبور المطبخ",
+  "dashboardInstallLedLights": "تركيب مصابيح LED",
+  "dashboardRabatMorocco": "الرباط، المغرب",
+  "dashboardCasablancaMorocco": "الدار البيضاء، المغرب",
+  "dashboardMarrakechMorocco": "مراكش، المغرب",
+  "dashboardHomeAppliance": "أجهزة منزلية",
+  "dashboardPlumbing": "السباكة",
+  "dashboardElectrical": "الكهرباء",
+  "dashboardHoursAgo": "قبل {count} ساعة",
+  "@dashboardHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardDaysAgo": "قبل {count} يوم",
+  "@dashboardDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStatusNew": "جديد",
+  "dashboardStatusPending": "قيد الانتظار",
+  "dashboardPrice": "{amount} درهم",
+  "@dashboardPrice": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "dashboardGrowBusiness": "طوّر نشاطك",
+  "dashboardGrowBusinessSubtitle": "احصل على مهام أكثر وزِد أرباحك",
+  "dashboardBoostProfile": "عزّز ملفك",
+  "dashboardPostTask": "انشر مهمة",
+  "dashboardMessages": "الرسائل",
+  "dashboardEarnings": "الأرباح",
+  "dashboardNoFilteredTasks": "لا توجد مهام في هذه الفئة بعد.",
+  "dashboardFeatureUnavailable": "ميزة {feature} ستتوفر قريباً.",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": {
+      "feature": {}
+    }
+  }
 }
