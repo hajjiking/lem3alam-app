@@ -46,6 +46,7 @@ flutter:
     - assets/logo.png
     - assets/branding/lem3alam-logo.png
     - assets/artisan_cutout.png
+    - assets/login_header.png
     
 
 flutter_launcher_icons:

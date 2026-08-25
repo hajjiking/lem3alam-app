@@ -71,23 +71,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: CustomScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               slivers: [
-                SliverToBoxAdapter(child: _Hero(compact: compact)),
+                const SliverToBoxAdapter(child: _Hero()),
                 SliverToBoxAdapter(
-                  child: Transform.translate(
-                    offset: const Offset(0, -18),
-                    child: _LoginPanel(
-                      compact: compact,
-                      formKey: _formKey,
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                      loading: _loading,
-                      obscurePassword: _obscurePassword,
-                      error: _error,
-                      fieldErrors: _fieldErrors,
-                      onTogglePassword: () => setState(() => _obscurePassword = !_obscurePassword),
-                      onSubmit: _submit,
-                      l10n: l10n,
-                    ),
+                  child: _LoginPanel(
+                    compact: compact,
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    loading: _loading,
+                    obscurePassword: _obscurePassword,
+                    error: _error,
+                    fieldErrors: _fieldErrors,
+                    onTogglePassword: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onSubmit: _submit,
+                    l10n: l10n,
                   ),
                 ),
               ],
@@ -100,57 +97,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 }
 
 class _Hero extends StatelessWidget {
-  const _Hero({required this.compact});
-  final bool compact;
+  const _Hero();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: compact ? 285 : 320,
-      clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFFEAF2FF), Color(0xFFD7E7FF), Color(0xFFF0F6FF)],
-        ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            right: -65,
-            bottom: -95,
-            child: Container(
-              width: 330,
-              height: 330,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withValues(alpha: 0.27)),
-            ),
-          ),
-          Positioned(
-            left: 26,
-            top: compact ? 66 : 78,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset('assets/logo.png', width: compact ? 180 : 218),
-                const SizedBox(height: 10),
-                Text(
-                  'Skilled Professionals,\nRight at Your Service',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF435887), fontWeight: FontWeight.w600, height: 1.45),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            right: -16,
-            bottom: -28,
-            child: SizedBox(
-              height: compact ? 244 : 276,
-              width: compact ? 185 : 210,
-              child: Image.asset('assets/artisan_cutout.png', fit: BoxFit.cover, alignment: Alignment.topCenter, color: Colors.white, colorBlendMode: BlendMode.screen),
-            ),
-          ),
-        ],
+    return AspectRatio(
+      aspectRatio: 1774 / 867,
+      child: Image.asset(
+        'assets/login_header.png',
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+        semanticLabel: 'Welcome back to Lem3alam',
       ),
     );
   }
