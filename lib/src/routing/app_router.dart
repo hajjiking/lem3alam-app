@@ -14,7 +14,7 @@ import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/dashboard/presentation/dashboard_screen.dart';
 import '../features/dashboard/presentation/tasker_categories_screen.dart';
-import '../features/dashboard/presentation/widgets/dashboard_components.dart';
+import '../features/dashboard/presentation/widgets/dashboard_bottom_navigation.dart';
 import '../features/location/presentation/map_picker_screen.dart';
 import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
@@ -196,7 +196,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => _AppShell(navigationShell: navigationShell),
+        builder: (context, state, navigationShell) => _AppShell(
+          navigationShell: navigationShell,
+          location: state.uri.path,
+        ),
         branches: [
           StatefulShellBranch(
             navigatorKey: _tasksBranchNavigatorKey,
@@ -349,9 +352,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 });
 
 class _AppShell extends ConsumerWidget {
-  const _AppShell({required this.navigationShell});
+  const _AppShell({required this.navigationShell, required this.location});
 
   final StatefulNavigationShell navigationShell;
+  final String location;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -376,12 +380,14 @@ class _AppShell extends ConsumerWidget {
       child: Scaffold(
         body: navigationShell,
         bottomNavigationBar: DashboardBottomNavigation(
-          selectedIndex: navigationShell.currentIndex == 1 ? 0 : 1,
+          selectedIndex: location.startsWith('/taskers/')
+              ? 4
+              : (navigationShell.currentIndex == 1 ? 0 : 1),
           homeLabel: l10n.home,
           tasksLabel: l10n.tasks,
-          postTaskLabel: l10n.dashboardPostTask,
           messagesLabel: l10n.dashboardMessages,
           earningsLabel: l10n.dashboardEarnings,
+          profileLabel: l10n.dashboardProfile,
           onSelected: (index) {
             switch (index) {
               case 0:
@@ -401,19 +407,20 @@ class _AppShell extends ConsumerWidget {
                 );
                 return;
               case 2:
-                if (auth.status != AuthStatus.authenticated) {
-                  context.goNamed(AppRouteNames.login);
-                } else if (auth.user?.isClient == true) {
-                  context.goNamed(AppRouteNames.taskCreate);
-                } else if (auth.user?.isTasker == true) {
-                  context.goNamed(AppRouteNames.nearbyTasks);
-                }
-                return;
-              case 3:
                 _showUnavailable(context, l10n.dashboardMessages);
                 return;
-              case 4:
+              case 3:
                 _showUnavailable(context, l10n.dashboardEarnings);
+                return;
+              case 4:
+                if (auth.user?.isTasker == true) {
+                  context.goNamed(
+                    AppRouteNames.taskerProfile,
+                    pathParameters: {'id': auth.user!.id.toString()},
+                  );
+                } else {
+                  _showUnavailable(context, l10n.dashboardProfile);
+                }
                 return;
             }
           },

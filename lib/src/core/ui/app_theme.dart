@@ -141,6 +141,9 @@ abstract class AppTheme {
     warning: Lem3alamColors.marrakeshGold,
     success: Lem3alamColors.mint,
     info: Lem3alamColors.teal,
+    accentPurple: Color(0xFF6D4AFF),
+    headerStart: Color(0xFF075DF5),
+    headerEnd: Color(0xFF0052E8),
     archLine: Color(0x1F0E355A),
   );
 
@@ -148,6 +151,9 @@ abstract class AppTheme {
     warning: Color(0xFFF4B860),
     success: Color(0xFF8FD8C7),
     info: Color(0xFF56D2D6),
+    accentPurple: Color(0xFFA88CFF),
+    headerStart: Color(0xFF0B3F9F),
+    headerEnd: Color(0xFF062D78),
     archLine: Color(0x33C8E8E8),
   );
 
@@ -455,12 +461,18 @@ class Lem3alamThemeTokens extends ThemeExtension<Lem3alamThemeTokens> {
     required this.warning,
     required this.success,
     required this.info,
+    required this.accentPurple,
+    required this.headerStart,
+    required this.headerEnd,
     required this.archLine,
   });
 
   final Color warning;
   final Color success;
   final Color info;
+  final Color accentPurple;
+  final Color headerStart;
+  final Color headerEnd;
   final Color archLine;
 
   @override
@@ -468,12 +480,18 @@ class Lem3alamThemeTokens extends ThemeExtension<Lem3alamThemeTokens> {
     Color? warning,
     Color? success,
     Color? info,
+    Color? accentPurple,
+    Color? headerStart,
+    Color? headerEnd,
     Color? archLine,
   }) {
     return Lem3alamThemeTokens(
       warning: warning ?? this.warning,
       success: success ?? this.success,
       info: info ?? this.info,
+      accentPurple: accentPurple ?? this.accentPurple,
+      headerStart: headerStart ?? this.headerStart,
+      headerEnd: headerEnd ?? this.headerEnd,
       archLine: archLine ?? this.archLine,
     );
   }
@@ -488,6 +506,9 @@ class Lem3alamThemeTokens extends ThemeExtension<Lem3alamThemeTokens> {
       warning: Color.lerp(warning, other.warning, t) ?? warning,
       success: Color.lerp(success, other.success, t) ?? success,
       info: Color.lerp(info, other.info, t) ?? info,
+      accentPurple: Color.lerp(accentPurple, other.accentPurple, t) ?? accentPurple,
+      headerStart: Color.lerp(headerStart, other.headerStart, t) ?? headerStart,
+      headerEnd: Color.lerp(headerEnd, other.headerEnd, t) ?? headerEnd,
       archLine: Color.lerp(archLine, other.archLine, t) ?? archLine,
     );
   }

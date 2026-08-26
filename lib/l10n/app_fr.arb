@@ -499,6 +499,7 @@
   },
   "dashboardReadySubtitle": "Prêt à aider et à gagner aujourd’hui ?",
   "dashboardOnline": "En ligne",
+  "dashboardOffline": "Hors ligne",
   "dashboardMenu": "Ouvrir le menu du tableau de bord",
   "dashboardNotifications": "Notifications",
   "dashboardProfile": "Profil",
@@ -507,6 +508,9 @@
   "dashboardDarkMode": "Mode sombre",
   "dashboardActiveTasks": "Tâches actives",
   "dashboardCompleted": "Terminées",
+  "dashboardTotalEarnings": "Revenus totaux",
+  "dashboardRating": "Note",
+  "dashboardCurrencyMad": "MAD",
   "dashboardSuccessRate": "Taux de réussite",
   "dashboardViewDetails": "Voir les détails",
   "dashboardRecentTasks": "Tâches récentes",
@@ -567,6 +571,18 @@
   "dashboardPostTask": "Publier",
   "dashboardMessages": "Messages",
   "dashboardEarnings": "Revenus",
+  "dashboardPerformance": "Performance",
+  "dashboardThisWeek": "Cette semaine",
+  "dashboardThisMonth": "Ce mois-ci",
+  "dashboardTasksCompleted": "Tâches terminées",
+  "dashboardChangeVsLastWeek": "{change} % par rapport à la semaine dernière",
+  "@dashboardChangeVsLastWeek": {
+    "placeholders": {
+      "change": {
+        "type": "int"
+      }
+    }
+  },
   "dashboardNoFilteredTasks": "Aucune tâche dans cette catégorie pour le moment.",
   "dashboardFeatureUnavailable": "La fonctionnalité {feature} arrive bientôt.",
   "@dashboardFeatureUnavailable": {

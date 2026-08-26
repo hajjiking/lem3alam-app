@@ -499,6 +499,7 @@
   },
   "dashboardReadySubtitle": "Ready to help and earn today?",
   "dashboardOnline": "Online",
+  "dashboardOffline": "Offline",
   "dashboardMenu": "Open dashboard menu",
   "dashboardNotifications": "Notifications",
   "dashboardProfile": "Profile",
@@ -507,6 +508,9 @@
   "dashboardDarkMode": "Dark mode",
   "dashboardActiveTasks": "Active Tasks",
   "dashboardCompleted": "Completed",
+  "dashboardTotalEarnings": "Total Earnings",
+  "dashboardRating": "Rating",
+  "dashboardCurrencyMad": "MAD",
   "dashboardSuccessRate": "Success Rate",
   "dashboardViewDetails": "View details",
   "dashboardRecentTasks": "Recent Tasks",
@@ -567,6 +571,18 @@
   "dashboardPostTask": "Post Task",
   "dashboardMessages": "Messages",
   "dashboardEarnings": "Earnings",
+  "dashboardPerformance": "Performance",
+  "dashboardThisWeek": "This Week",
+  "dashboardThisMonth": "This Month",
+  "dashboardTasksCompleted": "Tasks Completed",
+  "dashboardChangeVsLastWeek": "{change}% vs last week",
+  "@dashboardChangeVsLastWeek": {
+    "placeholders": {
+      "change": {
+        "type": "int"
+      }
+    }
+  },
   "dashboardNoFilteredTasks": "No tasks in this category yet.",
   "dashboardFeatureUnavailable": "{feature} is coming soon.",
   "@dashboardFeatureUnavailable": {

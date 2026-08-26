@@ -499,6 +499,7 @@
   },
   "dashboardReadySubtitle": "هل أنت مستعد للمساعدة والربح اليوم؟",
   "dashboardOnline": "متصل",
+  "dashboardOffline": "غير متصل",
   "dashboardMenu": "فتح قائمة لوحة التحكم",
   "dashboardNotifications": "الإشعارات",
   "dashboardProfile": "الملف الشخصي",
@@ -507,6 +508,9 @@
   "dashboardDarkMode": "الوضع الداكن",
   "dashboardActiveTasks": "المهام النشطة",
   "dashboardCompleted": "المكتملة",
+  "dashboardTotalEarnings": "إجمالي الأرباح",
+  "dashboardRating": "التقييم",
+  "dashboardCurrencyMad": "درهم",
   "dashboardSuccessRate": "نسبة النجاح",
   "dashboardViewDetails": "عرض التفاصيل",
   "dashboardRecentTasks": "المهام الأخيرة",
@@ -567,6 +571,18 @@
   "dashboardPostTask": "انشر مهمة",
   "dashboardMessages": "الرسائل",
   "dashboardEarnings": "الأرباح",
+  "dashboardPerformance": "الأداء",
+  "dashboardThisWeek": "هذا الأسبوع",
+  "dashboardThisMonth": "هذا الشهر",
+  "dashboardTasksCompleted": "المهام المنجزة",
+  "dashboardChangeVsLastWeek": "{change}٪ مقارنة بالأسبوع الماضي",
+  "@dashboardChangeVsLastWeek": {
+    "placeholders": {
+      "change": {
+        "type": "int"
+      }
+    }
+  },
   "dashboardNoFilteredTasks": "لا توجد مهام في هذه الفئة بعد.",
   "dashboardFeatureUnavailable": "ميزة {feature} ستتوفر قريباً.",
   "@dashboardFeatureUnavailable": {

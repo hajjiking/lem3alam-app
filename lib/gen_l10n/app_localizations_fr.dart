@@ -1137,6 +1137,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboardOnline => 'En ligne';
 
   @override
+  String get dashboardOffline => 'Hors ligne';
+
+  @override
   String get dashboardMenu => 'Ouvrir le menu du tableau de bord';
 
   @override
@@ -1159,6 +1162,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboardCompleted => 'Terminées';
+
+  @override
+  String get dashboardTotalEarnings => 'Revenus totaux';
+
+  @override
+  String get dashboardRating => 'Note';
+
+  @override
+  String get dashboardCurrencyMad => 'MAD';
 
   @override
   String get dashboardSuccessRate => 'Taux de réussite';
@@ -1263,6 +1275,23 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboardEarnings => 'Revenus';
+
+  @override
+  String get dashboardPerformance => 'Performance';
+
+  @override
+  String get dashboardThisWeek => 'Cette semaine';
+
+  @override
+  String get dashboardThisMonth => 'Ce mois-ci';
+
+  @override
+  String get dashboardTasksCompleted => 'Tâches terminées';
+
+  @override
+  String dashboardChangeVsLastWeek(int change) {
+    return '$change % par rapport à la semaine dernière';
+  }
 
   @override
   String get dashboardNoFilteredTasks =>

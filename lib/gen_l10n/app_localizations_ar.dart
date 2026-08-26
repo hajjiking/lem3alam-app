@@ -1115,6 +1115,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dashboardOnline => 'متصل';
 
   @override
+  String get dashboardOffline => 'غير متصل';
+
+  @override
   String get dashboardMenu => 'فتح قائمة لوحة التحكم';
 
   @override
@@ -1137,6 +1140,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dashboardCompleted => 'المكتملة';
+
+  @override
+  String get dashboardTotalEarnings => 'إجمالي الأرباح';
+
+  @override
+  String get dashboardRating => 'التقييم';
+
+  @override
+  String get dashboardCurrencyMad => 'درهم';
 
   @override
   String get dashboardSuccessRate => 'نسبة النجاح';
@@ -1228,6 +1240,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dashboardEarnings => 'الأرباح';
+
+  @override
+  String get dashboardPerformance => 'الأداء';
+
+  @override
+  String get dashboardThisWeek => 'هذا الأسبوع';
+
+  @override
+  String get dashboardThisMonth => 'هذا الشهر';
+
+  @override
+  String get dashboardTasksCompleted => 'المهام المنجزة';
+
+  @override
+  String dashboardChangeVsLastWeek(int change) {
+    return '$change٪ مقارنة بالأسبوع الماضي';
+  }
 
   @override
   String get dashboardNoFilteredTasks => 'لا توجد مهام في هذه الفئة بعد.';

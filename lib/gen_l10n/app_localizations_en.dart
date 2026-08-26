@@ -1119,6 +1119,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboardOnline => 'Online';
 
   @override
+  String get dashboardOffline => 'Offline';
+
+  @override
   String get dashboardMenu => 'Open dashboard menu';
 
   @override
@@ -1141,6 +1144,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboardCompleted => 'Completed';
+
+  @override
+  String get dashboardTotalEarnings => 'Total Earnings';
+
+  @override
+  String get dashboardRating => 'Rating';
+
+  @override
+  String get dashboardCurrencyMad => 'MAD';
 
   @override
   String get dashboardSuccessRate => 'Success Rate';
@@ -1245,6 +1257,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboardEarnings => 'Earnings';
+
+  @override
+  String get dashboardPerformance => 'Performance';
+
+  @override
+  String get dashboardThisWeek => 'This Week';
+
+  @override
+  String get dashboardThisMonth => 'This Month';
+
+  @override
+  String get dashboardTasksCompleted => 'Tasks Completed';
+
+  @override
+  String dashboardChangeVsLastWeek(int change) {
+    return '$change% vs last week';
+  }
 
   @override
   String get dashboardNoFilteredTasks => 'No tasks in this category yet.';

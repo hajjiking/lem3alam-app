@@ -64,12 +64,33 @@ void main() {
     expect(find.text('Active Tasks'), findsOneWidget);
     expect(find.text('Recent Tasks'), findsOneWidget);
 
+    await tester.tap(find.text('Online'));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('Offline'), findsOneWidget);
+
+    final horizontalList = find.byWidgetPredicate(
+      (widget) =>
+          widget is ListView && widget.scrollDirection == Axis.horizontal,
+    );
+    await tester.drag(horizontalList, const Offset(-340, 0));
+    await tester.pump(const Duration(milliseconds: 250));
+    expect(find.text('Total Earnings'), findsOneWidget);
+
     final accepted = find.text('Accepted (1)');
     await tester.ensureVisible(accepted);
     await tester.tap(accepted);
     await tester.pump(const Duration(milliseconds: 250));
 
     expect(find.text('No tasks in this category yet.'), findsOneWidget);
+
+    final verticalList = find.byWidgetPredicate(
+      (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
+    );
+    for (var index = 0; index < 4; index++) {
+      await tester.drag(verticalList, const Offset(0, -500));
+      await tester.pump(const Duration(milliseconds: 250));
+    }
+    expect(find.text('Performance'), findsOneWidget);
   });
 
   testWidgets('dashboard supports dark theme and Arabic RTL', (tester) async {
@@ -88,5 +109,14 @@ void main() {
 
     final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     expect(scaffold.backgroundColor, AppTheme.dark().colorScheme.surface);
+
+    final verticalList = find.byWidgetPredicate(
+      (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
+    );
+    for (var index = 0; index < 5; index++) {
+      await tester.drag(verticalList, const Offset(0, -500));
+      await tester.pump(const Duration(milliseconds: 250));
+    }
+    expect(find.text('الأداء'), findsOneWidget);
   });
 }

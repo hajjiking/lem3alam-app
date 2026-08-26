@@ -2,94 +2,83 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:lem3alam_mobile/gen_l10n/app_localizations.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../../../core/l10n/language_picker.dart';
 import '../../../core/ui/app_theme.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
-import 'widgets/dashboard_components.dart';
+import '../application/dashboard_controller.dart';
+import '../domain/dashboard_models.dart';
+import 'widgets/dashboard_widgets.dart';
 
-class DashboardScreen extends ConsumerStatefulWidget {
+class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
 
   @override
-  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  DashboardTaskFilter _filter = DashboardTaskFilter.pending;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final tokens = theme.extension<Lem3alamThemeTokens>()!;
     final l10n = context.l10n;
     final auth = ref.watch(authControllerProvider);
+    final dashboard = ref.watch(dashboardControllerProvider);
+    final controller = ref.read(dashboardControllerProvider.notifier);
     final user = auth.user;
     final rawName = user?.name.trim() ?? '';
     final displayName =
         rawName.isEmpty ? l10n.tasker : rawName.split(RegExp(r'\s+')).first;
     final numberFormat = NumberFormat.decimalPattern(l10n.localeName);
-    final percentFormat = NumberFormat.percentPattern(l10n.localeName);
+    final ratingFormat = NumberFormat('0.0', l10n.localeName);
+    final stats = dashboard.snapshot.stats;
+    final performance = dashboard.snapshot.performance;
 
-    final stats = <DashboardStatData>[
-      DashboardStatData(
+    final statItems = <DashboardStatViewData>[
+      DashboardStatViewData(
         label: l10n.dashboardActiveTasks,
-        value: numberFormat.format(3),
+        value: numberFormat.format(stats.activeTasks),
         icon: Icons.business_center_outlined,
         accent: scheme.primary,
       ),
-      DashboardStatData(
+      DashboardStatViewData(
         label: l10n.dashboardCompleted,
-        value: numberFormat.format(24),
+        value: numberFormat.format(stats.completedTasks),
+        icon: Icons.assignment_turned_in_outlined,
+        accent: tokens.success,
+      ),
+      DashboardStatViewData(
+        label: l10n.dashboardTotalEarnings,
+        value: numberFormat.format(stats.totalEarnings),
+        secondaryLabel: l10n.dashboardCurrencyMad,
+        icon: Icons.account_balance_wallet_outlined,
+        accent: tokens.accentPurple,
+      ),
+      DashboardStatViewData(
+        label: l10n.dashboardRating,
+        value: ratingFormat.format(stats.rating),
         icon: Icons.star_outline_rounded,
-        accent: scheme.tertiary,
-      ),
-      DashboardStatData(
-        label: l10n.dashboardSuccessRate,
-        value: percentFormat.format(0.95),
-        icon: Icons.bar_chart_rounded,
+        labelIcon: Icons.star_rounded,
         accent: tokens.warning,
       ),
     ];
-
-    final tasks = <DashboardTaskData>[
-      DashboardTaskData(
-        title: l10n.dashboardRepairWashingMachine,
-        location: l10n.dashboardRabatMorocco,
-        category: l10n.dashboardHomeAppliance,
-        timeAgo: l10n.dashboardHoursAgo(2),
-        status: DashboardTaskStatus.fresh,
-        statusLabel: l10n.dashboardStatusNew,
-        price: l10n.dashboardPrice(numberFormat.format(120)),
-        icon: Icons.build_outlined,
-        accent: scheme.primary,
-      ),
-      DashboardTaskData(
-        title: l10n.dashboardFixKitchenFaucet,
-        location: l10n.dashboardCasablancaMorocco,
-        category: l10n.dashboardPlumbing,
-        timeAgo: l10n.dashboardHoursAgo(5),
-        status: DashboardTaskStatus.fresh,
-        statusLabel: l10n.dashboardStatusNew,
-        price: l10n.dashboardPrice(numberFormat.format(100)),
-        icon: Icons.plumbing_rounded,
-        accent: scheme.tertiary,
-      ),
-      DashboardTaskData(
-        title: l10n.dashboardInstallLedLights,
-        location: l10n.dashboardMarrakechMorocco,
-        category: l10n.dashboardElectrical,
-        timeAgo: l10n.dashboardDaysAgo(1),
-        status: DashboardTaskStatus.pending,
-        statusLabel: l10n.dashboardStatusPending,
-        price: l10n.dashboardPrice(numberFormat.format(150)),
-        icon: Icons.lightbulb_outline_rounded,
-        accent: tokens.warning,
-      ),
-    ];
+    final tasks = dashboard.visibleTasks
+        .map(
+          (task) => DashboardTaskViewData(
+            title: _taskTitle(l10n, task.kind),
+            location: _taskLocation(l10n, task.city),
+            category: _taskCategory(l10n, task.category),
+            timeAgo: task.hoursAgo >= 24
+                ? l10n.dashboardDaysAgo(task.hoursAgo ~/ 24)
+                : l10n.dashboardHoursAgo(task.hoursAgo),
+            status: task.status,
+            statusLabel: _taskStatus(l10n, task.status),
+            price: l10n.dashboardPrice(numberFormat.format(task.price)),
+            icon: _taskIcon(task.kind),
+            accent: scheme.primary,
+          ),
+        )
+        .toList(growable: false);
 
     return Scaffold(
       backgroundColor: scheme.surface,
@@ -100,25 +89,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             appName: l10n.appName,
             greeting: l10n.dashboardGreeting(displayName),
             subtitle: l10n.dashboardReadySubtitle,
-            onlineLabel: l10n.dashboardOnline,
+            availabilityLabel: dashboard.isOnline
+                ? l10n.dashboardOnline
+                : l10n.dashboardOffline,
+            isOnline: dashboard.isOnline,
             menuLabel: l10n.dashboardMenu,
             notificationsLabel: l10n.dashboardNotifications,
             profileLabel: l10n.dashboardProfile,
-            onMenuTap: () => _showDashboardMenu(context),
+            onMenuTap: () => _showDashboardMenu(context, ref),
             onNotificationsTap: () => _showFeatureNotice(
               context,
               l10n.dashboardNotifications,
             ),
-            onProfileTap: () {
-              if (user?.isTasker == true) {
-                context.goNamed(
-                  AppRouteNames.taskerProfile,
-                  pathParameters: {'id': user!.id.toString()},
-                );
-              } else {
-                _showFeatureNotice(context, l10n.dashboardProfile);
-              }
-            },
+            onProfileTap: () =>
+                _openProfile(context, user?.id, user?.isTasker == true),
+            onAvailabilityTap: controller.toggleAvailability,
           ),
           Transform.translate(
             offset: const Offset(0, -28),
@@ -134,16 +119,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   constraints: const BoxConstraints(maxWidth: 1120),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20, 30, 20, 8),
+                        const EdgeInsetsDirectional.fromSTEB(20, 28, 20, 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        DashboardStats(
-                          items: stats,
-                          detailsLabel: l10n.dashboardViewDetails,
-                          onTap: (_) => context.goNamed(AppRouteNames.tasks),
-                        ),
-                        const SizedBox(height: 30),
+                        DashboardStatsRow(items: statItems),
+                        const SizedBox(height: 28),
                         DashboardSectionHeader(
                           title: l10n.dashboardRecentTasks,
                           actionLabel: l10n.dashboardViewAll,
@@ -152,21 +133,26 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         ),
                         const SizedBox(height: 10),
                         DashboardFilterBar(
-                          selected: _filter,
-                          pendingLabel: l10n.dashboardPendingCount(2),
-                          acceptedLabel: l10n.dashboardAcceptedCount(1),
+                          selected: dashboard.selectedFilter,
+                          pendingLabel:
+                              l10n.dashboardPendingCount(stats.pendingTasks),
+                          acceptedLabel:
+                              l10n.dashboardAcceptedCount(stats.acceptedTasks),
                           completedLabel: l10n.dashboardCompletedFilter,
-                          onSelected: (value) =>
-                              setState(() => _filter = value),
+                          onSelected: controller.selectFilter,
                         ),
                         const SizedBox(height: 14),
                         AnimatedSwitcher(
                           duration: const Duration(milliseconds: 220),
                           switchInCurve: Curves.easeOut,
                           switchOutCurve: Curves.easeIn,
-                          child: _filter == DashboardTaskFilter.pending
-                              ? Column(
-                                  key: const ValueKey('pending-tasks'),
+                          child: tasks.isEmpty
+                              ? DashboardEmptyState(
+                                  key: ValueKey(dashboard.selectedFilter),
+                                  label: l10n.dashboardNoFilteredTasks,
+                                )
+                              : Column(
+                                  key: ValueKey(dashboard.selectedFilter),
                                   children: [
                                     for (var index = 0;
                                         index < tasks.length;
@@ -180,10 +166,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                         const SizedBox(height: 12),
                                     ],
                                   ],
-                                )
-                              : DashboardEmptyState(
-                                  key: ValueKey(_filter),
-                                  label: l10n.dashboardNoFilteredTasks,
                                 ),
                         ),
                         const SizedBox(height: 24),
@@ -191,17 +173,43 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           title: l10n.dashboardGrowBusiness,
                           subtitle: l10n.dashboardGrowBusinessSubtitle,
                           actionLabel: l10n.dashboardBoostProfile,
-                          onTap: () {
-                            if (user?.isTasker == true) {
-                              context.goNamed(
-                                AppRouteNames.taskerProfile,
-                                pathParameters: {'id': user!.id.toString()},
-                              );
-                            } else {
-                              _showFeatureNotice(
-                                  context, l10n.dashboardBoostProfile);
-                            }
-                          },
+                          onTap: () => _openProfile(
+                            context,
+                            user?.id,
+                            user?.isTasker == true,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        DashboardPerformanceSection(
+                          title: l10n.dashboardPerformance,
+                          earningsLabel: l10n.dashboardEarnings,
+                          earningsValue: l10n.dashboardPrice(
+                            numberFormat.format(performance.earnings),
+                          ),
+                          tasksCompletedLabel: l10n.dashboardTasksCompleted,
+                          tasksCompletedValue: numberFormat.format(
+                            performance.tasksCompleted,
+                          ),
+                          earningsChangeLabel: l10n.dashboardChangeVsLastWeek(
+                            performance.earningsChangePercent,
+                          ),
+                          tasksChangeLabel: l10n.dashboardChangeVsLastWeek(
+                            performance.tasksChangePercent,
+                          ),
+                          selectedRange: dashboard.performanceRange,
+                          weekLabel: l10n.dashboardThisWeek,
+                          monthLabel: l10n.dashboardThisMonth,
+                          dayLabels: [
+                            l10n.mon,
+                            l10n.tue,
+                            l10n.wed,
+                            l10n.thu,
+                            l10n.fri,
+                            l10n.sat,
+                            l10n.sun,
+                          ],
+                          points: performance.points,
+                          onRangeSelected: controller.selectPerformanceRange,
                         ),
                         const SizedBox(height: 24),
                       ],
@@ -221,10 +229,22 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-          SnackBar(content: Text(l10n.dashboardFeatureUnavailable(feature))));
+        SnackBar(content: Text(l10n.dashboardFeatureUnavailable(feature))),
+      );
   }
 
-  Future<void> _showDashboardMenu(BuildContext context) async {
+  void _openProfile(BuildContext context, int? userId, bool isTasker) {
+    if (isTasker && userId != null) {
+      context.goNamed(
+        AppRouteNames.taskerProfile,
+        pathParameters: {'id': userId.toString()},
+      );
+      return;
+    }
+    _showFeatureNotice(context, context.l10n.dashboardProfile);
+  }
+
+  Future<void> _showDashboardMenu(BuildContext context, WidgetRef ref) async {
     final l10n = context.l10n;
     final themeModeNotifier = ref.read(themeModeControllerProvider.notifier);
     final isDark = themeModeNotifier.effectiveBrightness == Brightness.dark;
@@ -248,11 +268,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               },
             ),
             ListTile(
-              leading: Icon(isDark
-                  ? Icons.light_mode_outlined
-                  : Icons.dark_mode_outlined),
+              leading: Icon(
+                isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+              ),
               title: Text(
-                  isDark ? l10n.dashboardLightMode : l10n.dashboardDarkMode),
+                isDark ? l10n.dashboardLightMode : l10n.dashboardDarkMode,
+              ),
               onTap: () {
                 Navigator.of(sheetContext).pop();
                 ref.read(themeModeControllerProvider.notifier).toggle();
@@ -272,4 +293,46 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       ),
     );
   }
+}
+
+String _taskTitle(AppLocalizations l10n, DashboardTaskKind kind) {
+  return switch (kind) {
+    DashboardTaskKind.repairWashingMachine =>
+      l10n.dashboardRepairWashingMachine,
+    DashboardTaskKind.fixKitchenFaucet => l10n.dashboardFixKitchenFaucet,
+    DashboardTaskKind.installLedLights => l10n.dashboardInstallLedLights,
+  };
+}
+
+String _taskLocation(AppLocalizations l10n, DashboardCity city) {
+  return switch (city) {
+    DashboardCity.rabat => l10n.dashboardRabatMorocco,
+    DashboardCity.casablanca => l10n.dashboardCasablancaMorocco,
+    DashboardCity.marrakech => l10n.dashboardMarrakechMorocco,
+  };
+}
+
+String _taskCategory(AppLocalizations l10n, DashboardTaskCategory category) {
+  return switch (category) {
+    DashboardTaskCategory.homeAppliance => l10n.dashboardHomeAppliance,
+    DashboardTaskCategory.plumbing => l10n.dashboardPlumbing,
+    DashboardTaskCategory.electrical => l10n.dashboardElectrical,
+  };
+}
+
+String _taskStatus(AppLocalizations l10n, DashboardTaskStatus status) {
+  return switch (status) {
+    DashboardTaskStatus.fresh => l10n.dashboardStatusNew,
+    DashboardTaskStatus.pending => l10n.dashboardStatusPending,
+    DashboardTaskStatus.accepted => l10n.statusAssigned,
+    DashboardTaskStatus.completed => l10n.statusCompleted,
+  };
+}
+
+IconData _taskIcon(DashboardTaskKind kind) {
+  return switch (kind) {
+    DashboardTaskKind.repairWashingMachine => Icons.build_outlined,
+    DashboardTaskKind.fixKitchenFaucet => Icons.plumbing_rounded,
+    DashboardTaskKind.installLedLights => Icons.lightbulb_outline_rounded,
+  };
 }

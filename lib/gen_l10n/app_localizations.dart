@@ -2170,6 +2170,12 @@ abstract class AppLocalizations {
   /// **'Online'**
   String get dashboardOnline;
 
+  /// No description provided for @dashboardOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get dashboardOffline;
+
   /// No description provided for @dashboardMenu.
   ///
   /// In en, this message translates to:
@@ -2217,6 +2223,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed'**
   String get dashboardCompleted;
+
+  /// No description provided for @dashboardTotalEarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Earnings'**
+  String get dashboardTotalEarnings;
+
+  /// No description provided for @dashboardRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get dashboardRating;
+
+  /// No description provided for @dashboardCurrencyMad.
+  ///
+  /// In en, this message translates to:
+  /// **'MAD'**
+  String get dashboardCurrencyMad;
 
   /// No description provided for @dashboardSuccessRate.
   ///
@@ -2379,6 +2403,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Earnings'**
   String get dashboardEarnings;
+
+  /// No description provided for @dashboardPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get dashboardPerformance;
+
+  /// No description provided for @dashboardThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get dashboardThisWeek;
+
+  /// No description provided for @dashboardThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get dashboardThisMonth;
+
+  /// No description provided for @dashboardTasksCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks Completed'**
+  String get dashboardTasksCompleted;
+
+  /// No description provided for @dashboardChangeVsLastWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'{change}% vs last week'**
+  String dashboardChangeVsLastWeek(int change);
 
   /// No description provided for @dashboardNoFilteredTasks.
   ///

@@ -155,6 +155,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(DashboardScreen), findsOneWidget);
+    expect(find.text('Messages'), findsOneWidget);
+    expect(find.text('Earnings'), findsWidgets);
+    expect(find.text('Profile'), findsOneWidget);
   });
 
   testWidgets('Android back from dashboard root switches to tasks tab (instead of exiting)', (tester) async {
