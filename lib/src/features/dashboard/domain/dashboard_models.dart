@@ -2,16 +2,6 @@ enum DashboardTaskFilter { pending, accepted, completed }
 
 enum DashboardTaskStatus { fresh, pending, accepted, completed }
 
-enum DashboardTaskKind {
-  repairWashingMachine,
-  fixKitchenFaucet,
-  installLedLights,
-}
-
-enum DashboardTaskCategory { homeAppliance, plumbing, electrical }
-
-enum DashboardCity { rabat, casablanca, marrakech }
-
 enum DashboardPerformanceRange { week, month }
 
 class DashboardStats {
@@ -30,12 +20,21 @@ class DashboardStats {
   final double rating;
   final int pendingTasks;
   final int acceptedTasks;
+
+  factory DashboardStats.fromJson(Map<String, dynamic> json) => DashboardStats(
+        activeTasks: _asInt(json['active_tasks']),
+        completedTasks: _asInt(json['completed_tasks']),
+        totalEarnings: _asInt(json['total_earnings']),
+        rating: _asDouble(json['rating']),
+        pendingTasks: _asInt(json['pending_tasks']),
+        acceptedTasks: _asInt(json['accepted_tasks']),
+      );
 }
 
 class DashboardTask {
   const DashboardTask({
     required this.id,
-    required this.kind,
+    required this.title,
     required this.category,
     required this.city,
     required this.hoursAgo,
@@ -44,12 +43,31 @@ class DashboardTask {
   });
 
   final int id;
-  final DashboardTaskKind kind;
-  final DashboardTaskCategory category;
-  final DashboardCity city;
+  final String title;
+  final String category;
+  final String city;
   final int hoursAgo;
   final DashboardTaskStatus status;
   final int price;
+
+  factory DashboardTask.fromJson(Map<String, dynamic> json) {
+    final category = json['category'];
+    final createdAt = DateTime.tryParse(json['created_at']?.toString() ?? '');
+    final age = createdAt == null
+        ? 0
+        : DateTime.now().toUtc().difference(createdAt.toUtc()).inHours;
+    return DashboardTask(
+      id: _asInt(json['id']),
+      title: json['title']?.toString() ?? '',
+      category: category is Map
+          ? category['name']?.toString() ?? ''
+          : category?.toString() ?? '',
+      city: json['city']?.toString() ?? '',
+      hoursAgo: age < 0 ? 0 : age,
+      status: _dashboardTaskStatus(json['dashboard_status']?.toString()),
+      price: _asInt(json['budget']),
+    );
+  }
 }
 
 class WeeklyPerformancePoint {
@@ -57,6 +75,12 @@ class WeeklyPerformancePoint {
 
   final int dayIndex;
   final double value;
+
+  factory WeeklyPerformancePoint.fromJson(Map<String, dynamic> json) =>
+      WeeklyPerformancePoint(
+        dayIndex: _asInt(json['day_index']),
+        value: _asDouble(json['value']),
+      );
 }
 
 class DashboardPerformance {
@@ -73,6 +97,24 @@ class DashboardPerformance {
   final int earningsChangePercent;
   final int tasksChangePercent;
   final List<WeeklyPerformancePoint> points;
+
+  factory DashboardPerformance.fromJson(Map<String, dynamic> json) {
+    final points = json['points'];
+    return DashboardPerformance(
+      earnings: _asInt(json['earnings']),
+      tasksCompleted: _asInt(json['tasks_completed']),
+      earningsChangePercent: _asInt(json['earnings_change_percent']),
+      tasksChangePercent: _asInt(json['tasks_change_percent']),
+      points: points is List
+          ? points
+              .whereType<Map>()
+              .map((point) => WeeklyPerformancePoint.fromJson(
+                    Map<String, dynamic>.from(point),
+                  ))
+              .toList(growable: false)
+          : const [],
+    );
+  }
 }
 
 class DashboardSnapshot {
@@ -85,6 +127,30 @@ class DashboardSnapshot {
   final DashboardStats stats;
   final List<DashboardTask> tasks;
   final DashboardPerformance performance;
+
+  factory DashboardSnapshot.fromJson(Map<String, dynamic> json) {
+    final stats = json['stats'];
+    final tasks = json['recent_tasks'];
+    final performance = json['performance'];
+    return DashboardSnapshot(
+      stats: stats is Map
+          ? DashboardStats.fromJson(Map<String, dynamic>.from(stats))
+          : empty.stats,
+      tasks: tasks is List
+          ? tasks
+              .whereType<Map>()
+              .map((task) => DashboardTask.fromJson(
+                    Map<String, dynamic>.from(task),
+                  ))
+              .toList(growable: false)
+          : const [],
+      performance: performance is Map
+          ? DashboardPerformance.fromJson(
+              Map<String, dynamic>.from(performance),
+            )
+          : empty.performance,
+    );
+  }
 
   static const empty = DashboardSnapshot(
     stats: DashboardStats(
@@ -105,3 +171,22 @@ class DashboardSnapshot {
     ),
   );
 }
+
+int _asInt(dynamic value) => switch (value) {
+      num number => number.round(),
+      String text => double.tryParse(text)?.round() ?? 0,
+      _ => 0,
+    };
+
+double _asDouble(dynamic value) => switch (value) {
+      num number => number.toDouble(),
+      String text => double.tryParse(text) ?? 0,
+      _ => 0,
+    };
+
+DashboardTaskStatus _dashboardTaskStatus(String? value) => switch (value) {
+      'pending' => DashboardTaskStatus.pending,
+      'accepted' => DashboardTaskStatus.accepted,
+      'completed' => DashboardTaskStatus.completed,
+      _ => DashboardTaskStatus.fresh,
+    };

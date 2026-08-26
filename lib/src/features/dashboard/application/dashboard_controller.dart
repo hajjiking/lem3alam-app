@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/dashboard_repository_impl.dart';
 import '../domain/dashboard_models.dart';
 
 final dashboardControllerProvider =
@@ -11,11 +12,15 @@ class DashboardState {
     required this.snapshot,
     this.selectedFilter = DashboardTaskFilter.pending,
     this.performanceRange = DashboardPerformanceRange.week,
+    this.isLoading = false,
+    this.error,
   });
 
   final DashboardSnapshot snapshot;
   final DashboardTaskFilter selectedFilter;
   final DashboardPerformanceRange performanceRange;
+  final bool isLoading;
+  final Object? error;
 
   List<DashboardTask> get visibleTasks {
     return switch (selectedFilter) {
@@ -36,21 +41,48 @@ class DashboardState {
   }
 
   DashboardState copyWith({
+    DashboardSnapshot? snapshot,
     DashboardTaskFilter? selectedFilter,
     DashboardPerformanceRange? performanceRange,
+    bool? isLoading,
+    Object? error,
+    bool clearError = false,
   }) {
     return DashboardState(
-      snapshot: snapshot,
+      snapshot: snapshot ?? this.snapshot,
       selectedFilter: selectedFilter ?? this.selectedFilter,
       performanceRange: performanceRange ?? this.performanceRange,
+      isLoading: isLoading ?? this.isLoading,
+      error: clearError ? null : error ?? this.error,
     );
   }
 }
 
 class DashboardController extends Notifier<DashboardState> {
+  var _started = false;
+
   @override
   DashboardState build() {
+    if (!_started) {
+      _started = true;
+      Future.microtask(load);
+    }
     return const DashboardState(snapshot: DashboardSnapshot.empty);
+  }
+
+  Future<void> load() async {
+    state = state.copyWith(isLoading: true, clearError: true);
+    try {
+      final snapshot =
+          await ref.read(dashboardRepositoryProvider).fetchDashboard();
+      state = state.copyWith(
+        snapshot: snapshot,
+        isLoading: false,
+        clearError: true,
+      );
+    } catch (error) {
+      state = state.copyWith(isLoading: false, error: error);
+    }
   }
 
   void selectFilter(DashboardTaskFilter filter) {

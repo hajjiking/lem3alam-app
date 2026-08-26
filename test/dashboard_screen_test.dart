@@ -7,6 +7,9 @@ import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 import 'package:lem3alam_mobile/src/features/auth/domain/user.dart';
 import 'package:lem3alam_mobile/src/features/auth/presentation/auth_controller.dart';
 import 'package:lem3alam_mobile/src/features/auth/presentation/auth_state.dart';
+import 'package:lem3alam_mobile/src/features/dashboard/data/dashboard_repository_impl.dart';
+import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_models.dart';
+import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_repository.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/dashboard_screen.dart';
 
 class _DashboardAuthController extends AuthController {
@@ -26,10 +29,17 @@ class _DashboardAuthController extends AuthController {
   }
 }
 
+class _EmptyDashboardRepository implements DashboardRepository {
+  @override
+  Future<DashboardSnapshot> fetchDashboard() async => DashboardSnapshot.empty;
+}
+
 Widget _dashboardApp({required Locale locale, required ThemeMode themeMode}) {
   return ProviderScope(
     overrides: [
       authControllerProvider.overrideWith(_DashboardAuthController.new),
+      dashboardRepositoryProvider
+          .overrideWithValue(_EmptyDashboardRepository()),
     ],
     child: MaterialApp(
       locale: locale,

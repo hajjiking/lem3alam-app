@@ -71,16 +71,16 @@ class DashboardScreen extends ConsumerWidget {
     final tasks = dashboard.visibleTasks
         .map(
           (task) => DashboardTaskViewData(
-            title: _taskTitle(l10n, task.kind),
-            location: _taskLocation(l10n, task.city),
-            category: _taskCategory(l10n, task.category),
+            title: task.title,
+            location: task.city,
+            category: task.category,
             timeAgo: task.hoursAgo >= 24
                 ? l10n.dashboardDaysAgo(task.hoursAgo ~/ 24)
                 : l10n.dashboardHoursAgo(task.hoursAgo),
             status: task.status,
             statusLabel: _taskStatus(l10n, task.status),
             price: l10n.dashboardPrice(numberFormat.format(task.price)),
-            icon: _taskIcon(task.kind),
+            icon: _taskIcon(task.category),
             accent: scheme.primary,
           ),
         )
@@ -111,6 +111,7 @@ class DashboardScreen extends ConsumerWidget {
                 _openProfile(context, user?.id, user?.isTasker == true),
             onAvailabilityTap: () {},
           ),
+          if (dashboard.isLoading) const LinearProgressIndicator(minHeight: 2),
           Transform.translate(
             offset: const Offset(0, -28),
             child: Container(
@@ -319,31 +320,6 @@ class DashboardScreen extends ConsumerWidget {
   }
 }
 
-String _taskTitle(AppLocalizations l10n, DashboardTaskKind kind) {
-  return switch (kind) {
-    DashboardTaskKind.repairWashingMachine =>
-      l10n.dashboardRepairWashingMachine,
-    DashboardTaskKind.fixKitchenFaucet => l10n.dashboardFixKitchenFaucet,
-    DashboardTaskKind.installLedLights => l10n.dashboardInstallLedLights,
-  };
-}
-
-String _taskLocation(AppLocalizations l10n, DashboardCity city) {
-  return switch (city) {
-    DashboardCity.rabat => l10n.dashboardRabatMorocco,
-    DashboardCity.casablanca => l10n.dashboardCasablancaMorocco,
-    DashboardCity.marrakech => l10n.dashboardMarrakechMorocco,
-  };
-}
-
-String _taskCategory(AppLocalizations l10n, DashboardTaskCategory category) {
-  return switch (category) {
-    DashboardTaskCategory.homeAppliance => l10n.dashboardHomeAppliance,
-    DashboardTaskCategory.plumbing => l10n.dashboardPlumbing,
-    DashboardTaskCategory.electrical => l10n.dashboardElectrical,
-  };
-}
-
 String _taskStatus(AppLocalizations l10n, DashboardTaskStatus status) {
   return switch (status) {
     DashboardTaskStatus.fresh => l10n.dashboardStatusNew,
@@ -353,10 +329,13 @@ String _taskStatus(AppLocalizations l10n, DashboardTaskStatus status) {
   };
 }
 
-IconData _taskIcon(DashboardTaskKind kind) {
-  return switch (kind) {
-    DashboardTaskKind.repairWashingMachine => Icons.build_outlined,
-    DashboardTaskKind.fixKitchenFaucet => Icons.plumbing_rounded,
-    DashboardTaskKind.installLedLights => Icons.lightbulb_outline_rounded,
-  };
+IconData _taskIcon(String category) {
+  final normalized = category.toLowerCase();
+  if (normalized.contains('plumb') || normalized.contains('سباك')) {
+    return Icons.plumbing_rounded;
+  }
+  if (normalized.contains('electric') || normalized.contains('كهرب')) {
+    return Icons.lightbulb_outline_rounded;
+  }
+  return Icons.build_outlined;
 }
