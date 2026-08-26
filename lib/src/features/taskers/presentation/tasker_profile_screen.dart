@@ -30,9 +30,6 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
   var _isFav = false;
   List<bool> _helpfulToggles = const [];
   int? _lastKnownModelId;
-  var _useFallback = false;
-  Object? _lastHardError;
-  StackTrace? _lastHardStack;
 
   @override
   void initState() {
@@ -47,18 +44,7 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
   }
 
   void _refresh() {
-    setState(() {
-      _useFallback = false;
-      _lastHardError = null;
-      _lastHardStack = null;
-    });
     ref.invalidate(publicTaskerProfileProvider(widget.taskerId));
-  }
-
-  void _fallbackToDemo() {
-    setState(() {
-      _useFallback = true;
-    });
   }
 
   void _toggleFav() {
@@ -133,25 +119,13 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
     final systemBarIcon = brightness == Brightness.light ? Brightness.dark : Brightness.light;
 
     final async = ref.watch(publicTaskerProfileProvider(widget.taskerId));
-    final PublicProfileModel? rawModel;
-    if (_useFallback) {
-      rawModel = ref.watch(publicTaskerProfileFallbackProvider(widget.taskerId));
-    } else {
-      rawModel = async.asData?.value;
-    }
-    final PublicProfileModel? model = rawModel;
+    final PublicProfileModel? model = async.asData?.value;
     if (model != null && _lastKnownModelId != model.id) {
       _lastKnownModelId = model.id;
       _helpfulToggles = List<bool>.filled(model.reviews.length, false);
     }
 
     final hasData = model != null;
-
-    // Track provider hard errors for the fallback CTA body (but only when not using fallback)
-    if (!_useFallback && async.asError != null) {
-      _lastHardError = async.asError!.error;
-      _lastHardStack = async.asError!.stackTrace;
-    }
 
     Widget body;
     if (hasData) {
@@ -168,18 +142,14 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
         onBookService: () => _onBookNow(model),
         model: model,
       );
-      if (_useFallback) {
-        body = _FallbackBanner(onRefresh: _refresh, child: body);
-      }
     } else if (async.isLoading) {
       body = const _SkeletonBody(key: ValueKey('skeleton'));
     } else {
       body = _ErrorBody(
         key: const ValueKey('error'),
-        error: '${_lastHardError ?? async.asError?.error ?? context.l10n.errUnknown}',
-        stackTrace: '${_lastHardStack ?? async.asError?.stackTrace ?? ''}',
+        error: '${async.asError?.error ?? context.l10n.errUnknown}',
+        stackTrace: '${async.asError?.stackTrace ?? ''}',
         onRetry: _refresh,
-        onFallback: _fallbackToDemo,
       );
     }
 
@@ -433,7 +403,9 @@ class _Body extends StatelessWidget {
                           StatisticItem(
                             icon: Icons.check_circle_outline_rounded,
                             label: l10n.statJobsCompleted,
-                            value: _fmtInt(model.jobsCompleted),
+                            value: model.jobsCompleted == null
+                                ? '-'
+                                : _fmtInt(model.jobsCompleted!),
                             accent: const Color(0xFF2563EB),
                           ),
                           StatisticItem(
@@ -451,7 +423,9 @@ class _Body extends StatelessWidget {
                           StatisticItem(
                             icon: Icons.flag_rounded,
                             label: l10n.statCompletionRate,
-                            value: '${(model.completionRate * 100).toStringAsFixed(0)}%',
+                            value: model.completionRate == null
+                                ? '-'
+                                : '${(model.completionRate! * 100).toStringAsFixed(0)}%',
                             accent: const Color(0xFF7C3AED),
                           ),
                         ],
@@ -1101,12 +1075,10 @@ class _ErrorBody extends StatelessWidget {
     required this.error,
     required this.onRetry,
     this.stackTrace,
-    this.onFallback,
   });
   final String error;
   final String? stackTrace;
   final VoidCallback onRetry;
-  final VoidCallback? onFallback;
 
   @override
   Widget build(BuildContext context) {
@@ -1130,67 +1102,9 @@ class _ErrorBody extends StatelessWidget {
                 onRetry: onRetry,
               ),
             ),
-            if (onFallback != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: OutlinedButton.icon(
-                  onPressed: onFallback,
-                  icon: const Icon(Icons.offline_bolt_rounded),
-                  label: const Text('View demo profile (offline mode)'),
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(52),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  ),
-                ),
-              ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _FallbackBanner extends StatelessWidget {
-  const _FallbackBanner({required this.child, required this.onRefresh});
-  final Widget child;
-  final VoidCallback onRefresh;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Column(
-      children: [
-        Material(
-          color: scheme.primary.withValues(alpha: 0.08),
-          elevation: 0,
-          child: InkWell(
-            onTap: onRefresh,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Icon(Icons.cloud_off_rounded, color: scheme.primary, size: 20),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Offline mode — showing demo profile. Tap to refresh.',
-                      maxLines: 2,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: scheme.primary,
-                        fontWeight: FontWeight.w800,
-                        height: 1.25,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(Icons.refresh_rounded, color: scheme.primary, size: 18),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Expanded(child: child),
-      ],
     );
   }
 }

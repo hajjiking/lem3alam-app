@@ -85,4 +85,23 @@ class DashboardSnapshot {
   final DashboardStats stats;
   final List<DashboardTask> tasks;
   final DashboardPerformance performance;
+
+  static const empty = DashboardSnapshot(
+    stats: DashboardStats(
+      activeTasks: 0,
+      completedTasks: 0,
+      totalEarnings: 0,
+      rating: 0,
+      pendingTasks: 0,
+      acceptedTasks: 0,
+    ),
+    tasks: [],
+    performance: DashboardPerformance(
+      earnings: 0,
+      tasksCompleted: 0,
+      earningsChangePercent: 0,
+      tasksChangePercent: 0,
+      points: [],
+    ),
+  );
 }

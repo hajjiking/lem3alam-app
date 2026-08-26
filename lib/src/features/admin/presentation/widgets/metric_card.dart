@@ -4,20 +4,20 @@ class AdminMetricCardData {
   const AdminMetricCardData({
     required this.label,
     required this.value,
-    required this.deltaValue,
-    required this.deltaCaption,
     required this.icon,
     required this.accent,
-    required this.isPositive,
+    this.deltaValue,
+    this.deltaCaption,
+    this.isPositive,
   });
 
   final String label;
   final String value;
-  final String deltaValue;
-  final String deltaCaption;
+  final String? deltaValue;
+  final String? deltaCaption;
   final IconData icon;
   final Color accent;
-  final bool isPositive;
+  final bool? isPositive;
 }
 
 class AdminMetricCard extends StatelessWidget {
@@ -36,7 +36,7 @@ class AdminMetricCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
-    final trendColor = data.isPositive ? scheme.tertiary : scheme.error;
+    final trendColor = data.isPositive == true ? scheme.tertiary : scheme.error;
     final tintAlpha = theme.brightness == Brightness.dark ? 0.18 : 0.10;
 
     return Card(
@@ -91,39 +91,41 @@ class AdminMetricCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 9),
-              Row(
-                children: [
-                  Icon(
-                    data.isPositive
-                        ? Icons.arrow_upward_rounded
-                        : Icons.arrow_downward_rounded,
-                    color: trendColor,
-                    size: 17,
-                  ),
-                  const SizedBox(width: 3),
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Text(
-                      data.deltaValue,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: trendColor,
+              if (data.deltaValue != null && data.deltaCaption != null) ...[
+                const SizedBox(height: 9),
+                Row(
+                  children: [
+                    Icon(
+                      data.isPositive == true
+                          ? Icons.arrow_upward_rounded
+                          : Icons.arrow_downward_rounded,
+                      color: trendColor,
+                      size: 17,
+                    ),
+                    const SizedBox(width: 3),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: Text(
+                        data.deltaValue!,
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: trendColor,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                  Flexible(
-                    child: Text(
-                      data.deltaCaption,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: scheme.onSurfaceVariant,
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        data.deltaCaption!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
               const Spacer(),
               Divider(color: scheme.outlineVariant.withValues(alpha: 0.55)),
               Row(

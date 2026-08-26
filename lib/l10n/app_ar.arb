@@ -638,5 +638,7 @@
   },
   "adminHomeRepairs": "إصلاحات منزلية",
   "adminCleaning": "التنظيف",
-  "adminPainting": "الصباغة"
+  "adminPainting": "الصباغة",
+  "adminDetailedAnalyticsUnavailable": "ستظهر التحليلات التفصيلية عندما توفرها واجهة برمجة الإدارة. لا يتم عرض أي بيانات تجريبية.",
+  "dashboardLiveDataUnavailable": "بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية."
 }

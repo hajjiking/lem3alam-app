@@ -20,8 +20,8 @@ class PublicProfileModel {
     this.features = const [],
     this.phone,
     this.responseMinutes,
-    required this.jobsCompleted,
-    required this.completionRate,
+    this.jobsCompleted,
+    this.completionRate,
     this.services = const [],
     this.reviews = const [],
     this.portfolio = const [],
@@ -101,8 +101,8 @@ class PublicProfileModel {
       features: features,
       phone: json['phone']?.toString(),
       responseMinutes: _int(json['response_minutes']),
-      jobsCompleted: _int(json['jobs_completed']) ?? 0,
-      completionRate: _double(json['completion_rate']) ?? 0,
+      jobsCompleted: _int(json['jobs_completed']),
+      completionRate: _double(json['completion_rate']),
       services: services,
       reviews: reviews,
       portfolio: portfolio,
@@ -129,8 +129,8 @@ class PublicProfileModel {
   final List<String> features;
   final String? phone;
   final int? responseMinutes;
-  final int jobsCompleted;
-  final double completionRate;
+  final int? jobsCompleted;
+  final double? completionRate;
   final List<PublicServiceItem> services;
   final List<PublicReviewItem> reviews;
   final List<PublicPortfolioItem> portfolio;

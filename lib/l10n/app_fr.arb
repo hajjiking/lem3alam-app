@@ -638,5 +638,7 @@
   },
   "adminHomeRepairs": "Réparations maison",
   "adminCleaning": "Nettoyage",
-  "adminPainting": "Peinture"
+  "adminPainting": "Peinture",
+  "adminDetailedAnalyticsUnavailable": "Les analyses détaillées apparaîtront lorsque l’API d’administration les fournira. Aucune donnée d’exemple n’est affichée.",
+  "dashboardLiveDataUnavailable": "Les données du tableau de bord ne sont pas encore disponibles via l’API. Aucune tâche ni statistique d’exemple n’est affichée."
 }

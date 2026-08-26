@@ -638,5 +638,7 @@
   },
   "adminHomeRepairs": "Home Repairs",
   "adminCleaning": "Cleaning",
-  "adminPainting": "Painting"
+  "adminPainting": "Painting",
+  "adminDetailedAnalyticsUnavailable": "Detailed analytics will appear when the admin API provides them. No sample data is displayed.",
+  "dashboardLiveDataUnavailable": "Dashboard data is not available from the API yet. No sample tasks or statistics are displayed."
 }

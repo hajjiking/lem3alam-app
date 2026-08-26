@@ -1,12 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/mock_dashboard_repository.dart';
 import '../domain/dashboard_models.dart';
-import '../domain/dashboard_repository.dart';
-
-final dashboardRepositoryProvider = Provider<DashboardRepository>(
-  (ref) => const MockDashboardRepository(),
-);
 
 final dashboardControllerProvider =
     NotifierProvider<DashboardController, DashboardState>(
@@ -60,9 +54,7 @@ class DashboardState {
 class DashboardController extends Notifier<DashboardState> {
   @override
   DashboardState build() {
-    return DashboardState(
-      snapshot: ref.watch(dashboardRepositoryProvider).loadDashboard(),
-    );
+    return const DashboardState(snapshot: DashboardSnapshot.empty);
   }
 
   void selectFilter(DashboardTaskFilter filter) {

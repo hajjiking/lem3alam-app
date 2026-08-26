@@ -33,6 +33,12 @@ class DashboardScreen extends ConsumerWidget {
     final ratingFormat = NumberFormat('0.0', l10n.localeName);
     final stats = dashboard.snapshot.stats;
     final performance = dashboard.snapshot.performance;
+    final hasDashboardData = dashboard.snapshot.tasks.isNotEmpty ||
+        stats.activeTasks != 0 ||
+        stats.completedTasks != 0 ||
+        stats.totalEarnings != 0 ||
+        stats.rating != 0 ||
+        performance.points.isNotEmpty;
 
     final statItems = <DashboardStatViewData>[
       DashboardStatViewData(
@@ -123,6 +129,23 @@ class DashboardScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        if (!hasDashboardData) ...[
+                          DashboardEmptyState(
+                            label: l10n.dashboardLiveDataUnavailable,
+                          ),
+                          const SizedBox(height: 24),
+                          DashboardPromoBanner(
+                            title: l10n.dashboardGrowBusiness,
+                            subtitle: l10n.dashboardGrowBusinessSubtitle,
+                            actionLabel: l10n.dashboardBoostProfile,
+                            onTap: () => _openProfile(
+                              context,
+                              user?.id,
+                              user?.isTasker == true,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                        ] else ...[
                         DashboardStatsRow(items: statItems),
                         const SizedBox(height: 28),
                         DashboardSectionHeader(
@@ -212,6 +235,7 @@ class DashboardScreen extends ConsumerWidget {
                           onRangeSelected: controller.selectPerformanceRange,
                         ),
                         const SizedBox(height: 24),
+                        ],
                       ],
                     ),
                   ),
