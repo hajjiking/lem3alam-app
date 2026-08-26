@@ -17,6 +17,9 @@ class DashboardHeader extends StatelessWidget {
     required this.onNotificationsTap,
     required this.onProfileTap,
     required this.onAvailabilityTap,
+    this.notificationCount,
+    this.avatarAsset = 'assets/artisan_cutout.png',
+    this.avatarFallback = Icons.person_rounded,
   });
 
   final String appName;
@@ -31,6 +34,9 @@ class DashboardHeader extends StatelessWidget {
   final VoidCallback onNotificationsTap;
   final VoidCallback onProfileTap;
   final VoidCallback onAvailabilityTap;
+  final int? notificationCount;
+  final String? avatarAsset;
+  final IconData avatarFallback;
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +102,18 @@ class DashboardHeader extends StatelessWidget {
                       onPressed: onNotificationsTap,
                       style: IconButton.styleFrom(foregroundColor: foreground),
                       icon: Badge(
-                        smallSize: 9,
+                        label: notificationCount == null
+                            ? null
+                            : Text(
+                                '$notificationCount',
+                                textDirection: TextDirection.ltr,
+                              ),
+                        smallSize: notificationCount == null ? 9 : null,
                         backgroundColor: scheme.error,
-                        child: const Icon(Icons.notifications_none_rounded,
-                            size: 30),
+                        child: const Icon(
+                          Icons.notifications_none_rounded,
+                          size: 30,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -118,16 +132,18 @@ class DashboardHeader extends StatelessWidget {
                             color: scheme.surfaceContainerLowest,
                           ),
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/artisan_cutout.png',
-                              fit: BoxFit.cover,
-                              alignment: const Alignment(0, -0.82),
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Icon(
-                                Icons.person_rounded,
-                                color: scheme.primary,
-                              ),
-                            ),
+                            child: avatarAsset == null
+                                ? Icon(avatarFallback, color: scheme.primary)
+                                : Image.asset(
+                                    avatarAsset!,
+                                    fit: BoxFit.cover,
+                                    alignment: const Alignment(0, -0.82),
+                                    errorBuilder:
+                                        (context, error, stackTrace) => Icon(
+                                      avatarFallback,
+                                      color: scheme.primary,
+                                    ),
+                                  ),
                           ),
                         ),
                       ),

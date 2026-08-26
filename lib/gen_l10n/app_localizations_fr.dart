@@ -72,8 +72,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get createAccountTitle => 'Créez votre compte';
 
   @override
-  String get createAccountSubtitle =>
-      'Saisissez vos informations pour créer un compte';
+  String get createAccountSubtitle => 'Saisissez vos informations pour créer un compte';
 
   @override
   String get tasks => 'Tâches';
@@ -121,8 +120,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cancel => 'Annuler';
 
   @override
-  String get confirmDeleteTask =>
-      'Êtes-vous sûr de vouloir supprimer cette tâche ?';
+  String get confirmDeleteTask => 'Êtes-vous sûr de vouloir supprimer cette tâche ?';
 
   @override
   String get retry => 'Réessayer';
@@ -134,8 +132,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get emptyTasksTitle => 'Aucune tâche';
 
   @override
-  String get emptyTasksSubtitle =>
-      'Créez une nouvelle tâche ou actualisez la page.';
+  String get emptyTasksSubtitle => 'Créez une nouvelle tâche ou actualisez la page.';
 
   @override
   String get shortcuts => 'Raccourcis';
@@ -144,8 +141,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tip => 'Astuce';
 
   @override
-  String get tipText =>
-      'Commencez par créer une tâche puis choisissez la meilleure offre.';
+  String get tipText => 'Commencez par créer une tâche puis choisissez la meilleure offre.';
 
   @override
   String get remote => 'À distance';
@@ -297,8 +293,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get add => 'Ajouter';
 
   @override
-  String get addPhotosHelper =>
-      'Ajoutez jusqu\'à 5 photos pour aider les prestataires à comprendre la mission.';
+  String get addPhotosHelper => 'Ajoutez jusqu\'à 5 photos pour aider les prestataires à comprendre la mission.';
 
   @override
   String get locationSelected => 'Position sélectionnée';
@@ -310,8 +305,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get clear => 'Effacer';
 
   @override
-  String get cameraCaptureNotAvailableOnWeb =>
-      'La capture photo n\'est pas disponible sur le web';
+  String get cameraCaptureNotAvailableOnWeb => 'La capture photo n\'est pas disponible sur le web';
 
   @override
   String get maxTaskPhotos => 'Vous pouvez joindre jusqu\'à 5 photos';
@@ -320,12 +314,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cameraPermission => 'Autorisation caméra';
 
   @override
-  String get cameraPermissionPermanentlyDenied =>
-      'L\'autorisation caméra est refusée de façon permanente. Veuillez l\'activer dans les réglages.';
+  String get cameraPermissionPermanentlyDenied => 'L\'autorisation caméra est refusée de façon permanente. Veuillez l\'activer dans les réglages.';
 
   @override
-  String get cameraPermissionRequired =>
-      'L\'autorisation caméra est nécessaire pour prendre des photos.';
+  String get cameraPermissionRequired => 'L\'autorisation caméra est nécessaire pour prendre des photos.';
 
   @override
   String get close => 'Fermer';
@@ -365,20 +357,16 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get enableNearbyTaskMatching =>
-      'Activer la détection des tâches à proximité';
+  String get enableNearbyTaskMatching => 'Activer la détection des tâches à proximité';
 
   @override
-  String get nearbyTasksConsentSubtitle =>
-      'Nous utilisons votre position uniquement après votre consentement, et le flux se rafraîchit à un rythme respectueux de la batterie.';
+  String get nearbyTasksConsentSubtitle => 'Nous utilisons votre position uniquement après votre consentement, et le flux se rafraîchit à un rythme respectueux de la batterie.';
 
   @override
-  String get nearbyTasksConsentBody =>
-      'La position sert à trouver des missions proches dans le rayon choisi et à améliorer la pertinence selon votre profil de prestataire.';
+  String get nearbyTasksConsentBody => 'La position sert à trouver des missions proches dans le rayon choisi et à améliorer la pertinence selon votre profil de prestataire.';
 
   @override
-  String get allowLocationBasedNearbyTasks =>
-      'Autoriser les tâches proches basées sur la position';
+  String get allowLocationBasedNearbyTasks => 'Autoriser les tâches proches basées sur la position';
 
   @override
   String get feedControls => 'Contrôles du flux';
@@ -405,26 +393,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get savedStatus => 'Enregistrée';
 
   @override
-  String get locationAccuracyLow =>
-      'La précision de la position est actuellement faible. Déplacez-vous dans un endroit dégagé ou actualisez pour de meilleurs résultats.';
+  String get locationAccuracyLow => 'La précision de la position est actuellement faible. Déplacez-vous dans un endroit dégagé ou actualisez pour de meilleurs résultats.';
 
   @override
   String get noNearbyTasks => 'Aucune tâche à proximité';
 
   @override
-  String get noNearbyTasksSubtitle =>
-      'Essayez d\'augmenter le rayon ou de désactiver le mode enregistrées uniquement.';
+  String get noNearbyTasksSubtitle => 'Essayez d\'augmenter le rayon ou de désactiver le mode enregistrées uniquement.';
 
   @override
   String get locationDisabled => 'Localisation désactivée';
 
   @override
-  String get locationServicesRequired =>
-      'Veuillez activer les services GPS/localisation.';
+  String get locationServicesRequired => 'Veuillez activer les services GPS/localisation.';
 
   @override
-  String get locationDisabledNearbyTasksMessage =>
-      'Veuillez activer les services de localisation pour garder les tâches proches précises.';
+  String get locationDisabledNearbyTasksMessage => 'Veuillez activer les services de localisation pour garder les tâches proches précises.';
 
   @override
   String get permissionRequired => 'Autorisation requise';
@@ -433,24 +417,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get permissionBlocked => 'Autorisation bloquée';
 
   @override
-  String get locationPermissionPermanentlyDenied =>
-      'L\'autorisation de localisation est refusée définitivement. Activez-la dans les réglages.';
+  String get locationPermissionPermanentlyDenied => 'L\'autorisation de localisation est refusée définitivement. Activez-la dans les réglages.';
 
   @override
-  String get locationPermissionRequiredNearbyArtisans =>
-      'L\'autorisation de localisation est requise pour afficher les artisans proches.';
+  String get locationPermissionRequiredNearbyArtisans => 'L\'autorisation de localisation est requise pour afficher les artisans proches.';
 
   @override
-  String get allowLocationAccessNearbyTasks =>
-      'Autorisez l\'accès à la position pour charger les tâches proches.';
+  String get allowLocationAccessNearbyTasks => 'Autorisez l\'accès à la position pour charger les tâches proches.';
 
   @override
-  String get enablePermissionInSettings =>
-      'L\'autorisation de localisation a été refusée définitivement. Activez-la dans les réglages de l\'application.';
+  String get enablePermissionInSettings => 'L\'autorisation de localisation a été refusée définitivement. Activez-la dans les réglages de l\'application.';
 
   @override
-  String get unableToLoadNearbyTasks =>
-      'Impossible de charger les tâches proches';
+  String get unableToLoadNearbyTasks => 'Impossible de charger les tâches proches';
 
   @override
   String get distanceUnavailable => 'Distance indisponible';
@@ -461,8 +440,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get applicationSubmittedNearbyTask =>
-      'Candidature envoyée pour cette tâche proche.';
+  String get applicationSubmittedNearbyTask => 'Candidature envoyée pour cette tâche proche.';
 
   @override
   String get accept => 'Accepter';
@@ -483,8 +461,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loginRequired => 'Connexion requise';
 
   @override
-  String get couldNotLoadNearbyArtisans =>
-      'Impossible de charger les artisans proches.';
+  String get couldNotLoadNearbyArtisans => 'Impossible de charger les artisans proches.';
 
   @override
   String get noLocation => 'Aucune position';
@@ -510,8 +487,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get couldNotOpenNavigationApp =>
-      'Impossible d\'ouvrir l\'application de navigation.';
+  String get couldNotOpenNavigationApp => 'Impossible d\'ouvrir l\'application de navigation.';
 
   @override
   String get goToFirstPage => 'Aller à la première page';
@@ -600,8 +576,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get promoTodayTitle => 'Besoin d\'aide aujourd\'hui ?';
 
   @override
-  String get promoTodaySubtitle =>
-      'Réservez un expert de confiance en quelques minutes.';
+  String get promoTodaySubtitle => 'Réservez un expert de confiance en quelques minutes.';
 
   @override
   String get bookNow => 'Réserver maintenant';
@@ -610,8 +585,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get recommendedForYou => 'Recommandé pour vous';
 
   @override
-  String get pickedForYourNeeds =>
-      'Basé sur votre activité et votre localisation';
+  String get pickedForYourNeeds => 'Basé sur votre activité et votre localisation';
 
   @override
   String get inCategory => 'Sélectionné dans cette catégorie';
@@ -631,15 +605,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get needService => 'Je cherche un service';
 
   @override
-  String get needServiceSubtitle =>
-      'Réservez un professionnel en quelques minutes.';
+  String get needServiceSubtitle => 'Réservez un professionnel en quelques minutes.';
 
   @override
   String get wantWork => 'Je veux travailler';
 
   @override
-  String get wantWorkSubtitle =>
-      'Proposez vos services et gagnez de l\'argent.';
+  String get wantWorkSubtitle => 'Proposez vos services et gagnez de l\'argent.';
 
   @override
   String get more => 'Plus';
@@ -648,8 +620,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get personalInformation => 'Informations personnelles';
 
   @override
-  String get personalInformationSubtitle =>
-      'Nous utiliserons ces informations pour créer votre profil.';
+  String get personalInformationSubtitle => 'Nous utiliserons ces informations pour créer votre profil.';
 
   @override
   String get security => 'Sécurité';
@@ -664,8 +635,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get alreadyHaveAccount => 'Vous avez déjà un compte ?';
 
   @override
-  String get passwordHint =>
-      'Utilisez 8 caractères minimum, avec des lettres, chiffres et symboles.';
+  String get passwordHint => 'Utilisez 8 caractères minimum, avec des lettres, chiffres et symboles.';
 
   @override
   String reviewsCount(Object rating, int count) {
@@ -676,8 +646,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noReviewsYet => 'Aucun avis pour le moment.';
 
   @override
-  String get whatPeopleSayAboutThisTasker =>
-      'Ce que les gens disent de ce prestataire.';
+  String get whatPeopleSayAboutThisTasker => 'Ce que les gens disent de ce prestataire.';
 
   @override
   String get available => 'Disponible';
@@ -770,8 +739,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get confirmLocation => 'Confirmer l\'emplacement';
 
   @override
-  String get locationPermissionRequiredToPick =>
-      'L\'autorisation de localisation est requise pour choisir un emplacement.';
+  String get locationPermissionRequiredToPick => 'L\'autorisation de localisation est requise pour choisir un emplacement.';
 
   @override
   String get couldNotLoadMap => 'Impossible de charger la carte.';
@@ -818,31 +786,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get operationalSnapshot => 'Aperçu opérationnel';
 
   @override
-  String get operationalSnapshotSubtitle =>
-      'Correspond aux données admin déjà utilisées par la version web.';
+  String get operationalSnapshotSubtitle => 'Correspond aux données admin déjà utilisées par la version web.';
 
   @override
-  String get verifiedUsersLoadedPage =>
-      'Utilisateurs vérifiés sur la page chargée';
+  String get verifiedUsersLoadedPage => 'Utilisateurs vérifiés sur la page chargée';
 
   @override
-  String get openReportsLoadedPage =>
-      'Signalements ouverts sur la page chargée';
+  String get openReportsLoadedPage => 'Signalements ouverts sur la page chargée';
 
   @override
   String get mobileAdminParityPhase => 'Phase de parité admin mobile';
 
   @override
-  String get overviewModerationReports =>
-      'Vue d\'ensemble, modération, signalements';
+  String get overviewModerationReports => 'Vue d\'ensemble, modération, signalements';
 
   @override
-  String get unableToLoadAdminOverview =>
-      'Impossible de charger l\'aperçu administrateur';
+  String get unableToLoadAdminOverview => 'Impossible de charger l\'aperçu administrateur';
 
   @override
-  String get checkConnectionOrAdminPermissions =>
-      'Vérifiez votre connexion ou vos droits administrateur, puis réessayez.';
+  String get checkConnectionOrAdminPermissions => 'Vérifiez votre connexion ou vos droits administrateur, puis réessayez.';
 
   @override
   String get userModeration => 'Modération des utilisateurs';
@@ -856,15 +818,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noUsersFound => 'Aucun utilisateur trouvé';
 
   @override
-  String get tryDifferentSearchOrRefresh =>
-      'Essayez un autre terme de recherche ou actualisez la page.';
+  String get tryDifferentSearchOrRefresh => 'Essayez un autre terme de recherche ou actualisez la page.';
 
   @override
   String get unableToLoadUsers => 'Impossible de charger les utilisateurs';
 
   @override
-  String get adminUsersEndpointFailed =>
-      'Le point d\'accès admin des utilisateurs n\'a pas répondu.';
+  String get adminUsersEndpointFailed => 'Le point d\'accès admin des utilisateurs n\'a pas répondu.';
 
   @override
   String get reportsComplaints => 'Signalements et réclamations';
@@ -878,26 +838,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noReportsFound => 'Aucun signalement trouvé';
 
   @override
-  String get noUserReportsToModerate =>
-      'Il n\'y a actuellement aucun signalement utilisateur à modérer.';
+  String get noUserReportsToModerate => 'Il n\'y a actuellement aucun signalement utilisateur à modérer.';
 
   @override
   String get unableToLoadReports => 'Impossible de charger les signalements';
 
   @override
-  String get adminReportsEndpointFailed =>
-      'Le point d\'accès admin des signalements n\'a pas répondu.';
+  String get adminReportsEndpointFailed => 'Le point d\'accès admin des signalements n\'a pas répondu.';
 
   @override
-  String get nearbyTaskSettingsUpdated =>
-      'Les paramètres des tâches proches ont été mis à jour.';
+  String get nearbyTaskSettingsUpdated => 'Les paramètres des tâches proches ont été mis à jour.';
 
   @override
   String get nearbyTaskControls => 'Contrôles des tâches proches';
 
   @override
-  String get nearbyTaskControlsSubtitle =>
-      'Ajustez le rayon par défaut, les limites, la fréquence de rafraîchissement et les alertes prioritaires pour les prestataires.';
+  String get nearbyTaskControlsSubtitle => 'Ajustez le rayon par défaut, les limites, la fréquence de rafraîchissement et les alertes prioritaires pour les prestataires.';
 
   @override
   String get defaultRadiusKm => 'Rayon par défaut (km)';
@@ -924,8 +880,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unableToLoadSettings => 'Impossible de charger les paramètres';
 
   @override
-  String get nearbyTaskSettingsEndpointFailed =>
-      'Le point d\'accès des paramètres des tâches proches n\'a pas répondu.';
+  String get nearbyTaskSettingsEndpointFailed => 'Le point d\'accès des paramètres des tâches proches n\'a pas répondu.';
 
   @override
   String get noDescriptionProvided => 'Aucune description fournie.';
@@ -970,8 +925,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sundayShort => 'Dim';
 
   @override
-  String get errNetwork =>
-      'Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.';
+  String get errNetwork => 'Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.';
 
   @override
   String get errTimeout => 'Délai de connexion dépassé. Réessayez.';
@@ -1051,8 +1005,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noCommentProvided => 'Aucun commentaire fourni.';
 
   @override
-  String get shareYourExperience =>
-      'Partagez votre expérience avec ce prestataire…';
+  String get shareYourExperience => 'Partagez votre expérience avec ce prestataire…';
 
   @override
   String get submitReview => 'Envoyer l\'avis';
@@ -1261,8 +1214,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboardGrowBusiness => 'Développez votre activité';
 
   @override
-  String get dashboardGrowBusinessSubtitle =>
-      'Recevez plus de tâches et augmentez vos revenus';
+  String get dashboardGrowBusinessSubtitle => 'Recevez plus de tâches et augmentez vos revenus';
 
   @override
   String get dashboardBoostProfile => 'Booster le profil';
@@ -1294,11 +1246,99 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get dashboardNoFilteredTasks =>
-      'Aucune tâche dans cette catégorie pour le moment.';
+  String get dashboardNoFilteredTasks => 'Aucune tâche dans cette catégorie pour le moment.';
 
   @override
   String dashboardFeatureUnavailable(Object feature) {
     return 'La fonctionnalité $feature arrive bientôt.';
   }
+
+  @override
+  String get adminDefaultName => 'Admin';
+
+  @override
+  String adminGreeting(Object name) {
+    return 'Bonjour, $name 👋';
+  }
+
+  @override
+  String get adminDashboardSubtitle => 'Voici ce qui se passe aujourd’hui sur votre plateforme.';
+
+  @override
+  String get adminAnalyticsFallback => 'Les statistiques en direct sont indisponibles. Le dernier aperçu est affiché.';
+
+  @override
+  String get adminTotalUsers => 'Utilisateurs';
+
+  @override
+  String get adminTotalTasks => 'Total des tâches';
+
+  @override
+  String get adminCompletedTasks => 'Tâches terminées';
+
+  @override
+  String get adminActiveTaskers => 'Prestataires actifs';
+
+  @override
+  String get adminPendingTasks => 'Tâches en attente';
+
+  @override
+  String get adminPendingReviews => 'Avis en attente';
+
+  @override
+  String get adminVsLast7Days => 'sur les 7 derniers jours';
+
+  @override
+  String get adminTasksOverview => 'Aperçu des tâches';
+
+  @override
+  String get adminPosted => 'Publiées';
+
+  @override
+  String get adminInProgress => 'En cours';
+
+  @override
+  String get adminTasksByStatus => 'Tâches par statut';
+
+  @override
+  String get adminTotal => 'Total';
+
+  @override
+  String get adminCancelled => 'Annulées';
+
+  @override
+  String get adminViewAllTasks => 'Voir toutes les tâches';
+
+  @override
+  String get adminTopCategories => 'Meilleures catégories';
+
+  @override
+  String adminTaskBy(Object customerName) {
+    return 'par $customerName';
+  }
+
+  @override
+  String adminMinutesAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes',
+      one: '1 minute',
+    );
+    return 'il y a $_temp0';
+  }
+
+  @override
+  String adminWeekShort(int number) {
+    return 'S$number';
+  }
+
+  @override
+  String get adminHomeRepairs => 'Réparations maison';
+
+  @override
+  String get adminCleaning => 'Nettoyage';
+
+  @override
+  String get adminPainting => 'Peinture';
 }

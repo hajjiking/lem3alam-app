@@ -21,8 +21,10 @@ class AdminNearbyTaskSettings {
       minRadiusKm: _toInt(json['min_radius_km']),
       maxRadiusKm: _toInt(json['max_radius_km']),
       refreshIntervalMinutes: _toInt(json['refresh_interval_minutes']),
-      notificationMinUrgency: (json['notification_min_urgency'] ?? 'high').toString(),
-      notificationsEnabled: json['notifications_enabled'] == true || json['notifications_enabled']?.toString() == '1',
+      notificationMinUrgency:
+          (json['notification_min_urgency'] ?? 'high').toString(),
+      notificationsEnabled: json['notifications_enabled'] == true ||
+          json['notifications_enabled']?.toString() == '1',
     );
   }
 
@@ -43,4 +45,3 @@ int _toInt(dynamic value) {
   if (value is num) return value.toInt();
   return int.tryParse(value?.toString() ?? '') ?? 0;
 }
-

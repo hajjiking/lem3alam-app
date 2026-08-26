@@ -12,9 +12,11 @@ abstract class AdminRepository {
   Future<void> unbanUser(int userId);
   Future<void> suspendUser(int userId, {int days = 7, String? reason});
   Future<void> unsuspendUser(int userId);
-  Future<Paginated<AdminReportItem>> fetchReports({int page = 1, int perPage = 20});
+  Future<Paginated<AdminReportItem>> fetchReports(
+      {int page = 1, int perPage = 20});
   Future<void> resolveReport(int reportId, {String? notes});
   Future<void> dismissReport(int reportId, {String? notes});
   Future<AdminNearbyTaskSettings> fetchNearbyTaskSettings();
-  Future<AdminNearbyTaskSettings> updateNearbyTaskSettings(AdminNearbyTaskSettings settings);
+  Future<AdminNearbyTaskSettings> updateNearbyTaskSettings(
+      AdminNearbyTaskSettings settings);
 }

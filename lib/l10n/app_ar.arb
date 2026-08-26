@@ -589,5 +589,54 @@
     "placeholders": {
       "feature": {}
     }
-  }
+  },
+  "adminDefaultName": "المشرف",
+  "adminGreeting": "مرحباً، {name} 👋",
+  "@adminGreeting": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "adminDashboardSubtitle": "إليك ما يحدث على منصتك اليوم.",
+  "adminAnalyticsFallback": "الإحصاءات المباشرة غير متاحة. يتم عرض أحدث لقطة للوحة التحكم.",
+  "adminTotalUsers": "إجمالي المستخدمين",
+  "adminTotalTasks": "إجمالي المهام",
+  "adminCompletedTasks": "المهام المكتملة",
+  "adminActiveTaskers": "المهنيون النشطون",
+  "adminPendingTasks": "المهام المعلقة",
+  "adminPendingReviews": "التقييمات المعلقة",
+  "adminVsLast7Days": "مقارنة بآخر 7 أيام",
+  "adminTasksOverview": "نظرة عامة على المهام",
+  "adminPosted": "منشورة",
+  "adminInProgress": "قيد التنفيذ",
+  "adminTasksByStatus": "المهام حسب الحالة",
+  "adminTotal": "الإجمالي",
+  "adminCancelled": "ملغاة",
+  "adminViewAllTasks": "عرض كل المهام",
+  "adminTopCategories": "أهم الفئات",
+  "adminTaskBy": "بواسطة {customerName}",
+  "@adminTaskBy": {
+    "placeholders": {
+      "customerName": {}
+    }
+  },
+  "adminMinutesAgo": "قبل {count} دقيقة",
+  "@adminMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adminWeekShort": "أ{number}",
+  "@adminWeekShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "adminHomeRepairs": "إصلاحات منزلية",
+  "adminCleaning": "التنظيف",
+  "adminPainting": "الصباغة"
 }

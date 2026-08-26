@@ -26,7 +26,8 @@ class AdminRepositoryImpl implements AdminRepository {
   }
 
   @override
-  Future<Paginated<AdminUserItem>> fetchUsers({int page = 1, int perPage = 20}) async {
+  Future<Paginated<AdminUserItem>> fetchUsers(
+      {int page = 1, int perPage = 20}) async {
     final json = await _api.users(page: page, perPage: perPage);
     final data = (json['data'] as Map<String, dynamic>?) ?? const {};
     return Paginated.fromLaravel(
@@ -61,7 +62,8 @@ class AdminRepositoryImpl implements AdminRepository {
   }
 
   @override
-  Future<Paginated<AdminReportItem>> fetchReports({int page = 1, int perPage = 20}) async {
+  Future<Paginated<AdminReportItem>> fetchReports(
+      {int page = 1, int perPage = 20}) async {
     final json = await _api.reports(page: page, perPage: perPage);
     final data = (json['data'] as Map<String, dynamic>?) ?? const {};
     return Paginated.fromLaravel(
@@ -88,7 +90,8 @@ class AdminRepositoryImpl implements AdminRepository {
   }
 
   @override
-  Future<AdminNearbyTaskSettings> updateNearbyTaskSettings(AdminNearbyTaskSettings settings) async {
+  Future<AdminNearbyTaskSettings> updateNearbyTaskSettings(
+      AdminNearbyTaskSettings settings) async {
     final json = await _api.updateNearbyTaskSettings(settings.toJson());
     final data = (json['data'] as Map<String, dynamic>?) ?? const {};
     return AdminNearbyTaskSettings.fromJson(data);

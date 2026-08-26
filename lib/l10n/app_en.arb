@@ -589,5 +589,54 @@
     "placeholders": {
       "feature": {}
     }
-  }
+  },
+  "adminDefaultName": "Admin",
+  "adminGreeting": "Hello, {name} 👋",
+  "@adminGreeting": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "adminDashboardSubtitle": "Here’s what’s happening on your platform today.",
+  "adminAnalyticsFallback": "Live analytics are unavailable. Showing the latest dashboard snapshot.",
+  "adminTotalUsers": "Total Users",
+  "adminTotalTasks": "Total Tasks",
+  "adminCompletedTasks": "Completed Tasks",
+  "adminActiveTaskers": "Active Taskers",
+  "adminPendingTasks": "Pending Tasks",
+  "adminPendingReviews": "Pending Reviews",
+  "adminVsLast7Days": "vs last 7 days",
+  "adminTasksOverview": "Tasks Overview",
+  "adminPosted": "Posted",
+  "adminInProgress": "In Progress",
+  "adminTasksByStatus": "Tasks by Status",
+  "adminTotal": "Total",
+  "adminCancelled": "Cancelled",
+  "adminViewAllTasks": "View All Tasks",
+  "adminTopCategories": "Top Categories",
+  "adminTaskBy": "by {customerName}",
+  "@adminTaskBy": {
+    "placeholders": {
+      "customerName": {}
+    }
+  },
+  "adminMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@adminMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "adminWeekShort": "W{number}",
+  "@adminWeekShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "adminHomeRepairs": "Home Repairs",
+  "adminCleaning": "Cleaning",
+  "adminPainting": "Painting"
 }

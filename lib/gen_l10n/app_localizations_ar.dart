@@ -1265,4 +1265,88 @@ class AppLocalizationsAr extends AppLocalizations {
   String dashboardFeatureUnavailable(Object feature) {
     return 'ميزة $feature ستتوفر قريباً.';
   }
+
+  @override
+  String get adminDefaultName => 'المشرف';
+
+  @override
+  String adminGreeting(Object name) {
+    return 'مرحباً، $name 👋';
+  }
+
+  @override
+  String get adminDashboardSubtitle => 'إليك ما يحدث على منصتك اليوم.';
+
+  @override
+  String get adminAnalyticsFallback =>
+      'الإحصاءات المباشرة غير متاحة. يتم عرض أحدث لقطة للوحة التحكم.';
+
+  @override
+  String get adminTotalUsers => 'إجمالي المستخدمين';
+
+  @override
+  String get adminTotalTasks => 'إجمالي المهام';
+
+  @override
+  String get adminCompletedTasks => 'المهام المكتملة';
+
+  @override
+  String get adminActiveTaskers => 'المهنيون النشطون';
+
+  @override
+  String get adminPendingTasks => 'المهام المعلقة';
+
+  @override
+  String get adminPendingReviews => 'التقييمات المعلقة';
+
+  @override
+  String get adminVsLast7Days => 'مقارنة بآخر 7 أيام';
+
+  @override
+  String get adminTasksOverview => 'نظرة عامة على المهام';
+
+  @override
+  String get adminPosted => 'منشورة';
+
+  @override
+  String get adminInProgress => 'قيد التنفيذ';
+
+  @override
+  String get adminTasksByStatus => 'المهام حسب الحالة';
+
+  @override
+  String get adminTotal => 'الإجمالي';
+
+  @override
+  String get adminCancelled => 'ملغاة';
+
+  @override
+  String get adminViewAllTasks => 'عرض كل المهام';
+
+  @override
+  String get adminTopCategories => 'أهم الفئات';
+
+  @override
+  String adminTaskBy(Object customerName) {
+    return 'بواسطة $customerName';
+  }
+
+  @override
+  String adminMinutesAgo(int count) {
+    return 'قبل $count دقيقة';
+  }
+
+  @override
+  String adminWeekShort(int number) {
+    return 'أ$number';
+  }
+
+  @override
+  String get adminHomeRepairs => 'إصلاحات منزلية';
+
+  @override
+  String get adminCleaning => 'التنظيف';
+
+  @override
+  String get adminPainting => 'الصباغة';
 }

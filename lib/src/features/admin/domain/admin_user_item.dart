@@ -29,7 +29,8 @@ class AdminUserItem {
       email: (json['email'] ?? '').toString(),
       role: (json['role'] ?? '').toString(),
       status: (json['status'] ?? '').toString(),
-      isVerified: json['is_verified'] == true || json['is_verified']?.toString() == '1',
+      isVerified:
+          json['is_verified'] == true || json['is_verified']?.toString() == '1',
       city: json['city']?.toString(),
       banReason: json['ban_reason']?.toString(),
     );
@@ -41,4 +42,3 @@ int _toInt(dynamic value) {
   if (value is num) return value.toInt();
   return int.tryParse(value?.toString() ?? '') ?? 0;
 }
-

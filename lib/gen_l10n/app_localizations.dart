@@ -2445,6 +2445,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{feature} is coming soon.'**
   String dashboardFeatureUnavailable(Object feature);
+
+  /// No description provided for @adminDefaultName.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get adminDefaultName;
+
+  /// No description provided for @adminGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {name} 👋'**
+  String adminGreeting(Object name);
+
+  /// No description provided for @adminDashboardSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Here’s what’s happening on your platform today.'**
+  String get adminDashboardSubtitle;
+
+  /// No description provided for @adminAnalyticsFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Live analytics are unavailable. Showing the latest dashboard snapshot.'**
+  String get adminAnalyticsFallback;
+
+  /// No description provided for @adminTotalUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Users'**
+  String get adminTotalUsers;
+
+  /// No description provided for @adminTotalTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Tasks'**
+  String get adminTotalTasks;
+
+  /// No description provided for @adminCompletedTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Tasks'**
+  String get adminCompletedTasks;
+
+  /// No description provided for @adminActiveTaskers.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Taskers'**
+  String get adminActiveTaskers;
+
+  /// No description provided for @adminPendingTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Tasks'**
+  String get adminPendingTasks;
+
+  /// No description provided for @adminPendingReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Reviews'**
+  String get adminPendingReviews;
+
+  /// No description provided for @adminVsLast7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'vs last 7 days'**
+  String get adminVsLast7Days;
+
+  /// No description provided for @adminTasksOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks Overview'**
+  String get adminTasksOverview;
+
+  /// No description provided for @adminPosted.
+  ///
+  /// In en, this message translates to:
+  /// **'Posted'**
+  String get adminPosted;
+
+  /// No description provided for @adminInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get adminInProgress;
+
+  /// No description provided for @adminTasksByStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks by Status'**
+  String get adminTasksByStatus;
+
+  /// No description provided for @adminTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get adminTotal;
+
+  /// No description provided for @adminCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get adminCancelled;
+
+  /// No description provided for @adminViewAllTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'View All Tasks'**
+  String get adminViewAllTasks;
+
+  /// No description provided for @adminTopCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Categories'**
+  String get adminTopCategories;
+
+  /// No description provided for @adminTaskBy.
+  ///
+  /// In en, this message translates to:
+  /// **'by {customerName}'**
+  String adminTaskBy(Object customerName);
+
+  /// No description provided for @adminMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 minute ago} other{{count} minutes ago}}'**
+  String adminMinutesAgo(int count);
+
+  /// No description provided for @adminWeekShort.
+  ///
+  /// In en, this message translates to:
+  /// **'W{number}'**
+  String adminWeekShort(int number);
+
+  /// No description provided for @adminHomeRepairs.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Repairs'**
+  String get adminHomeRepairs;
+
+  /// No description provided for @adminCleaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Cleaning'**
+  String get adminCleaning;
+
+  /// No description provided for @adminPainting.
+  ///
+  /// In en, this message translates to:
+  /// **'Painting'**
+  String get adminPainting;
 }
 
 class _AppLocalizationsDelegate

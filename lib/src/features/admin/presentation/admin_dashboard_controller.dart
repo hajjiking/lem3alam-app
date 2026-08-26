@@ -7,7 +7,8 @@ import '../domain/admin_nearby_task_settings.dart';
 import '../domain/admin_report_item.dart';
 import '../domain/admin_user_item.dart';
 
-final _adminRefreshTickProvider = NotifierProvider<_AdminRefreshTick, int>(_AdminRefreshTick.new);
+final _adminRefreshTickProvider =
+    NotifierProvider<_AdminRefreshTick, int>(_AdminRefreshTick.new);
 
 class _AdminRefreshTick extends Notifier<int> {
   @override
@@ -16,28 +17,33 @@ class _AdminRefreshTick extends Notifier<int> {
   void bump() => state++;
 }
 
-final adminDashboardProvider = FutureProvider<AdminDashboardSummary>((ref) async {
+final adminDashboardProvider =
+    FutureProvider<AdminDashboardSummary>((ref) async {
   ref.watch(_adminRefreshTickProvider);
   return ref.watch(adminRepositoryProvider).fetchDashboard();
 });
 
-final adminUsersProvider = FutureProvider<Paginated<AdminUserItem>>((ref) async {
+final adminUsersProvider =
+    FutureProvider<Paginated<AdminUserItem>>((ref) async {
   ref.watch(_adminRefreshTickProvider);
   return ref.watch(adminRepositoryProvider).fetchUsers(page: 1, perPage: 50);
 });
 
-final adminReportsProvider = FutureProvider<Paginated<AdminReportItem>>((ref) async {
+final adminReportsProvider =
+    FutureProvider<Paginated<AdminReportItem>>((ref) async {
   ref.watch(_adminRefreshTickProvider);
   return ref.watch(adminRepositoryProvider).fetchReports(page: 1, perPage: 50);
 });
 
-final adminNearbyTaskSettingsProvider = FutureProvider<AdminNearbyTaskSettings>((ref) async {
+final adminNearbyTaskSettingsProvider =
+    FutureProvider<AdminNearbyTaskSettings>((ref) async {
   ref.watch(_adminRefreshTickProvider);
   return ref.watch(adminRepositoryProvider).fetchNearbyTaskSettings();
 });
 
 final adminActionControllerProvider =
-    AsyncNotifierProvider<AdminActionController, void>(AdminActionController.new);
+    AsyncNotifierProvider<AdminActionController, void>(
+        AdminActionController.new);
 
 class AdminActionController extends AsyncNotifier<void> {
   @override
@@ -61,7 +67,9 @@ class AdminActionController extends AsyncNotifier<void> {
       if (user.isBanned) {
         await ref.read(adminRepositoryProvider).unbanUser(user.id);
       } else {
-        await ref.read(adminRepositoryProvider).banUser(user.id, reason: 'Banned from mobile admin');
+        await ref
+            .read(adminRepositoryProvider)
+            .banUser(user.id, reason: 'Banned from mobile admin');
       }
       await refreshAll();
     });
@@ -74,10 +82,10 @@ class AdminActionController extends AsyncNotifier<void> {
         await ref.read(adminRepositoryProvider).unsuspendUser(user.id);
       } else {
         await ref.read(adminRepositoryProvider).suspendUser(
-          user.id,
-          days: 7,
-          reason: 'Suspended from mobile admin',
-        );
+              user.id,
+              days: 7,
+              reason: 'Suspended from mobile admin',
+            );
       }
       await refreshAll();
     });
@@ -105,10 +113,13 @@ class AdminActionController extends AsyncNotifier<void> {
     });
   }
 
-  Future<void> updateNearbyTaskSettings(AdminNearbyTaskSettings settings) async {
+  Future<void> updateNearbyTaskSettings(
+      AdminNearbyTaskSettings settings) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(adminRepositoryProvider).updateNearbyTaskSettings(settings);
+      await ref
+          .read(adminRepositoryProvider)
+          .updateNearbyTaskSettings(settings);
       await refreshAll();
     });
   }

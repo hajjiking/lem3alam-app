@@ -39,7 +39,8 @@ class AdminApi {
     return _client.putJson<Map<String, dynamic>>('admin/users/$userId/unban');
   }
 
-  Future<Map<String, dynamic>> suspendUser(int userId, {int days = 7, String? reason}) {
+  Future<Map<String, dynamic>> suspendUser(int userId,
+      {int days = 7, String? reason}) {
     return _client.putJson<Map<String, dynamic>>(
       'admin/users/$userId/suspend',
       data: {
@@ -50,7 +51,8 @@ class AdminApi {
   }
 
   Future<Map<String, dynamic>> unsuspendUser(int userId) {
-    return _client.putJson<Map<String, dynamic>>('admin/users/$userId/unsuspend');
+    return _client
+        .putJson<Map<String, dynamic>>('admin/users/$userId/unsuspend');
   }
 
   Future<Map<String, dynamic>> reports({
@@ -70,7 +72,8 @@ class AdminApi {
     return _client.putJson<Map<String, dynamic>>(
       'admin/reports/$reportId/resolve',
       data: {
-        if (notes != null && notes.trim().isNotEmpty) 'resolution_notes': notes.trim(),
+        if (notes != null && notes.trim().isNotEmpty)
+          'resolution_notes': notes.trim(),
       },
     );
   }
@@ -79,7 +82,8 @@ class AdminApi {
     return _client.putJson<Map<String, dynamic>>(
       'admin/reports/$reportId/dismiss',
       data: {
-        if (notes != null && notes.trim().isNotEmpty) 'resolution_notes': notes.trim(),
+        if (notes != null && notes.trim().isNotEmpty)
+          'resolution_notes': notes.trim(),
       },
     );
   }
@@ -88,7 +92,9 @@ class AdminApi {
     return _client.getJson<Map<String, dynamic>>('admin/nearby-task-settings');
   }
 
-  Future<Map<String, dynamic>> updateNearbyTaskSettings(Map<String, dynamic> payload) {
-    return _client.putJson<Map<String, dynamic>>('admin/nearby-task-settings', data: payload);
+  Future<Map<String, dynamic>> updateNearbyTaskSettings(
+      Map<String, dynamic> payload) {
+    return _client.putJson<Map<String, dynamic>>('admin/nearby-task-settings',
+        data: payload);
   }
 }

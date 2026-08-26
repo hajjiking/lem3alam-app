@@ -1282,4 +1282,95 @@ class AppLocalizationsEn extends AppLocalizations {
   String dashboardFeatureUnavailable(Object feature) {
     return '$feature is coming soon.';
   }
+
+  @override
+  String get adminDefaultName => 'Admin';
+
+  @override
+  String adminGreeting(Object name) {
+    return 'Hello, $name 👋';
+  }
+
+  @override
+  String get adminDashboardSubtitle =>
+      'Here’s what’s happening on your platform today.';
+
+  @override
+  String get adminAnalyticsFallback =>
+      'Live analytics are unavailable. Showing the latest dashboard snapshot.';
+
+  @override
+  String get adminTotalUsers => 'Total Users';
+
+  @override
+  String get adminTotalTasks => 'Total Tasks';
+
+  @override
+  String get adminCompletedTasks => 'Completed Tasks';
+
+  @override
+  String get adminActiveTaskers => 'Active Taskers';
+
+  @override
+  String get adminPendingTasks => 'Pending Tasks';
+
+  @override
+  String get adminPendingReviews => 'Pending Reviews';
+
+  @override
+  String get adminVsLast7Days => 'vs last 7 days';
+
+  @override
+  String get adminTasksOverview => 'Tasks Overview';
+
+  @override
+  String get adminPosted => 'Posted';
+
+  @override
+  String get adminInProgress => 'In Progress';
+
+  @override
+  String get adminTasksByStatus => 'Tasks by Status';
+
+  @override
+  String get adminTotal => 'Total';
+
+  @override
+  String get adminCancelled => 'Cancelled';
+
+  @override
+  String get adminViewAllTasks => 'View All Tasks';
+
+  @override
+  String get adminTopCategories => 'Top Categories';
+
+  @override
+  String adminTaskBy(Object customerName) {
+    return 'by $customerName';
+  }
+
+  @override
+  String adminMinutesAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count minutes ago',
+      one: '1 minute ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String adminWeekShort(int number) {
+    return 'W$number';
+  }
+
+  @override
+  String get adminHomeRepairs => 'Home Repairs';
+
+  @override
+  String get adminCleaning => 'Cleaning';
+
+  @override
+  String get adminPainting => 'Painting';
 }

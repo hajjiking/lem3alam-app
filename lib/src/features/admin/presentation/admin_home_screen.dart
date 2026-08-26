@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/l10n.dart';
+import '../../../core/l10n/language_picker.dart';
+import '../../../core/ui/app_theme.dart';
 import '../../../core/ui/app_widgets.dart';
+import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../domain/admin_report_item.dart';
 import '../domain/admin_nearby_task_settings.dart';
 import '../domain/admin_user_item.dart';
+import 'admin_dashboard_screen.dart';
 import 'admin_dashboard_controller.dart';
+import 'widgets/admin_bottom_nav.dart';
 
 class AdminHomeScreen extends ConsumerStatefulWidget {
   const AdminHomeScreen({super.key});
@@ -20,6 +25,7 @@ class AdminHomeScreen extends ConsumerStatefulWidget {
 class _AdminHomeScreenState extends ConsumerState<AdminHomeScreen> {
   final _searchController = TextEditingController();
   String _query = '';
+  int _selectedIndex = 0;
 
   @override
   void dispose() {
@@ -29,170 +35,174 @@ class _AdminHomeScreenState extends ConsumerState<AdminHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = ref.watch(authControllerProvider);
     final actionState = ref.watch(adminActionControllerProvider);
     final isBusy = actionState.isLoading;
+    final l10n = context.l10n;
 
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.l10n.adminWorkspace),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: context.l10n.overview, icon: const Icon(Icons.dashboard_outlined)),
-              Tab(text: context.l10n.users, icon: const Icon(Icons.people_outline)),
-              Tab(text: context.l10n.reports, icon: const Icon(Icons.flag_outlined)),
-              Tab(text: context.l10n.settings, icon: const Icon(Icons.tune_outlined)),
-            ],
+    final body = switch (_selectedIndex) {
+      1 => _AdminSectionPage(
+          title: l10n.users,
+          child: _UsersTab(
+            searchController: _searchController,
+            query: _query,
+            onQueryChanged: (value) =>
+                setState(() => _query = value.trim().toLowerCase()),
+            isBusy: isBusy,
           ),
-          actions: [
-            IconButton(
-              onPressed: isBusy
-                  ? null
-                  : () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
-              icon: const Icon(Icons.refresh),
-              tooltip: context.l10n.refreshAction,
-            ),
-            IconButton(
-              onPressed: () async {
-                await ref.read(authControllerProvider.notifier).logout();
-              },
-              icon: const Icon(Icons.logout),
-              tooltip: context.l10n.logout,
-            ),
-          ],
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              if (auth.user != null)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: AppInlineBanner(
-                    message: context.l10n.signedInAs(
-                      auth.user!.email,
-                      auth.user!.adminRole ?? 'admin',
-                    ),
-                    tone: AppBannerTone.info,
-                    icon: Icons.admin_panel_settings_outlined,
-                  ),
-                ),
-              if (actionState.hasError)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: AppInlineBanner(
-                    message: actionState.error.toString(),
-                    tone: AppBannerTone.error,
-                  ),
-                ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    _OverviewTab(isBusy: isBusy),
-                    _UsersTab(
-                      searchController: _searchController,
-                      query: _query,
-                      onQueryChanged: (value) => setState(() => _query = value.trim().toLowerCase()),
-                      isBusy: isBusy,
-                    ),
-                    _ReportsTab(isBusy: isBusy),
-                    _SettingsTab(isBusy: isBusy),
-                  ],
+      4 => _AdminSectionPage(
+          title: l10n.reports,
+          child: _ReportsTab(isBusy: isBusy),
+        ),
+      5 => _AdminSectionPage(
+          title: l10n.settings,
+          child: _SettingsTab(isBusy: isBusy),
+        ),
+      _ => AdminDashboardScreen(
+          onMenuTap: () => _showAdminMenu(context),
+          onNotificationsTap: () =>
+              _showFeatureNotice(l10n.dashboardNotifications),
+          onProfileTap: () => _showFeatureNotice(l10n.dashboardProfile),
+          onTasksTap: () => context.goNamed(AppRouteNames.tasks),
+        ),
+    };
+
+    return Scaffold(
+      body: Column(
+        children: [
+          if (actionState.hasError)
+            SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                child: AppInlineBanner(
+                  message: actionState.error.toString(),
+                  tone: AppBannerTone.error,
                 ),
               ),
-            ],
-          ),
+            ),
+          Expanded(child: body),
+        ],
+      ),
+      bottomNavigationBar: AdminBottomNavigation(
+        selectedIndex: _selectedIndex,
+        homeLabel: l10n.home,
+        usersLabel: l10n.users,
+        tasksLabel: l10n.tasks,
+        postTaskLabel: l10n.dashboardPostTask,
+        reportsLabel: l10n.reports,
+        moreLabel: l10n.more,
+        onSelected: _selectNavigation,
+      ),
+    );
+  }
+
+  void _selectNavigation(int index) {
+    if (index == 2) {
+      context.goNamed(AppRouteNames.tasks);
+      return;
+    }
+    if (index == 3) {
+      _showFeatureNotice(context.l10n.dashboardPostTask);
+      return;
+    }
+    setState(() => _selectedIndex = index);
+  }
+
+  void _showFeatureNotice(String feature) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.dashboardFeatureUnavailable(feature)),
+        ),
+      );
+  }
+
+  Future<void> _showAdminMenu(BuildContext context) async {
+    final l10n = context.l10n;
+    final isDark =
+        ref.read(themeModeControllerProvider.notifier).effectiveBrightness ==
+            Brightness.dark;
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (sheetContext) => Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 18),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.refresh_rounded),
+              title: Text(l10n.refreshAction),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                ref.read(adminActionControllerProvider.notifier).refreshAll();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.language_rounded),
+              title: Text(l10n.languageAction),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                showLanguagePicker(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+              ),
+              title: Text(
+                isDark ? l10n.dashboardLightMode : l10n.dashboardDarkMode,
+              ),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                ref.read(themeModeControllerProvider.notifier).toggle();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout_rounded),
+              title: Text(l10n.logout),
+              onTap: () async {
+                Navigator.of(sheetContext).pop();
+                await ref.read(authControllerProvider.notifier).logout();
+                if (context.mounted) context.goNamed(AppRouteNames.login);
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _OverviewTab extends ConsumerWidget {
-  const _OverviewTab({required this.isBusy});
+class _AdminSectionPage extends StatelessWidget {
+  const _AdminSectionPage({required this.title, required this.child});
 
-  final bool isBusy;
+  final String title;
+  final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final summaryAsync = ref.watch(adminDashboardProvider);
-    final usersAsync = ref.watch(adminUsersProvider);
-    final reportsAsync = ref.watch(adminReportsProvider);
-    final l10n = context.l10n;
-
-    return RefreshIndicator(
-      onRefresh: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
-      child: summaryAsync.when(
-        data: (summary) {
-          final reportsPage = reportsAsync.asData?.value;
-          final usersPage = usersAsync.asData?.value;
-          final openReports = reportsPage?.items.where((e) => e.status == 'open').length ?? 0;
-          final verifiedUsers = usersPage?.items.where((e) => e.isVerified).length ?? 0;
-          final currency = NumberFormat.currency(symbol: 'MAD ', decimalDigits: 0);
-
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              if (isBusy) const LinearProgressIndicator(),
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  _MetricCard(
-                    label: l10n.usersMetric,
-                    value: summary.usersCount.toString(),
-                    icon: Icons.people_alt_outlined,
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 20, 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  _MetricCard(
-                    label: l10n.tasksMetric,
-                    value: summary.tasksCount.toString(),
-                    icon: Icons.assignment_outlined,
-                  ),
-                  _MetricCard(
-                    label: l10n.openDisputes,
-                    value: summary.disputesCount.toString(),
-                    icon: Icons.gavel_outlined,
-                  ),
-                  _MetricCard(
-                    label: l10n.revenue,
-                    value: currency.format(summary.revenue),
-                    icon: Icons.payments_outlined,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              AppSectionCard(
-                title: l10n.operationalSnapshot,
-                subtitle: l10n.operationalSnapshotSubtitle,
-                child: Column(
-                  children: [
-                    _StatLine(label: l10n.verifiedUsersLoadedPage, value: '$verifiedUsers'),
-                    const SizedBox(height: 10),
-                    _StatLine(label: l10n.openReportsLoadedPage, value: '$openReports'),
-                    const SizedBox(height: 10),
-                    _StatLine(label: l10n.mobileAdminParityPhase, value: l10n.overviewModerationReports),
-                  ],
                 ),
-              ),
-            ],
-          );
-        },
-        error: (error, _) => AppErrorState(
-          title: l10n.unableToLoadAdminOverview,
-          subtitle: l10n.checkConnectionOrAdminPermissions,
-          debugDetails: error.toString(),
-          onRetry: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
-        ),
-        loading: () => ListView(
-          padding: const EdgeInsets.all(16),
-          children: const [
-            AppSkeletonBox(height: 120),
-            SizedBox(height: 12),
-            AppSkeletonBox(height: 200),
-          ],
-        ),
+              ],
+            ),
+          ),
+          Expanded(child: child),
+        ],
       ),
     );
   }
@@ -217,12 +227,15 @@ class _UsersTab extends ConsumerWidget {
     final l10n = context.l10n;
 
     return RefreshIndicator(
-      onRefresh: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+      onRefresh: () =>
+          ref.read(adminActionControllerProvider.notifier).refreshAll(),
       child: usersAsync.when(
         data: (page) {
           final filtered = page.items.where((user) {
             if (query.isEmpty) return true;
-            final haystack = '${user.name} ${user.email} ${user.role} ${user.city ?? ''}'.toLowerCase();
+            final haystack =
+                '${user.name} ${user.email} ${user.role} ${user.city ?? ''}'
+                    .toLowerCase();
             return haystack.contains(query);
           }).toList();
 
@@ -241,8 +254,14 @@ class _UsersTab extends ConsumerWidget {
               const SizedBox(height: 12),
               AppSectionCard(
                 title: l10n.userModeration,
-                subtitle: l10n.loadedUsersFromAdminApi(page.items.length, page.total),
-                trailing: isBusy ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2)) : null,
+                subtitle:
+                    l10n.loadedUsersFromAdminApi(page.items.length, page.total),
+                trailing: isBusy
+                    ? const SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2))
+                    : null,
                 child: filtered.isEmpty
                     ? AppEmptyState(
                         title: l10n.noUsersFound,
@@ -265,7 +284,8 @@ class _UsersTab extends ConsumerWidget {
           title: l10n.unableToLoadUsers,
           subtitle: l10n.adminUsersEndpointFailed,
           debugDetails: error.toString(),
-          onRetry: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+          onRetry: () =>
+              ref.read(adminActionControllerProvider.notifier).refreshAll(),
         ),
         loading: () => ListView(
           padding: const EdgeInsets.all(16),
@@ -293,7 +313,8 @@ class _ReportsTab extends ConsumerWidget {
     final l10n = context.l10n;
 
     return RefreshIndicator(
-      onRefresh: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+      onRefresh: () =>
+          ref.read(adminActionControllerProvider.notifier).refreshAll(),
       child: reportsAsync.when(
         data: (page) {
           return ListView(
@@ -301,8 +322,14 @@ class _ReportsTab extends ConsumerWidget {
             children: [
               AppSectionCard(
                 title: l10n.reportsComplaints,
-                subtitle: l10n.loadedReportsFromSharedBackend(page.items.length, page.total),
-                trailing: isBusy ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2)) : null,
+                subtitle: l10n.loadedReportsFromSharedBackend(
+                    page.items.length, page.total),
+                trailing: isBusy
+                    ? const SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2))
+                    : null,
                 child: page.items.isEmpty
                     ? AppEmptyState(
                         title: l10n.noReportsFound,
@@ -325,7 +352,8 @@ class _ReportsTab extends ConsumerWidget {
           title: l10n.unableToLoadReports,
           subtitle: l10n.adminReportsEndpointFailed,
           debugDetails: error.toString(),
-          onRetry: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+          onRetry: () =>
+              ref.read(adminActionControllerProvider.notifier).refreshAll(),
         ),
         loading: () => ListView(
           padding: const EdgeInsets.all(16),
@@ -396,7 +424,9 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
       notificationMinUrgency: _urgency,
       notificationsEnabled: _notificationsEnabled,
     );
-    await ref.read(adminActionControllerProvider.notifier).updateNearbyTaskSettings(payload);
+    await ref
+        .read(adminActionControllerProvider.notifier)
+        .updateNearbyTaskSettings(payload);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(context.l10n.nearbyTaskSettingsUpdated)),
@@ -409,7 +439,8 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
     final l10n = context.l10n;
 
     return RefreshIndicator(
-      onRefresh: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+      onRefresh: () =>
+          ref.read(adminActionControllerProvider.notifier).refreshAll(),
       child: settingsAsync.when(
         data: (settings) {
           _hydrate(settings);
@@ -420,41 +451,52 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
                 title: l10n.nearbyTaskControls,
                 subtitle: l10n.nearbyTaskControlsSubtitle,
                 trailing: widget.isBusy
-                    ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                    ? const SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2))
                     : null,
                 child: Column(
                   children: [
                     TextField(
                       controller: _defaultRadiusController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: l10n.defaultRadiusKm),
+                      decoration:
+                          InputDecoration(labelText: l10n.defaultRadiusKm),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _minRadiusController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: l10n.minimumRadiusKm),
+                      decoration:
+                          InputDecoration(labelText: l10n.minimumRadiusKm),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _maxRadiusController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: l10n.maximumRadiusKm),
+                      decoration:
+                          InputDecoration(labelText: l10n.maximumRadiusKm),
                     ),
                     const SizedBox(height: 12),
                     TextField(
                       controller: _refreshController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: l10n.refreshIntervalMinutes),
+                      decoration: InputDecoration(
+                          labelText: l10n.refreshIntervalMinutes),
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<String>(
                       value: _urgency,
-                      decoration: InputDecoration(labelText: l10n.notifyFromUrgency),
+                      decoration:
+                          InputDecoration(labelText: l10n.notifyFromUrgency),
                       items: [
-                        DropdownMenuItem(value: 'low', child: Text(l10n.urgencyLow)),
-                        DropdownMenuItem(value: 'medium', child: Text(l10n.urgencyMedium)),
-                        DropdownMenuItem(value: 'high', child: Text(l10n.urgencyHigh)),
+                        DropdownMenuItem(
+                            value: 'low', child: Text(l10n.urgencyLow)),
+                        DropdownMenuItem(
+                            value: 'medium', child: Text(l10n.urgencyMedium)),
+                        DropdownMenuItem(
+                            value: 'high', child: Text(l10n.urgencyHigh)),
                       ],
                       onChanged: (value) {
                         if (value == null) return;
@@ -465,7 +507,8 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
                     SwitchListTile.adaptive(
                       contentPadding: EdgeInsets.zero,
                       value: _notificationsEnabled,
-                      onChanged: (value) => setState(() => _notificationsEnabled = value),
+                      onChanged: (value) =>
+                          setState(() => _notificationsEnabled = value),
                       title: Text(l10n.enableHighPriorityAlerts),
                     ),
                     const SizedBox(height: 12),
@@ -487,7 +530,8 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
           title: l10n.unableToLoadSettings,
           subtitle: l10n.nearbyTaskSettingsEndpointFailed,
           debugDetails: error.toString(),
-          onRetry: () => ref.read(adminActionControllerProvider.notifier).refreshAll(),
+          onRetry: () =>
+              ref.read(adminActionControllerProvider.notifier).refreshAll(),
         ),
         loading: () => ListView(
           padding: const EdgeInsets.all(16),
@@ -496,83 +540,6 @@ class _SettingsTabState extends ConsumerState<_SettingsTab> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _MetricCard extends StatelessWidget {
-  const _MetricCard({
-    required this.label,
-    required this.value,
-    required this.icon,
-  });
-
-  final String label;
-  final String value;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final cardWidth = width > 700 ? (width - 56) / 2 : double.infinity;
-    final scheme = Theme.of(context).colorScheme;
-    return SizedBox(
-      width: cardWidth,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                height: 48,
-                width: 48,
-                decoration: BoxDecoration(
-                  color: scheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(icon, color: scheme.onPrimaryContainer),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(label, style: Theme.of(context).textTheme.bodyMedium),
-                    const SizedBox(height: 4),
-                    Text(
-                      value,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _StatLine extends StatelessWidget {
-  const _StatLine({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: Text(label)),
-        const SizedBox(width: 12),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-        ),
-      ],
     );
   }
 }
@@ -594,7 +561,11 @@ class _AdminUserTile extends ConsumerWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
-        title: Text(user.name, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+        title: Text(user.name,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w800)),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Column(
@@ -619,8 +590,12 @@ class _AdminUserTile extends ConsumerWidget {
                     ),
                   AppPill(
                     label: user.status,
-                    background: user.isSuspended ? scheme.tertiaryContainer : scheme.surfaceContainerHigh,
-                    foreground: user.isSuspended ? scheme.onTertiaryContainer : scheme.onSurface,
+                    background: user.isSuspended
+                        ? scheme.tertiaryContainer
+                        : scheme.surfaceContainerHigh,
+                    foreground: user.isSuspended
+                        ? scheme.onTertiaryContainer
+                        : scheme.onSurface,
                   ),
                   if ((user.city ?? '').isNotEmpty)
                     AppPill(
@@ -650,8 +625,13 @@ class _AdminUserTile extends ConsumerWidget {
           },
           itemBuilder: (context) => [
             PopupMenuItem(value: 'verify', child: Text(l10n.verifyAction)),
-            PopupMenuItem(value: 'ban', child: Text(user.isBanned ? l10n.unban : l10n.ban)),
-            PopupMenuItem(value: 'suspend', child: Text(user.isSuspended ? l10n.unsuspend : l10n.suspend7Days)),
+            PopupMenuItem(
+                value: 'ban',
+                child: Text(user.isBanned ? l10n.unban : l10n.ban)),
+            PopupMenuItem(
+                value: 'suspend',
+                child: Text(
+                    user.isSuspended ? l10n.unsuspend : l10n.suspend7Days)),
           ],
         ),
       ),
@@ -676,7 +656,11 @@ class _AdminReportTile extends ConsumerWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
-        title: Text(report.reason, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+        title: Text(report.reason,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.w800)),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 6),
           child: Column(

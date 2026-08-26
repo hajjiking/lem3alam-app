@@ -18,7 +18,8 @@ class AdminReportItem {
       id: _toInt(json['id']),
       reason: (json['reason'] ?? 'Report').toString(),
       status: (json['status'] ?? '').toString(),
-      description: json['description']?.toString() ?? json['details']?.toString(),
+      description:
+          json['description']?.toString() ?? json['details']?.toString(),
       createdAtLabel: json['created_at']?.toString(),
     );
   }
@@ -29,4 +30,3 @@ int _toInt(dynamic value) {
   if (value is num) return value.toInt();
   return int.tryParse(value?.toString() ?? '') ?? 0;
 }
-
