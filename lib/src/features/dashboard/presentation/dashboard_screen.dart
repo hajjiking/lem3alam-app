@@ -95,13 +95,13 @@ class DashboardScreen extends ConsumerWidget {
             appName: l10n.appName,
             greeting: l10n.dashboardGreeting(displayName),
             subtitle: l10n.dashboardReadySubtitle,
-            availabilityLabel: dashboard.isOnline
-                ? l10n.dashboardOnline
-                : l10n.dashboardOffline,
-            isOnline: dashboard.isOnline,
+            availabilityLabel: l10n.dashboardOffline,
+            isOnline: false,
+            showAvailability: false,
             menuLabel: l10n.dashboardMenu,
             notificationsLabel: l10n.dashboardNotifications,
             profileLabel: l10n.dashboardProfile,
+            avatarAsset: null,
             onMenuTap: () => _showDashboardMenu(context, ref),
             onNotificationsTap: () => _showFeatureNotice(
               context,
@@ -109,7 +109,7 @@ class DashboardScreen extends ConsumerWidget {
             ),
             onProfileTap: () =>
                 _openProfile(context, user?.id, user?.isTasker == true),
-            onAvailabilityTap: controller.toggleAvailability,
+            onAvailabilityTap: () {},
           ),
           Transform.translate(
             offset: const Offset(0, -28),
@@ -146,95 +146,95 @@ class DashboardScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 24),
                         ] else ...[
-                        DashboardStatsRow(items: statItems),
-                        const SizedBox(height: 28),
-                        DashboardSectionHeader(
-                          title: l10n.dashboardRecentTasks,
-                          actionLabel: l10n.dashboardViewAll,
-                          onActionTap: () =>
-                              context.goNamed(AppRouteNames.tasks),
-                        ),
-                        const SizedBox(height: 10),
-                        DashboardFilterBar(
-                          selected: dashboard.selectedFilter,
-                          pendingLabel:
-                              l10n.dashboardPendingCount(stats.pendingTasks),
-                          acceptedLabel:
-                              l10n.dashboardAcceptedCount(stats.acceptedTasks),
-                          completedLabel: l10n.dashboardCompletedFilter,
-                          onSelected: controller.selectFilter,
-                        ),
-                        const SizedBox(height: 14),
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 220),
-                          switchInCurve: Curves.easeOut,
-                          switchOutCurve: Curves.easeIn,
-                          child: tasks.isEmpty
-                              ? DashboardEmptyState(
-                                  key: ValueKey(dashboard.selectedFilter),
-                                  label: l10n.dashboardNoFilteredTasks,
-                                )
-                              : Column(
-                                  key: ValueKey(dashboard.selectedFilter),
-                                  children: [
-                                    for (var index = 0;
-                                        index < tasks.length;
-                                        index++) ...[
-                                      DashboardTaskCard(
-                                        data: tasks[index],
-                                        onTap: () => context
-                                            .goNamed(AppRouteNames.tasks),
-                                      ),
-                                      if (index != tasks.length - 1)
-                                        const SizedBox(height: 12),
+                          DashboardStatsRow(items: statItems),
+                          const SizedBox(height: 28),
+                          DashboardSectionHeader(
+                            title: l10n.dashboardRecentTasks,
+                            actionLabel: l10n.dashboardViewAll,
+                            onActionTap: () =>
+                                context.goNamed(AppRouteNames.tasks),
+                          ),
+                          const SizedBox(height: 10),
+                          DashboardFilterBar(
+                            selected: dashboard.selectedFilter,
+                            pendingLabel:
+                                l10n.dashboardPendingCount(stats.pendingTasks),
+                            acceptedLabel: l10n
+                                .dashboardAcceptedCount(stats.acceptedTasks),
+                            completedLabel: l10n.dashboardCompletedFilter,
+                            onSelected: controller.selectFilter,
+                          ),
+                          const SizedBox(height: 14),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 220),
+                            switchInCurve: Curves.easeOut,
+                            switchOutCurve: Curves.easeIn,
+                            child: tasks.isEmpty
+                                ? DashboardEmptyState(
+                                    key: ValueKey(dashboard.selectedFilter),
+                                    label: l10n.dashboardNoFilteredTasks,
+                                  )
+                                : Column(
+                                    key: ValueKey(dashboard.selectedFilter),
+                                    children: [
+                                      for (var index = 0;
+                                          index < tasks.length;
+                                          index++) ...[
+                                        DashboardTaskCard(
+                                          data: tasks[index],
+                                          onTap: () => context
+                                              .goNamed(AppRouteNames.tasks),
+                                        ),
+                                        if (index != tasks.length - 1)
+                                          const SizedBox(height: 12),
+                                      ],
                                     ],
-                                  ],
-                                ),
-                        ),
-                        const SizedBox(height: 24),
-                        DashboardPromoBanner(
-                          title: l10n.dashboardGrowBusiness,
-                          subtitle: l10n.dashboardGrowBusinessSubtitle,
-                          actionLabel: l10n.dashboardBoostProfile,
-                          onTap: () => _openProfile(
-                            context,
-                            user?.id,
-                            user?.isTasker == true,
+                                  ),
                           ),
-                        ),
-                        const SizedBox(height: 28),
-                        DashboardPerformanceSection(
-                          title: l10n.dashboardPerformance,
-                          earningsLabel: l10n.dashboardEarnings,
-                          earningsValue: l10n.dashboardPrice(
-                            numberFormat.format(performance.earnings),
+                          const SizedBox(height: 24),
+                          DashboardPromoBanner(
+                            title: l10n.dashboardGrowBusiness,
+                            subtitle: l10n.dashboardGrowBusinessSubtitle,
+                            actionLabel: l10n.dashboardBoostProfile,
+                            onTap: () => _openProfile(
+                              context,
+                              user?.id,
+                              user?.isTasker == true,
+                            ),
                           ),
-                          tasksCompletedLabel: l10n.dashboardTasksCompleted,
-                          tasksCompletedValue: numberFormat.format(
-                            performance.tasksCompleted,
+                          const SizedBox(height: 28),
+                          DashboardPerformanceSection(
+                            title: l10n.dashboardPerformance,
+                            earningsLabel: l10n.dashboardEarnings,
+                            earningsValue: l10n.dashboardPrice(
+                              numberFormat.format(performance.earnings),
+                            ),
+                            tasksCompletedLabel: l10n.dashboardTasksCompleted,
+                            tasksCompletedValue: numberFormat.format(
+                              performance.tasksCompleted,
+                            ),
+                            earningsChangeLabel: l10n.dashboardChangeVsLastWeek(
+                              performance.earningsChangePercent,
+                            ),
+                            tasksChangeLabel: l10n.dashboardChangeVsLastWeek(
+                              performance.tasksChangePercent,
+                            ),
+                            selectedRange: dashboard.performanceRange,
+                            weekLabel: l10n.dashboardThisWeek,
+                            monthLabel: l10n.dashboardThisMonth,
+                            dayLabels: [
+                              l10n.mon,
+                              l10n.tue,
+                              l10n.wed,
+                              l10n.thu,
+                              l10n.fri,
+                              l10n.sat,
+                              l10n.sun,
+                            ],
+                            points: performance.points,
+                            onRangeSelected: controller.selectPerformanceRange,
                           ),
-                          earningsChangeLabel: l10n.dashboardChangeVsLastWeek(
-                            performance.earningsChangePercent,
-                          ),
-                          tasksChangeLabel: l10n.dashboardChangeVsLastWeek(
-                            performance.tasksChangePercent,
-                          ),
-                          selectedRange: dashboard.performanceRange,
-                          weekLabel: l10n.dashboardThisWeek,
-                          monthLabel: l10n.dashboardThisMonth,
-                          dayLabels: [
-                            l10n.mon,
-                            l10n.tue,
-                            l10n.wed,
-                            l10n.thu,
-                            l10n.fri,
-                            l10n.sat,
-                            l10n.sun,
-                          ],
-                          points: performance.points,
-                          onRangeSelected: controller.selectPerformanceRange,
-                        ),
-                        const SizedBox(height: 24),
+                          const SizedBox(height: 24),
                         ],
                       ],
                     ),

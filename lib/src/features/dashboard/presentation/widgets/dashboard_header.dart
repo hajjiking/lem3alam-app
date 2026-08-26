@@ -20,6 +20,8 @@ class DashboardHeader extends StatelessWidget {
     this.notificationCount,
     this.avatarAsset = 'assets/artisan_cutout.png',
     this.avatarFallback = Icons.person_rounded,
+    this.showNotificationBadge = false,
+    this.showAvailability = true,
   });
 
   final String appName;
@@ -37,6 +39,8 @@ class DashboardHeader extends StatelessWidget {
   final int? notificationCount;
   final String? avatarAsset;
   final IconData avatarFallback;
+  final bool showNotificationBadge;
+  final bool showAvailability;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +106,8 @@ class DashboardHeader extends StatelessWidget {
                       onPressed: onNotificationsTap,
                       style: IconButton.styleFrom(foregroundColor: foreground),
                       icon: Badge(
+                        isLabelVisible:
+                            showNotificationBadge || notificationCount != null,
                         label: notificationCount == null
                             ? null
                             : Text(
@@ -192,8 +198,10 @@ class DashboardHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           greetingBlock,
-                          const SizedBox(height: 16),
-                          availability,
+                          if (showAvailability) ...[
+                            const SizedBox(height: 16),
+                            availability,
+                          ],
                         ],
                       );
                     }
@@ -202,8 +210,10 @@ class DashboardHeader extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Expanded(child: greetingBlock),
-                        const SizedBox(width: 24),
-                        availability,
+                        if (showAvailability) ...[
+                          const SizedBox(width: 24),
+                          availability,
+                        ],
                       ],
                     );
                   },

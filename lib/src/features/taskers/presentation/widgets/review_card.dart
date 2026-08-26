@@ -89,10 +89,11 @@ class ReviewCard extends StatelessWidget {
                           dateLabel,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: scheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: scheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                       ],
                     ),
@@ -103,10 +104,11 @@ class ReviewCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           rating.toStringAsFixed(1),
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: const Color(0xFFD97706),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: const Color(0xFFD97706),
+                                  ),
                         ),
                         if (verifiedCustomer) ...[
                           const SizedBox(width: 10),
@@ -130,7 +132,8 @@ class ReviewCard extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.work_outline_rounded, size: 14, color: scheme.onSurfaceVariant),
+                  Icon(Icons.work_outline_rounded,
+                      size: 14, color: scheme.onSurfaceVariant),
                   const SizedBox(width: 6),
                   Flexible(
                     child: Text(
@@ -138,9 +141,9 @@ class ReviewCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: scheme.onSurfaceVariant,
-                        fontWeight: FontWeight.w800,
-                      ),
+                            color: scheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                   ),
                 ],
@@ -153,10 +156,10 @@ class ReviewCard extends StatelessWidget {
             maxLines: 6,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: scheme.onSurfaceVariant.withValues(alpha: 0.92),
-              fontWeight: FontWeight.w500,
-              height: 1.45,
-            ),
+                  color: scheme.onSurfaceVariant.withValues(alpha: 0.92),
+                  fontWeight: FontWeight.w500,
+                  height: 1.45,
+                ),
           ),
           if (onHelpfulToggle != null) ...[
             const SizedBox(height: 12),
@@ -166,22 +169,26 @@ class ReviewCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(999),
                 onTap: () => onHelpfulToggle!.call(!isHelpful),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        isHelpful ? Icons.thumb_up_rounded : Icons.thumb_up_outlined,
+                        isHelpful
+                            ? Icons.thumb_up_rounded
+                            : Icons.thumb_up_outlined,
                         size: 16,
                         color: fg,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         isHelpful ? helpfulLabel : notHelpfulLabel,
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: fg,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: fg,
+                                ),
                       ),
                     ],
                   ),
@@ -213,11 +220,15 @@ class ReviewCard extends StatelessWidget {
           ),
           clipBehavior: Clip.antiAlias,
           child: resolved == null
-              ? Icon(Icons.person_outline_rounded, size: 22, color: scheme.primary)
+              ? Icon(Icons.person_outline_rounded,
+                  size: 22, color: scheme.primary)
               : Image.network(
                   resolved,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Icon(Icons.person_outline_rounded, size: 22, color: scheme.primary),
+                  errorBuilder: (_, __, ___) => Icon(
+                      Icons.person_outline_rounded,
+                      size: 22,
+                      color: scheme.primary),
                 ),
         );
       },
@@ -226,7 +237,10 @@ class ReviewCard extends StatelessWidget {
 
   static String? _resolveStorage(String path) {
     final api = Uri.parse(AppConfig.apiBaseUrl);
-    final publicBase = api.replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), '')).toString().replaceAll(RegExp(r'/$'), '');
+    final publicBase = api
+        .replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), ''))
+        .toString()
+        .replaceAll(RegExp(r'/$'), '');
     final normalized = path.startsWith('/') ? path.substring(1) : path;
     return '$publicBase/storage/$normalized';
   }

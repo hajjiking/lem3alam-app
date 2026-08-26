@@ -76,14 +76,18 @@ class TaskerProfile {
     final portfolio = <TaskerPortfolioItem>[];
     if (portfolioRaw is List) {
       for (final v in portfolioRaw) {
-        if (v is Map<String, dynamic>) portfolio.add(TaskerPortfolioItem.fromJson(v));
+        if (v is Map<String, dynamic>) {
+          portfolio.add(TaskerPortfolioItem.fromJson(v));
+        }
       }
     }
 
     final socials = <TaskerSocialAccount>[];
     if (socialsRaw is List) {
       for (final v in socialsRaw) {
-        if (v is Map<String, dynamic>) socials.add(TaskerSocialAccount.fromJson(v));
+        if (v is Map<String, dynamic>) {
+          socials.add(TaskerSocialAccount.fromJson(v));
+        }
       }
     }
 
@@ -92,14 +96,17 @@ class TaskerProfile {
       for (final e in ratingDistRaw.entries) {
         final k = int.tryParse(e.key.toString());
         final v = _intOptional(e.value);
-        if (k != null && v != null && k >= 1 && k <= 5) ratingDistribution[k] = v;
+        if (k != null && v != null && k >= 1 && k <= 5) {
+          ratingDistribution[k] = v;
+        }
       }
     }
 
     return TaskerProfile(
       id: _intRequired(json['id']),
       name: (json['name'] ?? '').toString(),
-      professionalTitle: json['professional_title']?.toString() ?? json['title']?.toString(),
+      professionalTitle:
+          json['professional_title']?.toString() ?? json['title']?.toString(),
       city: json['city']?.toString(),
       address: json['address']?.toString(),
       bio: json['bio']?.toString(),
@@ -109,9 +116,9 @@ class TaskerProfile {
       hourlyRate: _doubleOptional(json['hourly_rate']),
       available: json['available'] == true || json['available'] == 1,
       isVerified: json['is_verified'] == true || json['is_verified'] == 1,
-      yearsExperience: _intOptional(json['years_experience']) ?? _intOptional(json['experience_years']),
-      isTopRated:
-          json['is_top_rated'] == true ||
+      yearsExperience: _intOptional(json['years_experience']) ??
+          _intOptional(json['experience_years']),
+      isTopRated: json['is_top_rated'] == true ||
           json['is_top_rated'] == 1 ||
           json['top_rated'] == true ||
           json['top_rated'] == 1,
@@ -138,8 +145,7 @@ class TaskerService {
   final String currency;
 
   factory TaskerService.fromJson(Map<String, dynamic> json) {
-    final price =
-        _intOptional(json['price']) ??
+    final price = _intOptional(json['price']) ??
         _intOptional(json['price_mad']) ??
         _doubleOptional(json['price'])?.toInt() ??
         0;
@@ -270,4 +276,3 @@ double? _doubleOptional(dynamic value) {
   if (value is num) return value.toDouble();
   return double.tryParse(value.toString());
 }
-

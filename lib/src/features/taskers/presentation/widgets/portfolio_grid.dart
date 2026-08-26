@@ -29,7 +29,10 @@ class _PortfolioGridState extends State<PortfolioGrid> {
         width: double.infinity,
         padding: const EdgeInsets.all(40),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+          color: Theme.of(context)
+              .colorScheme
+              .surfaceContainerHighest
+              .withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
@@ -42,7 +45,10 @@ class _PortfolioGridState extends State<PortfolioGrid> {
             const SizedBox(height: 12),
             Text(
               'No portfolio yet',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -107,14 +113,17 @@ class _Tile extends StatelessWidget {
           img == null
               ? Container(
                   color: scheme.surfaceContainerHighest.withValues(alpha: 0.8),
-                  child: Icon(Icons.image_outlined, size: 42, color: scheme.onSurfaceVariant),
+                  child: Icon(Icons.image_outlined,
+                      size: 42, color: scheme.onSurfaceVariant),
                 )
               : Image.network(
                   img,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
-                    color: scheme.surfaceContainerHighest.withValues(alpha: 0.8),
-                    child: Icon(Icons.broken_image_outlined, size: 42, color: scheme.onSurfaceVariant),
+                    color:
+                        scheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                    child: Icon(Icons.broken_image_outlined,
+                        size: 42, color: scheme.onSurfaceVariant),
                   ),
                 ),
           if ((item.category ?? item.tags.join(', ')).trim().isNotEmpty)
@@ -122,7 +131,8 @@ class _Tile extends StatelessWidget {
               top: 10,
               left: 10,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.55),
                   borderRadius: BorderRadius.circular(999),
@@ -149,7 +159,8 @@ class _Tile extends StatelessWidget {
                   color: const Color(0xFFF59E0B),
                   borderRadius: BorderRadius.circular(999),
                 ),
-                child: const Icon(Icons.star_rounded, size: 12, color: Colors.white),
+                child: const Icon(Icons.star_rounded,
+                    size: 12, color: Colors.white),
               ),
             ),
           Positioned(
@@ -162,7 +173,10 @@ class _Tile extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withValues(alpha: 0.75)],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.75)
+                  ],
                 ),
               ),
               child: Column(
@@ -205,8 +219,13 @@ class _Tile extends StatelessWidget {
           tag: heroTag,
           flightShuttleBuilder: (_, anim, direction, fromContext, toContext) {
             return RotationTransition(
-              turns: Tween<double>(begin: 0, end: direction == HeroFlightDirection.push ? 0.01 : 0).animate(anim),
-              child: (direction == HeroFlightDirection.push ? fromContext.widget : toContext.widget),
+              turns: Tween<double>(
+                      begin: 0,
+                      end: direction == HeroFlightDirection.push ? 0.01 : 0)
+                  .animate(anim),
+              child: (direction == HeroFlightDirection.push
+                  ? fromContext.widget
+                  : toContext.widget),
             );
           },
           child: tile,
@@ -220,7 +239,10 @@ class _Tile extends StatelessWidget {
     if (p.isEmpty) return null;
     if (p.startsWith('http://') || p.startsWith('https://')) return p;
     final api = Uri.parse(AppConfig.apiBaseUrl);
-    final publicBase = api.replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), '')).toString().replaceAll(RegExp(r'/$'), '');
+    final publicBase = api
+        .replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), ''))
+        .toString()
+        .replaceAll(RegExp(r'/$'), '');
     final normalized = p.startsWith('/') ? p.substring(1) : p;
     return '$publicBase/storage/$normalized';
   }
@@ -302,7 +324,8 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                               tag: tag,
                               child: img == null
                                   ? Container(
-                                      color: scheme.surfaceContainerHighest.withValues(alpha: 0.8),
+                                      color: scheme.surfaceContainerHighest
+                                          .withValues(alpha: 0.8),
                                       child: Center(
                                         child: Icon(
                                           Icons.image_outlined,
@@ -328,9 +351,12 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                             decoration: BoxDecoration(
                               color: scheme.surface,
                               border: Border(
-                                top: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.4)),
+                                top: BorderSide(
+                                    color: scheme.outlineVariant
+                                        .withValues(alpha: 0.4)),
                               ),
-                              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(28)),
+                              borderRadius: const BorderRadius.vertical(
+                                  bottom: Radius.circular(28)),
                             ),
                             padding: const EdgeInsets.fromLTRB(20, 18, 20, 22),
                             child: Column(
@@ -342,20 +368,26 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.inter(
-                                    textStyle: Theme.of(context).textTheme.titleMedium,
+                                    textStyle:
+                                        Theme.of(context).textTheme.titleMedium,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
-                                if ((item.description ?? '').trim().isNotEmpty) ...[
+                                if ((item.description ?? '')
+                                    .trim()
+                                    .isNotEmpty) ...[
                                   const SizedBox(height: 6),
                                   Text(
                                     item.description!,
                                     maxLines: 4,
                                     overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: scheme.onSurfaceVariant,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: scheme.onSurfaceVariant,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   ),
                                 ],
                                 if (item.tags.isNotEmpty) ...[
@@ -366,17 +398,23 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                                     children: [
                                       for (final t in item.tags)
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
                                           decoration: BoxDecoration(
-                                            color: scheme.primary.withValues(alpha: 0.10),
-                                            borderRadius: BorderRadius.circular(999),
+                                            color: scheme.primary
+                                                .withValues(alpha: 0.10),
+                                            borderRadius:
+                                                BorderRadius.circular(999),
                                           ),
                                           child: Text(
                                             '#$t',
-                                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                              fontWeight: FontWeight.w800,
-                                              color: scheme.primary,
-                                            ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelSmall
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.w800,
+                                                  color: scheme.primary,
+                                                ),
                                           ),
                                         ),
                                     ],
@@ -406,7 +444,9 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                         width: i == _current ? 18 : 6,
                         height: 6,
                         decoration: BoxDecoration(
-                          color: i == _current ? const Color(0xFF2563EB) : Colors.white.withValues(alpha: 0.4),
+                          color: i == _current
+                              ? const Color(0xFF2563EB)
+                              : Colors.white.withValues(alpha: 0.4),
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
@@ -424,7 +464,10 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
     if (p.isEmpty) return null;
     if (p.startsWith('http://') || p.startsWith('https://')) return p;
     final api = Uri.parse(AppConfig.apiBaseUrl);
-    final publicBase = api.replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), '')).toString().replaceAll(RegExp(r'/$'), '');
+    final publicBase = api
+        .replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), ''))
+        .toString()
+        .replaceAll(RegExp(r'/$'), '');
     final normalized = p.startsWith('/') ? p.substring(1) : p;
     return '$publicBase/storage/$normalized';
   }

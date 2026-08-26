@@ -40,21 +40,27 @@ class PublicProfileModel {
     final services = <PublicServiceItem>[];
     if (servicesRaw != null) {
       for (final s in servicesRaw) {
-        if (s is Map<String, dynamic>) services.add(PublicServiceItem.fromJson(s));
+        if (s is Map<String, dynamic>) {
+          services.add(PublicServiceItem.fromJson(s));
+        }
       }
     }
 
     final reviews = <PublicReviewItem>[];
     if (reviewsRaw != null) {
       for (final r in reviewsRaw) {
-        if (r is Map<String, dynamic>) reviews.add(PublicReviewItem.fromJson(r));
+        if (r is Map<String, dynamic>) {
+          reviews.add(PublicReviewItem.fromJson(r));
+        }
       }
     }
 
     final portfolio = <PublicPortfolioItem>[];
     if (portfolioRaw != null) {
       for (final p in portfolioRaw) {
-        if (p is Map<String, dynamic>) portfolio.add(PublicPortfolioItem.fromJson(p));
+        if (p is Map<String, dynamic>) {
+          portfolio.add(PublicPortfolioItem.fromJson(p));
+        }
       }
     }
 
@@ -92,7 +98,8 @@ class PublicProfileModel {
       isVerified: json['is_verified'] == true || json['is_verified'] == 1,
       isOnline: json['is_online'] == true || json['is_online'] == 1,
       isTopRated: json['is_top_rated'] == true || json['is_top_rated'] == 1,
-      availableToday: json['available_today'] == true || json['available_today'] == 1,
+      availableToday:
+          json['available_today'] == true || json['available_today'] == 1,
       yearsExperience: _int(json['years_experience']),
       city: json['city']?.toString(),
       country: json['country']?.toString(),
@@ -251,7 +258,8 @@ class PublicReviewItem {
       comment: (json['comment'] ?? '').toString(),
       dateLabel: (json['date_label'] ?? '').toString(),
       reviewerAvatar: json['reviewer_avatar']?.toString(),
-      verifiedCustomer: json['verified_customer'] == true || json['verified_customer'] == 1,
+      verifiedCustomer:
+          json['verified_customer'] == true || json['verified_customer'] == 1,
       taskTitle: json['task_title']?.toString(),
     );
   }

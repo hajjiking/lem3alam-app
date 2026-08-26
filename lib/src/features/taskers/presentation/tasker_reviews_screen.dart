@@ -18,7 +18,8 @@ class TaskerReviewsScreen extends ConsumerStatefulWidget {
   final int taskerId;
 
   @override
-  ConsumerState<TaskerReviewsScreen> createState() => _TaskerReviewsScreenState();
+  ConsumerState<TaskerReviewsScreen> createState() =>
+      _TaskerReviewsScreenState();
 }
 
 class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
@@ -151,7 +152,9 @@ class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
 
   double get _effectiveAverage {
     final profile = _profile;
-    if (profile != null && profile.totalReviews > 0) return profile.averageRating;
+    if (profile != null && profile.totalReviews > 0) {
+      return profile.averageRating;
+    }
     if (_items.isEmpty) return 0;
     final sum = _items.fold<int>(0, (a, b) => a + b.rating);
     return sum / _items.length;
@@ -204,7 +207,8 @@ class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
                           slivers: [
                             SliverToBoxAdapter(
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 16, 16, 8),
                                 child: AppReviewSummaryCard(
                                   averageRating: _effectiveAverage,
                                   totalReviews: _effectiveTotal,
@@ -214,7 +218,8 @@ class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
                             ),
                             SliverToBoxAdapter(
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 4, 16, 4),
                                 child: _Filters(
                                   rating: _ratingFilter,
                                   sort: _sort,
@@ -246,32 +251,41 @@ class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
                               SliverFillRemaining(
                                 hasScrollBody: false,
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 120),
+                                  padding: const EdgeInsets.fromLTRB(
+                                      16, 20, 16, 120),
                                   child: AppEmptyState(
                                     title: context.l10n.noReviews,
-                                    subtitle: context.l10n.noReviewsMatchFilters,
+                                    subtitle:
+                                        context.l10n.noReviewsMatchFilters,
                                     icon: Icons.rate_review_outlined,
                                   ),
                                 ),
                               )
                             else ...[
                               SliverPadding(
-                                padding: const EdgeInsets.fromLTRB(16, 8, 16, 140),
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 8, 16, 140),
                                 sliver: SliverList.separated(
-                                  itemCount: _items.length + (_loadingMore ? 1 : 0),
+                                  itemCount:
+                                      _items.length + (_loadingMore ? 1 : 0),
                                   separatorBuilder: (_, __) => Divider(
                                     height: 1,
-                                    color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.4),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant
+                                        .withValues(alpha: 0.4),
                                   ),
                                   itemBuilder: (context, index) {
                                     if (index >= _items.length) {
                                       return const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 14),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 14),
                                         child: Center(
                                           child: SizedBox(
                                             height: 22,
                                             width: 22,
-                                            child: CircularProgressIndicator(strokeWidth: 2),
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2),
                                           ),
                                         ),
                                       );
@@ -321,7 +335,8 @@ class _Filters extends StatelessWidget {
   final String sort;
   final String? from;
   final String? to;
-  final void Function(int rating, String sort, String? from, String? to) onChanged;
+  final void Function(int rating, String sort, String? from, String? to)
+      onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -352,7 +367,9 @@ class _Filters extends StatelessWidget {
                             child: Icon(
                               Icons.star_rounded,
                               size: 14,
-                              color: selected ? Colors.white : const Color(0xFFF59E0B),
+                              color: selected
+                                  ? Colors.white
+                                  : const Color(0xFFF59E0B),
                             ),
                           ),
                       ],
@@ -365,12 +382,18 @@ class _Filters extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 180),
                     curve: Curves.easeOutCubic,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(
-                      color: selected ? colorScheme.primary : colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                      color: selected
+                          ? colorScheme.primary
+                          : colorScheme.surfaceContainerHighest
+                              .withValues(alpha: 0.6),
                       borderRadius: BorderRadius.circular(999),
                       border: Border.all(
-                        color: selected ? colorScheme.primary : colorScheme.outlineVariant.withValues(alpha: 0.4),
+                        color: selected
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant.withValues(alpha: 0.4),
                         width: 1,
                       ),
                     ),
@@ -386,7 +409,9 @@ class _Filters extends StatelessWidget {
                           style: GoogleFonts.cairo(
                             textStyle: Theme.of(context).textTheme.labelLarge,
                             fontWeight: FontWeight.w800,
-                            color: selected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+                            color: selected
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -477,25 +502,32 @@ class _SortChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.4), width: 1),
+          border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.4),
+              width: 1),
         ),
         child: Row(
           children: [
-            Icon(Icons.filter_list_rounded, size: 18, color: colorScheme.onSurfaceVariant),
+            Icon(Icons.filter_list_rounded,
+                size: 18, color: colorScheme.onSurfaceVariant),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                options.firstWhere((o) => o.value == value, orElse: () => options.first).label,
+                options
+                    .firstWhere((o) => o.value == value,
+                        orElse: () => options.first)
+                    .label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: colorScheme.onSurface,
-                ),
+                      fontWeight: FontWeight.w700,
+                      color: colorScheme.onSurface,
+                    ),
               ),
             ),
             const SizedBox(width: 6),
-            Icon(Icons.expand_more_rounded, size: 18, color: colorScheme.onSurfaceVariant),
+            Icon(Icons.expand_more_rounded,
+                size: 18, color: colorScheme.onSurfaceVariant),
           ],
         ),
       ),
@@ -540,26 +572,37 @@ class _DateRangeButton extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
-                color: active ? colorScheme.primary.withValues(alpha: 0.10) : colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                color: active
+                    ? colorScheme.primary.withValues(alpha: 0.10)
+                    : colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: active ? colorScheme.primary.withValues(alpha: 0.35) : colorScheme.outlineVariant.withValues(alpha: 0.4),
+                  color: active
+                      ? colorScheme.primary.withValues(alpha: 0.35)
+                      : colorScheme.outlineVariant.withValues(alpha: 0.4),
                   width: 1,
                 ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.date_range_rounded, size: 18, color: active ? colorScheme.primary : colorScheme.onSurfaceVariant),
+                  Icon(Icons.date_range_rounded,
+                      size: 18,
+                      color: active
+                          ? colorScheme.primary
+                          : colorScheme.onSurfaceVariant),
                   const SizedBox(width: 6),
                   Text(
                     from == null ? l10n.fromDate : from!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: active ? colorScheme.primary : colorScheme.onSurface,
-                    ),
+                          fontWeight: FontWeight.w700,
+                          color: active
+                              ? colorScheme.primary
+                              : colorScheme.onSurface,
+                        ),
                   ),
                 ],
               ),
@@ -575,26 +618,37 @@ class _DateRangeButton extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
-                color: active ? colorScheme.primary.withValues(alpha: 0.10) : colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                color: active
+                    ? colorScheme.primary.withValues(alpha: 0.10)
+                    : colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: active ? colorScheme.primary.withValues(alpha: 0.35) : colorScheme.outlineVariant.withValues(alpha: 0.4),
+                  color: active
+                      ? colorScheme.primary.withValues(alpha: 0.35)
+                      : colorScheme.outlineVariant.withValues(alpha: 0.4),
                   width: 1,
                 ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.event_rounded, size: 18, color: active ? colorScheme.primary : colorScheme.onSurfaceVariant),
+                  Icon(Icons.event_rounded,
+                      size: 18,
+                      color: active
+                          ? colorScheme.primary
+                          : colorScheme.onSurfaceVariant),
                   const SizedBox(width: 6),
                   Text(
                     to == null ? l10n.toDate : to!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: active ? colorScheme.primary : colorScheme.onSurface,
-                    ),
+                          fontWeight: FontWeight.w700,
+                          color: active
+                              ? colorScheme.primary
+                              : colorScheme.onSurface,
+                        ),
                   ),
                 ],
               ),
@@ -626,8 +680,12 @@ class _ReviewTile extends StatelessWidget {
     final l10n = context.l10n;
     final colorScheme = Theme.of(context).colorScheme;
     final avatar = review.reviewerAvatar;
-    final avatarUrl = avatar == null || avatar.trim().isEmpty ? null : _resolvePublicStorageUrl(avatar);
-    final comment = review.comment.trim().isEmpty ? l10n.noCommentProvided : review.comment.trim();
+    final avatarUrl = avatar == null || avatar.trim().isEmpty
+        ? null
+        : _resolvePublicStorageUrl(avatar);
+    final comment = review.comment.trim().isEmpty
+        ? l10n.noCommentProvided
+        : review.comment.trim();
 
     return AppSectionCard(
       padding: EdgeInsets.zero,
@@ -637,7 +695,9 @@ class _ReviewTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppReviewTile(
-            reviewerName: review.reviewerName.isEmpty ? l10n.anonymous : review.reviewerName,
+            reviewerName: review.reviewerName.isEmpty
+                ? l10n.anonymous
+                : review.reviewerName,
             reviewerAvatarUrl: avatarUrl,
             rating: review.rating.toDouble(),
             text: comment,
@@ -649,14 +709,18 @@ class _ReviewTile extends StatelessWidget {
               padding: const EdgeInsets.only(left: 58, right: 4, bottom: 4),
               child: Row(
                 children: [
-                  Icon(Icons.work_outline, size: 16, color: colorScheme.onSurfaceVariant),
+                  Icon(Icons.work_outline,
+                      size: 16, color: colorScheme.onSurfaceVariant),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       review.taskTitle!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: colorScheme.onSurfaceVariant),
                     ),
                   ),
                 ],
@@ -719,9 +783,9 @@ class _HelpfulButtonState extends State<_HelpfulButton> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: fg,
-                ),
+                      fontWeight: FontWeight.w700,
+                      color: fg,
+                    ),
               ),
             ],
           ),
@@ -775,7 +839,8 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
         builder: (context, setSheet) {
           final media = MediaQuery.of(context);
           return Padding(
-            padding: EdgeInsets.fromLTRB(20, 14, 20, 20 + media.viewInsets.bottom),
+            padding:
+                EdgeInsets.fromLTRB(20, 14, 20, 20 + media.viewInsets.bottom),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -794,8 +859,8 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                 Text(
                   l10n.writeReview,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
+                        fontWeight: FontWeight.w900,
+                      ),
                 ),
                 const SizedBox(height: 14),
                 Center(
@@ -816,7 +881,9 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                             child: Padding(
                               padding: const EdgeInsets.all(6),
                               child: Icon(
-                                filled ? Icons.star_rounded : Icons.star_outline_rounded,
+                                filled
+                                    ? Icons.star_rounded
+                                    : Icons.star_outline_rounded,
                                 size: 34,
                                 color: const Color(0xFFF59E0B),
                               ),
@@ -839,7 +906,9 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
+                      borderSide: BorderSide(
+                          color: colorScheme.outlineVariant
+                              .withValues(alpha: 0.6)),
                     ),
                   ),
                 ),
@@ -856,7 +925,9 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                                   Navigator.pop(context);
                                   widget.onSubmitted();
                                 } finally {
-                                  if (mounted) setState(() => _submitting = false);
+                                  if (mounted) {
+                                    setState(() => _submitting = false);
+                                  }
                                 }
                               },
                         style: FilledButton.styleFrom(
@@ -869,10 +940,13 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                             ? const SizedBox(
                                 height: 18,
                                 width: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2, color: Colors.white),
                               )
                             : const Icon(Icons.send_rounded),
-                        label: Text(_rating == 0 ? l10n.selectRatingFirst : l10n.submitReview),
+                        label: Text(_rating == 0
+                            ? l10n.selectRatingFirst
+                            : l10n.submitReview),
                       ),
                     ),
                   ],
@@ -894,7 +968,9 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
       decoration: BoxDecoration(
         color: colorScheme.surface.withValues(alpha: 0.98),
         border: Border(
-          top: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.45), width: 1),
+          top: BorderSide(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.45),
+              width: 1),
         ),
       ),
       padding: EdgeInsets.fromLTRB(16, 10, 16, 10 + media.padding.bottom),
@@ -909,7 +985,8 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                   onPressed: _submitting ? null : _open,
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
                   ),
                   icon: const Icon(Icons.edit_note_rounded),
                   label: Text(l10n.writeReview),

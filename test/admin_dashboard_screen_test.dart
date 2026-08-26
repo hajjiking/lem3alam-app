@@ -90,7 +90,7 @@ class _TestBottomNavigation extends StatelessWidget {
 }
 
 void main() {
-  testWidgets('admin dashboard renders compact data and interactive range', (
+  testWidgets('admin dashboard renders only API summary data', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
@@ -105,40 +105,21 @@ void main() {
     expect(find.text('Total Users'), findsOneWidget);
     expect(find.text('Post Task'), findsOneWidget);
 
-    await tester.tap(find.text('Online'));
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text('Offline'), findsOneWidget);
+    expect(find.text('Online'), findsNothing);
 
     final dashboardList = find.byKey(
       const PageStorageKey<String>('admin-dashboard-scroll'),
     );
-    final scrollable = find
-        .descendant(
-          of: dashboardList,
-          matching: find.byType(Scrollable),
-        )
-        .first;
-    await tester.scrollUntilVisible(
-      find.text('Tasks Overview'),
-      520,
-      scrollable: scrollable,
+    expect(dashboardList, findsOneWidget);
+    expect(find.text('Tasks Overview'), findsNothing);
+    expect(find.text('Recent Tasks'), findsNothing);
+    expect(find.text('Repair washing machine'), findsNothing);
+    expect(
+      find.text(
+        'Detailed analytics will appear when the admin API provides them. No sample data is displayed.',
+      ),
+      findsOneWidget,
     );
-    await tester.pump(const Duration(milliseconds: 200));
-
-    await tester.tap(find.text('This Week'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('This Month').last);
-    await tester.pumpAndSettle();
-    expect(find.text('This Month'), findsOneWidget);
-
-    await tester.scrollUntilVisible(
-      find.text('Top Categories'),
-      520,
-      scrollable: scrollable,
-    );
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text('Recent Tasks'), findsOneWidget);
-    expect(find.text('Home Repairs'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -158,6 +139,7 @@ void main() {
     expect(find.text('مرحباً، Admin 👋'), findsOneWidget);
     expect(find.text('إجمالي المستخدمين'), findsOneWidget);
     expect(find.text('انشر مهمة'), findsOneWidget);
+    expect(find.text('متصل'), findsNothing);
 
     expect(Theme.of(tester.element(dashboard)).brightness, Brightness.dark);
     expect(tester.takeException(), isNull);

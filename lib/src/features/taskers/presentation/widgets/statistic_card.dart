@@ -32,7 +32,9 @@ class StatisticCard extends StatelessWidget {
                     0,
                     0,
                   ),
-                  child: i < items.length ? _Tile(item: items[i]) : const SizedBox.shrink(),
+                  child: i < items.length
+                      ? _Tile(item: items[i])
+                      : const SizedBox.shrink(),
                 ),
               );
             }),
@@ -112,9 +114,9 @@ class _Tile extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: scheme.onSurfaceVariant,
-            fontWeight: FontWeight.w600,
-          ),
+                color: scheme.onSurfaceVariant,
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ],
     );

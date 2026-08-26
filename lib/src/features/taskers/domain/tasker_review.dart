@@ -24,7 +24,11 @@ class TaskerReview {
     final translations = json['comment_translations'];
     String comment = (json['comment'] ?? '').toString();
     if (translations is Map) {
-      comment = (translations['ar'] ?? translations['en'] ?? translations['fr'] ?? comment).toString();
+      comment = (translations['ar'] ??
+              translations['en'] ??
+              translations['fr'] ??
+              comment)
+          .toString();
     }
 
     return TaskerReview(
@@ -32,9 +36,14 @@ class TaskerReview {
       rating: _intRequired(json['rating']),
       comment: comment,
       createdAtIso: (json['created_at'] ?? '').toString(),
-      reviewerName: reviewer is Map<String, dynamic> ? (reviewer['name'] ?? '').toString() : '',
-      reviewerAvatar: reviewer is Map<String, dynamic> ? reviewer['profile_image']?.toString() : null,
-      taskTitle: task is Map<String, dynamic> ? task['title']?.toString() : null,
+      reviewerName: reviewer is Map<String, dynamic>
+          ? (reviewer['name'] ?? '').toString()
+          : '',
+      reviewerAvatar: reviewer is Map<String, dynamic>
+          ? reviewer['profile_image']?.toString()
+          : null,
+      taskTitle:
+          task is Map<String, dynamic> ? task['title']?.toString() : null,
     );
   }
 }
@@ -45,4 +54,3 @@ int _intRequired(dynamic value) {
   if (value == null) return 0;
   return int.tryParse(value.toString()) ?? 0;
 }
-

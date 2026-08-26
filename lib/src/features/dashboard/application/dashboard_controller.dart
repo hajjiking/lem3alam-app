@@ -11,13 +11,11 @@ class DashboardState {
     required this.snapshot,
     this.selectedFilter = DashboardTaskFilter.pending,
     this.performanceRange = DashboardPerformanceRange.week,
-    this.isOnline = true,
   });
 
   final DashboardSnapshot snapshot;
   final DashboardTaskFilter selectedFilter;
   final DashboardPerformanceRange performanceRange;
-  final bool isOnline;
 
   List<DashboardTask> get visibleTasks {
     return switch (selectedFilter) {
@@ -40,13 +38,11 @@ class DashboardState {
   DashboardState copyWith({
     DashboardTaskFilter? selectedFilter,
     DashboardPerformanceRange? performanceRange,
-    bool? isOnline,
   }) {
     return DashboardState(
       snapshot: snapshot,
       selectedFilter: selectedFilter ?? this.selectedFilter,
       performanceRange: performanceRange ?? this.performanceRange,
-      isOnline: isOnline ?? this.isOnline,
     );
   }
 }
@@ -63,9 +59,5 @@ class DashboardController extends Notifier<DashboardState> {
 
   void selectPerformanceRange(DashboardPerformanceRange range) {
     state = state.copyWith(performanceRange: range);
-  }
-
-  void toggleAvailability() {
-    state = state.copyWith(isOnline: !state.isOnline);
   }
 }

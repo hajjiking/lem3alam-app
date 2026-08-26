@@ -19,7 +19,8 @@ class TaskerProfileScreen extends ConsumerStatefulWidget {
   final int taskerId;
 
   @override
-  ConsumerState<TaskerProfileScreen> createState() => _TaskerProfileScreenState();
+  ConsumerState<TaskerProfileScreen> createState() =>
+      _TaskerProfileScreenState();
 }
 
 class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
@@ -112,11 +113,11 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final brightness = Theme.of(context).brightness;
-    final bg =
-        brightness == Brightness.light
-            ? const Color(0xFFF8FAFC)
-            : scheme.surface;
-    final systemBarIcon = brightness == Brightness.light ? Brightness.dark : Brightness.light;
+    final bg = brightness == Brightness.light
+        ? const Color(0xFFF8FAFC)
+        : scheme.surface;
+    final systemBarIcon =
+        brightness == Brightness.light ? Brightness.dark : Brightness.light;
 
     final async = ref.watch(publicTaskerProfileProvider(widget.taskerId));
     final PublicProfileModel? model = async.asData?.value;
@@ -153,12 +154,12 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
       );
     }
 
-    final bookNowFromServices =
-        model == null
-            ? null
-            : (model.services.isNotEmpty && model.services.first.startingPrice != null
-                ? 'From ${model.services.first.startingPrice} ${model.services.first.currency}'
-                : null);
+    final bookNowFromServices = model == null
+        ? null
+        : (model.services.isNotEmpty &&
+                model.services.first.startingPrice != null
+            ? 'From ${model.services.first.startingPrice} ${model.services.first.currency}'
+            : null);
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
@@ -197,12 +198,12 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
   PreferredSizeWidget _buildAppBar(PublicProfileModel? model) {
     final scheme = Theme.of(context).colorScheme;
     final brightness = Theme.of(context).brightness;
-    final pageBg =
-        brightness == Brightness.light
-            ? const Color(0xFFF8FAFC)
-            : scheme.surfaceContainerLowest;
-    final btnBg =
-        brightness == Brightness.light ? Colors.white : scheme.surfaceContainerLow;
+    final pageBg = brightness == Brightness.light
+        ? const Color(0xFFF8FAFC)
+        : scheme.surfaceContainerLowest;
+    final btnBg = brightness == Brightness.light
+        ? Colors.white
+        : scheme.surfaceContainerLow;
     return AppBar(
       backgroundColor: pageBg,
       surfaceTintColor: Colors.transparent,
@@ -217,8 +218,10 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
         style: IconButton.styleFrom(
           backgroundColor: btnBg,
           elevation: 0,
-          side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          side: BorderSide(
+              color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           minimumSize: const Size(40, 40),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
@@ -238,8 +241,10 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
           style: IconButton.styleFrom(
             backgroundColor: btnBg,
             elevation: 0,
-            side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            side: BorderSide(
+                color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             minimumSize: const Size(40, 40),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
@@ -252,14 +257,18 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
             duration: const Duration(milliseconds: 240),
             transitionBuilder: (ch, a) => ScaleTransition(scale: a, child: ch),
             child: _isFav
-                ? const Icon(Icons.favorite_rounded, color: Color(0xFFEF4444), key: ValueKey('fav_on'))
-                : const Icon(Icons.favorite_border_rounded, key: ValueKey('fav_off')),
+                ? const Icon(Icons.favorite_rounded,
+                    color: Color(0xFFEF4444), key: ValueKey('fav_on'))
+                : const Icon(Icons.favorite_border_rounded,
+                    key: ValueKey('fav_off')),
           ),
           style: IconButton.styleFrom(
             backgroundColor: btnBg,
             elevation: 0,
-            side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            side: BorderSide(
+                color: scheme.outlineVariant.withValues(alpha: 0.45), width: 1),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             minimumSize: const Size(40, 40),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
@@ -321,9 +330,9 @@ class _AppBarTitle extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w600,
-                  ),
+                        color: scheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
             ],
           ),
@@ -362,10 +371,9 @@ class _Body extends StatelessWidget {
     const tabs = _ProfileTab.values;
     final media = MediaQuery.of(context);
     final bookingBarReserve = 72.0 + media.padding.bottom + 12.0;
-    final pageBg =
-        Theme.of(context).brightness == Brightness.light
-            ? const Color(0xFFF8FAFC)
-            : scheme.surfaceContainerLowest;
+    final pageBg = Theme.of(context).brightness == Brightness.light
+        ? const Color(0xFFF8FAFC)
+        : scheme.surfaceContainerLowest;
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
@@ -417,7 +425,9 @@ class _Body extends StatelessWidget {
                           StatisticItem(
                             icon: Icons.schedule_rounded,
                             label: l10n.statResponseTime,
-                            value: model.responseMinutes == null ? '-' : '${model.responseMinutes} min',
+                            value: model.responseMinutes == null
+                                ? '-'
+                                : '${model.responseMinutes} min',
                             accent: const Color(0xFF10B981),
                           ),
                           StatisticItem(
@@ -446,7 +456,10 @@ class _Body extends StatelessWidget {
                 (label: l10n.services, icon: Icons.handyman_outlined),
                 (label: l10n.portfolio, icon: Icons.photo_library_outlined),
                 (label: l10n.reviews, icon: Icons.rate_review_outlined),
-                (label: l10n.availability, icon: Icons.event_available_outlined),
+                (
+                  label: l10n.availability,
+                  icon: Icons.event_available_outlined
+                ),
               ],
             ),
           ),
@@ -528,7 +541,8 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
   final List<({String label, IconData icon})> tabs;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     final scheme = Theme.of(context).colorScheme;
     return Container(
       color: const Color(0xFFF8FAFC),
@@ -540,7 +554,8 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.35), width: 1),
+            border: Border.all(
+                color: scheme.outlineVariant.withValues(alpha: 0.35), width: 1),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.035),
@@ -574,7 +589,8 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
             tabs: [
               for (final t in tabs)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
                   child: Tab(
                     height: 44,
                     child: Padding(
@@ -609,11 +625,13 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
   @override
   double get maxExtent => 80;
   @override
-  bool shouldRebuild(covariant _TabsDelegate oldDelegate) => oldDelegate.controller != controller;
+  bool shouldRebuild(covariant _TabsDelegate oldDelegate) =>
+      oldDelegate.controller != controller;
 }
 
 class _AboutTab extends StatelessWidget {
-  const _AboutTab({required this.model, required this.l10n, required this.scheme});
+  const _AboutTab(
+      {required this.model, required this.l10n, required this.scheme});
   final PublicProfileModel model;
   final AppLocalizations l10n;
   final ColorScheme scheme;
@@ -643,7 +661,9 @@ class _AboutTab extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.35)),
+                          border: Border.all(
+                              color: scheme.outlineVariant
+                                  .withValues(alpha: 0.35)),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.04),
@@ -656,11 +676,13 @@ class _AboutTab extends StatelessWidget {
                           (model.bio ?? '').trim().isEmpty
                               ? l10n.noBioProvided
                               : model.bio!,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            height: 1.55,
-                            color: scheme.onSurfaceVariant.withValues(alpha: 0.95),
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    height: 1.55,
+                                    color: scheme.onSurfaceVariant
+                                        .withValues(alpha: 0.95),
+                                  ),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -671,26 +693,32 @@ class _AboutTab extends StatelessWidget {
                         children: [
                           for (final f in model.features)
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 9),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(999),
                                 border: Border.all(
-                                  color: const Color(0xFF10B981).withValues(alpha: 0.25),
+                                  color: const Color(0xFF10B981)
+                                      .withValues(alpha: 0.25),
                                   width: 1,
                                 ),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.check_circle_rounded, size: 14, color: Color(0xFF10B981)),
+                                  const Icon(Icons.check_circle_rounded,
+                                      size: 14, color: Color(0xFF10B981)),
                                   const SizedBox(width: 6),
                                   Text(
                                     f,
-                                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                      fontWeight: FontWeight.w900,
-                                      color: scheme.onSurface,
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w900,
+                                          color: scheme.onSurface,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -793,9 +821,12 @@ class _IllustrationCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.18),
                         borderRadius: BorderRadius.circular(28),
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.35), width: 1),
+                        border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.35),
+                            width: 1),
                       ),
-                      child: const Icon(Icons.electric_bolt_rounded, color: Colors.white, size: 40),
+                      child: const Icon(Icons.electric_bolt_rounded,
+                          color: Colors.white, size: 40),
                     ),
                     const SizedBox(height: 14),
                     Text(
@@ -849,7 +880,8 @@ class _ServicesTab extends StatelessWidget {
               maxWidth: 900,
               child: SectionTitle(
                 title: l10n.services,
-                subtitle: 'Choose a service below to book ${model.name.split(' ').first}.',
+                subtitle:
+                    'Choose a service below to book ${model.name.split(' ').first}.',
               ),
             ),
           ),
@@ -965,12 +997,15 @@ class _ReviewsTab extends StatelessWidget {
                 ReviewCard(
                   reviewerName: model.reviews[i].reviewerName,
                   rating: model.reviews[i].rating,
-                  comment: model.reviews[i].comment.isEmpty ? l10n.noCommentProvided : model.reviews[i].comment,
+                  comment: model.reviews[i].comment.isEmpty
+                      ? l10n.noCommentProvided
+                      : model.reviews[i].comment,
                   dateLabel: model.reviews[i].dateLabel,
                   reviewerAvatar: model.reviews[i].reviewerAvatar,
                   verifiedCustomer: model.reviews[i].verifiedCustomer,
                   taskTitle: model.reviews[i].taskTitle,
-                  isHelpful: helpfulToggles.length > i ? helpfulToggles[i] : false,
+                  isHelpful:
+                      helpfulToggles.length > i ? helpfulToggles[i] : false,
                   onHelpfulToggle: (v) => onHelpfulToggle(i, v),
                 ),
                 if (i != model.reviews.length - 1) const SizedBox(height: 14),
@@ -1035,7 +1070,9 @@ class _AvailabilityTab extends StatelessWidget {
           children: [
             SectionTitle(
               title: l10n.availability,
-              subtitle: model.availableToday ? l10n.acceptingNewBookings : l10n.currentlyBusy,
+              subtitle: model.availableToday
+                  ? l10n.acceptingNewBookings
+                  : l10n.currentlyBusy,
             ),
             AvailabilityCalendar(
               availableDates: model.availabilityDates,

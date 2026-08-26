@@ -7,7 +7,6 @@ import '../../../core/ui/app_theme.dart';
 import '../../../core/ui/app_widgets.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../../dashboard/presentation/widgets/dashboard_header.dart';
-import '../application/admin_dashboard_view_controller.dart';
 import 'admin_dashboard_controller.dart';
 import 'widgets/metric_card.dart';
 import 'widgets/metrics_grid.dart';
@@ -33,9 +32,6 @@ class AdminDashboardScreen extends ConsumerWidget {
     final tokens = theme.extension<Lem3alamThemeTokens>()!;
     final l10n = context.l10n;
     final auth = ref.watch(authControllerProvider);
-    final viewState = ref.watch(adminDashboardViewControllerProvider);
-    final viewController =
-        ref.read(adminDashboardViewControllerProvider.notifier);
     final summaryAsync = ref.watch(adminDashboardProvider);
     final rawName = auth.user?.name.trim() ?? '';
     final displayName = rawName.isEmpty
@@ -52,13 +48,13 @@ class AdminDashboardScreen extends ConsumerWidget {
     final metrics = summaryAsync.maybeWhen(
       data: (summary) => <AdminMetricCardData>[
         AdminMetricCardData(
-          label: l10n.usersMetric,
+          label: l10n.adminTotalUsers,
           value: numberFormat.format(summary.usersCount),
           icon: Icons.people_alt_rounded,
           accent: scheme.primary,
         ),
         AdminMetricCardData(
-          label: l10n.tasksMetric,
+          label: l10n.adminTotalTasks,
           value: numberFormat.format(summary.tasksCount),
           icon: Icons.assignment_turned_in_rounded,
           accent: scheme.tertiary,
@@ -91,20 +87,18 @@ class AdminDashboardScreen extends ConsumerWidget {
             appName: l10n.appName,
             greeting: l10n.adminGreeting(displayName),
             subtitle: l10n.adminDashboardSubtitle,
-            availabilityLabel: viewState.isOnline
-                ? l10n.dashboardOnline
-                : l10n.dashboardOffline,
-            isOnline: viewState.isOnline,
+            availabilityLabel: l10n.dashboardOffline,
+            isOnline: false,
+            showAvailability: false,
             menuLabel: l10n.dashboardMenu,
             notificationsLabel: l10n.dashboardNotifications,
             profileLabel: l10n.dashboardProfile,
-            notificationCount: 3,
             avatarAsset: null,
             avatarFallback: Icons.admin_panel_settings_rounded,
             onMenuTap: onMenuTap,
             onNotificationsTap: onNotificationsTap,
             onProfileTap: onProfileTap,
-            onAvailabilityTap: viewController.toggleAvailability,
+            onAvailabilityTap: () {},
           ),
           Transform.translate(
             offset: const Offset(0, -28),

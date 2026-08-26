@@ -45,7 +45,11 @@ class TaskersRepositoryImpl implements TaskersRepository {
         itemFromJson: TaskerReview.fromJson,
       );
     }
-    return Paginated(items: const [], currentPage: 1, lastPage: 1, perPage: perPage, total: 0);
+    return Paginated(
+        items: const [],
+        currentPage: 1,
+        lastPage: 1,
+        perPage: perPage,
+        total: 0);
   }
 }
-

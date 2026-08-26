@@ -49,7 +49,7 @@ Widget _dashboardApp({required Locale locale, required ThemeMode themeMode}) {
 }
 
 void main() {
-  testWidgets('dashboard renders compact light layout and filters tasks', (
+  testWidgets('dashboard renders an honest empty state without API data', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
@@ -61,36 +61,17 @@ void main() {
     await tester.pump();
 
     expect(find.text('Hello, Mohamed 👋'), findsOneWidget);
-    expect(find.text('Active Tasks'), findsOneWidget);
-    expect(find.text('Recent Tasks'), findsOneWidget);
-
-    await tester.tap(find.text('Online'));
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text('Offline'), findsOneWidget);
-
-    final horizontalList = find.byWidgetPredicate(
-      (widget) =>
-          widget is ListView && widget.scrollDirection == Axis.horizontal,
+    expect(
+      find.text(
+        'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.',
+      ),
+      findsOneWidget,
     );
-    await tester.drag(horizontalList, const Offset(-340, 0));
-    await tester.pump(const Duration(milliseconds: 250));
-    expect(find.text('Total Earnings'), findsOneWidget);
+    expect(find.text('Repair washing machine'), findsNothing);
 
-    final accepted = find.text('Accepted (1)');
-    await tester.ensureVisible(accepted);
-    await tester.tap(accepted);
-    await tester.pump(const Duration(milliseconds: 250));
+    expect(find.text('Online'), findsNothing);
 
-    expect(find.text('No tasks in this category yet.'), findsOneWidget);
-
-    final verticalList = find.byWidgetPredicate(
-      (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
-    );
-    for (var index = 0; index < 4; index++) {
-      await tester.drag(verticalList, const Offset(0, -500));
-      await tester.pump(const Duration(milliseconds: 250));
-    }
-    expect(find.text('Performance'), findsOneWidget);
+    expect(find.text('Performance'), findsNothing);
   });
 
   testWidgets('dashboard supports dark theme and Arabic RTL', (tester) async {
@@ -110,13 +91,11 @@ void main() {
     final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     expect(scaffold.backgroundColor, AppTheme.dark().colorScheme.surface);
 
-    final verticalList = find.byWidgetPredicate(
-      (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
+    expect(
+      find.text(
+        'بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية.',
+      ),
+      findsOneWidget,
     );
-    for (var index = 0; index < 5; index++) {
-      await tester.drag(verticalList, const Offset(0, -500));
-      await tester.pump(const Duration(milliseconds: 250));
-    }
-    expect(find.text('الأداء'), findsOneWidget);
   });
 }

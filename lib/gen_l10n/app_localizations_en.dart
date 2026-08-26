@@ -1373,4 +1373,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get adminPainting => 'Painting';
+
+  @override
+  String get adminDetailedAnalyticsUnavailable =>
+      'Detailed analytics will appear when the admin API provides them. No sample data is displayed.';
+
+  @override
+  String get dashboardLiveDataUnavailable =>
+      'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.';
 }

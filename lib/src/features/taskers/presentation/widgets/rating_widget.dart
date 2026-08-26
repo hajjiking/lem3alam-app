@@ -18,7 +18,8 @@ class RatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ic = inactiveColor ?? Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.7);
+    final ic = inactiveColor ??
+        Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.7);
     final r = rating.clamp(0.0, 5.0);
     final full = r.floor();
     final fraction = r - full;
@@ -33,7 +34,8 @@ class RatingWidget extends StatelessWidget {
       children: [
         for (var i = 0; i < totalFull; i++)
           Padding(
-            padding: EdgeInsets.only(right: i < totalFull - 1 || half > 0 || empty > 0 ? 2 : 0),
+            padding: EdgeInsets.only(
+                right: i < totalFull - 1 || half > 0 || empty > 0 ? 2 : 0),
             child: Icon(Icons.star_rounded, size: size, color: activeColor),
           ),
         if (half == 1)
@@ -44,7 +46,8 @@ class RatingWidget extends StatelessWidget {
                 Icon(Icons.star_rounded, size: size, color: ic),
                 ClipRect(
                   clipper: const _HalfClipper(),
-                  child: Icon(Icons.star_rounded, size: size, color: activeColor),
+                  child:
+                      Icon(Icons.star_rounded, size: size, color: activeColor),
                 ),
               ],
             ),

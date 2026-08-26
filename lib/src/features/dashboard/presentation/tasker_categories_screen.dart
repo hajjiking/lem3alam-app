@@ -62,8 +62,8 @@ class TaskerCategoriesScreen extends ConsumerWidget {
                 final byParent = ap.compareTo(bp);
                 if (byParent != 0) return byParent;
                 return a.localizedName(languageCode).toLowerCase().compareTo(
-                  b.localizedName(languageCode).toLowerCase(),
-                );
+                      b.localizedName(languageCode).toLowerCase(),
+                    );
               });
 
               return LayoutBuilder(
@@ -80,7 +80,8 @@ class TaskerCategoriesScreen extends ConsumerWidget {
                       mainAxisSpacing: 12,
                       mainAxisExtent: 168,
                     ),
-                    itemBuilder: (context, index) => _CategoryTile(category: sorted[index]),
+                    itemBuilder: (context, index) =>
+                        _CategoryTile(category: sorted[index]),
                   );
                 },
               );
@@ -107,7 +108,8 @@ class _CategoryTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
     final imageUrl = (category.imageUrl ?? '').trim();
-    final localizedName = category.localizedName(Localizations.localeOf(context).languageCode);
+    final localizedName =
+        category.localizedName(Localizations.localeOf(context).languageCode);
 
     return InkWell(
       borderRadius: BorderRadius.circular(18),
@@ -116,7 +118,8 @@ class _CategoryTile extends ConsumerWidget {
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerLowest,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
+          border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
         ),
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -128,12 +131,14 @@ class _CategoryTile extends ConsumerWidget {
                 child: Container(
                   color: colorScheme.surfaceContainerHighest,
                   child: imageUrl.isEmpty
-                      ? Icon(Icons.image_outlined, color: colorScheme.onSurfaceVariant, size: 34)
+                      ? Icon(Icons.image_outlined,
+                          color: colorScheme.onSurfaceVariant, size: 34)
                       : Image.network(
                           imageUrl,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Icon(Icons.broken_image_outlined, color: colorScheme.onSurfaceVariant, size: 34);
+                            return Icon(Icons.broken_image_outlined,
+                                color: colorScheme.onSurfaceVariant, size: 34);
                           },
                           loadingBuilder: (context, child, progress) {
                             if (progress == null) return child;
@@ -145,7 +150,8 @@ class _CategoryTile extends ConsumerWidget {
                                   strokeWidth: 2,
                                   value: progress.expectedTotalBytes == null
                                       ? null
-                                      : progress.cumulativeBytesLoaded / progress.expectedTotalBytes!,
+                                      : progress.cumulativeBytesLoaded /
+                                          progress.expectedTotalBytes!,
                                 ),
                               ),
                             );
@@ -160,7 +166,10 @@ class _CategoryTile extends ConsumerWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontWeight: FontWeight.w800),
             ),
           ],
         ),

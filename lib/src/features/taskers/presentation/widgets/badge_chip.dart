@@ -69,7 +69,8 @@ class BadgeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final bg = backgroundColor ?? scheme.surfaceContainerHighest.withValues(alpha: 0.8);
+    final bg = backgroundColor ??
+        scheme.surfaceContainerHighest.withValues(alpha: 0.8);
     final fg = foregroundColor ?? scheme.onSurface;
     final ic = iconColor ?? fg;
 
@@ -98,9 +99,9 @@ class BadgeChip extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w800,
-                color: fg,
-              ),
+                    fontWeight: FontWeight.w800,
+                    color: fg,
+                  ),
             ),
           ),
         ],

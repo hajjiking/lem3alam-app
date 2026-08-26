@@ -1349,4 +1349,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get adminPainting => 'الصباغة';
+
+  @override
+  String get adminDetailedAnalyticsUnavailable =>
+      'ستظهر التحليلات التفصيلية عندما توفرها واجهة برمجة الإدارة. لا يتم عرض أي بيانات تجريبية.';
+
+  @override
+  String get dashboardLiveDataUnavailable =>
+      'بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية.';
 }

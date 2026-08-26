@@ -50,7 +50,8 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: scheme.outlineVariant.withValues(alpha: 0.35)),
+        border:
+            Border.all(color: scheme.outlineVariant.withValues(alpha: 0.35)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -66,7 +67,8 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
           Row(
             children: [
               IconButton(
-                onPressed: () => setState(() => _month = DateTime(_month.year, _month.month - 1, 1)),
+                onPressed: () => setState(
+                    () => _month = DateTime(_month.year, _month.month - 1, 1)),
                 icon: const Icon(Icons.chevron_left_rounded),
                 tooltip: MaterialLocalizations.of(context).previousMonthTooltip,
               ),
@@ -81,7 +83,8 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                 ),
               ),
               IconButton(
-                onPressed: () => setState(() => _month = DateTime(_month.year, _month.month + 1, 1)),
+                onPressed: () => setState(
+                    () => _month = DateTime(_month.year, _month.month + 1, 1)),
                 icon: const Icon(Icons.chevron_right_rounded),
                 tooltip: MaterialLocalizations.of(context).nextMonthTooltip,
               ),
@@ -98,9 +101,9 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                       child: Text(
                         n,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: scheme.onSurfaceVariant,
-                        ),
+                              fontWeight: FontWeight.w800,
+                              color: scheme.onSurfaceVariant,
+                            ),
                       ),
                     ),
                   ),
@@ -124,9 +127,13 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
               if (d == null) return const SizedBox.shrink();
               final key = DateTime(d.year, d.month, d.day);
               final isUnavailable = unavailableSet.contains(key);
-              final isAvailable = widget.availableDates.isEmpty || availableSet.contains(key);
-              final past = d.isBefore(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day));
-              final selected = _selected != null && DateTime(_selected!.year, _selected!.month, _selected!.day) == key;
+              final isAvailable =
+                  widget.availableDates.isEmpty || availableSet.contains(key);
+              final past = d.isBefore(DateTime(DateTime.now().year,
+                  DateTime.now().month, DateTime.now().day));
+              final selected = _selected != null &&
+                  DateTime(_selected!.year, _selected!.month, _selected!.day) ==
+                      key;
               final enabled = !isUnavailable && !past;
               final highlight = selected && enabled;
               final bg = !enabled
@@ -154,9 +161,11 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                             _selected = d;
                             _selectedSlots.clear();
                           });
-                          if (widget.onSlotSelected != null && _selectedSlots.isNotEmpty) {
+                          if (widget.onSlotSelected != null &&
+                              _selectedSlots.isNotEmpty) {
                             for (final s in _selectedSlots) {
-                              widget.onSlotSelected!.call(AvailabilitySlot(date: d, kind: s));
+                              widget.onSlotSelected!
+                                  .call(AvailabilitySlot(date: d, kind: s));
                             }
                           }
                         }
@@ -169,16 +178,17 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                       border: Border.all(
                         color: highlight
                             ? scheme.primary
-                            : scheme.outlineVariant.withValues(alpha: enabled ? 0.35 : 0.15),
+                            : scheme.outlineVariant
+                                .withValues(alpha: enabled ? 0.35 : 0.15),
                         width: 1,
                       ),
                     ),
                     child: Text(
                       '${d.day}',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
-                        color: fg,
-                      ),
+                            fontWeight: FontWeight.w900,
+                            color: fg,
+                          ),
                     ),
                   ),
                 ),
@@ -192,24 +202,27 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
               decoration: BoxDecoration(
                 color: scheme.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: scheme.primary.withValues(alpha: 0.25)),
+                border:
+                    Border.all(color: scheme.primary.withValues(alpha: 0.25)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.event_available_rounded, color: scheme.primary, size: 18),
+                      Icon(Icons.event_available_rounded,
+                          color: scheme.primary, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'Slots for ${_selected!.day}/${_selected!.month}/${_selected!.year}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: scheme.onSurface,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: scheme.onSurface,
+                                  ),
                         ),
                       ),
                     ],
@@ -335,7 +348,9 @@ class _SlotChip extends StatelessWidget {
             color: bg,
             borderRadius: BorderRadius.circular(999),
             border: Border.all(
-              color: selected ? accent : scheme.outlineVariant.withValues(alpha: 0.5),
+              color: selected
+                  ? accent
+                  : scheme.outlineVariant.withValues(alpha: 0.5),
               width: 1,
             ),
           ),
@@ -347,9 +362,9 @@ class _SlotChip extends StatelessWidget {
               Text(
                 label,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w900,
-                  color: fg,
-                ),
+                      fontWeight: FontWeight.w900,
+                      color: fg,
+                    ),
               ),
             ],
           ),

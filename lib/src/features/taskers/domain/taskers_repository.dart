@@ -35,4 +35,3 @@ abstract class TaskersRepository {
     required TaskerReviewsQuery query,
   });
 }
-

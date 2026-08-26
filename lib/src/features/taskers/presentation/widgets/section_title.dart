@@ -45,10 +45,10 @@ class SectionTitle extends StatelessWidget {
                   Text(
                     subtitle!,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: scheme.onSurfaceVariant,
-                      fontWeight: FontWeight.w500,
-                      height: 1.35,
-                    ),
+                          color: scheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
+                          height: 1.35,
+                        ),
                   ),
                 ],
               ],

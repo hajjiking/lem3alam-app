@@ -1392,4 +1392,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get adminPainting => 'Peinture';
+
+  @override
+  String get adminDetailedAnalyticsUnavailable =>
+      'Les analyses détaillées apparaîtront lorsque l’API d’administration les fournira. Aucune donnée d’exemple n’est affichée.';
+
+  @override
+  String get dashboardLiveDataUnavailable =>
+      'Les données du tableau de bord ne sont pas encore disponibles via l’API. Aucune tâche ni statistique d’exemple n’est affichée.';
 }

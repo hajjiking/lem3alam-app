@@ -39,7 +39,8 @@ class BottomBookingBar extends StatelessWidget {
           decoration: BoxDecoration(
             color: scheme.surface,
             border: Border(
-              top: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.4)),
+              top: BorderSide(
+                  color: scheme.outlineVariant.withValues(alpha: 0.4)),
             ),
           ),
           child: Row(
@@ -68,10 +69,11 @@ class BottomBookingBar extends StatelessWidget {
                             phoneHint!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: scheme.onSurfaceVariant,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: scheme.onSurfaceVariant,
+                                    ),
                           ),
                       ],
                     ),
@@ -83,7 +85,8 @@ class BottomBookingBar extends StatelessWidget {
                 onPressed: callEnabled ? onCall : null,
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size(110, 56),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18)),
                 ),
                 icon: const Icon(Icons.call_outlined, size: 20),
                 label: Text(
@@ -98,12 +101,14 @@ class BottomBookingBar extends StatelessWidget {
                   onPressed: enabled ? onBookNow : null,
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
                   ),
                   icon: const Icon(Icons.calendar_month_rounded, size: 20),
                   label: Text(
                     bookLabel,
-                    style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 0.1),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w900, letterSpacing: 0.1),
                   ),
                 ),
               ),

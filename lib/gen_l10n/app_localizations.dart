@@ -2595,6 +2595,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Painting'**
   String get adminPainting;
+
+  /// No description provided for @adminDetailedAnalyticsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed analytics will appear when the admin API provides them. No sample data is displayed.'**
+  String get adminDetailedAnalyticsUnavailable;
+
+  /// No description provided for @dashboardLiveDataUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.'**
+  String get dashboardLiveDataUnavailable;
 }
 
 class _AppLocalizationsDelegate

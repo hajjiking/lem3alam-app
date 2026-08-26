@@ -53,7 +53,8 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final hasLocation = (city ?? '').trim().isNotEmpty || (country ?? '').trim().isNotEmpty;
+    final hasLocation =
+        (city ?? '').trim().isNotEmpty || (country ?? '').trim().isNotEmpty;
     final l10n = context.l10n;
 
     return Column(
@@ -91,9 +92,9 @@ class ProfileHeader extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: scheme.primary,
-                      ),
+                            fontWeight: FontWeight.w700,
+                            color: scheme.primary,
+                          ),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -102,18 +103,20 @@ class ProfileHeader extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           rating.toStringAsFixed(1),
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: scheme.onSurface,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: scheme.onSurface,
+                                  ),
                         ),
                         const SizedBox(width: 6),
                         Text(
                           '($reviewCount)',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: scheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: scheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                       ],
                     ),
@@ -133,13 +136,18 @@ class ProfileHeader extends StatelessWidget {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              [city, country].where((x) => (x ?? '').trim().isNotEmpty).join(', '),
+                              [city, country]
+                                  .where((x) => (x ?? '').trim().isNotEmpty)
+                                  .join(', '),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: scheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: scheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ),
                         ],
@@ -160,10 +168,13 @@ class ProfileHeader extends StatelessWidget {
                               '${distanceKm!.toStringAsFixed(1)} km away',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: scheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color: scheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                           ),
                         ],
@@ -183,8 +194,10 @@ class ProfileHeader extends StatelessWidget {
             if (isVerified) BadgeChip.verified(context, l10n.verifiedIdentity),
             if (isTopRated) BadgeChip.topRated(context, l10n.topRated),
             if (yearsExperience != null && yearsExperience! > 0)
-              BadgeChip.experience(context, l10n.verifiedYears(yearsExperience!)),
-            if (availableToday) BadgeChip.availableToday(context, l10n.availableTodayHint),
+              BadgeChip.experience(
+                  context, l10n.verifiedYears(yearsExperience!)),
+            if (availableToday)
+              BadgeChip.availableToday(context, l10n.availableTodayHint),
             ...customBadges,
           ],
         ),
@@ -196,8 +209,11 @@ class ProfileHeader extends StatelessWidget {
                 onPressed: onMessage,
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(56),
-                  side: BorderSide(color: scheme.outlineVariant.withValues(alpha: 0.6), width: 1.2),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                  side: BorderSide(
+                      color: scheme.outlineVariant.withValues(alpha: 0.6),
+                      width: 1.2),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18)),
                 ),
                 icon: const Icon(Icons.chat_bubble_outline_rounded, size: 20),
                 label: Text(
@@ -213,12 +229,14 @@ class ProfileHeader extends StatelessWidget {
                 onPressed: onBookNow,
                 style: FilledButton.styleFrom(
                   minimumSize: const Size.fromHeight(56),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18)),
                 ),
                 icon: const Icon(Icons.calendar_month_rounded, size: 20),
                 label: Text(
                   bookNowLabel,
-                  style: const TextStyle(fontWeight: FontWeight.w900, letterSpacing: 0.1),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, letterSpacing: 0.1),
                 ),
               ),
             ),
@@ -255,11 +273,13 @@ class _Avatar extends StatelessWidget {
         width: 110,
         height: 110,
         child: resolved == null
-            ? Icon(Icons.person_outline_rounded, size: 52, color: scheme.onSurfaceVariant)
+            ? Icon(Icons.person_outline_rounded,
+                size: 52, color: scheme.onSurfaceVariant)
             : Image.network(
                 resolved,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Icon(Icons.person_outline_rounded, size: 52, color: scheme.onSurfaceVariant),
+                errorBuilder: (_, __, ___) => Icon(Icons.person_outline_rounded,
+                    size: 52, color: scheme.onSurfaceVariant),
               ),
       ),
     );
@@ -298,7 +318,8 @@ class _Avatar extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: scheme.surface, width: 2),
               ),
-              child: const Icon(Icons.check_rounded, size: 16, color: Colors.white),
+              child: const Icon(Icons.check_rounded,
+                  size: 16, color: Colors.white),
             ),
           ),
         if (isOnline)
@@ -331,7 +352,10 @@ class _Avatar extends StatelessWidget {
     if (p.isEmpty) return null;
     if (p.startsWith('http://') || p.startsWith('https://')) return p;
     final api = Uri.parse(AppConfig.apiBaseUrl);
-    final publicBase = api.replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), '')).toString().replaceAll(RegExp(r'/$'), '');
+    final publicBase = api
+        .replace(path: api.path.replaceAll(RegExp(r'/api/v1/?$'), ''))
+        .toString()
+        .replaceAll(RegExp(r'/$'), '');
     final normalized = p.startsWith('/') ? p.substring(1) : p;
     return '$publicBase/storage/$normalized';
   }
