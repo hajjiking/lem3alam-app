@@ -19,7 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 
 The app reads the API base URL from a compile-time define:
 
-- `API_BASE_URL` (defaults to `https://lem3alam.rf.gd/api/v1/`)
+- `API_BASE_URL` (defaults to `https://lem3alam.ma/public/api/v1/`)
 
 Example (Android emulator pointing to local XAMPP/Laravel on the host machine):
 
