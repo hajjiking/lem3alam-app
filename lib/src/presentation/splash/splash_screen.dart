@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'splash_animation.dart';
@@ -143,14 +144,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         statusText: splashState.isReady
                             ? 'جاري فتح التطبيق...'
                             : 'جاري التحميل...',
-                        statusFontSize:
-                            (shortest * 0.032).clamp(12.0, 14.0),
-                        progressWidth:
-                            (size.width * 0.62).clamp(160.0, 320.0),
+                        statusFontSize: (shortest * 0.032).clamp(12.0, 14.0),
+                        progressWidth: (size.width * 0.62).clamp(160.0, 320.0),
                         progressFactor: _progressBar.value,
                         shimmerValue: _shimmerController.value,
-                        gapHeight:
-                            (shortest * 0.028).clamp(8.0, 14.0),
+                        gapHeight: (shortest * 0.028).clamp(8.0, 14.0),
                       ),
                     ),
                   ),
@@ -177,13 +175,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF1565C0)
+                    color: context.appColors.primary
                         .withValues(alpha: _animation.glowPulse.value),
                     blurRadius: 30 * _animation.backgroundGlow.value,
                     spreadRadius: 10 * _animation.backgroundGlow.value,
                   ),
                   BoxShadow(
-                    color: const Color(0xFF42A5F5)
+                    color: context.appColors.secondary
                         .withValues(alpha: _animation.glowPulse.value * 0.5),
                     blurRadius: 50 * _animation.backgroundGlow.value,
                     spreadRadius: 2,
@@ -243,9 +241,9 @@ class _WaveBody extends StatelessWidget {
     return Container(
       height: height,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF1565C0), Color(0xFF0D47A1)],
+          colors: [context.appTokens.headerStart, context.appTokens.headerEnd],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -258,12 +256,11 @@ class _WaveBody extends StatelessWidget {
             opacity: loadingOpacity,
             child: Text(
               statusText,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: statusFontSize,
-                fontFamily: 'Cairo',
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.white,
+                    fontSize: statusFontSize,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ),
           SizedBox(height: gapHeight),
@@ -353,21 +350,20 @@ class _Tagline extends StatelessWidget {
           height: 2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(1),
-            gradient: const LinearGradient(
-              colors: [Color(0x001565C0), Color(0xFF1565C0)],
+            gradient: LinearGradient(
+              colors: [Colors.transparent, context.appColors.primary],
             ),
           ),
         ),
         const SizedBox(width: 10),
         Text(
           'خدمة موثوقة، بين يديك',
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w600,
-            color: const Color(0xFF1565C0),
-            fontFamily: 'Cairo',
-            letterSpacing: 0.5,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontSize: fontSize,
+                fontWeight: FontWeight.w600,
+                color: context.appColors.primary,
+                letterSpacing: 0.5,
+              ),
         ),
         const SizedBox(width: 10),
         Container(
@@ -375,8 +371,8 @@ class _Tagline extends StatelessWidget {
           height: 2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(1),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF1565C0), Color(0x001565C0)],
+            gradient: LinearGradient(
+              colors: [context.appColors.primary, Colors.transparent],
             ),
           ),
         ),

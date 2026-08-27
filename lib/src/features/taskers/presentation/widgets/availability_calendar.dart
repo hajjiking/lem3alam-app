@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 import 'package:intl/intl.dart';
 
 class AvailabilityCalendar extends StatefulWidget {
@@ -47,19 +47,7 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
     final unavailableSet = _toDaySet(widget.unavailableDates);
 
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border:
-            Border.all(color: scheme.outlineVariant.withValues(alpha: 0.35)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
+      decoration: AppStyle.cardDecoration(context),
       padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,10 +64,9 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                 child: Text(
                   _monthTitle(),
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
               ),
               IconButton(
@@ -141,14 +128,14 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                   : highlight
                       ? scheme.primary
                       : isAvailable
-                          ? const Color(0xFF10B981).withValues(alpha: 0.12)
+                          ? context.appTokens.success.withValues(alpha: 0.12)
                           : scheme.surface;
               final fg = !enabled
                   ? scheme.onSurfaceVariant.withValues(alpha: 0.45)
                   : highlight
-                      ? Colors.white
+                      ? scheme.onPrimary
                       : isAvailable
-                          ? const Color(0xFF047857)
+                          ? context.appTokens.success
                           : scheme.onSurface;
 
               return Material(
@@ -186,7 +173,7 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                     child: Text(
                       '${d.day}',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.w800,
                             color: fg,
                           ),
                     ),
@@ -220,7 +207,7 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                           overflow: TextOverflow.ellipsis,
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w800,
                                     color: scheme.onSurface,
                                   ),
                         ),
@@ -236,21 +223,21 @@ class _AvailabilityCalendarState extends State<AvailabilityCalendar> {
                         label: widget.morningLabel,
                         selected: _selectedSlots.contains(SlotKind.morning),
                         onToggle: () => _toggle(SlotKind.morning),
-                        accent: const Color(0xFFF59E0B),
+                        accent: context.appTokens.warning,
                         icon: Icons.wb_twilight_rounded,
                       ),
                       _SlotChip(
                         label: widget.afternoonLabel,
                         selected: _selectedSlots.contains(SlotKind.afternoon),
                         onToggle: () => _toggle(SlotKind.afternoon),
-                        accent: const Color(0xFF2563EB),
+                        accent: context.appColors.primary,
                         icon: Icons.wb_sunny_rounded,
                       ),
                       _SlotChip(
                         label: widget.eveningLabel,
                         selected: _selectedSlots.contains(SlotKind.evening),
                         onToggle: () => _toggle(SlotKind.evening),
-                        accent: const Color(0xFF7C3AED),
+                        accent: context.appTokens.accentPurple,
                         icon: Icons.nightlight_round,
                       ),
                     ],
@@ -333,8 +320,8 @@ class _SlotChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final bg = selected ? accent : Colors.white;
-    final fg = selected ? Colors.white : scheme.onSurface;
+    final bg = selected ? scheme.primary : scheme.surfaceContainerLowest;
+    final fg = selected ? scheme.onPrimary : scheme.onSurface;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -349,7 +336,7 @@ class _SlotChip extends StatelessWidget {
             borderRadius: BorderRadius.circular(999),
             border: Border.all(
               color: selected
-                  ? accent
+                  ? scheme.primary
                   : scheme.outlineVariant.withValues(alpha: 0.5),
               width: 1,
             ),
@@ -362,7 +349,7 @@ class _SlotChip extends StatelessWidget {
               Text(
                 label,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w800,
                       color: fg,
                     ),
               ),

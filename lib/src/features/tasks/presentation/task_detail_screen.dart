@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'task_style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
@@ -83,7 +84,10 @@ class TaskDetailScreen extends ConsumerWidget {
                           type: MaterialType.transparency,
                           child: Text(
                             task.title,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(fontWeight: FontWeight.w800),
                           ),
                         ),
                       ),
@@ -95,46 +99,58 @@ class TaskDetailScreen extends ConsumerWidget {
                           AppPill(
                             icon: Icons.place_outlined,
                             label: task.city,
-                            background: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                            background: colorScheme.surfaceContainerHighest
+                                .withValues(alpha: 0.6),
                             foreground: colorScheme.onSurfaceVariant,
                           ),
                           AppPill(
                             icon: Icons.payments_outlined,
-                            label: '${task.budgetMin.toStringAsFixed(0)} - ${task.budgetMax.toStringAsFixed(0)}',
-                            background: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                            label:
+                                '${task.budgetMin.toStringAsFixed(0)} - ${task.budgetMax.toStringAsFixed(0)}',
+                            background: colorScheme.surfaceContainerHighest
+                                .withValues(alpha: 0.6),
                             foreground: colorScheme.onSurfaceVariant,
                           ),
                           AppPill(
                             icon: Icons.flag_outlined,
                             label: _urgencyLabel(l10n, task.urgency),
-                            background: _urgencyColor(colorScheme, task.urgency).withValues(alpha: 0.12),
-                            foreground: _urgencyColor(colorScheme, task.urgency),
+                            background: taskUrgencyColor(context, task.urgency)
+                                .withValues(alpha: 0.12),
+                            foreground: taskUrgencyColor(context, task.urgency),
                           ),
                           AppPill(
                             icon: Icons.info_outline,
                             label: _statusLabel(l10n, task.status),
-                            background: _statusColor(colorScheme, task.status).withValues(alpha: 0.12),
-                            foreground: _statusColor(colorScheme, task.status),
+                            background: taskStatusColor(context, task.status)
+                                .withValues(alpha: 0.12),
+                            foreground: taskStatusColor(context, task.status),
                           ),
-                          if ((task.localizedCategoryName(languageCode) ?? '').isNotEmpty)
+                          if ((task.localizedCategoryName(languageCode) ?? '')
+                              .isNotEmpty)
                             AppPill(
                               icon: Icons.category_outlined,
                               label: task.localizedCategoryName(languageCode)!,
-                              background: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                              background: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.6),
                               foreground: colorScheme.onSurfaceVariant,
                             ),
                           if ((task.clientName ?? '').isNotEmpty)
                             AppPill(
                               icon: Icons.person_outline,
                               label: task.clientName!,
-                              background: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                              background: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.6),
                               foreground: colorScheme.onSurfaceVariant,
                             ),
                           if (task.deadline != null)
                             AppPill(
                               icon: Icons.event_outlined,
-                              label: task.deadline!.toIso8601String().split('T').first,
-                              background: colorScheme.surfaceContainerHighest.withValues(alpha: 0.6),
+                              label: task.deadline!
+                                  .toIso8601String()
+                                  .split('T')
+                                  .first,
+                              background: colorScheme.surfaceContainerHighest
+                                  .withValues(alpha: 0.6),
                               foreground: colorScheme.onSurfaceVariant,
                             ),
                         ],
@@ -142,7 +158,8 @@ class TaskDetailScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                if (task.latitude != null && task.longitude != null) const SizedBox(height: 12),
+                if (task.latitude != null && task.longitude != null)
+                  const SizedBox(height: 12),
                 if (task.latitude != null && task.longitude != null)
                   AppSectionCard(
                     title: l10n.location,
@@ -152,25 +169,30 @@ class TaskDetailScreen extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(18),
                         child: FlutterMap(
                           options: MapOptions(
-                            initialCenter: LatLng(task.latitude!, task.longitude!),
+                            initialCenter:
+                                LatLng(task.latitude!, task.longitude!),
                             initialZoom: 15,
-                            interactionOptions: const InteractionOptions(flags: InteractiveFlag.all),
+                            interactionOptions: const InteractionOptions(
+                                flags: InteractiveFlag.all),
                           ),
                           children: [
                             TileLayer(
-                              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                              urlTemplate:
+                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                               userAgentPackageName: 'lem3alam_mobile',
                             ),
                             MarkerLayer(
                               markers: [
                                 Marker(
-                                  point: LatLng(task.latitude!, task.longitude!),
+                                  point:
+                                      LatLng(task.latitude!, task.longitude!),
                                   width: 46,
                                   height: 46,
                                   child: Icon(
                                     Icons.location_on,
                                     size: 46,
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ],
@@ -239,7 +261,9 @@ class TaskDetailScreen extends ConsumerWidget {
                     trailing: TextButton(
                       onPressed: () => context.goNamed(
                         AppRouteNames.taskerProfile,
-                        pathParameters: {'id': task.assignedTaskerId.toString()},
+                        pathParameters: {
+                          'id': task.assignedTaskerId.toString()
+                        },
                       ),
                       child: Text(l10n.viewProfile),
                     ),
@@ -249,10 +273,15 @@ class TaskDetailScreen extends ConsumerWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            (task.assignedTaskerName ?? '').trim().isEmpty ? '—' : task.assignedTaskerName!,
+                            (task.assignedTaskerName ?? '').trim().isEmpty
+                                ? '—'
+                                : task.assignedTaskerName!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w800),
                           ),
                         ),
                       ],
@@ -261,11 +290,13 @@ class TaskDetailScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 if (isTasker && task.status == 'open')
                   FilledButton.icon(
-                    onPressed: () => _showApplySheet(context, ref, taskId: task.id),
+                    onPressed: () =>
+                        _showApplySheet(context, ref, taskId: task.id),
                     icon: const Icon(Icons.send_outlined),
                     label: Text(l10n.apply),
                   ),
-                if (isTasker && task.status == 'open') const SizedBox(height: 12),
+                if (isTasker && task.status == 'open')
+                  const SizedBox(height: 12),
                 if (isClient && task.clientId == user?.id)
                   FilledButton.tonalIcon(
                     onPressed: () async {
@@ -275,13 +306,19 @@ class TaskDetailScreen extends ConsumerWidget {
                           title: Text(l10n.deleteTask),
                           content: Text(l10n.confirmDeleteTask),
                           actions: [
-                            TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancel)),
-                            FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.delete)),
+                            TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: Text(l10n.cancel)),
+                            FilledButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: Text(l10n.delete)),
                           ],
                         ),
                       );
                       if (ok != true) return;
-                      await ref.read(taskMutationControllerProvider).delete(task.id);
+                      await ref
+                          .read(taskMutationControllerProvider)
+                          .delete(task.id);
                       ref.invalidate(tasksListControllerProvider);
                       if (context.mounted) context.goNamed(AppRouteNames.tasks);
                     },
@@ -330,7 +367,10 @@ Future<void> _showApplySheet(
               children: [
                 Text(
                   l10n.applyToTask,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
@@ -340,18 +380,23 @@ Future<void> _showApplySheet(
                     labelText: l10n.proposal,
                     prefixIcon: const Icon(Icons.notes_outlined),
                   ),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? l10n.requiredField
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: budgetController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   decoration: InputDecoration(
                     labelText: l10n.proposedBudget,
                     prefixIcon: const Icon(Icons.payments_outlined),
                   ),
                   validator: (v) {
-                    if (v == null || v.trim().isEmpty) return l10n.requiredField;
+                    if (v == null || v.trim().isEmpty) {
+                      return l10n.requiredField;
+                    }
                     final parsed = double.tryParse(v.replaceAll(',', '.'));
                     if (parsed == null || parsed < 0) return l10n.requiredField;
                     return null;
@@ -364,7 +409,9 @@ Future<void> _showApplySheet(
                     labelText: l10n.estimatedDuration,
                     prefixIcon: const Icon(Icons.schedule_outlined),
                   ),
-                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
+                  validator: (v) => (v == null || v.trim().isEmpty)
+                      ? l10n.requiredField
+                      : null,
                 ),
                 const SizedBox(height: 16),
                 FilledButton(
@@ -373,7 +420,9 @@ Future<void> _showApplySheet(
                       : () async {
                           if (!formKey.currentState!.validate()) return;
 
-                          final budget = double.parse(budgetController.text.trim().replaceAll(',', '.'));
+                          final budget = double.parse(budgetController.text
+                              .trim()
+                              .replaceAll(',', '.'));
                           final payload = TaskApplicationPayload(
                             proposal: proposalController.text.trim(),
                             proposedBudget: budget,
@@ -382,23 +431,30 @@ Future<void> _showApplySheet(
 
                           setState(() => submitting = true);
                           try {
-                            await ref.read(taskMutationControllerProvider).apply(taskId: taskId, payload: payload);
+                            await ref
+                                .read(taskMutationControllerProvider)
+                                .apply(taskId: taskId, payload: payload);
                             ref.invalidate(taskDetailProvider(taskId));
                             ref.invalidate(tasksListControllerProvider);
                             if (context.mounted) {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(l10n.applicationSubmitted)),
+                                SnackBar(
+                                    content: Text(l10n.applicationSubmitted)),
                               );
                             }
                           } on ApiException catch (e) {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(localizeApiException(context, e))),
+                                SnackBar(
+                                    content:
+                                        Text(localizeApiException(context, e))),
                               );
                             }
                           } finally {
-                            if (context.mounted) setState(() => submitting = false);
+                            if (context.mounted) {
+                              setState(() => submitting = false);
+                            }
                           }
                         },
                   child: submitting
@@ -525,22 +581,6 @@ class _TaskDetailSkeleton extends StatelessWidget {
   }
 }
 
-Color _statusColor(ColorScheme colorScheme, String status) {
-  switch (status) {
-    case 'open':
-      return colorScheme.primary;
-    case 'assigned':
-    case 'in_progress':
-      return Colors.orange;
-    case 'completed':
-      return Colors.green;
-    case 'cancelled':
-      return colorScheme.error;
-    default:
-      return colorScheme.onSurfaceVariant;
-  }
-}
-
 String _statusLabel(AppLocalizations l10n, String status) {
   switch (status) {
     case 'open':
@@ -555,21 +595,6 @@ String _statusLabel(AppLocalizations l10n, String status) {
       return l10n.statusCancelled;
     default:
       return status;
-  }
-}
-
-Color _urgencyColor(ColorScheme colorScheme, String urgency) {
-  switch (urgency) {
-    case 'urgent':
-      return colorScheme.error;
-    case 'high':
-      return Colors.deepOrange;
-    case 'medium':
-      return Colors.orange;
-    case 'low':
-      return Colors.green;
-    default:
-      return colorScheme.onSurfaceVariant;
   }
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
@@ -33,12 +32,11 @@ class SectionTitle extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.inter(
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                    fontWeight: FontWeight.w800,
-                    color: scheme.onSurface,
-                    height: 1.15,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: scheme.onSurface,
+                        height: 1.15,
+                      ),
                 ),
                 if (subtitle != null && subtitle!.trim().isNotEmpty) ...[
                   const SizedBox(height: 4),

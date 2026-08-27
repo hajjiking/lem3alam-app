@@ -26,14 +26,16 @@ void main() {
   test('resolves raw storage paths against public base url', () {
     expect(
       resolveTaskImageUrl('task_images/example.jpg'),
-      'https://lem3alam.ma/storage/task_images/example.jpg',
+      'https://lem3alam.ma/public/storage/task_images/example.jpg',
     );
   });
 
-  test('preserves storage-prefixed relative paths without duplicating storage segment', () {
+  test(
+      'preserves storage-prefixed relative paths without duplicating storage segment',
+      () {
     expect(
       resolveTaskImageUrl('/storage/task_images/example.jpg'),
-      'https://lem3alam.ma/storage/task_images/example.jpg',
+      'https://lem3alam.ma/public/storage/task_images/example.jpg',
     );
   });
 

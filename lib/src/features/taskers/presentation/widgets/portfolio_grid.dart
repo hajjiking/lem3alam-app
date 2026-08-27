@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 import '../../../../core/config/app_config.dart';
 
@@ -141,11 +141,11 @@ class _Tile extends StatelessWidget {
                   (item.category ?? item.tags.firstOrNull) ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 11,
+                      ),
                 ),
               ),
             ),
@@ -156,7 +156,7 @@ class _Tile extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF59E0B),
+                  color: context.appTokens.warning,
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: const Icon(Icons.star_rounded,
@@ -186,10 +186,10 @@ class _Tile extends StatelessWidget {
                     item.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.inter(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
                   ),
                   if ((item.description ?? '').trim().isNotEmpty)
                     Text(
@@ -367,11 +367,12 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                                   item.title,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.inter(
-                                    textStyle:
-                                        Theme.of(context).textTheme.titleMedium,
-                                    fontWeight: FontWeight.w900,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                      ),
                                 ),
                                 if ((item.description ?? '')
                                     .trim()
@@ -445,7 +446,7 @@ class _GalleryPreviewState extends State<_GalleryPreview> {
                         height: 6,
                         decoration: BoxDecoration(
                           color: i == _current
-                              ? const Color(0xFF2563EB)
+                              ? context.appColors.primary
                               : Colors.white.withValues(alpha: 0.4),
                           borderRadius: BorderRadius.circular(999),
                         ),

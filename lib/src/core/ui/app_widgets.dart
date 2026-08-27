@@ -14,7 +14,7 @@ class AppResponsiveCenter extends StatelessWidget {
     super.key,
     required this.child,
     this.maxWidth = 720,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.padding = const EdgeInsets.symmetric(horizontal: AppStyle.pagePadding),
   });
 
   final Widget child;
@@ -43,7 +43,7 @@ class AppSectionCard extends StatelessWidget {
     this.title,
     this.subtitle,
     this.trailing,
-    this.padding = const EdgeInsets.all(18),
+    this.padding = const EdgeInsets.all(AppStyle.cardPadding),
     this.backgroundColor,
     this.shadow = true,
     this.elevation,
@@ -73,16 +73,7 @@ class AppSectionCard extends StatelessWidget {
       elevation: elevation ?? (shadow ? null : 0),
       surfaceTintColor: surfaceTintColor,
       shadowColor: shadow ? null : Colors.transparent,
-      shape: shape ??
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(22),
-            side: BorderSide(
-              color: backgroundColor == Colors.transparent && !shadow
-                  ? colorScheme.outlineVariant.withValues(alpha: 0.4)
-                  : Colors.transparent,
-              width: 1,
-            ),
-          ),
+      shape: shape,
       child: Padding(
         padding: padding,
         child: Column(
@@ -98,13 +89,19 @@ class AppSectionCard extends StatelessWidget {
                       children: [
                         Text(
                           title!,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w800),
                         ),
                         if (subtitle != null) ...[
                           const SizedBox(height: 4),
                           Text(
                             subtitle!,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: colorScheme.onSurfaceVariant),
                           ),
                         ],
                       ],
@@ -154,7 +151,7 @@ class AppSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final borderRadius = BorderRadius.circular(18);
+    final borderRadius = BorderRadius.circular(AppStyle.controlRadius);
     final effectiveBorder = border ??
         OutlineInputBorder(
           borderRadius: borderRadius,
@@ -183,23 +180,32 @@ class AppSearchBar extends StatelessWidget {
           onChanged: onChanged,
           onSubmitted: onSubmitted,
           textInputAction: TextInputAction.search,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge
+              ?.copyWith(fontWeight: FontWeight.w600),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             hintText: hintText,
-            hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(color: colorScheme.onSurfaceVariant, fontWeight: FontWeight.w500),
+            hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500),
             prefixIcon: Padding(
               padding: const EdgeInsetsDirectional.only(start: 14, end: 10),
-              child: Icon(Icons.search_rounded, color: colorScheme.onSurfaceVariant, size: 22),
+              child: Icon(Icons.search_rounded,
+                  color: colorScheme.onSurfaceVariant, size: 22),
             ),
-            prefixIconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+            prefixIconConstraints:
+                const BoxConstraints(minWidth: 40, minHeight: 40),
             suffixIcon: suffixIcon,
             filled: false,
             border: effectiveBorder,
             enabledBorder: effectiveBorder,
             focusedBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(color: Lem3alamColors.primaryBlue, width: 1.8),
+              borderSide:
+                  BorderSide(color: context.appColors.primary, width: 1.8),
             ),
           ),
         ),
@@ -235,10 +241,11 @@ class AppLocationChip extends StatelessWidget {
               height: 34,
               width: 34,
               decoration: BoxDecoration(
-                color: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
+                color: context.appColors.primary.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(999),
               ),
-              child: Icon(Icons.location_on_rounded, color: Lem3alamColors.primaryBlue, size: 18),
+              child: Icon(Icons.location_on_rounded,
+                  color: context.appColors.primary, size: 18),
             ),
             const SizedBox(width: 10),
             Flexible(
@@ -251,19 +258,25 @@ class AppLocationChip extends StatelessWidget {
                       subtitle!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w600),
                     ),
                   Text(
                     location,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontWeight: FontWeight.w800),
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
-            Icon(Icons.keyboard_arrow_down_rounded, color: colorScheme.onSurfaceVariant, size: 22),
+            Icon(Icons.keyboard_arrow_down_rounded,
+                color: colorScheme.onSurfaceVariant, size: 22),
           ],
         ),
       ),
@@ -299,9 +312,10 @@ class AppHeroPromoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final bg = backgroundColor ?? Lem3alamColors.primaryBlue;
-    final onBg = bg.computeLuminance() > 0.55 ? colorScheme.onSurface : Colors.white;
+    final bg = backgroundColor ?? context.appTokens.headerStart;
+    final onBg = ThemeData.estimateBrightnessForColor(bg) == Brightness.dark
+        ? Colors.white
+        : Colors.black87;
     final resolvedAsset = heroCutoutAssetPath ?? kDefaultArtisanCutoutAsset;
     final useCutout = heroCutoutImageUrl != null || resolvedAsset.isNotEmpty;
     final compact = MediaQuery.sizeOf(context).width < 380;
@@ -310,7 +324,10 @@ class AppHeroPromoCard extends StatelessWidget {
       builder: (context, constraints) {
         final maxVisual = compact ? 190.0 : 230.0;
         final minVisual = compact ? 168.0 : 190.0;
-        final visualHeight = (maxVisual * (constraints.maxWidth.clamp(280, 1080) / 1080) + maxVisual * 0.78).clamp(minVisual, maxVisual + 14);
+        final visualHeight =
+            (maxVisual * (constraints.maxWidth.clamp(280, 1080) / 1080) +
+                    maxVisual * 0.78)
+                .clamp(minVisual, maxVisual + 14);
         return Container(
           constraints: BoxConstraints(minHeight: visualHeight + 36),
           decoration: BoxDecoration(
@@ -371,7 +388,8 @@ class AppHeroPromoCard extends StatelessWidget {
                   ),
                 ),
               Padding(
-                padding: EdgeInsets.fromLTRB(20, 22, useCutout ? (compact ? 124 : 172) : 14, 22),
+                padding: EdgeInsets.fromLTRB(
+                    20, 22, useCutout ? (compact ? 124 : 172) : 14, 22),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -381,7 +399,10 @@ class AppHeroPromoCard extends StatelessWidget {
                         children: [
                           Text(
                             title,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
                                   color: onBg,
                                   fontWeight: FontWeight.w900,
                                   height: 1.22,
@@ -392,18 +413,24 @@ class AppHeroPromoCard extends StatelessWidget {
                             subtitle,
                             maxLines: useCutout ? 3 : 2,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: onBg.withValues(alpha: 0.88)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: onBg.withValues(alpha: 0.88)),
                           ),
                           const SizedBox(height: 14),
                           FilledButton.tonalIcon(
                             onPressed: onCtaTap,
                             style: FilledButton.styleFrom(
                               backgroundColor: Colors.white,
-                              foregroundColor: Lem3alamColors.primaryBlue,
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              foregroundColor: context.appTokens.headerStart,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
                               minimumSize: const Size(0, 44),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                              textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(fontWeight: FontWeight.w800),
                             ),
                             icon: const Icon(Icons.arrow_forward_rounded),
                             label: Text(ctaLabel),
@@ -424,7 +451,8 @@ class AppHeroPromoCard extends StatelessWidget {
                         alignment: Alignment.center,
                         child: iconAsset != null
                             ? Image.asset(iconAsset!, fit: BoxFit.cover)
-                            : Icon(icon ?? Icons.handyman_rounded, color: onBg, size: 62),
+                            : Icon(icon ?? Icons.handyman_rounded,
+                                color: onBg, size: 62),
                       ),
                     ],
                   ],
@@ -482,7 +510,8 @@ class _HeroArtisanCutout extends StatelessWidget {
                     imageUrl!,
                     fit: BoxFit.contain,
                     alignment: Alignment.bottomCenter,
-                    frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                    frameBuilder:
+                        (context, child, frame, wasSynchronouslyLoaded) {
                       if (wasSynchronouslyLoaded) return child;
                       return AnimatedOpacity(
                         opacity: frame == null ? 0 : 1,
@@ -498,7 +527,8 @@ class _HeroArtisanCutout extends StatelessWidget {
                           dimension: 26,
                           child: CircularProgressIndicator(
                             value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
                                 : null,
                             color: Colors.white,
                             strokeWidth: 3,
@@ -533,7 +563,7 @@ class _HeroArtisanCutout extends StatelessWidget {
         width: 90,
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.14),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(AppStyle.cardRadius),
         ),
         padding: const EdgeInsets.all(8),
         child: Icon(fallbackIcon, color: fallbackColor, size: 54),
@@ -541,7 +571,6 @@ class _HeroArtisanCutout extends StatelessWidget {
     );
   }
 }
-
 
 class AppCategoryTile extends StatelessWidget {
   const AppCategoryTile({
@@ -563,16 +592,17 @@ class AppCategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final bg = iconBackgroundColor ?? colorScheme.surfaceContainerLow;
-    final fg = iconColor ?? Lem3alamColors.primaryBlue;
+    final fg = iconColor ?? context.appColors.primary;
 
     return InkWell(
-      borderRadius: BorderRadius.circular(22),
+      borderRadius: BorderRadius.circular(AppStyle.cardRadius),
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerLowest,
-          borderRadius: BorderRadius.circular(22),
-          border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
+          borderRadius: BorderRadius.circular(AppStyle.cardRadius),
+          border: Border.all(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.55)),
         ),
         padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
         child: Column(
@@ -597,7 +627,10 @@ class AppCategoryTile extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w800, height: 1.2),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(fontWeight: FontWeight.w800, height: 1.2),
               ),
             ),
           ],
@@ -633,13 +666,19 @@ class AppSectionHeader extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w800),
               ),
               if (subtitle != null) ...[
                 const SizedBox(height: 2),
                 Text(
                   subtitle!,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: colorScheme.onSurfaceVariant),
                 ),
               ],
             ],
@@ -652,7 +691,10 @@ class AppSectionHeader extends StatelessWidget {
             style: TextButton.styleFrom(
               minimumSize: Size.zero,
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w800),
+              textStyle: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(fontWeight: FontWeight.w800),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -690,7 +732,8 @@ class AppRoleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final accent = accentColor ?? (selected ? Lem3alamColors.primaryBlue : colorScheme.primary);
+    final accent = accentColor ??
+        (selected ? context.appColors.primary : colorScheme.primary);
     final bg = selected
         ? accent.withValues(alpha: 0.08)
         : colorScheme.surfaceContainerLowest;
@@ -718,7 +761,7 @@ class AppRoleCard extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: accent.withValues(alpha: 0.14),
-                borderRadius: BorderRadius.circular(22),
+                borderRadius: BorderRadius.circular(AppStyle.cardRadius),
               ),
               alignment: Alignment.bottomRight,
               padding: const EdgeInsets.fromLTRB(12, 8, 10, 10),
@@ -727,14 +770,20 @@ class AppRoleCard extends StatelessWidget {
             const SizedBox(height: 14),
             Text(
               title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 4),
             Text(
               subtitle,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: colorScheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -787,7 +836,8 @@ class AppSegmentedTabBar<T> extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
           fontWeight: FontWeight.w800,
-          color: selected ? Colors.white : colorScheme.onSurfaceVariant,
+          color:
+              selected ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
         );
 
     return Padding(
@@ -800,12 +850,12 @@ class AppSegmentedTabBar<T> extends StatelessWidget {
           curve: Curves.easeOutCubic,
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: selected ? Lem3alamColors.primaryBlue : Colors.transparent,
+            color: selected ? context.appColors.primary : Colors.transparent,
             borderRadius: BorderRadius.circular(14),
             boxShadow: selected
                 ? [
                     BoxShadow(
-                      color: Lem3alamColors.primaryBlue.withValues(alpha: 0.28),
+                      color: context.appColors.primary.withValues(alpha: 0.28),
                       blurRadius: 14,
                       offset: const Offset(0, 4),
                     ),
@@ -843,11 +893,26 @@ class AppInlineBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final (bg, fg) = switch (tone) {
-      AppBannerTone.error => (colorScheme.errorContainer, colorScheme.onErrorContainer),
-      AppBannerTone.warning => (colorScheme.tertiaryContainer, colorScheme.onTertiaryContainer),
-      AppBannerTone.info => (colorScheme.secondaryContainer, colorScheme.onSecondaryContainer),
-      AppBannerTone.success => (colorScheme.primaryContainer, colorScheme.onPrimaryContainer),
-      AppBannerTone.neutral => (colorScheme.surfaceContainerHigh, colorScheme.onSurfaceVariant),
+      AppBannerTone.error => (
+          colorScheme.errorContainer,
+          colorScheme.onErrorContainer
+        ),
+      AppBannerTone.warning => (
+          colorScheme.tertiaryContainer,
+          colorScheme.onTertiaryContainer
+        ),
+      AppBannerTone.info => (
+          colorScheme.secondaryContainer,
+          colorScheme.onSecondaryContainer
+        ),
+      AppBannerTone.success => (
+          colorScheme.primaryContainer,
+          colorScheme.onPrimaryContainer
+        ),
+      AppBannerTone.neutral => (
+          colorScheme.surfaceContainerHigh,
+          colorScheme.onSurfaceVariant
+        ),
     };
 
     return Container(
@@ -864,7 +929,8 @@ class AppInlineBanner extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: fg),
+              style:
+                  Theme.of(context).textTheme.bodyMedium?.copyWith(color: fg),
             ),
           ),
         ],
@@ -891,12 +957,21 @@ class AppStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final (bg, fg) = switch (tone) {
-      AppBannerTone.error => (colorScheme.errorContainer, colorScheme.onErrorContainer),
-      AppBannerTone.warning => (colorScheme.tertiaryContainer, colorScheme.onTertiaryContainer),
-      AppBannerTone.info => (colorScheme.secondaryContainer, colorScheme.onSecondaryContainer),
+      AppBannerTone.error => (
+          colorScheme.errorContainer,
+          colorScheme.onErrorContainer
+        ),
+      AppBannerTone.warning => (
+          colorScheme.tertiaryContainer,
+          colorScheme.onTertiaryContainer
+        ),
+      AppBannerTone.info => (
+          colorScheme.secondaryContainer,
+          colorScheme.onSecondaryContainer
+        ),
       AppBannerTone.success => (
-          Lem3alamColors.accentGreen.withValues(alpha: 0.14),
-          Lem3alamColors.accentGreen,
+          context.appTokens.success.withValues(alpha: 0.14),
+          context.appTokens.success,
         ),
       AppBannerTone.neutral => (
           colorScheme.surfaceContainerHigh,
@@ -976,21 +1051,28 @@ class AppEmptyState extends StatelessWidget {
                     width: 72,
                     decoration: BoxDecoration(
                       color: colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(22),
+                      borderRadius: BorderRadius.circular(AppStyle.cardRadius),
                     ),
-                    child: Icon(icon, color: colorScheme.onSecondaryContainer, size: 34),
+                    child: Icon(icon,
+                        color: colorScheme.onSecondaryContainer, size: 34),
                   ),
                   const SizedBox(height: 14),
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     subtitle,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                   if (actionLabel != null && onAction != null) ...[
                     const SizedBox(height: 16),
@@ -1045,30 +1127,42 @@ class AppErrorState extends StatelessWidget {
                     width: 72,
                     decoration: BoxDecoration(
                       color: colorScheme.errorContainer,
-                      borderRadius: BorderRadius.circular(22),
+                      borderRadius: BorderRadius.circular(AppStyle.cardRadius),
                     ),
-                    child: Icon(Icons.cloud_off_outlined, color: colorScheme.onErrorContainer, size: 34),
+                    child: Icon(Icons.cloud_off_outlined,
+                        color: colorScheme.onErrorContainer, size: 34),
                   ),
                   const SizedBox(height: 14),
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     subtitle,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
-                  if (kDebugMode && debugDetails != null && debugDetails!.isNotEmpty) ...[
+                  if (kDebugMode &&
+                      debugDetails != null &&
+                      debugDetails!.isNotEmpty) ...[
                     const SizedBox(height: 10),
                     Text(
                       debugDetails!,
                       textAlign: TextAlign.center,
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: colorScheme.onSurfaceVariant),
                     ),
                   ],
                   const SizedBox(height: 16),
@@ -1122,7 +1216,10 @@ class AppPill extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               softWrap: false,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(color: foreground, fontWeight: FontWeight.w700),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(color: foreground, fontWeight: FontWeight.w700),
             ),
           ),
         ],
@@ -1147,7 +1244,7 @@ class AppStarRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accent = color ?? const Color(0xFFF59E0B);
+    final accent = color ?? context.appTokens.warning;
     final dim = Theme.of(context).colorScheme.surfaceContainerHighest;
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -1201,7 +1298,8 @@ class AppProfileBadgePill extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: scheme.primary.withValues(alpha: 0.08), width: 1),
+        border:
+            Border.all(color: scheme.primary.withValues(alpha: 0.08), width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12, 9, 14, 9),
@@ -1215,7 +1313,10 @@ class AppProfileBadgePill extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(color: fg, fontWeight: FontWeight.w800),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge
+                    ?.copyWith(color: fg, fontWeight: FontWeight.w800),
               ),
             ),
           ],
@@ -1255,7 +1356,8 @@ class AppServicePriceRow extends StatelessWidget {
               service,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: scheme.onSurface),
+              style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600, color: scheme.onSurface),
             ),
           ),
           if (showPrice) ...[
@@ -1263,7 +1365,8 @@ class AppServicePriceRow extends StatelessWidget {
             Flexible(
               fit: FlexFit.loose,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: scheme.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(14),
@@ -1303,7 +1406,7 @@ class AppReviewSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final star = starColor ?? const Color(0xFFF59E0B);
+    final star = starColor ?? context.appTokens.warning;
     final scheme = Theme.of(context).colorScheme;
     final total = distribution.values.fold<int>(0, (a, b) => a + b);
     final safeTotal = total == 0 ? 1 : total;
@@ -1314,7 +1417,9 @@ class AppReviewSummaryCard extends StatelessWidget {
           SizedBox(
             width: stacked ? double.infinity : 180,
             child: Column(
-              crossAxisAlignment: stacked ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+              crossAxisAlignment: stacked
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
               children: [
                 Text(
                   averageRating.toStringAsFixed(1),
@@ -1325,7 +1430,11 @@ class AppReviewSummaryCard extends StatelessWidget {
                       ),
                 ),
                 const SizedBox(height: 10),
-                AppStarRating(rating: averageRating, size: 22, color: star, showHalf: true),
+                AppStarRating(
+                    rating: averageRating,
+                    size: 22,
+                    color: star,
+                    showHalf: true),
                 const SizedBox(height: 8),
                 Text(
                   totalReviews <= 0
@@ -1334,13 +1443,19 @@ class AppReviewSummaryCard extends StatelessWidget {
                           averageRating.toStringAsFixed(1),
                           totalReviews,
                         ),
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: scheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600),
                 ),
               ],
             ),
           ),
-          if (stacked) const SizedBox(height: 14) else const SizedBox(width: 20),
-          Expanded(
+          if (stacked)
+            const SizedBox(height: 14)
+          else
+            const SizedBox(width: 20),
+          Flexible(
+            fit: FlexFit.loose,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(5, (i) {
@@ -1358,7 +1473,10 @@ class AppReviewSummaryCard extends StatelessWidget {
                           children: [
                             Text(
                               starCount.toString(),
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
                                     color: scheme.onSurface,
                                     fontWeight: FontWeight.w800,
                                   ),
@@ -1385,10 +1503,11 @@ class AppReviewSummaryCard extends StatelessWidget {
                         child: Text(
                           count.toString(),
                           textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w900,
-                                color: scheme.onSurface,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: scheme.onSurface,
+                                  ),
                         ),
                       ),
                     ],
@@ -1400,7 +1519,12 @@ class AppReviewSummaryCard extends StatelessWidget {
         ];
         return AppSectionCard(
           padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
-          child: stacked ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: children) : Row(children: children),
+          child: stacked
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: children)
+              : Row(children: children),
         );
       },
     );
@@ -1442,13 +1566,16 @@ class AppReviewTile extends StatelessWidget {
               color: scheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(23),
             ),
-            child: reviewerAvatarUrl == null || reviewerAvatarUrl!.trim().isEmpty
-                ? Icon(Icons.person_outline, color: scheme.onSurfaceVariant, size: 26)
-                : Image.network(
-                    reviewerAvatarUrl!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Icon(Icons.person_outline, color: scheme.onSurfaceVariant, size: 26),
-                  ),
+            child:
+                reviewerAvatarUrl == null || reviewerAvatarUrl!.trim().isEmpty
+                    ? Icon(Icons.person_outline,
+                        color: scheme.onSurfaceVariant, size: 26)
+                    : Image.network(
+                        reviewerAvatarUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Icon(Icons.person_outline,
+                            color: scheme.onSurfaceVariant, size: 26),
+                      ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -1464,7 +1591,9 @@ class AppReviewTile extends StatelessWidget {
                         reviewerName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800, color: scheme.onSurface),
+                        style: textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: scheme.onSurface),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -1474,7 +1603,9 @@ class AppReviewTile extends StatelessWidget {
                         relativeDate,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                        style: textTheme.bodySmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ],
@@ -1482,18 +1613,25 @@ class AppReviewTile extends StatelessWidget {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    AppStarRating(rating: rating, size: 17, color: starColor, showHalf: true),
+                    AppStarRating(
+                        rating: rating,
+                        size: 17,
+                        color: starColor,
+                        showHalf: true),
                     const SizedBox(width: 8),
                     Text(
                       rating.toStringAsFixed(1),
-                      style: textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w900, color: const Color(0xFFF59E0B)),
+                      style: textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w900,
+                          color: context.appTokens.warning),
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Text(
                   text,
-                  style: textTheme.bodyMedium?.copyWith(color: scheme.onSurface, height: 1.45),
+                  style: textTheme.bodyMedium
+                      ?.copyWith(color: scheme.onSurface, height: 1.45),
                 ),
               ],
             ),
@@ -1536,7 +1674,7 @@ class AppProfileBackFavShareBar extends StatelessWidget {
             icon: isFavorite ? Icons.favorite : Icons.favorite_border_rounded,
             onTap: onFavorite,
             semantics: context.l10n.save,
-            color: isFavorite ? const Color(0xFFEF4444) : null,
+            color: isFavorite ? context.appColors.error : null,
           ),
           const SizedBox(width: 10),
           _profileActionButton(
@@ -1611,7 +1749,10 @@ class AppProfileActionBar extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.96),
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.45),
+            color: Theme.of(context)
+                .colorScheme
+                .outlineVariant
+                .withValues(alpha: 0.45),
             width: 1,
           ),
         ),
@@ -1624,7 +1765,6 @@ class AppProfileActionBar extends StatelessWidget {
               onPressed: chatEnabled ? onChat : null,
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size.fromHeight(56),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
               ),
               icon: const Icon(Icons.chat_bubble_outline_rounded),
               label: Text(chatLabel ?? l10n.chat),
@@ -1637,7 +1777,6 @@ class AppProfileActionBar extends StatelessWidget {
               onPressed: bookEnabled ? onBook : null,
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(56),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
               ),
               icon: const Icon(Icons.event_available_rounded),
               label: Text(bookLabel ?? l10n.bookService),
@@ -1711,13 +1850,16 @@ class _Shimmer extends StatefulWidget {
   State<_Shimmer> createState() => _ShimmerState();
 }
 
-class _ShimmerState extends State<_Shimmer> with SingleTickerProviderStateMixin {
+class _ShimmerState extends State<_Shimmer>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200))..repeat();
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1200))
+      ..repeat();
   }
 
   @override
@@ -1806,7 +1948,8 @@ class AppThemeModeButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(themeModeControllerProvider);
-    final effective = ref.read(themeModeControllerProvider.notifier).effectiveBrightness;
+    final effective =
+        ref.read(themeModeControllerProvider.notifier).effectiveBrightness;
     final isDark = effective == Brightness.dark;
 
     return IconButton(
@@ -1851,7 +1994,10 @@ final cityOptionsProvider = FutureProvider<List<CityOption>>((ref) async {
   final json = await client.getJson<Map<String, dynamic>>('cities/all');
   final data = json['data'];
   if (data is List) {
-    return data.whereType<Map>().map((e) => CityOption.fromJson(e.cast<String, dynamic>())).toList();
+    return data
+        .whereType<Map>()
+        .map((e) => CityOption.fromJson(e.cast<String, dynamic>()))
+        .toList();
   }
   return const [];
 });
@@ -1908,13 +2054,12 @@ class AppCityPickerField extends ConsumerWidget {
             final q = query.trim().toLowerCase();
             final filtered = q.isEmpty
                 ? cities
-                : cities
-                    .where((c) {
-                      final name = (isArabic ? c.nameAr : c.name).toLowerCase();
-                      final region = (isArabic ? c.regionAr : c.region).toLowerCase();
-                      return name.contains(q) || region.contains(q);
-                    })
-                    .toList(growable: false);
+                : cities.where((c) {
+                    final name = (isArabic ? c.nameAr : c.name).toLowerCase();
+                    final region =
+                        (isArabic ? c.regionAr : c.region).toLowerCase();
+                    return name.contains(q) || region.contains(q);
+                  }).toList(growable: false);
 
             return SafeArea(
               child: SizedBox(
@@ -1942,8 +2087,11 @@ class AppCityPickerField extends ConsumerWidget {
                           final subtitle = isArabic ? c.regionAr : c.region;
                           return ListTile(
                             title: Text(title),
-                            subtitle: subtitle.trim().isEmpty ? null : Text(subtitle),
-                            trailing: c.isMajor ? const Icon(Icons.star_outline) : null,
+                            subtitle:
+                                subtitle.trim().isEmpty ? null : Text(subtitle),
+                            trailing: c.isMajor
+                                ? const Icon(Icons.star_outline)
+                                : null,
                             onTap: () => Navigator.pop(context, c),
                           );
                         },

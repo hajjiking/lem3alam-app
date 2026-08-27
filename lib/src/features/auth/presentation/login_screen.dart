@@ -62,7 +62,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final l10n = context.l10n;
     final compact = MediaQuery.sizeOf(context).width < 390;
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F9FF),
+      backgroundColor: context.appColors.surface,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Center(
@@ -82,7 +82,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     obscurePassword: _obscurePassword,
                     error: _error,
                     fieldErrors: _fieldErrors,
-                    onTogglePassword: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onTogglePassword: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
                     onSubmit: _submit,
                     l10n: l10n,
                   ),
@@ -142,28 +143,49 @@ class _LoginPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const blue = Lem3alamColors.primaryBlue;
+    final blue = context.appColors.primary;
     return Container(
-      padding: EdgeInsets.fromLTRB(compact ? 22 : 34, 32, compact ? 22 : 34, 34),
-      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(38))),
+      padding: EdgeInsets.all(compact ? AppStyle.pagePadding : 24),
+      decoration: BoxDecoration(
+          color: context.appColors.surfaceContainerLowest,
+          borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppStyle.sheetRadius))),
       child: Form(
         key: formKey,
         child: AutofillGroup(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Welcome Back 👋', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900, color: const Color(0xFF111B48))),
+              Text(l10n.welcomeBack,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: context.appColors.onSurface)),
               const SizedBox(height: 4),
-              Text(l10n.loginSubtitle, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: const Color(0xFF66789F))),
+              Text(l10n.loginSubtitle,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: context.appColors.onSurfaceVariant)),
               const SizedBox(height: 26),
-              if (error != null) ...[_ErrorMessage(message: error!), const SizedBox(height: 14)],
+              if (error != null) ...[
+                _ErrorMessage(message: error!),
+                const SizedBox(height: 14)
+              ],
               TextFormField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                autofillHints: const [AutofillHints.username, AutofillHints.email],
-                decoration: InputDecoration(hintText: 'Email address', prefixIcon: const Icon(Icons.mail_outline_rounded, color: blue), errorText: fieldErrors['email']?.first),
-                validator: (value) => value == null || value.trim().isEmpty ? l10n.requiredField : null,
+                autofillHints: const [
+                  AutofillHints.username,
+                  AutofillHints.email
+                ],
+                decoration: InputDecoration(
+                    hintText: l10n.email,
+                    prefixIcon: Icon(Icons.mail_outline_rounded, color: blue),
+                    errorText: fieldErrors['email']?.first),
+                validator: (value) => value == null || value.trim().isEmpty
+                    ? l10n.requiredField
+                    : null,
               ),
               const SizedBox(height: 14),
               TextFormField(
@@ -171,25 +193,52 @@ class _LoginPanel extends StatelessWidget {
                 obscureText: obscurePassword,
                 textInputAction: TextInputAction.done,
                 autofillHints: const [AutofillHints.password],
-                onFieldSubmitted: (_) { if (formKey.currentState?.validate() ?? false) onSubmit(); },
+                onFieldSubmitted: (_) {
+                  if (formKey.currentState?.validate() ?? false) {
+                    onSubmit();
+                  }
+                },
                 decoration: InputDecoration(
                   hintText: l10n.password,
-                  prefixIcon: const Icon(Icons.lock_outline_rounded, color: blue),
+                  prefixIcon: Icon(Icons.lock_outline_rounded, color: blue),
                   errorText: fieldErrors['password']?.first,
-                  suffixIcon: IconButton(onPressed: onTogglePassword, icon: Icon(obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined)),
+                  suffixIcon: IconButton(
+                      onPressed: onTogglePassword,
+                      icon: Icon(obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined)),
                 ),
-                validator: (value) => value == null || value.isEmpty ? l10n.requiredField : null,
+                validator: (value) =>
+                    value == null || value.isEmpty ? l10n.requiredField : null,
               ),
-              Align(alignment: AlignmentDirectional.centerEnd, child: TextButton(onPressed: loading ? null : () {}, child: const Text('Forgot password?'))),
+              Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton(
+                      onPressed: loading ? null : () {},
+                      child: const Text('Forgot password?'))),
               const SizedBox(height: 8),
               SizedBox(
-                height: 58,
+                height: AppStyle.controlHeight,
                 child: FilledButton(
-                  onPressed: loading ? null : () { if (formKey.currentState?.validate() ?? false) onSubmit(); },
-                  style: FilledButton.styleFrom(backgroundColor: blue, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17))),
+                  onPressed: loading
+                      ? null
+                      : () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            onSubmit();
+                          }
+                        },
                   child: loading
-                      ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white))
-                      : Row(mainAxisSize: MainAxisSize.min, children: [Text(l10n.login), const SizedBox(width: 10), const Icon(Icons.arrow_forward_rounded)]),
+                      ? SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              color: context.appColors.onPrimary))
+                      : Row(mainAxisSize: MainAxisSize.min, children: [
+                          Text(l10n.login),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.arrow_forward_rounded)
+                        ]),
                 ),
               ),
               const SizedBox(height: 26),
@@ -197,17 +246,30 @@ class _LoginPanel extends StatelessWidget {
               const SizedBox(height: 22),
               const Row(
                 children: [
-                  Expanded(child: _SocialButton(label: 'Google', icon: _GoogleMark())),
+                  Expanded(
+                      child:
+                          _SocialButton(label: 'Google', icon: _GoogleMark())),
                   SizedBox(width: 12),
-                  Expanded(child: _SocialButton(label: 'Facebook', icon: Icon(Icons.facebook_rounded, color: Color(0xFF1877F2), size: 28))),
+                  Expanded(
+                      child: _SocialButton(
+                          label: 'Facebook',
+                          icon: Icon(Icons.facebook_rounded,
+                              color: Color(0xFF1877F2), size: 28))),
                 ],
               ),
               const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text(l10n.noAccountYet, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF66789F))),
-                  TextButton(onPressed: loading ? null : () => context.goNamed(AppRouteNames.register), child: Text(l10n.register)),
+                  Text(l10n.noAccountYet,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: context.appColors.onSurfaceVariant)),
+                  TextButton(
+                      onPressed: loading
+                          ? null
+                          : () => context.goNamed(AppRouteNames.register),
+                      child: Text(l10n.register)),
                 ],
               ),
             ],
@@ -224,8 +286,14 @@ class _ErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(color: const Color(0xFFFFECEB), borderRadius: BorderRadius.circular(14)),
-        child: Text(message, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: const Color(0xFFB42318))),
+        decoration: BoxDecoration(
+            color: context.appColors.errorContainer,
+            borderRadius: BorderRadius.circular(14)),
+        child: Text(message,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: context.appColors.onErrorContainer)),
       );
 }
 
@@ -234,7 +302,13 @@ class _OrDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(children: [
         const Expanded(child: Divider()),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Text('or continue with', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF66789F)))),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text('or continue with',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: context.appColors.onSurfaceVariant))),
         const Expanded(child: Divider()),
       ]);
 }
@@ -245,13 +319,26 @@ class _SocialButton extends StatelessWidget {
   final Widget icon;
   @override
   Widget build(BuildContext context) => SizedBox(
-        height: 58,
-        child: OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 10)), child: Row(mainAxisSize: MainAxisSize.min, children: [icon, const SizedBox(width: 8), Text(label, style: const TextStyle(color: Color(0xFF111B48)))])),
+        height: AppStyle.controlHeight,
+        child: OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 10)),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              icon,
+              const SizedBox(width: 8),
+              Flexible(
+                  child: Text(label,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: context.appColors.onSurface)))
+            ])),
       );
 }
 
 class _GoogleMark extends StatelessWidget {
   const _GoogleMark();
   @override
-  Widget build(BuildContext context) => const Text('G', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Color(0xFF4285F4)));
+  Widget build(BuildContext context) => const Text('G',
+      style: TextStyle(
+          fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF4285F4)));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'task_style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lem3alam_mobile/gen_l10n/app_localizations.dart';
@@ -124,7 +125,8 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
           data: (page) => _TaskListView(
             page: page,
             scrollController: _scrollController,
-            onRefresh: () => ref.read(tasksListControllerProvider.notifier).loadFirstPage(),
+            onRefresh: () =>
+                ref.read(tasksListControllerProvider.notifier).loadFirstPage(),
             canCreate: canCreate,
             searchController: _searchController,
           ),
@@ -166,10 +168,17 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
                 name.isEmpty ? (user?.email ?? l10n.dashboard) : name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w800),
               ),
             ] else
-              Text(l10n.tasks, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
+              Text(l10n.tasks,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.w800)),
           ],
         ),
       ),
@@ -204,7 +213,9 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
             ),
           if (isLoggedIn)
             IconButton(
-              onPressed: () => ref.read(tasksListControllerProvider.notifier).loadFirstPage(),
+              onPressed: () => ref
+                  .read(tasksListControllerProvider.notifier)
+                  .loadFirstPage(),
               icon: const Icon(Icons.notifications_outlined),
               tooltip: l10n.refreshAction,
             ),
@@ -242,7 +253,9 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
                   context.goNamed(AppRouteNames.login);
                   break;
                 case _MoreActions.refresh:
-                  ref.read(tasksListControllerProvider.notifier).loadFirstPage();
+                  ref
+                      .read(tasksListControllerProvider.notifier)
+                      .loadFirstPage();
                   break;
               }
             },
@@ -352,7 +365,9 @@ class _TaskListView extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: AppSectionHeader(
                   title: l10n.recommendedForYou,
-                  subtitle: selectedCategoryId == null ? l10n.pickedForYourNeeds : l10n.inCategory,
+                  subtitle: selectedCategoryId == null
+                      ? l10n.pickedForYourNeeds
+                      : l10n.inCategory,
                   actionLabel: l10n.seeAll,
                   onActionTap: () async {
                     if (!scrollController.hasClients) return;
@@ -378,7 +393,8 @@ class _TaskListView extends ConsumerWidget {
                     final task = recommended[index];
                     return SizedBox(
                       width: 320,
-                      child: _TaskCard(task: task, variant: _TaskCardVariant.highlighted),
+                      child: _TaskCard(
+                          task: task, variant: _TaskCardVariant.highlighted),
                     );
                   },
                 ),
@@ -391,7 +407,9 @@ class _TaskListView extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppSectionHeader(
                 title: l10n.allTasks,
-                subtitle: page.items.isEmpty ? '' : l10n.tasksAvailableCount(page.items.length),
+                subtitle: page.items.isEmpty
+                    ? ''
+                    : l10n.tasksAvailableCount(page.items.length),
               ),
             ),
           ),
@@ -399,13 +417,16 @@ class _TaskListView extends ConsumerWidget {
           if (page.items.isEmpty)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: AppEmptyState(
                   title: l10n.emptyTasksTitle,
                   subtitle: l10n.emptyTasksSubtitle,
                   icon: Icons.inbox_outlined,
                   actionLabel: canCreate ? l10n.createTask : l10n.login,
-                  onAction: () => context.goNamed(canCreate ? AppRouteNames.taskCreate : AppRouteNames.login),
+                  onAction: () => context.goNamed(canCreate
+                      ? AppRouteNames.taskCreate
+                      : AppRouteNames.login),
                 ),
               ),
             )
@@ -466,17 +487,18 @@ class _PopularCategories extends ConsumerWidget {
       data: (categories) {
         if (categories.isEmpty) return const SizedBox.shrink();
 
-        final parents = categories.where((c) => c.parentId == null).toList(growable: false);
+        final parents =
+            categories.where((c) => c.parentId == null).toList(growable: false);
         final popular = parents.take(8).toList(growable: false);
         final iconPalette = [
-          (Icons.bolt_outlined, Lem3alamColors.primaryBlue),
-          (Icons.plumbing_outlined, Lem3alamColors.secondaryBlue),
-          (Icons.cleaning_services_outlined, Lem3alamColors.accentGreen),
-          (Icons.format_paint_outlined, const Color(0xFFF59E0B)),
-          (Icons.handyman_outlined, const Color(0xFF6366F1)),
-          (Icons.kitchen_outlined, const Color(0xFFEC4899)),
-          (Icons.local_shipping_outlined, const Color(0xFF0EA5E9)),
-          (Icons.yard_outlined, const Color(0xFF10B981)),
+          (Icons.bolt_outlined, context.appColors.primary),
+          (Icons.plumbing_outlined, context.appColors.secondary),
+          (Icons.cleaning_services_outlined, context.appTokens.success),
+          (Icons.format_paint_outlined, context.appTokens.warning),
+          (Icons.handyman_outlined, context.appTokens.accentPurple),
+          (Icons.kitchen_outlined, context.appTokens.accentPurple),
+          (Icons.local_shipping_outlined, context.appTokens.info),
+          (Icons.yard_outlined, context.appTokens.success),
         ];
 
         return Column(
@@ -485,7 +507,8 @@ class _PopularCategories extends ConsumerWidget {
             AppSectionHeader(
               title: l10n.popularCategories,
               actionLabel: l10n.more,
-              onActionTap: () => context.goNamed(AppRouteNames.dashboardCategories),
+              onActionTap: () =>
+                  context.goNamed(AppRouteNames.dashboardCategories),
             ),
             const SizedBox(height: 14),
             GridView.builder(
@@ -502,7 +525,8 @@ class _PopularCategories extends ConsumerWidget {
                 final c = popular[index];
                 final palette = iconPalette[index % iconPalette.length];
                 final selected = selectedCategoryId == c.id;
-                final accentColor = selected ? Lem3alamColors.primaryBlue : palette.$2;
+                final accentColor =
+                    selected ? context.appColors.primary : palette.$2;
 
                 return Stack(
                   clipBehavior: Clip.none,
@@ -510,14 +534,17 @@ class _PopularCategories extends ConsumerWidget {
                     AppCategoryTile(
                       label: c.localizedName(languageCode),
                       icon: palette.$1,
-                      iconColor: selected ? Colors.white : accentColor,
+                      iconColor:
+                          selected ? context.appColors.onPrimary : accentColor,
                       iconBackgroundColor: selected
-                          ? Lem3alamColors.primaryBlue
+                          ? context.appColors.primary
                           : accentColor.withValues(alpha: 0.12),
                       onTap: () async {
                         if (selectedCategoryId == c.id) return;
                         ref.read(selectedCategoryIdProvider.notifier).set(c.id);
-                        await ref.read(tasksListControllerProvider.notifier).loadFirstPage();
+                        await ref
+                            .read(tasksListControllerProvider.notifier)
+                            .loadFirstPage();
                         if (scrollController.hasClients) {
                           await scrollController.animateTo(
                             0,
@@ -535,11 +562,14 @@ class _PopularCategories extends ConsumerWidget {
                           height: 22,
                           width: 22,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: context.appColors.onPrimary,
                             shape: BoxShape.circle,
-                            border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
+                            border: Border.all(
+                                color: colorScheme.outlineVariant
+                                    .withValues(alpha: 0.6)),
                           ),
-                          child: Icon(Icons.check_rounded, size: 14, color: Lem3alamColors.primaryBlue),
+                          child: Icon(Icons.check_rounded,
+                              size: 14, color: context.appColors.primary),
                         ),
                       ),
                   ],
@@ -562,8 +592,12 @@ class _PopularCategories extends ConsumerWidget {
                         label: Text(l10n.all),
                         onSelected: (_) async {
                           if (selectedCategoryId == null) return;
-                          ref.read(selectedCategoryIdProvider.notifier).set(null);
-                          await ref.read(tasksListControllerProvider.notifier).loadFirstPage();
+                          ref
+                              .read(selectedCategoryIdProvider.notifier)
+                              .set(null);
+                          await ref
+                              .read(tasksListControllerProvider.notifier)
+                              .loadFirstPage();
                           if (scrollController.hasClients) {
                             await scrollController.animateTo(
                               0,
@@ -573,17 +607,22 @@ class _PopularCategories extends ConsumerWidget {
                           }
                         },
                         showCheckmark: false,
-                        side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.75)),
+                        side: BorderSide(
+                            color: colorScheme.outlineVariant
+                                .withValues(alpha: 0.75)),
                       );
                     }
-                    final c = popular.take(4).toList(growable: false)[index - 1];
+                    final c =
+                        popular.take(4).toList(growable: false)[index - 1];
                     return FilterChip(
                       selected: selectedCategoryId == c.id,
                       label: Text(c.localizedName(languageCode)),
                       onSelected: (_) async {
                         if (selectedCategoryId == c.id) return;
                         ref.read(selectedCategoryIdProvider.notifier).set(c.id);
-                        await ref.read(tasksListControllerProvider.notifier).loadFirstPage();
+                        await ref
+                            .read(tasksListControllerProvider.notifier)
+                            .loadFirstPage();
                         if (scrollController.hasClients) {
                           await scrollController.animateTo(
                             0,
@@ -593,7 +632,9 @@ class _PopularCategories extends ConsumerWidget {
                         }
                       },
                       showCheckmark: false,
-                      side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.75)),
+                      side: BorderSide(
+                          color: colorScheme.outlineVariant
+                              .withValues(alpha: 0.75)),
                     );
                   },
                 ),
@@ -609,7 +650,8 @@ class _PopularCategories extends ConsumerWidget {
 enum _TaskCardVariant { standard, highlighted }
 
 class _TaskCard extends StatelessWidget {
-  const _TaskCard({required this.task, this.variant = _TaskCardVariant.standard});
+  const _TaskCard(
+      {required this.task, this.variant = _TaskCardVariant.standard});
 
   final Task task;
   final _TaskCardVariant variant;
@@ -619,8 +661,8 @@ class _TaskCard extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = context.l10n;
     final languageCode = Localizations.localeOf(context).languageCode;
-    final statusColor = _statusColor(colorScheme, task.status);
-    final urgencyColor = _urgencyColor(colorScheme, task.urgency);
+    final statusColor = taskStatusColor(context, task.status);
+    final urgencyColor = taskUrgencyColor(context, task.urgency);
     final localizedCategoryName = task.localizedCategoryName(languageCode);
     final isHighlight = variant == _TaskCardVariant.highlighted;
 
@@ -647,15 +689,15 @@ class _TaskCard extends StatelessWidget {
                     left: 12,
                     child: _Pill(
                       label: _statusLabel(l10n, task.status),
-                      background: statusColor.withValues(alpha: 0.92),
-                      foreground: Colors.white,
+                      background: colorScheme.surfaceContainerLowest,
+                      foreground: statusColor,
                     ),
                   ),
                   Positioned(
                     top: 12,
                     right: 12,
                     child: Material(
-                      color: Colors.white.withValues(alpha: 0.92),
+                      color: colorScheme.surfaceContainerLowest,
                       borderRadius: BorderRadius.circular(999),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(999),
@@ -694,7 +736,12 @@ class _TaskCard extends StatelessWidget {
                                 task.title,
                                 maxLines: isHighlight ? 2 : 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800, height: 1.3),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                        height: 1.3),
                               ),
                             ),
                           ),
@@ -704,8 +751,9 @@ class _TaskCard extends StatelessWidget {
                           fit: FlexFit.loose,
                           child: _Pill(
                             label: '${task.budgetMax.toStringAsFixed(0)} MAD',
-                            background: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
-                            foreground: Lem3alamColors.primaryBlue,
+                            background: context.appColors.primary
+                                .withValues(alpha: 0.10),
+                            foreground: context.appColors.primary,
                           ),
                         ),
                       ],
@@ -713,14 +761,20 @@ class _TaskCard extends StatelessWidget {
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        Icon(Icons.place_outlined, size: 16, color: colorScheme.onSurfaceVariant),
+                        Icon(Icons.place_outlined,
+                            size: 16, color: colorScheme.onSurfaceVariant),
                         const SizedBox(width: 5),
                         Expanded(
                           child: Text(
                             task.city,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant, fontWeight: FontWeight.w600),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                    fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
@@ -732,14 +786,20 @@ class _TaskCard extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                         ),
-                        Icon(Icons.schedule_outlined, size: 16, color: colorScheme.onSurfaceVariant),
+                        Icon(Icons.schedule_outlined,
+                            size: 16, color: colorScheme.onSurfaceVariant),
                         const SizedBox(width: 5),
                         Flexible(
                           child: Text(
                             _urgencyLabel(l10n, task.urgency),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: urgencyColor, fontWeight: FontWeight.w700),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                    color: urgencyColor,
+                                    fontWeight: FontWeight.w700),
                           ),
                         ),
                       ],
@@ -762,7 +822,10 @@ class _TaskCard extends StatelessWidget {
                           if (task.deadline != null)
                             _Pill(
                               icon: Icons.event_outlined,
-                              label: task.deadline!.toIso8601String().split('T').first,
+                              label: task.deadline!
+                                  .toIso8601String()
+                                  .split('T')
+                                  .first,
                               background: colorScheme.surfaceContainerHigh,
                               foreground: colorScheme.onSurfaceVariant,
                             ),
@@ -828,7 +891,11 @@ class _Pill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppPill(label: label, background: background, foreground: foreground, icon: icon);
+    return AppPill(
+        label: label,
+        background: background,
+        foreground: foreground,
+        icon: icon);
   }
 }
 
@@ -837,22 +904,6 @@ String _errorMessage(BuildContext context, Object error) {
     return localizeApiException(context, error);
   }
   return context.l10n.errUnknown;
-}
-
-Color _statusColor(ColorScheme colorScheme, String status) {
-  switch (status) {
-    case 'open':
-      return colorScheme.primary;
-    case 'assigned':
-    case 'in_progress':
-      return Colors.orange;
-    case 'completed':
-      return Colors.green;
-    case 'cancelled':
-      return colorScheme.error;
-    default:
-      return colorScheme.onSurfaceVariant;
-  }
 }
 
 String _statusLabel(AppLocalizations l10n, String status) {
@@ -869,21 +920,6 @@ String _statusLabel(AppLocalizations l10n, String status) {
       return l10n.statusCancelled;
     default:
       return status;
-  }
-}
-
-Color _urgencyColor(ColorScheme colorScheme, String urgency) {
-  switch (urgency) {
-    case 'urgent':
-      return colorScheme.error;
-    case 'high':
-      return Colors.deepOrange;
-    case 'medium':
-      return Colors.orange;
-    case 'low':
-      return Colors.green;
-    default:
-      return colorScheme.onSurfaceVariant;
   }
 }
 
@@ -920,7 +956,10 @@ class _AppMenuRow extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w700),
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(fontWeight: FontWeight.w700),
           ),
         ),
       ],

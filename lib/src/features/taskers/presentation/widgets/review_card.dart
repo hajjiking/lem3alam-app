@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 import '../../../../core/config/app_config.dart';
 import 'badge_chip.dart';
@@ -39,26 +39,7 @@ class ReviewCard extends StatelessWidget {
     final fg = isHelpful ? scheme.primary : scheme.onSurfaceVariant;
     final avatar = _avatar();
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: scheme.outlineVariant.withValues(alpha: 0.30),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
-          ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.015),
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
+      decoration: AppStyle.cardDecoration(context),
       padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,10 +60,12 @@ class ReviewCard extends StatelessWidget {
                             reviewerName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.inter(
-                              textStyle: Theme.of(context).textTheme.titleSmall,
-                              fontWeight: FontWeight.w800,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                ),
                           ),
                         ),
                         Text(
@@ -106,8 +89,8 @@ class ReviewCard extends StatelessWidget {
                           rating.toStringAsFixed(1),
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                    color: const Color(0xFFD97706),
+                                    fontWeight: FontWeight.w800,
+                                    color: context.appTokens.warning,
                                   ),
                         ),
                         if (verifiedCustomer) ...[

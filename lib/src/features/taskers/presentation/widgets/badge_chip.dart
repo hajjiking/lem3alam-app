@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 class BadgeChip extends StatelessWidget {
   const BadgeChip({
@@ -25,18 +26,18 @@ class BadgeChip extends StatelessWidget {
   }
 
   factory BadgeChip.topRated(BuildContext context, String label) {
-    const c = Color(0xFFD97706);
+    final c = context.appTokens.warning;
     return BadgeChip(
       label: label,
       icon: Icons.emoji_events_rounded,
-      backgroundColor: const Color(0xFFF59E0B).withValues(alpha: 0.12),
+      backgroundColor: context.appTokens.warning.withValues(alpha: 0.12),
       foregroundColor: c,
       iconColor: c,
     );
   }
 
   factory BadgeChip.experience(BuildContext context, String label) {
-    const c = Color(0xFF7C3AED);
+    final c = context.appTokens.accentPurple;
     return BadgeChip(
       label: label,
       icon: Icons.workspace_premium_rounded,
@@ -47,11 +48,11 @@ class BadgeChip extends StatelessWidget {
   }
 
   factory BadgeChip.availableToday(BuildContext context, String label) {
-    const c = Color(0xFF059669);
+    final c = context.appTokens.success;
     return BadgeChip(
       label: label,
       icon: Icons.check_circle_rounded,
-      backgroundColor: const Color(0xFF10B981).withValues(alpha: 0.12),
+      backgroundColor: context.appTokens.success.withValues(alpha: 0.12),
       foregroundColor: c,
       iconColor: c,
     );

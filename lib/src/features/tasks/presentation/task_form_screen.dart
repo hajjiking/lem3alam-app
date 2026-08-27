@@ -143,7 +143,9 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
                   : l10n.cameraPermissionRequired,
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.close)),
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(l10n.close)),
               if (permanentlyDenied)
                 FilledButton(
                   onPressed: () async {
@@ -204,7 +206,9 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
   }
 
   Future<void> _pickOnMap() async {
-    final initial = (_latitude != null && _longitude != null) ? LatLng(_latitude!, _longitude!) : null;
+    final initial = (_latitude != null && _longitude != null)
+        ? LatLng(_latitude!, _longitude!)
+        : null;
     final result = await context.pushNamed<MapPickerResult>(
       AppRouteNames.mapPicker,
       extra: initial,
@@ -284,7 +288,9 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
         address: _address.text.trim().isEmpty ? null : _address.text.trim(),
         location: _isRemote
             ? null
-            : (((_locationLabel?.trim().isEmpty) ?? true) ? null : _locationLabel!.trim()),
+            : (((_locationLabel?.trim().isEmpty) ?? true)
+                ? null
+                : _locationLabel!.trim()),
         latitude: _isRemote ? null : _latitude,
         longitude: _isRemote ? null : _longitude,
         isRemote: _isRemote,
@@ -292,7 +298,8 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
 
       final mutation = ref.read(taskMutationControllerProvider);
       final task = widget.editTaskId == null
-          ? await mutation.create(payload, images: _images.isEmpty ? null : List.of(_images))
+          ? await mutation.create(payload,
+              images: _images.isEmpty ? null : List.of(_images))
           : await mutation.update(
               id: widget.editTaskId!,
               payload: payload,
@@ -326,18 +333,11 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
     final categoriesAsync = ref.watch(categoryOptionsProvider);
     final l10n = context.l10n;
     final languageCode = Localizations.localeOf(context).languageCode;
-    const headerBlue = Lem3alamColors.primaryBlue;
 
     return Scaffold(
-      backgroundColor: headerBlue,
       appBar: AppBar(
-        backgroundColor: headerBlue,
-        foregroundColor: Colors.white,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-            ),
-        title: _TaskFormHeader(title: widget.editTaskId == null ? l10n.createTask : l10n.editTask),
+        title: _TaskFormHeader(
+            title: widget.editTaskId == null ? l10n.createTask : l10n.editTask),
         actions: [
           IconButton(
             onPressed: () => showLanguagePicker(context),
@@ -353,351 +353,462 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
             : Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+                  borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(AppStyle.sheetRadius)),
                 ),
                 child: AppResponsiveCenter(
                   maxWidth: 640,
                   padding: EdgeInsets.zero,
                   child: ListView(
                     padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
-                  children: [
-                    _TaskFormIntro(message: l10n.tipText),
-                    const SizedBox(height: 16),
-                    if (_error != null) AppInlineBanner(message: _error!, tone: AppBannerTone.error),
-                    if (_error != null) const SizedBox(height: 12),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          AppSectionCard(
-                            title: l10n.title,
-                            subtitle: l10n.description,
-                            child: Column(
-                              children: [
-                                TextFormField(
-                                  controller: _title,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    labelText: l10n.title,
-                                    prefixIcon: const Icon(Icons.title_outlined),
-                                    errorText: _err('title'),
-                                  ),
-                                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
-                                ),
-                                const SizedBox(height: 12),
-                                TextFormField(
-                                  controller: _description,
-                                  maxLines: 4,
-                                  decoration: InputDecoration(
-                                    labelText: l10n.description,
-                                    prefixIcon: const Icon(Icons.subject_outlined),
-                                    errorText: _err('description'),
-                                  ),
-                                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          AppSectionCard(
-                            title: l10n.photos,
-                            trailing: FilledButton.tonalIcon(
-                              onPressed: _loading || _addingPhoto ? null : _addPhoto,
-                              icon: const Icon(Icons.photo_camera_outlined),
-                              label: Text(_images.isEmpty ? l10n.add : '${_images.length}/5'),
-                            ),
-                            child: _images.isEmpty
-                                ? Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(l10n.addPhotosHelper, style: Theme.of(context).textTheme.bodyMedium),
-                                      const SizedBox(height: 14),
-                                      Wrap(
-                                        spacing: 10,
-                                        runSpacing: 10,
-                                        children: [
-                                          _PhotoAddSlot(
-                                            icon: Icons.image_outlined,
-                                            onTap: _loading || _addingPhoto ? null : _addPhoto,
-                                          ),
-                                          for (var index = 0; index < 4; index++)
-                                            _PhotoAddSlot(onTap: _loading || _addingPhoto ? null : _addPhoto),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                : GridView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10,
+                    children: [
+                      _TaskFormIntro(message: l10n.tipText),
+                      const SizedBox(height: 16),
+                      if (_error != null)
+                        AppInlineBanner(
+                            message: _error!, tone: AppBannerTone.error),
+                      if (_error != null) const SizedBox(height: 12),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            AppSectionCard(
+                              title: l10n.title,
+                              subtitle: l10n.description,
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    controller: _title,
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                      labelText: l10n.title,
+                                      prefixIcon:
+                                          const Icon(Icons.title_outlined),
+                                      errorText: _err('title'),
                                     ),
-                                    itemCount: _images.length,
-                                    itemBuilder: (context, index) {
-                                      final img = _images[index];
-                                      return Stack(
-                                        children: [
-                                          Positioned.fill(
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              borderRadius: BorderRadius.circular(16),
-                                              clipBehavior: Clip.antiAlias,
-                                              child: InkWell(
-                                                onTap: () => _previewPhoto(img),
-                                                child: Ink.image(
-                                                  image: MemoryImage(Uint8List.fromList(img.bytes)),
-                                                  fit: BoxFit.cover,
+                                    validator: (v) =>
+                                        (v == null || v.trim().isEmpty)
+                                            ? l10n.requiredField
+                                            : null,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  TextFormField(
+                                    controller: _description,
+                                    maxLines: 4,
+                                    decoration: InputDecoration(
+                                      labelText: l10n.description,
+                                      prefixIcon:
+                                          const Icon(Icons.subject_outlined),
+                                      errorText: _err('description'),
+                                    ),
+                                    validator: (v) =>
+                                        (v == null || v.trim().isEmpty)
+                                            ? l10n.requiredField
+                                            : null,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            AppSectionCard(
+                              title: l10n.photos,
+                              trailing: FilledButton.tonalIcon(
+                                onPressed:
+                                    _loading || _addingPhoto ? null : _addPhoto,
+                                icon: const Icon(Icons.photo_camera_outlined),
+                                label: Text(_images.isEmpty
+                                    ? l10n.add
+                                    : '${_images.length}/5'),
+                              ),
+                              child: _images.isEmpty
+                                  ? Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(l10n.addPhotosHelper,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium),
+                                        const SizedBox(height: 14),
+                                        Wrap(
+                                          spacing: 10,
+                                          runSpacing: 10,
+                                          children: [
+                                            _PhotoAddSlot(
+                                              icon: Icons.image_outlined,
+                                              onTap: _loading || _addingPhoto
+                                                  ? null
+                                                  : _addPhoto,
+                                            ),
+                                            for (var index = 0;
+                                                index < 4;
+                                                index++)
+                                              _PhotoAddSlot(
+                                                  onTap:
+                                                      _loading || _addingPhoto
+                                                          ? null
+                                                          : _addPhoto),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                      ),
+                                      itemCount: _images.length,
+                                      itemBuilder: (context, index) {
+                                        final img = _images[index];
+                                        return Stack(
+                                          children: [
+                                            Positioned.fill(
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                                clipBehavior: Clip.antiAlias,
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      _previewPhoto(img),
+                                                  child: Ink.image(
+                                                    image: MemoryImage(
+                                                        Uint8List.fromList(
+                                                            img.bytes)),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            top: 6,
-                                            right: 6,
-                                            child: IconButton.filledTonal(
-                                              style: IconButton.styleFrom(
-                                                visualDensity: VisualDensity.compact,
-                                                padding: const EdgeInsets.all(6),
+                                            Positioned(
+                                              top: 6,
+                                              right: 6,
+                                              child: IconButton.filledTonal(
+                                                style: IconButton.styleFrom(
+                                                  visualDensity:
+                                                      VisualDensity.compact,
+                                                  padding:
+                                                      const EdgeInsets.all(6),
+                                                ),
+                                                onPressed: _loading
+                                                    ? null
+                                                    : () => _removePhoto(index),
+                                                icon: const Icon(Icons.close,
+                                                    size: 16),
                                               ),
-                                              onPressed: _loading ? null : () => _removePhoto(index),
-                                              icon: const Icon(Icons.close, size: 16),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                            ),
+                            const SizedBox(height: 12),
+                            AppSectionCard(
+                              title: l10n.location,
+                              child: Column(
+                                children: [
+                                  categoriesAsync.when(
+                                    loading: () => const AppSkeletonBox(
+                                        height: 56, width: double.infinity),
+                                    error: (e, _) => AppInlineBanner(
+                                      message: e.toString(),
+                                      tone: AppBannerTone.error,
+                                    ),
+                                    data: (cats) =>
+                                        DropdownButtonFormField<int>(
+                                      value: _categoryId,
+                                      isExpanded: true,
+                                      menuMaxHeight: 360,
+                                      itemHeight: null,
+                                      items: [
+                                        for (final c in cats)
+                                          DropdownMenuItem(
+                                            value: c.id,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4),
+                                              child: Text(
+                                                c.localizedName(languageCode),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
                                           ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                          ),
-                          const SizedBox(height: 12),
-                          AppSectionCard(
-                            title: l10n.location,
-                            child: Column(
-                              children: [
-                                categoriesAsync.when(
-                                  loading: () => const AppSkeletonBox(height: 56, width: double.infinity),
-                                  error: (e, _) => AppInlineBanner(
-                                    message: e.toString(),
-                                    tone: AppBannerTone.error,
-                                  ),
-                                  data: (cats) => DropdownButtonFormField<int>(
-                                    value: _categoryId,
-                                    isExpanded: true,
-                                    menuMaxHeight: 360,
-                                    itemHeight: null,
-                                    items: [
-                                      for (final c in cats)
-                                        DropdownMenuItem(
-                                          value: c.id,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(vertical: 4),
+                                      ],
+                                      selectedItemBuilder: (context) => [
+                                        for (final c in cats)
+                                          Align(
+                                            alignment: AlignmentDirectional
+                                                .centerStart,
                                             child: Text(
                                               c.localizedName(languageCode),
-                                              maxLines: 2,
+                                              maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
-                                        ),
-                                    ],
-                                    selectedItemBuilder: (context) => [
-                                      for (final c in cats)
-                                        Align(
-                                          alignment: AlignmentDirectional.centerStart,
-                                          child: Text(
-                                            c.localizedName(languageCode),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
+                                      ],
+                                      onChanged: _loading
+                                          ? null
+                                          : (v) =>
+                                              setState(() => _categoryId = v),
+                                      decoration: InputDecoration(
+                                        labelText: l10n.category,
+                                        prefixIcon:
+                                            const Icon(Icons.category_outlined),
+                                        errorText: _err('category_id'),
+                                      ),
+                                      validator: (v) => (v == null || v == 0)
+                                          ? l10n.requiredField
+                                          : null,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  AppCityPickerField(
+                                    controller: _city,
+                                    labelText: l10n.city,
+                                    textInputAction: TextInputAction.next,
+                                    errorText: _err('city'),
+                                    validator: (v) =>
+                                        (v == null || v.trim().isEmpty)
+                                            ? l10n.requiredField
+                                            : null,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  TextFormField(
+                                    controller: _address,
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                      labelText: l10n.addressOptional,
+                                      prefixIcon:
+                                          const Icon(Icons.place_outlined),
+                                      errorText: _err('address'),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: FilledButton.tonalIcon(
+                                          onPressed:
+                                              _loading ? null : _pickOnMap,
+                                          icon: const Icon(Icons.map_outlined),
+                                          label: Text(
+                                            (_latitude != null &&
+                                                    _longitude != null)
+                                                ? l10n.locationSelected
+                                                : l10n.pickOnMap,
                                           ),
                                         ),
+                                      ),
+                                      if (_latitude != null &&
+                                          _longitude != null) ...[
+                                        const SizedBox(width: 10),
+                                        IconButton(
+                                          onPressed: _loading
+                                              ? null
+                                              : _clearPickedLocation,
+                                          tooltip: l10n.clear,
+                                          icon: const Icon(Icons.close),
+                                        ),
+                                      ],
                                     ],
-                                    onChanged: _loading ? null : (v) => setState(() => _categoryId = v),
-                                    decoration: InputDecoration(
-                                      labelText: l10n.category,
-                                      prefixIcon: const Icon(Icons.category_outlined),
-                                      errorText: _err('category_id'),
+                                  ),
+                                  if ((_locationLabel ?? '')
+                                      .trim()
+                                      .isNotEmpty) ...[
+                                    const SizedBox(height: 10),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
+                                      child: Text(
+                                        _locationLabel!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                    validator: (v) => (v == null || v == 0) ? l10n.requiredField : null,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                AppCityPickerField(
-                                  controller: _city,
-                                  labelText: l10n.city,
-                                  textInputAction: TextInputAction.next,
-                                  errorText: _err('city'),
-                                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
-                                ),
-                                const SizedBox(height: 12),
-                                TextFormField(
-                                  controller: _address,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    labelText: l10n.addressOptional,
-                                    prefixIcon: const Icon(Icons.place_outlined),
-                                    errorText: _err('address'),
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: FilledButton.tonalIcon(
-                                        onPressed: _loading ? null : _pickOnMap,
-                                        icon: const Icon(Icons.map_outlined),
-                                        label: Text(
-                                          (_latitude != null && _longitude != null)
-                                              ? l10n.locationSelected
-                                              : l10n.pickOnMap,
+                                  ],
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            AppSectionCard(
+                              title: l10n.proposedBudget,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextFormField(
+                                          controller: _budgetMin,
+                                          keyboardType: const TextInputType
+                                              .numberWithOptions(decimal: true),
+                                          textInputAction: TextInputAction.next,
+                                          decoration: InputDecoration(
+                                            labelText: l10n.budgetMin,
+                                            prefixIcon: const Icon(
+                                                Icons.money_outlined),
+                                            errorText: _err('budget_min'),
+                                          ),
+                                          validator: (v) =>
+                                              (v == null || v.trim().isEmpty)
+                                                  ? l10n.requiredField
+                                                  : null,
                                         ),
                                       ),
-                                    ),
-                                    if (_latitude != null && _longitude != null) ...[
-                                      const SizedBox(width: 10),
-                                      IconButton(
-                                        onPressed: _loading ? null : _clearPickedLocation,
-                                        tooltip: l10n.clear,
-                                        icon: const Icon(Icons.close),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: TextFormField(
+                                          controller: _budgetMax,
+                                          keyboardType: const TextInputType
+                                              .numberWithOptions(decimal: true),
+                                          textInputAction: TextInputAction.next,
+                                          decoration: InputDecoration(
+                                            labelText: l10n.budgetMax,
+                                            prefixIcon: const Icon(
+                                                Icons.money_outlined),
+                                            errorText: _err('budget_max'),
+                                          ),
+                                          validator: (v) =>
+                                              (v == null || v.trim().isEmpty)
+                                                  ? l10n.requiredField
+                                                  : null,
+                                        ),
                                       ),
                                     ],
-                                  ],
-                                ),
-                                if ((_locationLabel ?? '').trim().isNotEmpty) ...[
-                                  const SizedBox(height: 10),
-                                  Align(
-                                    alignment: AlignmentDirectional.centerStart,
-                                    child: Text(
-                                      _locationLabel!,
-                                      style: Theme.of(context).textTheme.bodySmall,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 12),
+                                  DropdownButtonFormField<String>(
+                                    value: _budgetType,
+                                    items: [
+                                      DropdownMenuItem(
+                                          value: 'fixed',
+                                          child: Text(l10n.fixed)),
+                                      DropdownMenuItem(
+                                          value: 'hourly',
+                                          child: Text(l10n.hourly)),
+                                      DropdownMenuItem(
+                                          value: 'negotiable',
+                                          child: Text(l10n.negotiable)),
+                                    ],
+                                    onChanged: _loading
+                                        ? null
+                                        : (v) => setState(
+                                            () => _budgetType = v ?? 'fixed'),
+                                    decoration: InputDecoration(
+                                      labelText: l10n.budgetType,
+                                      prefixIcon:
+                                          const Icon(Icons.tune_outlined),
+                                      errorText: _err('budget_type'),
                                     ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  DropdownButtonFormField<String>(
+                                    value: _urgency,
+                                    items: [
+                                      DropdownMenuItem(
+                                          value: 'low',
+                                          child: Text(l10n.urgencyLow)),
+                                      DropdownMenuItem(
+                                          value: 'medium',
+                                          child: Text(l10n.urgencyMedium)),
+                                      DropdownMenuItem(
+                                          value: 'high',
+                                          child: Text(l10n.urgencyHigh)),
+                                      DropdownMenuItem(
+                                          value: 'urgent',
+                                          child: Text(l10n.urgencyUrgent)),
+                                    ],
+                                    onChanged: _loading
+                                        ? null
+                                        : (v) => setState(
+                                            () => _urgency = v ?? 'medium'),
+                                    decoration: InputDecoration(
+                                      labelText: l10n.urgency,
+                                      prefixIcon:
+                                          const Icon(Icons.flag_outlined),
+                                      errorText: _err('urgency'),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  DropdownButtonFormField<String>(
+                                    value: _paymentMethod,
+                                    items: [
+                                      DropdownMenuItem(
+                                          value: 'cash',
+                                          child: Text(l10n.cash)),
+                                      DropdownMenuItem(
+                                          value: 'card',
+                                          child: Text(l10n.card)),
+                                      DropdownMenuItem(
+                                          value: 'online',
+                                          child: Text(l10n.online)),
+                                    ],
+                                    onChanged: _loading
+                                        ? null
+                                        : (v) =>
+                                            setState(() => _paymentMethod = v),
+                                    decoration: InputDecoration(
+                                      labelText: l10n.paymentMethodOptional,
+                                      prefixIcon: const Icon(
+                                          Icons.credit_card_outlined),
+                                      errorText: _err('payment_method'),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  SwitchListTile.adaptive(
+                                    value: _isRemote,
+                                    onChanged: _loading
+                                        ? null
+                                        : (v) => setState(() => _isRemote = v),
+                                    title: Text(l10n.remote),
+                                    secondary: const Icon(
+                                        Icons.wifi_tethering_outlined),
                                   ),
                                 ],
-                              ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 12),
-                          AppSectionCard(
-                            title: l10n.proposedBudget,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextFormField(
-                                        controller: _budgetMin,
-                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                                        textInputAction: TextInputAction.next,
-                                        decoration: InputDecoration(
-                                          labelText: l10n.budgetMin,
-                                          prefixIcon: const Icon(Icons.money_outlined),
-                                          errorText: _err('budget_min'),
-                                        ),
-                                        validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: TextFormField(
-                                        controller: _budgetMax,
-                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                                        textInputAction: TextInputAction.next,
-                                        decoration: InputDecoration(
-                                          labelText: l10n.budgetMax,
-                                          prefixIcon: const Icon(Icons.money_outlined),
-                                          errorText: _err('budget_max'),
-                                        ),
-                                        validator: (v) => (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
-                                DropdownButtonFormField<String>(
-                                  value: _budgetType,
-                                  items: [
-                                    DropdownMenuItem(value: 'fixed', child: Text(l10n.fixed)),
-                                    DropdownMenuItem(value: 'hourly', child: Text(l10n.hourly)),
-                                    DropdownMenuItem(value: 'negotiable', child: Text(l10n.negotiable)),
-                                  ],
-                                  onChanged: _loading ? null : (v) => setState(() => _budgetType = v ?? 'fixed'),
-                                  decoration: InputDecoration(
-                                    labelText: l10n.budgetType,
-                                    prefixIcon: const Icon(Icons.tune_outlined),
-                                    errorText: _err('budget_type'),
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                DropdownButtonFormField<String>(
-                                  value: _urgency,
-                                  items: [
-                                    DropdownMenuItem(value: 'low', child: Text(l10n.urgencyLow)),
-                                    DropdownMenuItem(value: 'medium', child: Text(l10n.urgencyMedium)),
-                                    DropdownMenuItem(value: 'high', child: Text(l10n.urgencyHigh)),
-                                    DropdownMenuItem(value: 'urgent', child: Text(l10n.urgencyUrgent)),
-                                  ],
-                                  onChanged: _loading ? null : (v) => setState(() => _urgency = v ?? 'medium'),
-                                  decoration: InputDecoration(
-                                    labelText: l10n.urgency,
-                                    prefixIcon: const Icon(Icons.flag_outlined),
-                                    errorText: _err('urgency'),
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                DropdownButtonFormField<String>(
-                                  value: _paymentMethod,
-                                  items: [
-                                    DropdownMenuItem(value: 'cash', child: Text(l10n.cash)),
-                                    DropdownMenuItem(value: 'card', child: Text(l10n.card)),
-                                    DropdownMenuItem(value: 'online', child: Text(l10n.online)),
-                                  ],
-                                  onChanged: _loading ? null : (v) => setState(() => _paymentMethod = v),
-                                  decoration: InputDecoration(
-                                    labelText: l10n.paymentMethodOptional,
-                                    prefixIcon: const Icon(Icons.credit_card_outlined),
-                                    errorText: _err('payment_method'),
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                SwitchListTile.adaptive(
-                                  value: _isRemote,
-                                  onChanged: _loading ? null : (v) => setState(() => _isRemote = v),
-                                  title: Text(l10n.remote),
-                                  secondary: const Icon(Icons.wifi_tethering_outlined),
-                                ),
-                              ],
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: FilledButton.icon(
+                                onPressed: _loading
+                                    ? null
+                                    : () {
+                                        if (_formKey.currentState?.validate() ??
+                                            false) {
+                                          _submit();
+                                        }
+                                      },
+                                icon: _loading
+                                    ? const SizedBox(
+                                        width: 22,
+                                        height: 22,
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 3),
+                                      )
+                                    : const Icon(Icons.send_rounded),
+                                label: Text(widget.editTaskId == null
+                                    ? l10n.createTask
+                                    : l10n.save),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            width: double.infinity,
-                            child: FilledButton.icon(
-                              onPressed: _loading
-                                  ? null
-                                  : () {
-                                      if (_formKey.currentState?.validate() ?? false) {
-                                        _submit();
-                                      }
-                                    },
-                              icon: _loading
-                                  ? const SizedBox(
-                                      width: 22,
-                                      height: 22,
-                                      child: CircularProgressIndicator(strokeWidth: 3),
-                                    )
-                                  : const Icon(Icons.send_rounded),
-                              label: Text(widget.editTaskId == null ? l10n.createTask : l10n.save),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-                ),
       ),
     );
   }
@@ -714,7 +825,7 @@ class _TaskFormIntro extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
+        color: context.appColors.primary.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -727,7 +838,8 @@ class _TaskFormIntro extends StatelessWidget {
               color: colorScheme.surface,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(Icons.lightbulb_outline_rounded, color: Lem3alamColors.primaryBlue),
+            child: Icon(Icons.lightbulb_outline_rounded,
+                color: context.appColors.primary),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -751,40 +863,11 @@ class _TaskFormHeader extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(Icons.home_work_outlined, size: 30),
-        const SizedBox(width: 6),
-        Flexible(
-          child: Text(
-            'lem3alam',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Flexible(
-          child: Text(
-            title,
-            textAlign: TextAlign.end,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
-          ),
-        ),
-        const SizedBox(width: 6),
-        const Icon(Icons.playlist_add_rounded, size: 28),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Text(
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
 }
 
 class _PhotoAddSlot extends StatelessWidget {
@@ -798,7 +881,7 @@ class _PhotoAddSlot extends StatelessWidget {
     final isPreview = icon != null;
     return Material(
       color: isPreview
-          ? Lem3alamColors.primaryBlue.withValues(alpha: 0.10)
+          ? context.appColors.primary.withValues(alpha: 0.10)
           : Colors.transparent,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
@@ -812,13 +895,14 @@ class _PhotoAddSlot extends StatelessWidget {
             border: isPreview
                 ? null
                 : Border.all(
-                    color: Lem3alamColors.primaryBlue.withValues(alpha: 0.45),
+                    color: context.appColors.primary.withValues(alpha: 0.45),
                     style: BorderStyle.solid,
                   ),
           ),
           child: Icon(
             icon ?? Icons.add_rounded,
-            color: Lem3alamColors.primaryBlue.withValues(alpha: isPreview ? 1 : 0.55),
+            color: context.appColors.primary
+                .withValues(alpha: isPreview ? 1 : 0.55),
             size: isPreview ? 34 : 30,
           ),
         ),
@@ -931,7 +1015,8 @@ class _CameraCaptureScreenState extends State<_CameraCaptureScreen> {
       }
 
       _cameras = cams;
-      final backIndex = cams.indexWhere((c) => c.lensDirection == CameraLensDirection.back);
+      final backIndex =
+          cams.indexWhere((c) => c.lensDirection == CameraLensDirection.back);
       _cameraIndex = backIndex == -1 ? 0 : backIndex;
       await _startController(_cameras[_cameraIndex]);
     } catch (e) {
@@ -1006,7 +1091,9 @@ class _CameraCaptureScreenState extends State<_CameraCaptureScreen> {
         title: Text(l10n.camera),
         actions: [
           IconButton(
-            onPressed: _initializing || _busy || _captured != null ? null : _switchCamera,
+            onPressed: _initializing || _busy || _captured != null
+                ? null
+                : _switchCamera,
             icon: const Icon(Icons.cameraswitch_outlined),
             tooltip: l10n.switchCamera,
           ),
@@ -1049,8 +1136,11 @@ class _CameraCaptureScreenState extends State<_CameraCaptureScreen> {
                                     width: 72,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.white, width: 4),
-                                      color: _busy ? Colors.white.withValues(alpha: 0.2) : Colors.transparent,
+                                      border: Border.all(
+                                          color: Colors.white, width: 4),
+                                      color: _busy
+                                          ? Colors.white.withValues(alpha: 0.2)
+                                          : Colors.transparent,
                                     ),
                                   ),
                                 ),
@@ -1084,7 +1174,8 @@ class _PreviewBody extends StatelessWidget {
             builder: (context, snap) {
               final data = snap.data;
               if (data == null) {
-                return const Center(child: CircularProgressIndicator(color: Colors.white));
+                return const Center(
+                    child: CircularProgressIndicator(color: Colors.white));
               }
               return Center(
                 child: InteractiveViewer(
@@ -1102,7 +1193,8 @@ class _PreviewBody extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
+                    style:
+                        OutlinedButton.styleFrom(foregroundColor: Colors.white),
                     onPressed: onRetake,
                     child: Text(l10n.retake),
                   ),

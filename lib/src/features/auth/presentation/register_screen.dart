@@ -43,7 +43,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   Future<void> _submit() async {
     if (!_acceptedTerms) {
-      setState(() => _error = 'Please accept the Terms & Conditions to continue.');
+      setState(
+          () => _error = 'Please accept the Terms & Conditions to continue.');
       return;
     }
     setState(() {
@@ -79,7 +80,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     final l10n = context.l10n;
     final compact = MediaQuery.sizeOf(context).width < 390;
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F9FF),
+      backgroundColor: context.appColors.surface,
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -105,8 +106,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     error: _error,
                     errors: _fieldErrors,
                     onRoleChanged: (role) => setState(() => _role = role),
-                    onTermsChanged: (accepted) => setState(() => _acceptedTerms = accepted),
-                    onPasswordVisibilityChanged: () => setState(() => _obscurePassword = !_obscurePassword),
+                    onTermsChanged: (accepted) =>
+                        setState(() => _acceptedTerms = accepted),
+                    onPasswordVisibilityChanged: () =>
+                        setState(() => _obscurePassword = !_obscurePassword),
                     onSubmit: _submit,
                   ),
                 ),
@@ -136,16 +139,34 @@ class _RegisterHero extends StatelessWidget {
 
 class _RegisterPanel extends StatelessWidget {
   const _RegisterPanel({
-    required this.compact, required this.formKey, required this.l10n, required this.nameController, required this.emailController,
-    required this.phoneController, required this.cityController, required this.passwordController, required this.role,
-    required this.acceptedTerms, required this.loading, required this.obscurePassword, required this.error, required this.errors,
-    required this.onRoleChanged, required this.onTermsChanged, required this.onPasswordVisibilityChanged, required this.onSubmit,
+    required this.compact,
+    required this.formKey,
+    required this.l10n,
+    required this.nameController,
+    required this.emailController,
+    required this.phoneController,
+    required this.cityController,
+    required this.passwordController,
+    required this.role,
+    required this.acceptedTerms,
+    required this.loading,
+    required this.obscurePassword,
+    required this.error,
+    required this.errors,
+    required this.onRoleChanged,
+    required this.onTermsChanged,
+    required this.onPasswordVisibilityChanged,
+    required this.onSubmit,
   });
 
   final bool compact;
   final GlobalKey<FormState> formKey;
   final AppLocalizations l10n;
-  final TextEditingController nameController, emailController, phoneController, cityController, passwordController;
+  final TextEditingController nameController,
+      emailController,
+      phoneController,
+      cityController,
+      passwordController;
   final String role;
   final bool acceptedTerms, loading, obscurePassword;
   final String? error;
@@ -157,46 +178,121 @@ class _RegisterPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const blue = Lem3alamColors.primaryBlue;
+    final blue = context.appColors.primary;
     return Container(
-      padding: EdgeInsets.fromLTRB(compact ? 22 : 34, 32, compact ? 22 : 34, 34),
-      decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(38))),
+      padding: EdgeInsets.all(compact ? AppStyle.pagePadding : 24),
+      decoration: BoxDecoration(
+          color: context.appColors.surfaceContainerLowest,
+          borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppStyle.sheetRadius))),
       child: Form(
         key: formKey,
         child: AutofillGroup(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Text('Create Your Account 👋', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900, color: const Color(0xFF111B48))),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text(l10n.createAccountTitle,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: context.appColors.onSurface)),
             const SizedBox(height: 4),
-            Text('Join lem3alam and find the right professional for your needs, or offer your services to more people.', style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: const Color(0xFF66789F), height: 1.35)),
+            Text(l10n.createAccountSubtitle,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: context.appColors.onSurfaceVariant, height: 1.35)),
             const SizedBox(height: 22),
-            if (error != null) ...[_ErrorMessage(message: error!), const SizedBox(height: 14)],
-            _Field(controller: nameController, hint: 'Full Name', icon: Icons.person_outline_rounded, error: errors['name']?.first, action: TextInputAction.next, autofill: const [AutofillHints.name], validator: (value) => _required(value, l10n)),
+            if (error != null) ...[
+              _ErrorMessage(message: error!),
+              const SizedBox(height: 14)
+            ],
+            _Field(
+                controller: nameController,
+                hint: l10n.name,
+                icon: Icons.person_outline_rounded,
+                error: errors['name']?.first,
+                action: TextInputAction.next,
+                autofill: const [AutofillHints.name],
+                validator: (value) => _required(value, l10n)),
             const SizedBox(height: 12),
-            _Field(controller: emailController, hint: 'Email address', icon: Icons.mail_outline_rounded, error: errors['email']?.first, action: TextInputAction.next, keyboard: TextInputType.emailAddress, autofill: const [AutofillHints.email], validator: (value) => _required(value, l10n)),
+            _Field(
+                controller: emailController,
+                hint: l10n.email,
+                icon: Icons.mail_outline_rounded,
+                error: errors['email']?.first,
+                action: TextInputAction.next,
+                keyboard: TextInputType.emailAddress,
+                autofill: const [AutofillHints.email],
+                validator: (value) => _required(value, l10n)),
             const SizedBox(height: 12),
-            _Field(controller: phoneController, hint: 'Phone number', icon: Icons.phone_outlined, error: errors['phone']?.first, action: TextInputAction.next, keyboard: TextInputType.phone, autofill: const [AutofillHints.telephoneNumber], validator: (value) => _required(value, l10n)),
+            _Field(
+                controller: phoneController,
+                hint: l10n.phone,
+                icon: Icons.phone_outlined,
+                error: errors['phone']?.first,
+                action: TextInputAction.next,
+                keyboard: TextInputType.phone,
+                autofill: const [AutofillHints.telephoneNumber],
+                validator: (value) => _required(value, l10n)),
             const SizedBox(height: 12),
-            _Field(controller: cityController, hint: l10n.city, icon: Icons.location_city_outlined, error: errors['city']?.first, action: TextInputAction.next, validator: (value) => _required(value, l10n)),
+            _Field(
+                controller: cityController,
+                hint: l10n.city,
+                icon: Icons.location_city_outlined,
+                error: errors['city']?.first,
+                action: TextInputAction.next,
+                validator: (value) => _required(value, l10n)),
             const SizedBox(height: 12),
             TextFormField(
-              controller: passwordController, obscureText: obscurePassword, textInputAction: TextInputAction.done, autofillHints: const [AutofillHints.newPassword],
-              onFieldSubmitted: (_) { if (formKey.currentState?.validate() ?? false) onSubmit(); },
-              decoration: InputDecoration(hintText: l10n.password, prefixIcon: const Icon(Icons.lock_outline_rounded, color: blue), errorText: errors['password']?.first, suffixIcon: IconButton(onPressed: onPasswordVisibilityChanged, icon: Icon(obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined))),
-              validator: (value) => value == null || value.length < 8 ? l10n.passwordTooShort : null,
+              controller: passwordController,
+              obscureText: obscurePassword,
+              textInputAction: TextInputAction.done,
+              autofillHints: const [AutofillHints.newPassword],
+              onFieldSubmitted: (_) {
+                if (formKey.currentState?.validate() ?? false) {
+                  onSubmit();
+                }
+              },
+              decoration: InputDecoration(
+                  hintText: l10n.password,
+                  prefixIcon: Icon(Icons.lock_outline_rounded, color: blue),
+                  errorText: errors['password']?.first,
+                  suffixIcon: IconButton(
+                      onPressed: onPasswordVisibilityChanged,
+                      icon: Icon(obscurePassword
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined))),
+              validator: (value) => value == null || value.length < 8
+                  ? l10n.passwordTooShort
+                  : null,
             ),
             const SizedBox(height: 18),
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: const Color(0xFFF1F6FF), borderRadius: BorderRadius.circular(16)),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('I want to register as:', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w900, color: const Color(0xFF111B48))),
-                const SizedBox(height: 10),
-                Row(children: [
-                  Expanded(child: _RoleButton(label: 'Professional', icon: Icons.person_outline_rounded, selected: role == 'tasker', onTap: () => onRoleChanged('tasker'))),
-                  const SizedBox(width: 10),
-                  Expanded(child: _RoleButton(label: 'Client', icon: Icons.person_outline_rounded, selected: role == 'client', onTap: () => onRoleChanged('client'))),
-                ]),
-              ]),
+              decoration: BoxDecoration(
+                  color: context.appColors.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(16)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.role,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: context.appColors.onSurface)),
+                    const SizedBox(height: 10),
+                    Row(children: [
+                      Expanded(
+                          child: _RoleButton(
+                              label: l10n.tasker,
+                              icon: Icons.person_outline_rounded,
+                              selected: role == 'tasker',
+                              onTap: () => onRoleChanged('tasker'))),
+                      const SizedBox(width: 10),
+                      Expanded(
+                          child: _RoleButton(
+                              label: l10n.client,
+                              icon: Icons.person_outline_rounded,
+                              selected: role == 'client',
+                              onTap: () => onRoleChanged('client'))),
+                    ]),
+                  ]),
             ),
             const SizedBox(height: 14),
             InkWell(
@@ -217,19 +313,24 @@ class _RegisterPanel extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 7),
                       child: RichText(
                         text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: const Color(0xFF66789F),
-                              ),
-                          children: const [
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: context.appColors.onSurfaceVariant,
+                                  ),
+                          children: [
                             TextSpan(text: 'I agree to the '),
                             TextSpan(
                               text: 'Terms & Conditions',
-                              style: TextStyle(color: Lem3alamColors.primaryBlue, fontWeight: FontWeight.w800),
+                              style: TextStyle(
+                                  color: context.appColors.primary,
+                                  fontWeight: FontWeight.w800),
                             ),
                             TextSpan(text: ' and '),
                             TextSpan(
                               text: 'Privacy Policy',
-                              style: TextStyle(color: Lem3alamColors.primaryBlue, fontWeight: FontWeight.w800),
+                              style: TextStyle(
+                                  color: context.appColors.primary,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ],
                         ),
@@ -240,28 +341,79 @@ class _RegisterPanel extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-            SizedBox(height: 58, child: FilledButton(
-              onPressed: loading ? null : () { if (formKey.currentState?.validate() ?? false) onSubmit(); },
-              style: FilledButton.styleFrom(backgroundColor: blue, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17))),
-              child: loading ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white)) : Row(mainAxisSize: MainAxisSize.min, children: [Text(l10n.register), const SizedBox(width: 10), const Icon(Icons.arrow_forward_rounded)]),
-            )),
+            SizedBox(
+                height: AppStyle.controlHeight,
+                child: FilledButton(
+                  onPressed: loading
+                      ? null
+                      : () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            onSubmit();
+                          }
+                        },
+                  child: loading
+                      ? SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              color: context.appColors.onPrimary))
+                      : Row(mainAxisSize: MainAxisSize.min, children: [
+                          Text(l10n.register),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.arrow_forward_rounded)
+                        ]),
+                )),
             const SizedBox(height: 22),
             const _OrDivider(),
             const SizedBox(height: 18),
-            SizedBox(height: 58, child: OutlinedButton(onPressed: () {}, child: const Row(mainAxisSize: MainAxisSize.min, children: [_GoogleMark(), SizedBox(width: 14), Text('Sign up with Google', style: TextStyle(color: Color(0xFF111B48)))]))),
+            SizedBox(
+                height: AppStyle.controlHeight,
+                child: OutlinedButton(
+                    onPressed: () {},
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      _GoogleMark(),
+                      SizedBox(width: 14),
+                      Flexible(
+                          child: Text('Sign up with Google',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: context.appColors.onSurface)))
+                    ]))),
             const SizedBox(height: 18),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(l10n.alreadyHaveAccount, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF66789F))), TextButton(onPressed: loading ? null : () => context.goNamed(AppRouteNames.login), child: Text(l10n.login))]),
+            Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(l10n.alreadyHaveAccount,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: context.appColors.onSurfaceVariant)),
+                  TextButton(
+                      onPressed: loading
+                          ? null
+                          : () => context.goNamed(AppRouteNames.login),
+                      child: Text(l10n.login))
+                ]),
           ]),
         ),
       ),
     );
   }
 
-  String? _required(String? value, AppLocalizations l10n) => value == null || value.trim().isEmpty ? l10n.requiredField : null;
+  String? _required(String? value, AppLocalizations l10n) =>
+      value == null || value.trim().isEmpty ? l10n.requiredField : null;
 }
 
 class _Field extends StatelessWidget {
-  const _Field({required this.controller, required this.hint, required this.icon, required this.error, required this.action, this.keyboard, this.autofill, required this.validator});
+  const _Field(
+      {required this.controller,
+      required this.hint,
+      required this.icon,
+      required this.error,
+      required this.action,
+      this.keyboard,
+      this.autofill,
+      required this.validator});
   final TextEditingController controller;
   final String hint;
   final IconData icon;
@@ -271,34 +423,85 @@ class _Field extends StatelessWidget {
   final Iterable<String>? autofill;
   final FormFieldValidator<String> validator;
   @override
-  Widget build(BuildContext context) => TextFormField(controller: controller, keyboardType: keyboard, textInputAction: action, autofillHints: autofill, decoration: InputDecoration(hintText: hint, prefixIcon: Icon(icon, color: Lem3alamColors.primaryBlue), errorText: error), validator: validator);
+  Widget build(BuildContext context) => TextFormField(
+      controller: controller,
+      keyboardType: keyboard,
+      textInputAction: action,
+      autofillHints: autofill,
+      decoration: InputDecoration(
+          hintText: hint,
+          prefixIcon: Icon(icon, color: context.appColors.primary),
+          errorText: error),
+      validator: validator);
 }
 
 class _RoleButton extends StatelessWidget {
-  const _RoleButton({required this.label, required this.icon, required this.selected, required this.onTap});
+  const _RoleButton(
+      {required this.label,
+      required this.icon,
+      required this.selected,
+      required this.onTap});
   final String label;
   final IconData icon;
   final bool selected;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) => SizedBox(height: 54, child: FilledButton.tonal(onPressed: onTap, style: FilledButton.styleFrom(backgroundColor: selected ? Lem3alamColors.primaryBlue : Colors.white, foregroundColor: selected ? Colors.white : const Color(0xFF111B48), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))), child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(icon, size: 22), const SizedBox(width: 8), Flexible(child: Text(label, overflow: TextOverflow.ellipsis))])));
+  Widget build(BuildContext context) => SizedBox(
+      height: 54,
+      child: FilledButton.tonal(
+          onPressed: onTap,
+          style: FilledButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            backgroundColor: selected
+                ? context.appColors.primary
+                : context.appColors.surfaceContainerLowest,
+            foregroundColor: selected
+                ? context.appColors.onPrimary
+                : context.appColors.onSurface,
+          ),
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
+            Icon(icon, size: 22),
+            const SizedBox(width: 8),
+            Flexible(child: Text(label, overflow: TextOverflow.ellipsis))
+          ])));
 }
 
 class _ErrorMessage extends StatelessWidget {
   const _ErrorMessage({required this.message});
   final String message;
   @override
-  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: const Color(0xFFFFECEB), borderRadius: BorderRadius.circular(14)), child: Text(message, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: const Color(0xFFB42318))));
+  Widget build(BuildContext context) => Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+          color: context.appColors.errorContainer,
+          borderRadius: BorderRadius.circular(14)),
+      child: Text(message,
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(color: context.appColors.onErrorContainer)));
 }
 
 class _OrDivider extends StatelessWidget {
   const _OrDivider();
   @override
-  Widget build(BuildContext context) => Row(children: [const Expanded(child: Divider()), Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Text('or', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: const Color(0xFF66789F)))), const Expanded(child: Divider())]);
+  Widget build(BuildContext context) => Row(children: [
+        const Expanded(child: Divider()),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text('or',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: context.appColors.onSurfaceVariant))),
+        const Expanded(child: Divider())
+      ]);
 }
 
 class _GoogleMark extends StatelessWidget {
   const _GoogleMark();
   @override
-  Widget build(BuildContext context) => const Text('G', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Color(0xFF4285F4)));
+  Widget build(BuildContext context) => const Text('G',
+      style: TextStyle(
+          fontSize: 28, fontWeight: FontWeight.w800, color: Color(0xFF4285F4)));
 }

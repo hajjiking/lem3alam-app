@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'task_style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,17 +33,17 @@ void _dbgEvent({
     unawaited(
       dio
           .post<Object?>(
-        fallbackUrl,
-        data: jsonEncode({
-          'sessionId': sessionId,
-          'runId': runId,
-          'hypothesisId': hypothesisId,
-          'location': location,
-          'msg': '[DEBUG] $msg',
-          'data': data,
-        }),
-        options: Options(headers: {'Content-Type': 'application/json'}),
-      )
+            fallbackUrl,
+            data: jsonEncode({
+              'sessionId': sessionId,
+              'runId': runId,
+              'hypothesisId': hypothesisId,
+              'location': location,
+              'msg': '[DEBUG] $msg',
+              'data': data,
+            }),
+            options: Options(headers: {'Content-Type': 'application/json'}),
+          )
           .then<void>((Response<Object?> _) {})
           .catchError((Object _) {}),
     );
@@ -66,10 +67,12 @@ class _NearbyTasksScreenState extends ConsumerState<NearbyTasksScreen> {
     ref.listenManual(nearbyTasksControllerProvider, (previous, next) {
       if (!mounted) return;
       _scheduleRefresh(next.settings.refreshIntervalMinutes);
-      if (next.newHighPriorityCount > 0 && previous?.newHighPriorityCount != next.newHighPriorityCount) {
+      if (next.newHighPriorityCount > 0 &&
+          previous?.newHighPriorityCount != next.newHighPriorityCount) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(context.l10n.newHighPriorityNearbyTasksFound(next.newHighPriorityCount)),
+            content: Text(context.l10n
+                .newHighPriorityNearbyTasksFound(next.newHighPriorityCount)),
           ),
         );
       }
@@ -161,8 +164,11 @@ class _NearbyTasksScreenState extends ConsumerState<NearbyTasksScreen> {
                         onRefresh: controller.refresh,
                         child: ListView.separated(
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                          itemCount: state.page.items.isEmpty ? 1 : state.page.items.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 12),
+                          itemCount: state.page.items.isEmpty
+                              ? 1
+                              : state.page.items.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 12),
                           itemBuilder: (context, index) {
                             if (state.page.items.isEmpty) {
                               return AppEmptyState(
@@ -229,7 +235,8 @@ class _ControlsBar extends ConsumerWidget {
       child: AppSectionCard(
         title: l10n.feedControls,
         subtitle: state.lastRefreshedAt == null
-            ? l10n.radiusAdjustable(state.settings.minRadiusKm, state.settings.maxRadiusKm)
+            ? l10n.radiusAdjustable(
+                state.settings.minRadiusKm, state.settings.maxRadiusKm)
             : l10n.lastRefreshedAt(
                 '${state.lastRefreshedAt!.hour.toString().padLeft(2, '0')}:${state.lastRefreshedAt!.minute.toString().padLeft(2, '0')}',
               ),
@@ -240,7 +247,10 @@ class _ControlsBar extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     l10n.radiusLabel(state.radiusKm),
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(fontWeight: FontWeight.w800),
                   ),
                 ),
                 FilterChip(
@@ -254,10 +264,12 @@ class _ControlsBar extends ConsumerWidget {
               value: state.radiusKm.toDouble(),
               min: state.settings.minRadiusKm.toDouble(),
               max: state.settings.maxRadiusKm.toDouble(),
-              divisions: state.settings.maxRadiusKm - state.settings.minRadiusKm,
+              divisions:
+                  state.settings.maxRadiusKm - state.settings.minRadiusKm,
               label: '${state.radiusKm} km',
               onChanged: (value) => controller.updateRadius(value.round()),
-              onChangeEnd: (value) => controller.updateRadius(value.round(), refreshFeed: true),
+              onChangeEnd: (value) =>
+                  controller.updateRadius(value.round(), refreshFeed: true),
             ),
             if (state.loading) const LinearProgressIndicator(minHeight: 2),
           ],
@@ -367,14 +379,21 @@ class _NearbyTaskCard extends ConsumerWidget {
                             task.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w800),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            task.localizedCategoryName(languageCode) ?? task.city,
+                            task.localizedCategoryName(languageCode) ??
+                                task.city,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: scheme.onSurfaceVariant),
                           ),
                         ],
                       ),
@@ -382,8 +401,9 @@ class _NearbyTaskCard extends ConsumerWidget {
                     const SizedBox(width: 8),
                     _Badge(
                       label: _urgencyLabel(context, task.urgency),
-                      background: _urgencyColor(scheme, task.urgency).withValues(alpha: 0.12),
-                      foreground: _urgencyColor(scheme, task.urgency),
+                      background: taskUrgencyColor(context, task.urgency)
+                          .withValues(alpha: 0.12),
+                      foreground: taskUrgencyColor(context, task.urgency),
                     ),
                   ],
                 ),
@@ -393,23 +413,28 @@ class _NearbyTaskCard extends ConsumerWidget {
                   runSpacing: 8,
                   children: [
                     _Badge(
-                      label: task.distanceKm == null ? l10n.distanceUnavailable : '${task.distanceKm!.toStringAsFixed(1)} km',
+                      label: task.distanceKm == null
+                          ? l10n.distanceUnavailable
+                          : '${task.distanceKm!.toStringAsFixed(1)} km',
                       background: scheme.primaryContainer,
                       foreground: scheme.onPrimaryContainer,
                     ),
                     _Badge(
-                      label: '${task.budgetMin.toStringAsFixed(0)} - ${task.budgetMax.toStringAsFixed(0)} MAD',
+                      label:
+                          '${task.budgetMin.toStringAsFixed(0)} - ${task.budgetMax.toStringAsFixed(0)} MAD',
                       background: scheme.secondaryContainer,
                       foreground: scheme.onSecondaryContainer,
                     ),
                     if (task.deadline != null)
                       _Badge(
-                        label: task.deadline!.toIso8601String().split('T').first,
+                        label:
+                            task.deadline!.toIso8601String().split('T').first,
                         background: scheme.surfaceContainerHigh,
                         foreground: scheme.onSurface,
                       ),
                     _Badge(
-                      label: l10n.clientRatingLabel(task.clientRating?.toStringAsFixed(1) ?? '0.0'),
+                      label: l10n.clientRatingLabel(
+                          task.clientRating?.toStringAsFixed(1) ?? '0.0'),
                       background: scheme.tertiaryContainer,
                       foreground: scheme.onTertiaryContainer,
                     ),
@@ -431,7 +456,9 @@ class _NearbyTaskCard extends ConsumerWidget {
                           await controller.accept(task);
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(l10n.applicationSubmittedNearbyTask)),
+                              SnackBar(
+                                  content: Text(
+                                      l10n.applicationSubmittedNearbyTask)),
                             );
                           }
                         },
@@ -443,8 +470,11 @@ class _NearbyTaskCard extends ConsumerWidget {
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () => controller.toggleSave(task),
-                        icon: Icon(task.isSaved ? Icons.bookmark : Icons.bookmark_border),
-                        label: Text(task.isSaved ? l10n.savedStatus : l10n.save),
+                        icon: Icon(task.isSaved
+                            ? Icons.bookmark
+                            : Icons.bookmark_border),
+                        label:
+                            Text(task.isSaved ? l10n.savedStatus : l10n.save),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -520,17 +550,6 @@ class _Badge extends StatelessWidget {
             ),
       ),
     );
-  }
-}
-
-Color _urgencyColor(ColorScheme scheme, String urgency) {
-  switch (urgency) {
-    case 'high':
-      return scheme.error;
-    case 'medium':
-      return Colors.orange;
-    default:
-      return scheme.primary;
   }
 }
 

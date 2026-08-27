@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import '../../../../core/ui/app_theme.dart';
 
 class RatingWidget extends StatelessWidget {
   const RatingWidget({
     super.key,
     required this.rating,
     this.size = 18,
-    this.activeColor = const Color(0xFFF59E0B),
+    this.activeColor,
     this.inactiveColor,
     this.showHalf = true,
   });
 
   final double rating;
   final double size;
-  final Color activeColor;
+  final Color? activeColor;
   final Color? inactiveColor;
   final bool showHalf;
 
   @override
   Widget build(BuildContext context) {
+    final active = activeColor ?? context.appTokens.warning;
     final ic = inactiveColor ??
         Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.7);
     final r = rating.clamp(0.0, 5.0);
@@ -36,7 +38,7 @@ class RatingWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 right: i < totalFull - 1 || half > 0 || empty > 0 ? 2 : 0),
-            child: Icon(Icons.star_rounded, size: size, color: activeColor),
+            child: Icon(Icons.star_rounded, size: size, color: active),
           ),
         if (half == 1)
           Padding(
@@ -46,8 +48,7 @@ class RatingWidget extends StatelessWidget {
                 Icon(Icons.star_rounded, size: size, color: ic),
                 ClipRect(
                   clipper: const _HalfClipper(),
-                  child:
-                      Icon(Icons.star_rounded, size: size, color: activeColor),
+                  child: Icon(Icons.star_rounded, size: size, color: active),
                 ),
               ],
             ),

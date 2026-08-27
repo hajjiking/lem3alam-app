@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 class SplashAnimationValues {
   SplashAnimationValues({
@@ -132,15 +133,10 @@ class SplashBackground extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: isDark
-              ? const [
-                  Color(0xFF0A1730),
-                  Color(0xFF10294A),
-                ]
-              : const [
-                  Colors.white,
-                  Color(0xffEDF5FF),
-                ],
+          colors: [
+            context.appColors.surface,
+            context.appColors.surfaceContainerLow
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -153,7 +149,7 @@ class SplashBackground extends StatelessWidget {
               opacity: patternOpacity,
               child: CustomPaint(
                 painter: MoroccanPatternPainter(
-                  color: const Color(0xff1565C0).withValues(
+                  color: context.appColors.primary.withValues(
                     alpha: isDark ? 0.08 : 0.06,
                   ),
                 ),
@@ -169,7 +165,7 @@ class SplashBackground extends StatelessWidget {
                   gradient: RadialGradient(
                     radius: 1.1,
                     colors: [
-                      const Color(0xff42A5F5).withValues(
+                      context.appColors.secondary.withValues(
                         alpha: isDark ? 0.12 : 0.18 * glowProgress,
                       ),
                       Colors.transparent,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 class StatisticCard extends StatelessWidget {
   const StatisticCard({
@@ -15,7 +15,6 @@ class StatisticCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
         final cross = columns ?? _columnsForWidth(constraints.maxWidth);
@@ -41,26 +40,7 @@ class StatisticCard extends StatelessWidget {
           );
         });
         return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 24,
-                offset: const Offset(0, 8),
-              ),
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.02),
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              ),
-            ],
-            border: Border.all(
-              color: scheme.outlineVariant.withValues(alpha: 0.35),
-              width: 1,
-            ),
-          ),
+          decoration: AppStyle.cardDecoration(context),
           padding: padding,
           child: Column(
             children: rows,
@@ -102,11 +82,10 @@ class _Tile extends StatelessWidget {
           item.value,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.inter(
-            textStyle: Theme.of(context).textTheme.titleMedium,
-            fontWeight: FontWeight.w900,
-            color: scheme.onSurface,
-          ),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: scheme.onSurface,
+              ),
         ),
         const SizedBox(height: 2),
         Text(

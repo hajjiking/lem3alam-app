@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/analytics/app_analytics.dart';
 import '../../../core/config/app_config.dart';
@@ -368,8 +368,8 @@ class _Filters extends StatelessWidget {
                               Icons.star_rounded,
                               size: 14,
                               color: selected
-                                  ? Colors.white
-                                  : const Color(0xFFF59E0B),
+                                  ? context.appColors.onPrimary
+                                  : context.appTokens.warning,
                             ),
                           ),
                       ],
@@ -406,13 +406,13 @@ class _Filters extends StatelessWidget {
                         ],
                         Text(
                           r == 0 ? l10n.all : r.toString(),
-                          style: GoogleFonts.cairo(
-                            textStyle: Theme.of(context).textTheme.labelLarge,
-                            fontWeight: FontWeight.w800,
-                            color: selected
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurfaceVariant,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                    color: selected
+                                        ? colorScheme.onPrimary
+                                        : colorScheme.onSurfaceVariant,
+                                  ),
                         ),
                       ],
                     ),
@@ -859,7 +859,7 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                 Text(
                   l10n.writeReview,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w800,
                       ),
                 ),
                 const SizedBox(height: 14),
@@ -885,7 +885,7 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                                     ? Icons.star_rounded
                                     : Icons.star_outline_rounded,
                                 size: 34,
-                                color: const Color(0xFFF59E0B),
+                                color: context.appTokens.warning,
                               ),
                             ),
                           ),
@@ -932,16 +932,14 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                               },
                         style: FilledButton.styleFrom(
                           minimumSize: const Size.fromHeight(56),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
                         ),
                         icon: _submitting
-                            ? const SizedBox(
+                            ? SizedBox(
                                 height: 18,
                                 width: 18,
                                 child: CircularProgressIndicator(
-                                    strokeWidth: 2, color: Colors.white),
+                                    strokeWidth: 2,
+                                    color: context.appColors.onPrimary),
                               )
                             : const Icon(Icons.send_rounded),
                         label: Text(_rating == 0
@@ -985,8 +983,6 @@ class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
                   onPressed: _submitting ? null : _open,
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(56),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18)),
                   ),
                   icon: const Icon(Icons.edit_note_rounded),
                   label: Text(l10n.writeReview),

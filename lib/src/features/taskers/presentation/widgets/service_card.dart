@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
@@ -31,29 +31,10 @@ class ServiceCard extends StatelessWidget {
     final accent = color ?? scheme.primary;
     final card = Container(
       width: 280,
-      height: 210,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
-        ],
-        border: Border.all(
-          color: scheme.outlineVariant.withValues(alpha: 0.30),
-          width: 1,
-        ),
-      ),
+      decoration: AppStyle.cardDecoration(context),
       padding: const EdgeInsets.all(18),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -66,17 +47,14 @@ class ServiceCard extends StatelessWidget {
             child: Icon(icon, size: 24, color: accent),
           ),
           const SizedBox(height: 14),
-          Expanded(
-            child: Text(
-              name,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.inter(
-                textStyle: Theme.of(context).textTheme.titleMedium,
-                fontWeight: FontWeight.w900,
-                height: 1.2,
-              ),
-            ),
+          Text(
+            name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  height: 1.2,
+                ),
           ),
           const SizedBox(height: 8),
           Row(
@@ -94,7 +72,7 @@ class ServiceCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.w900,
+                          fontWeight: FontWeight.w800,
                           color: accent,
                         ),
                   ),
@@ -123,15 +101,11 @@ class ServiceCard extends StatelessWidget {
                   onPressed: onBook,
                   style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(44),
-                    backgroundColor: accent,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   child: Text(
                     bookLabel,
-                    style: const TextStyle(fontWeight: FontWeight.w900),
+                    style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                 ),
               ),
@@ -142,7 +116,7 @@ class ServiceCard extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.only(right: 14),
+      padding: const EdgeInsetsDirectional.only(end: 14),
       child: heroTag == null ? card : Hero(tag: heroTag!, child: card),
     );
   }

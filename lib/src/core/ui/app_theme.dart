@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../networking/dio_provider.dart';
 
-final themeModeControllerProvider = NotifierProvider<ThemeModeController, ThemeMode>(ThemeModeController.new);
+final themeModeControllerProvider =
+    NotifierProvider<ThemeModeController, ThemeMode>(ThemeModeController.new);
 
 class ThemeModeController extends Notifier<ThemeMode> {
   static const _key = 'theme_mode';
@@ -138,9 +138,9 @@ abstract class AppTheme {
   );
 
   static const _lightTokens = Lem3alamThemeTokens(
-    warning: Lem3alamColors.marrakeshGold,
-    success: Lem3alamColors.mint,
-    info: Lem3alamColors.teal,
+    warning: Color(0xFF946200),
+    success: Color(0xFF087F5B),
+    info: Color(0xFF087F8C),
     accentPurple: Color(0xFF6D4AFF),
     headerStart: Color(0xFF075DF5),
     headerEnd: Color(0xFF0052E8),
@@ -158,86 +158,86 @@ abstract class AppTheme {
   );
 
   static ThemeData _theme(ColorScheme colorScheme, Lem3alamThemeTokens tokens) {
-    final cairo = GoogleFonts.cairo();
+    final baseTextTheme = ThemeData(
+      brightness: colorScheme.brightness,
+      useMaterial3: true,
+      fontFamily: 'Cairo',
+    ).textTheme;
 
-    final baseTextTheme = GoogleFonts.cairoTextTheme(
-      ThemeData(
-        brightness: colorScheme.brightness,
-        useMaterial3: true,
-      ).textTheme,
-    );
+    final textTheme = baseTextTheme
+        .copyWith(
+          displayLarge: baseTextTheme.displayLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.1,
+            letterSpacing: -0.8,
+          ),
+          displayMedium: baseTextTheme.displayMedium?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.15,
+            letterSpacing: -0.4,
+          ),
+          headlineLarge: baseTextTheme.headlineLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.2,
+          ),
+          headlineMedium: baseTextTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.2,
+          ),
+          headlineSmall: baseTextTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.25,
+          ),
+          titleLarge: baseTextTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            height: 1.25,
+          ),
+          titleMedium: baseTextTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+            height: 1.3,
+          ),
+          titleSmall: baseTextTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+            height: 1.3,
+          ),
+          bodyLarge: baseTextTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+            height: 1.5,
+          ),
+          bodyMedium: baseTextTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w400,
+            height: 1.55,
+          ),
+          bodySmall: baseTextTheme.bodySmall?.copyWith(
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+          ),
+          labelLarge: baseTextTheme.labelLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+            letterSpacing: 0.1,
+          ),
+          labelMedium: baseTextTheme.labelMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+          labelSmall: baseTextTheme.labelSmall?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        )
+        .apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: colorScheme.onSurface,
+        );
 
-    final textTheme = baseTextTheme.copyWith(
-      displayLarge: baseTextTheme.displayLarge?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.1,
-        letterSpacing: -0.8,
-      ),
-      displayMedium: baseTextTheme.displayMedium?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.15,
-        letterSpacing: -0.4,
-      ),
-      headlineLarge: baseTextTheme.headlineLarge?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.2,
-      ),
-      headlineMedium: baseTextTheme.headlineMedium?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.2,
-      ),
-      headlineSmall: baseTextTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.25,
-      ),
-      titleLarge: baseTextTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w800,
-        height: 1.25,
-      ),
-      titleMedium: baseTextTheme.titleMedium?.copyWith(
-        fontWeight: FontWeight.w700,
-        height: 1.3,
-      ),
-      titleSmall: baseTextTheme.titleSmall?.copyWith(
-        fontWeight: FontWeight.w700,
-        height: 1.3,
-      ),
-      bodyLarge: baseTextTheme.bodyLarge?.copyWith(
-        fontWeight: FontWeight.w500,
-        height: 1.5,
-      ),
-      bodyMedium: baseTextTheme.bodyMedium?.copyWith(
-        fontWeight: FontWeight.w400,
-        height: 1.55,
-      ),
-      bodySmall: baseTextTheme.bodySmall?.copyWith(
-        fontWeight: FontWeight.w400,
-        height: 1.5,
-      ),
-      labelLarge: baseTextTheme.labelLarge?.copyWith(
-        fontWeight: FontWeight.w800,
-        letterSpacing: 0.1,
-      ),
-      labelMedium: baseTextTheme.labelMedium?.copyWith(
-        fontWeight: FontWeight.w700,
-      ),
-      labelSmall: baseTextTheme.labelSmall?.copyWith(
-        fontWeight: FontWeight.w700,
-      ),
-    ).apply(
-      bodyColor: colorScheme.onSurface,
-      displayColor: colorScheme.onSurface,
-    );
-
-    const buttonRadius = 16.0;
-    final fieldRadius = BorderRadius.circular(16);
-    final cardRadius = BorderRadius.circular(22);
-    final buttonShape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(buttonRadius));
+    const buttonRadius = AppStyle.controlRadius;
+    final fieldRadius = BorderRadius.circular(AppStyle.controlRadius);
+    final cardRadius = BorderRadius.circular(AppStyle.cardRadius);
+    final buttonShape = RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(buttonRadius));
     final cardShape = RoundedRectangleBorder(borderRadius: cardRadius);
 
     return ThemeData(
       useMaterial3: true,
-      fontFamily: cairo.fontFamily,
+      fontFamily: 'Cairo',
       colorScheme: colorScheme,
       textTheme: textTheme,
       scaffoldBackgroundColor: colorScheme.surface,
@@ -266,7 +266,8 @@ abstract class AppTheme {
         shadowColor: colorScheme.shadow,
         surfaceTintColor: Colors.transparent,
         shape: cardShape.copyWith(
-          side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
+          side: BorderSide(
+              color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
         ),
       ),
       dialogTheme: DialogThemeData(
@@ -286,7 +287,8 @@ abstract class AppTheme {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: colorScheme.inverseSurface,
-        contentTextStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.onInverseSurface),
+        contentTextStyle:
+            textTheme.bodyMedium?.copyWith(color: colorScheme.onInverseSurface),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         elevation: 2,
         insetPadding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
@@ -295,52 +297,42 @@ abstract class AppTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           shadowColor: colorScheme.shadow.withValues(alpha: 0.18),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          backgroundColor: Lem3alamColors.primaryBlue,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: colorScheme.surfaceContainerHighest,
-          disabledForegroundColor: colorScheme.onSurfaceVariant,
-          shape: buttonShape,
-          textStyle: textTheme.labelLarge,
-          minimumSize: const Size(0, 52),
-        ),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           backgroundColor: colorScheme.primary,
           foregroundColor: colorScheme.onPrimary,
           disabledBackgroundColor: colorScheme.surfaceContainerHighest,
           disabledForegroundColor: colorScheme.onSurfaceVariant,
           shape: buttonShape,
           textStyle: textTheme.labelLarge,
-          minimumSize: const Size(0, 52),
-        ).copyWith(
-          shadowColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return Colors.transparent;
-            return colorScheme.shadow.withValues(alpha: 0.22);
-          }),
-          elevation: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return 0;
-            if (states.contains(WidgetState.pressed)) return 0;
-            return 8;
-          }),
+          minimumSize: const Size(0, AppStyle.controlHeight),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+          disabledForegroundColor: colorScheme.onSurfaceVariant,
+          shape: buttonShape,
+          textStyle: textTheme.labelLarge,
+          minimumSize: const Size(0, AppStyle.controlHeight),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          foregroundColor: Lem3alamColors.primaryBlue,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          foregroundColor: colorScheme.primary,
           side: BorderSide(color: colorScheme.outlineVariant, width: 1.2),
           shape: buttonShape,
           textStyle: textTheme.labelLarge,
-          minimumSize: const Size(0, 52),
+          minimumSize: const Size(0, AppStyle.controlHeight),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: Lem3alamColors.primaryBlue,
+          foregroundColor: colorScheme.primary,
           textStyle: textTheme.labelLarge,
           shape: buttonShape,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -349,12 +341,16 @@ abstract class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surfaceContainerLow,
-        hintStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
-        labelStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
-        floatingLabelStyle: textTheme.bodyMedium?.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+        hintStyle:
+            textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+        labelStyle:
+            textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+        floatingLabelStyle: textTheme.bodyMedium
+            ?.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
         prefixIconColor: colorScheme.onSurfaceVariant,
         suffixIconColor: colorScheme.onSurfaceVariant,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
         border: OutlineInputBorder(
           borderRadius: fieldRadius,
           borderSide: BorderSide(color: colorScheme.outlineVariant),
@@ -365,7 +361,7 @@ abstract class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: fieldRadius,
-          borderSide: BorderSide(color: Lem3alamColors.primaryBlue, width: 1.8),
+          borderSide: BorderSide(color: colorScheme.primary, width: 1.8),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: fieldRadius,
@@ -380,10 +376,13 @@ abstract class AppTheme {
         backgroundColor: colorScheme.surfaceContainer,
         selectedColor: colorScheme.primaryContainer,
         disabledColor: colorScheme.surfaceContainerHighest,
-        side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.75)),
+        side: BorderSide(
+            color: colorScheme.outlineVariant.withValues(alpha: 0.75)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
-        labelStyle: textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
-        secondaryLabelStyle: textTheme.labelMedium?.copyWith(color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700),
+        labelStyle:
+            textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
+        secondaryLabelStyle: textTheme.labelMedium?.copyWith(
+            color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
       listTileTheme: ListTileThemeData(
@@ -397,11 +396,12 @@ abstract class AppTheme {
         height: 80,
         backgroundColor: colorScheme.surfaceContainerLowest,
         surfaceTintColor: Colors.transparent,
-        indicatorColor: Lem3alamColors.primaryBlue.withValues(alpha: 0.10),
+        indicatorColor: colorScheme.primary.withValues(alpha: 0.10),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final isSelected = states.contains(WidgetState.selected);
           return textTheme.labelSmall?.copyWith(
-            color: isSelected ? Lem3alamColors.primaryBlue : colorScheme.onSurfaceVariant,
+            color:
+                isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w700,
           );
         }),
@@ -409,33 +409,82 @@ abstract class AppTheme {
           final isSelected = states.contains(WidgetState.selected);
           return IconThemeData(
             size: 24,
-            color: isSelected ? Lem3alamColors.primaryBlue : colorScheme.onSurfaceVariant,
+            color:
+                isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
           );
         }),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         backgroundColor: colorScheme.surfaceContainerLowest,
-        selectedItemColor: Lem3alamColors.primaryBlue,
+        selectedItemColor: colorScheme.primary,
         unselectedItemColor: colorScheme.onSurfaceVariant,
-        selectedLabelStyle: textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w800),
-        unselectedLabelStyle: textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w700),
+        selectedLabelStyle:
+            textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w800),
+        unselectedLabelStyle:
+            textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w700),
         elevation: 8,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         elevation: 8,
-        backgroundColor: Lem3alamColors.primaryBlue,
-        foregroundColor: Colors.white,
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
-        color: Lem3alamColors.primaryBlue,
+        color: colorScheme.primary,
         linearTrackColor: colorScheme.surfaceContainerHighest,
         circularTrackColor: colorScheme.surfaceContainerHighest,
         linearMinHeight: 6,
       ),
+      tabBarTheme: TabBarThemeData(
+        labelColor: colorScheme.primary,
+        unselectedLabelColor: colorScheme.onSurfaceVariant,
+        labelStyle: textTheme.labelLarge,
+        unselectedLabelStyle: textTheme.labelLarge,
+        indicatorColor: colorScheme.primary,
+        dividerColor: colorScheme.outlineVariant,
+      ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: colorScheme.surfaceContainerLowest,
+        surfaceTintColor: Colors.transparent,
+        textStyle: textTheme.bodyMedium,
+        shape: buttonShape,
+      ),
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outlineVariant,
+        thickness: 1,
+        space: 24,
+      ),
     );
   }
+}
+
+/// Shared geometry for both Material controls and custom feature widgets.
+abstract final class AppStyle {
+  static const double pagePadding = 16;
+  static const double cardPadding = 18;
+  static const double cardRadius = 22;
+  static const double controlRadius = 16;
+  static const double sheetRadius = 28;
+  static const double controlHeight = 52;
+
+  static BoxDecoration cardDecoration(BuildContext context) => BoxDecoration(
+        color: context.appColors.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(cardRadius),
+        border: Border.all(
+          color: context.appColors.outlineVariant.withValues(alpha: 0.6),
+        ),
+      );
+}
+
+extension AppThemeContext on BuildContext {
+  ColorScheme get appColors => Theme.of(this).colorScheme;
+  Lem3alamThemeTokens get appTokens =>
+      Theme.of(this).extension<Lem3alamThemeTokens>() ??
+      (appColors.brightness == Brightness.dark
+          ? AppTheme._darkTokens
+          : AppTheme._lightTokens);
 }
 
 abstract final class Lem3alamColors {
@@ -497,7 +546,8 @@ class Lem3alamThemeTokens extends ThemeExtension<Lem3alamThemeTokens> {
   }
 
   @override
-  Lem3alamThemeTokens lerp(ThemeExtension<Lem3alamThemeTokens>? other, double t) {
+  Lem3alamThemeTokens lerp(
+      ThemeExtension<Lem3alamThemeTokens>? other, double t) {
     if (other is! Lem3alamThemeTokens) {
       return this;
     }
@@ -506,7 +556,8 @@ class Lem3alamThemeTokens extends ThemeExtension<Lem3alamThemeTokens> {
       warning: Color.lerp(warning, other.warning, t) ?? warning,
       success: Color.lerp(success, other.success, t) ?? success,
       info: Color.lerp(info, other.info, t) ?? info,
-      accentPurple: Color.lerp(accentPurple, other.accentPurple, t) ?? accentPurple,
+      accentPurple:
+          Color.lerp(accentPurple, other.accentPurple, t) ?? accentPurple,
       headerStart: Color.lerp(headerStart, other.headerStart, t) ?? headerStart,
       headerEnd: Color.lerp(headerEnd, other.headerEnd, t) ?? headerEnd,
       archLine: Color.lerp(archLine, other.archLine, t) ?? archLine,

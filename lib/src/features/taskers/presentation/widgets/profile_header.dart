@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 
 import '../../../../core/config/app_config.dart';
 import '../../../../core/l10n/l10n.dart';
@@ -78,13 +78,12 @@ class ProfileHeader extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: GoogleFonts.inter(
-                        textStyle: Theme.of(context).textTheme.titleLarge,
-                        fontWeight: FontWeight.w900,
-                        height: 1.1,
-                        fontSize: 24,
-                        color: scheme.onSurface,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            height: 1.1,
+                            fontSize: 24,
+                            color: scheme.onSurface,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -105,7 +104,7 @@ class ProfileHeader extends StatelessWidget {
                           rating.toStringAsFixed(1),
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w800,
                                     color: scheme.onSurface,
                                   ),
                         ),
@@ -208,12 +207,12 @@ class ProfileHeader extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: onMessage,
                 style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
+                  minimumSize: const Size.fromHeight(AppStyle.controlHeight),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   side: BorderSide(
                       color: scheme.outlineVariant.withValues(alpha: 0.6),
                       width: 1.2),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
                 ),
                 icon: const Icon(Icons.chat_bubble_outline_rounded, size: 20),
                 label: Text(
@@ -224,19 +223,18 @@ class ProfileHeader extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Expanded(
-              flex: 2,
               child: FilledButton.icon(
                 onPressed: onBookNow,
                 style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18)),
+                  minimumSize: const Size.fromHeight(AppStyle.controlHeight),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 ),
                 icon: const Icon(Icons.calendar_month_rounded, size: 20),
                 label: Text(
                   bookNowLabel,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w900, letterSpacing: 0.1),
+                      fontWeight: FontWeight.w800, letterSpacing: 0.1),
                 ),
               ),
             ),
@@ -318,8 +316,8 @@ class _Avatar extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: scheme.surface, width: 2),
               ),
-              child: const Icon(Icons.check_rounded,
-                  size: 16, color: Colors.white),
+              child: Icon(Icons.check_rounded,
+                  size: 16, color: context.appColors.onPrimary),
             ),
           ),
         if (isOnline)
@@ -330,12 +328,12 @@ class _Avatar extends StatelessWidget {
               width: 14,
               height: 14,
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981),
+                color: context.appTokens.success,
                 shape: BoxShape.circle,
                 border: Border.all(color: scheme.surface, width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF10B981).withValues(alpha: 0.6),
+                    color: context.appTokens.success.withValues(alpha: 0.6),
                     blurRadius: 6,
                     spreadRadius: 0.5,
                   ),

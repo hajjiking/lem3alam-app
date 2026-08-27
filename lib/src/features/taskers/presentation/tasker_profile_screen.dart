@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lem3alam_mobile/src/core/ui/app_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lem3alam_mobile/gen_l10n/app_localizations.dart';
 
 import '../../../core/analytics/app_analytics.dart';
@@ -113,9 +113,7 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final brightness = Theme.of(context).brightness;
-    final bg = brightness == Brightness.light
-        ? const Color(0xFFF8FAFC)
-        : scheme.surface;
+    final bg = scheme.surface;
     final systemBarIcon =
         brightness == Brightness.light ? Brightness.dark : Brightness.light;
 
@@ -197,13 +195,8 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
 
   PreferredSizeWidget _buildAppBar(PublicProfileModel? model) {
     final scheme = Theme.of(context).colorScheme;
-    final brightness = Theme.of(context).brightness;
-    final pageBg = brightness == Brightness.light
-        ? const Color(0xFFF8FAFC)
-        : scheme.surfaceContainerLowest;
-    final btnBg = brightness == Brightness.light
-        ? Colors.white
-        : scheme.surfaceContainerLow;
+    final pageBg = scheme.surface;
+    final btnBg = scheme.surfaceContainerLowest;
     return AppBar(
       backgroundColor: pageBg,
       surfaceTintColor: Colors.transparent,
@@ -257,8 +250,8 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
             duration: const Duration(milliseconds: 240),
             transitionBuilder: (ch, a) => ScaleTransition(scale: a, child: ch),
             child: _isFav
-                ? const Icon(Icons.favorite_rounded,
-                    color: Color(0xFFEF4444), key: ValueKey('fav_on'))
+                ? Icon(Icons.favorite_rounded,
+                    color: context.appColors.error, key: ValueKey('fav_on'))
                 : const Icon(Icons.favorite_border_rounded,
                     key: ValueKey('fav_off')),
           ),
@@ -305,10 +298,9 @@ class _AppBarTitle extends StatelessWidget {
                       name!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        textStyle: Theme.of(context).textTheme.titleMedium,
-                        fontWeight: FontWeight.w900,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                   ),
                   if (isOnline) ...[
@@ -316,9 +308,9 @@ class _AppBarTitle extends StatelessWidget {
                     Container(
                       width: 10,
                       height: 10,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xFF10B981),
+                        color: context.appTokens.success,
                       ),
                     ),
                   ],
@@ -370,10 +362,8 @@ class _Body extends StatelessWidget {
     final l10n = context.l10n;
     const tabs = _ProfileTab.values;
     final media = MediaQuery.of(context);
-    final bookingBarReserve = 72.0 + media.padding.bottom + 12.0;
-    final pageBg = Theme.of(context).brightness == Brightness.light
-        ? const Color(0xFFF8FAFC)
-        : scheme.surfaceContainerLowest;
+    final bookingBarReserve = 120.0 + media.padding.bottom;
+    final pageBg = scheme.surface;
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
@@ -414,13 +404,13 @@ class _Body extends StatelessWidget {
                             value: model.jobsCompleted == null
                                 ? '-'
                                 : _fmtInt(model.jobsCompleted!),
-                            accent: const Color(0xFF2563EB),
+                            accent: context.appColors.primary,
                           ),
                           StatisticItem(
                             icon: Icons.star_rounded,
                             label: l10n.rating,
                             value: model.rating.toStringAsFixed(1),
-                            accent: const Color(0xFFF59E0B),
+                            accent: context.appTokens.warning,
                           ),
                           StatisticItem(
                             icon: Icons.schedule_rounded,
@@ -428,7 +418,7 @@ class _Body extends StatelessWidget {
                             value: model.responseMinutes == null
                                 ? '-'
                                 : '${model.responseMinutes} min',
-                            accent: const Color(0xFF10B981),
+                            accent: context.appTokens.success,
                           ),
                           StatisticItem(
                             icon: Icons.flag_rounded,
@@ -436,7 +426,7 @@ class _Body extends StatelessWidget {
                             value: model.completionRate == null
                                 ? '-'
                                 : '${(model.completionRate! * 100).toStringAsFixed(0)}%',
-                            accent: const Color(0xFF7C3AED),
+                            accent: context.appTokens.accentPurple,
                           ),
                         ],
                       ),
@@ -545,14 +535,14 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     final scheme = Theme.of(context).colorScheme;
     return Container(
-      color: const Color(0xFFF8FAFC),
+      color: scheme.surface,
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
       child: AppResponsiveCenter(
         maxWidth: 900,
         child: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: scheme.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
                 color: scheme.outlineVariant.withValues(alpha: 0.35), width: 1),
@@ -575,16 +565,15 @@ class _TabsDelegate extends SliverPersistentHeaderDelegate {
               color: scheme.primary,
               borderRadius: BorderRadius.circular(16),
             ),
-            labelColor: Colors.white,
+            labelColor: scheme.onPrimary,
             unselectedLabelColor: scheme.onSurfaceVariant,
-            labelStyle: GoogleFonts.inter(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-              fontWeight: FontWeight.w900,
-            ),
-            unselectedLabelStyle: GoogleFonts.inter(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-              fontWeight: FontWeight.w700,
-            ),
+            labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+            unselectedLabelStyle:
+                Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
             splashBorderRadius: BorderRadius.circular(16),
             tabs: [
               for (final t in tabs)
@@ -658,20 +647,7 @@ class _AboutTab extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(
-                              color: scheme.outlineVariant
-                                  .withValues(alpha: 0.35)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.04),
-                              blurRadius: 18,
-                              offset: const Offset(0, 6),
-                            ),
-                          ],
-                        ),
+                        decoration: AppStyle.cardDecoration(context),
                         child: Text(
                           (model.bio ?? '').trim().isEmpty
                               ? l10n.noBioProvided
@@ -696,10 +672,10 @@ class _AboutTab extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 9),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: scheme.surfaceContainerLowest,
                                 borderRadius: BorderRadius.circular(999),
                                 border: Border.all(
-                                  color: const Color(0xFF10B981)
+                                  color: context.appTokens.success
                                       .withValues(alpha: 0.25),
                                   width: 1,
                                 ),
@@ -707,8 +683,9 @@ class _AboutTab extends StatelessWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.check_circle_rounded,
-                                      size: 14, color: Color(0xFF10B981)),
+                                  Icon(Icons.check_circle_rounded,
+                                      size: 14,
+                                      color: context.appTokens.success),
                                   const SizedBox(width: 6),
                                   Text(
                                     f,
@@ -716,7 +693,7 @@ class _AboutTab extends StatelessWidget {
                                         .textTheme
                                         .labelLarge
                                         ?.copyWith(
-                                          fontWeight: FontWeight.w900,
+                                          fontWeight: FontWeight.w800,
                                           color: scheme.onSurface,
                                         ),
                                   ),
@@ -732,7 +709,8 @@ class _AboutTab extends StatelessWidget {
                   const SizedBox(width: 20),
                   Expanded(
                     flex: 2,
-                    child: _IllustrationCard(color: scheme.primary),
+                    child:
+                        _IllustrationCard(color: context.appTokens.headerStart),
                   ),
                 ],
               ],
@@ -761,7 +739,7 @@ class _IllustrationCard extends StatelessWidget {
             colors: [
               color.withValues(alpha: 0.85),
               color.withValues(alpha: 0.75),
-              const Color(0xFF3B82F6),
+              context.appTokens.headerEnd,
             ],
           ),
           boxShadow: [
@@ -802,8 +780,8 @@ class _IllustrationCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      const Color(0xFF10B981).withValues(alpha: 0.25),
-                      const Color(0xFF10B981).withValues(alpha: 0),
+                      context.appTokens.success.withValues(alpha: 0.25),
+                      context.appTokens.success.withValues(alpha: 0),
                     ],
                   ),
                 ),
@@ -832,12 +810,12 @@ class _IllustrationCard extends StatelessWidget {
                     Text(
                       'Clean. Safe. Certified.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 17,
-                        height: 1.2,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17,
+                            height: 1.2,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -888,7 +866,10 @@ class _ServicesTab extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 230,
+            height: 280 +
+                (MediaQuery.textScalerOf(context).scale(16) - 16)
+                        .clamp(0, double.infinity) *
+                    5,
             child: ListView.separated(
               padding: const EdgeInsets.fromLTRB(20, 0, 6, 0),
               scrollDirection: Axis.horizontal,
@@ -1097,9 +1078,8 @@ class _SkeletonBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 120),
-        primary: false,
         child: const AppCardListSkeleton(),
       ),
     );
