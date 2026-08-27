@@ -1,3 +1,5 @@
+import 'task_offer.dart';
+
 class Task {
   const Task({
     required this.id,
@@ -28,6 +30,7 @@ class Task {
     this.distanceKm,
     this.clientRating,
     this.isSaved = false,
+    this.offers = const [],
   });
 
   final int id;
@@ -58,6 +61,7 @@ class Task {
   final double? distanceKm;
   final double? clientRating;
   final bool isSaved;
+  final List<TaskOffer> offers;
 
   String? get primaryImagePath => images.isEmpty ? null : images.first;
   String? get primaryImageSource => primaryImageUrl ?? primaryImagePath;
@@ -118,8 +122,7 @@ class Task {
       categoryNameAr = category['name_ar']?.toString().trim();
       categoryNameEn = category['name_en']?.toString().trim();
       categoryNameFr = category['name_fr']?.toString().trim();
-      categoryName =
-          category['name']?.toString().trim() ??
+      categoryName = category['name']?.toString().trim() ??
           categoryNameEn ??
           categoryNameFr ??
           categoryNameAr ??
@@ -148,15 +151,24 @@ class Task {
       categoryNameEn: categoryNameEn,
       categoryNameFr: categoryNameFr,
       categoryNameTranslations: categoryNameTranslations,
-      clientName: client is Map<String, dynamic> ? client['name']?.toString() : null,
+      clientName:
+          client is Map<String, dynamic> ? client['name']?.toString() : null,
       assignedTaskerId: _intOptional(json['assigned_tasker_id']),
-      assignedTaskerName: assignedTasker is Map<String, dynamic> ? assignedTasker['name']?.toString() : null,
+      assignedTaskerName: assignedTasker is Map<String, dynamic>
+          ? assignedTasker['name']?.toString()
+          : null,
       isRemote: json['is_remote'] == true || json['is_remote'] == 1,
       images: images,
       primaryImageUrl: json['primary_image_url']?.toString(),
       distanceKm: double.tryParse(json['distance_km']?.toString() ?? ''),
       clientRating: double.tryParse(json['client_rating']?.toString() ?? ''),
       isSaved: json['is_saved'] == true || json['is_saved']?.toString() == '1',
+      offers: (json['applications'] as List? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .map(TaskOffer.fromJson)
+          .where((offer) =>
+              offer.id > 0 && offer.taskId == _intRequired(json['id']))
+          .toList(growable: false),
     );
   }
 }
@@ -308,8 +320,7 @@ class CategoryOption {
     final nameEn = json['name_en']?.toString().trim();
     final nameFr = json['name_fr']?.toString().trim();
     final baseName = json['name']?.toString().trim();
-    final translatedName =
-        baseName ??
+    final translatedName = baseName ??
         nameEn ??
         nameFr ??
         nameAr ??

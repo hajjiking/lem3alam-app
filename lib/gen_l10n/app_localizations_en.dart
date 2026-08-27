@@ -9,6 +9,52 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get clientOffersTitle => 'New offers waiting';
+
+  @override
+  String clientOffersWaiting(int count) {
+    return 'New offers waiting ($count)';
+  }
+
+  @override
+  String get clientOffersSubtitle =>
+      'Review tasker proposals and pick the best fit.';
+
+  @override
+  String get clientOffersEmpty =>
+      'No new offers yet. Proposals for your tasks will appear here.';
+
+  @override
+  String get clientOffersLoadError =>
+      'Could not load your offers. Please try again.';
+
+  @override
+  String get taskOffers => 'Task proposals';
+
+  @override
+  String get rejectOffer => 'Reject';
+
+  @override
+  String get offerAccepted => 'Offer accepted';
+
+  @override
+  String get offerRejected => 'Offer rejected';
+
+  @override
+  String get offerNoLongerAvailable =>
+      'This offer is no longer available. Refresh to see the latest proposals.';
+
+  @override
+  String confirmAcceptOffer(String name, String task) {
+    return 'Accept $name\'s offer for “$task”? This assigns the task to this tasker.';
+  }
+
+  @override
+  String confirmRejectOffer(String name) {
+    return 'Reject $name\'s offer?';
+  }
+
+  @override
   String get taskerAvailableTasks => 'All available tasks';
 
   @override

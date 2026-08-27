@@ -9,6 +9,50 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get clientOffersTitle => 'عروض جديدة بانتظارك';
+
+  @override
+  String clientOffersWaiting(int count) {
+    return 'عروض جديدة بانتظارك ($count)';
+  }
+
+  @override
+  String get clientOffersSubtitle => 'قارن عروض مقدمي الخدمات واختر الأنسب.';
+
+  @override
+  String get clientOffersEmpty =>
+      'لا توجد عروض جديدة بعد. ستظهر هنا العروض المقدمة لمهامك.';
+
+  @override
+  String get clientOffersLoadError => 'تعذر تحميل عروضك. حاول مجدداً.';
+
+  @override
+  String get taskOffers => 'العروض المقدمة للمهمة';
+
+  @override
+  String get rejectOffer => 'رفض';
+
+  @override
+  String get offerAccepted => 'تم قبول العرض';
+
+  @override
+  String get offerRejected => 'تم رفض العرض';
+
+  @override
+  String get offerNoLongerAvailable =>
+      'لم يعد هذا العرض متاحاً. حدّث الصفحة لعرض أحدث العروض.';
+
+  @override
+  String confirmAcceptOffer(String name, String task) {
+    return 'هل تقبل عرض $name للمهمة «$task»؟ سيتم إسناد المهمة إليه.';
+  }
+
+  @override
+  String confirmRejectOffer(String name) {
+    return 'هل تريد رفض عرض $name؟';
+  }
+
+  @override
   String get taskerAvailableTasks => 'جميع المهام المتاحة';
 
   @override

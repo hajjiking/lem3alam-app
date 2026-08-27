@@ -100,6 +100,78 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @clientOffersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New offers waiting'**
+  String get clientOffersTitle;
+
+  /// No description provided for @clientOffersWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'New offers waiting ({count})'**
+  String clientOffersWaiting(int count);
+
+  /// No description provided for @clientOffersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review tasker proposals and pick the best fit.'**
+  String get clientOffersSubtitle;
+
+  /// No description provided for @clientOffersEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No new offers yet. Proposals for your tasks will appear here.'**
+  String get clientOffersEmpty;
+
+  /// No description provided for @clientOffersLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your offers. Please try again.'**
+  String get clientOffersLoadError;
+
+  /// No description provided for @taskOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Task proposals'**
+  String get taskOffers;
+
+  /// No description provided for @rejectOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get rejectOffer;
+
+  /// No description provided for @offerAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer accepted'**
+  String get offerAccepted;
+
+  /// No description provided for @offerRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Offer rejected'**
+  String get offerRejected;
+
+  /// No description provided for @offerNoLongerAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This offer is no longer available. Refresh to see the latest proposals.'**
+  String get offerNoLongerAvailable;
+
+  /// No description provided for @confirmAcceptOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept {name}\'s offer for “{task}”? This assigns the task to this tasker.'**
+  String confirmAcceptOffer(String name, String task);
+
+  /// No description provided for @confirmRejectOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject {name}\'s offer?'**
+  String confirmRejectOffer(String name);
+
   /// No description provided for @taskerAvailableTasks.
   ///
   /// In en, this message translates to:

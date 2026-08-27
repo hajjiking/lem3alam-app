@@ -28,6 +28,7 @@ import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dash
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dashboard_stats.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dashboard_tasks.dart';
 import 'package:lem3alam_mobile/src/routing/app_router.dart';
+import 'package:lem3alam_mobile/src/features/tasks/data/client_offers_repository.dart';
 
 // Fixtures stay in tests. Production always reads the authenticated dashboard API.
 Map<String, dynamic> _payload() => {
@@ -105,6 +106,7 @@ Widget _app(DashboardRepository repository,
     GlobalKey? captureKey}) {
   return ProviderScope(
       overrides: [
+        clientOffersProvider.overrideWith((ref) async => []),
         authControllerProvider.overrideWith(() => _Auth(role)),
         localeControllerProvider.overrideWith(() => _Locale(locale)),
         dashboardRepositoryProvider.overrideWithValue(repository),
@@ -378,6 +380,7 @@ void main() {
     addTearDown(router.dispose);
     await tester.pumpWidget(ProviderScope(
         overrides: [
+          clientOffersProvider.overrideWith((ref) async => []),
           authControllerProvider.overrideWith(_Auth.new),
           localeControllerProvider
               .overrideWith(() => _Locale(const Locale('en'))),

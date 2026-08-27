@@ -7,6 +7,8 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/ui/app_theme.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
+import '../../tasks/data/client_offers_repository.dart';
+import '../../tasks/presentation/client_offers_panel.dart';
 import '../application/client_dashboard_controller.dart';
 import '../domain/client_dashboard_stats.dart';
 import '../domain/dashboard_models.dart';
@@ -42,6 +44,7 @@ class ClientDashboardScreen extends ConsumerWidget {
     Future<void> refresh() async {
       // Errors are rendered below; pull-to-refresh must still complete normally.
       ref.invalidate(clientDashboardProvider);
+      ref.invalidate(clientOffersProvider);
       try {
         await ref.read(clientDashboardProvider.future);
       } catch (_) {}
@@ -171,6 +174,8 @@ class ClientDashboardScreen extends ConsumerWidget {
                               ],
                             ),
                           ),
+                          const SizedBox(height: 24),
+                          const ClientOffersPanel(),
                           const SizedBox(height: 24),
                           ClientPromoBanner(
                               onPostTask: () =>

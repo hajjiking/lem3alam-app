@@ -17,6 +17,8 @@ import '../../dashboard/application/client_dashboard_controller.dart';
 import 'task_image_support.dart';
 import 'tasks_controller.dart';
 import 'task_application_sheet.dart';
+import 'client_offers_panel.dart';
+import '../data/client_offers_repository.dart';
 
 class TaskDetailScreen extends ConsumerWidget {
   const TaskDetailScreen({super.key, required this.taskId});
@@ -291,6 +293,10 @@ class TaskDetailScreen extends ConsumerWidget {
                     ),
                   ),
                 const SizedBox(height: 16),
+                if (isClient && task.clientId == user?.id) ...[
+                  TaskOffersSection(task: task),
+                  const SizedBox(height: 16),
+                ],
                 if (isTasker && task.status == 'open')
                   FilledButton.icon(
                     onPressed: () =>
@@ -324,6 +330,7 @@ class TaskDetailScreen extends ConsumerWidget {
                           .delete(task.id);
                       ref.invalidate(tasksListControllerProvider);
                       ref.invalidate(clientDashboardProvider);
+                      ref.invalidate(clientOffersProvider);
                       if (context.mounted) context.goNamed(AppRouteNames.tasks);
                     },
                     icon: const Icon(Icons.delete_outline),

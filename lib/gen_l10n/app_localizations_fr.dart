@@ -9,6 +9,52 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get clientOffersTitle => 'Nouvelles offres en attente';
+
+  @override
+  String clientOffersWaiting(int count) {
+    return 'Nouvelles offres en attente ($count)';
+  }
+
+  @override
+  String get clientOffersSubtitle =>
+      'Comparez les propositions et choisissez le meilleur prestataire.';
+
+  @override
+  String get clientOffersEmpty =>
+      'Aucune nouvelle offre. Les propositions pour vos tâches apparaîtront ici.';
+
+  @override
+  String get clientOffersLoadError =>
+      'Impossible de charger vos offres. Réessayez.';
+
+  @override
+  String get taskOffers => 'Propositions pour cette tâche';
+
+  @override
+  String get rejectOffer => 'Refuser';
+
+  @override
+  String get offerAccepted => 'Offre acceptée';
+
+  @override
+  String get offerRejected => 'Offre refusée';
+
+  @override
+  String get offerNoLongerAvailable =>
+      'Cette offre n’est plus disponible. Actualisez les propositions.';
+
+  @override
+  String confirmAcceptOffer(String name, String task) {
+    return 'Accepter l’offre de $name pour « $task » ? La tâche lui sera attribuée.';
+  }
+
+  @override
+  String confirmRejectOffer(String name) {
+    return 'Refuser l’offre de $name ?';
+  }
+
+  @override
   String get taskerAvailableTasks => 'Toutes les tâches disponibles';
 
   @override

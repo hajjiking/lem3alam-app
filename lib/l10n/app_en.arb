@@ -1,4 +1,40 @@
 {
+  "clientOffersTitle": "New offers waiting",
+  "clientOffersWaiting": "New offers waiting ({count})",
+  "clientOffersSubtitle": "Review tasker proposals and pick the best fit.",
+  "clientOffersEmpty": "No new offers yet. Proposals for your tasks will appear here.",
+  "clientOffersLoadError": "Could not load your offers. Please try again.",
+  "taskOffers": "Task proposals",
+  "rejectOffer": "Reject",
+  "offerAccepted": "Offer accepted",
+  "offerRejected": "Offer rejected",
+  "offerNoLongerAvailable": "This offer is no longer available. Refresh to see the latest proposals.",
+  "confirmAcceptOffer": "Accept {name}'s offer for “{task}”? This assigns the task to this tasker.",
+  "confirmRejectOffer": "Reject {name}'s offer?",
+  "@clientOffersWaiting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@confirmAcceptOffer": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "@confirmRejectOffer": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "taskerAvailableTasks": "All available tasks",
   "taskerBrowseInfo": "Browse open tasks from all clients and apply. Posting is available for clients only.",
   "taskerViewAndApply": "View and apply",
