@@ -14,9 +14,9 @@ import '../../../core/ui/app_widgets.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../../dashboard/application/client_dashboard_controller.dart';
-import '../domain/task.dart';
 import 'task_image_support.dart';
 import 'tasks_controller.dart';
+import 'task_application_sheet.dart';
 
 class TaskDetailScreen extends ConsumerWidget {
   const TaskDetailScreen({super.key, required this.taskId});
@@ -294,7 +294,7 @@ class TaskDetailScreen extends ConsumerWidget {
                 if (isTasker && task.status == 'open')
                   FilledButton.icon(
                     onPressed: () =>
-                        _showApplySheet(context, ref, taskId: task.id),
+                        showTaskApplicationSheet(context, ref, taskId: task.id),
                     icon: const Icon(Icons.send_outlined),
                     label: Text(l10n.apply),
                   ),
@@ -335,151 +335,6 @@ class TaskDetailScreen extends ConsumerWidget {
         ),
       ),
     );
-  }
-}
-
-Future<void> _showApplySheet(
-  BuildContext context,
-  WidgetRef ref, {
-  required int taskId,
-}) async {
-  final l10n = context.l10n;
-  final formKey = GlobalKey<FormState>();
-  final proposalController = TextEditingController();
-  final budgetController = TextEditingController();
-  final durationController = TextEditingController();
-  var submitting = false;
-
-  try {
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) => Padding(
-          padding: EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 8,
-            bottom: 16 + MediaQuery.viewInsetsOf(context).bottom,
-          ),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  l10n.applyToTask,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(fontWeight: FontWeight.w800),
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: proposalController,
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                    labelText: l10n.proposal,
-                    prefixIcon: const Icon(Icons.notes_outlined),
-                  ),
-                  validator: (v) => (v == null || v.trim().isEmpty)
-                      ? l10n.requiredField
-                      : null,
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: budgetController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  decoration: InputDecoration(
-                    labelText: l10n.proposedBudget,
-                    prefixIcon: const Icon(Icons.payments_outlined),
-                  ),
-                  validator: (v) {
-                    if (v == null || v.trim().isEmpty) {
-                      return l10n.requiredField;
-                    }
-                    final parsed = double.tryParse(v.replaceAll(',', '.'));
-                    if (parsed == null || parsed < 0) return l10n.requiredField;
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: durationController,
-                  decoration: InputDecoration(
-                    labelText: l10n.estimatedDuration,
-                    prefixIcon: const Icon(Icons.schedule_outlined),
-                  ),
-                  validator: (v) => (v == null || v.trim().isEmpty)
-                      ? l10n.requiredField
-                      : null,
-                ),
-                const SizedBox(height: 16),
-                FilledButton(
-                  onPressed: submitting
-                      ? null
-                      : () async {
-                          if (!formKey.currentState!.validate()) return;
-
-                          final budget = double.parse(budgetController.text
-                              .trim()
-                              .replaceAll(',', '.'));
-                          final payload = TaskApplicationPayload(
-                            proposal: proposalController.text.trim(),
-                            proposedBudget: budget,
-                            estimatedDuration: durationController.text.trim(),
-                          );
-
-                          setState(() => submitting = true);
-                          try {
-                            await ref
-                                .read(taskMutationControllerProvider)
-                                .apply(taskId: taskId, payload: payload);
-                            ref.invalidate(taskDetailProvider(taskId));
-                            ref.invalidate(tasksListControllerProvider);
-                            ref.invalidate(clientDashboardProvider);
-                            if (context.mounted) {
-                              Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text(l10n.applicationSubmitted)),
-                              );
-                            }
-                          } on ApiException catch (e) {
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content:
-                                        Text(localizeApiException(context, e))),
-                              );
-                            }
-                          } finally {
-                            if (context.mounted) {
-                              setState(() => submitting = false);
-                            }
-                          }
-                        },
-                  child: submitting
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : Text(l10n.submitApplication),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  } finally {
-    proposalController.dispose();
-    budgetController.dispose();
-    durationController.dispose();
   }
 }
 
