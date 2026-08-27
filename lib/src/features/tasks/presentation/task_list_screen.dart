@@ -60,6 +60,12 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
     final isClient = user?.isClient == true;
     final canCreate = isClient;
     final l10n = context.l10n;
+    ref.listen(
+        authControllerProvider
+            .select((auth) => (auth.status, auth.user?.id, auth.user?.role)),
+        (_, next) {
+      _searchController.clear();
+    });
 
     if (auth.status == AuthStatus.unknown) {
       return Scaffold(
@@ -71,7 +77,7 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
             children: const [
               _TaskListTopSkeleton(),
               SizedBox(height: 20),
-              AppCardListSkeleton(itemCount: 4),
+              AppCardListSkeleton(itemCount: 4, shrinkWrap: true),
             ],
           ),
         ),
@@ -105,12 +111,14 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
       body: SafeArea(
         bottom: false,
         child: state.when(
+          skipLoadingOnReload: false,
+          skipLoadingOnRefresh: false,
           loading: () => ListView(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
             children: const [
               _TaskListTopSkeleton(),
               SizedBox(height: 20),
-              AppCardListSkeleton(itemCount: 4),
+              AppCardListSkeleton(itemCount: 4, shrinkWrap: true),
             ],
           ),
           error: (e, _) => AppErrorState(
@@ -157,7 +165,9 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
           children: [
             if (isLoggedIn) ...[
               Text(
-                context.l10n.greetingMorning,
+                user?.isClient == true
+                    ? l10n.clientTasksTitle
+                    : l10n.greetingMorning,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
@@ -316,7 +326,8 @@ class _TaskListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final selectedCategoryId = ref.watch(selectedCategoryIdProvider);
-    final recommended = page.items.take(4).toList(growable: false);
+    final recommended =
+        canCreate ? <Task>[] : page.items.take(4).toList(growable: false);
     final rest = page.items.skip(recommended.length).toList(growable: false);
 
     return RefreshIndicator.adaptive(
@@ -324,6 +335,7 @@ class _TaskListView extends ConsumerWidget {
       displacement: 20,
       edgeOffset: 8,
       child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         controller: scrollController,
         slivers: [
           SliverToBoxAdapter(
@@ -358,7 +370,7 @@ class _TaskListView extends ConsumerWidget {
               ),
             ),
           ),
-          if (page.items.isNotEmpty) ...[
+          if (recommended.isNotEmpty) ...[
             const SliverToBoxAdapter(child: SizedBox(height: 22)),
             SliverToBoxAdapter(
               child: Padding(
@@ -406,10 +418,12 @@ class _TaskListView extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppSectionHeader(
-                title: l10n.allTasks,
-                subtitle: page.items.isEmpty
-                    ? ''
-                    : l10n.tasksAvailableCount(page.items.length),
+                title: canCreate ? l10n.clientTasksTitle : l10n.allTasks,
+                subtitle: canCreate
+                    ? '${l10n.clientTasksScope} · ${l10n.clientTasksCount(page.total)}'
+                    : page.items.isEmpty
+                        ? ''
+                        : l10n.tasksAvailableCount(page.items.length),
               ),
             ),
           ),
@@ -421,7 +435,9 @@ class _TaskListView extends ConsumerWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: AppEmptyState(
                   title: l10n.emptyTasksTitle,
-                  subtitle: l10n.emptyTasksSubtitle,
+                  subtitle: canCreate
+                      ? l10n.clientTasksEmpty
+                      : l10n.emptyTasksSubtitle,
                   icon: Icons.inbox_outlined,
                   actionLabel: canCreate ? l10n.createTask : l10n.login,
                   onAction: () => context.goNamed(canCreate

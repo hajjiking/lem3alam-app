@@ -20,7 +20,8 @@ void main() {
 
       await expectLater(
         () => repository.list(page: 1, perPage: 15),
-        throwsA(isA<ApiException>().having((e) => e.statusCode, 'statusCode', 403)),
+        throwsA(
+            isA<ApiException>().having((e) => e.statusCode, 'statusCode', 403)),
       );
       expect(api.listCalls, 0);
       expect(api.myTasksCalls, 0);
@@ -105,7 +106,8 @@ void main() {
             estimatedDuration: '2 days',
           ),
         ),
-        throwsA(isA<ApiException>().having((e) => e.statusCode, 'statusCode', 403)),
+        throwsA(
+            isA<ApiException>().having((e) => e.statusCode, 'statusCode', 403)),
       );
       expect(api.applyCalls, 0);
     });
@@ -156,6 +158,7 @@ class _FakeTasksApi extends TasksApi {
         'data': [
           {
             'id': 1,
+            'client_id': 10,
             'title': title,
             'description': 'Task description',
             'category_id': 1,

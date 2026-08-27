@@ -9,6 +9,27 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get clientTasksTitle => 'My tasks';
+
+  @override
+  String get clientTasksScope => 'Only tasks you posted';
+
+  @override
+  String get clientTasksEmpty =>
+      'You haven’t posted any tasks matching these filters.';
+
+  @override
+  String clientTasksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tasks',
+      one: '1 task',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get taskerNoComparison => 'No previous-period activity';
 
   @override

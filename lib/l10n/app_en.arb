@@ -1,4 +1,9 @@
 {
+  "clientTasksTitle": "My tasks",
+  "clientTasksScope": "Only tasks you posted",
+  "clientTasksEmpty": "You haven’t posted any tasks matching these filters.",
+  "clientTasksCount": "{count, plural, =1{1 task} other{{count} tasks}}",
+  "@clientTasksCount": {"placeholders": {"count": {"type": "int"}}},
   "taskerNoComparison": "No previous-period activity",
   "taskerPeriodChange": "{change}% vs previous period",
   "taskerPeriodUnavailable": "Analytics for this period are unavailable. Update the server and refresh.",

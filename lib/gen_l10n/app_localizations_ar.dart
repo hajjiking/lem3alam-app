@@ -9,6 +9,30 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get clientTasksTitle => 'مهامي';
+
+  @override
+  String get clientTasksScope => 'المهام التي نشرتها فقط';
+
+  @override
+  String get clientTasksEmpty => 'لم تنشر أي مهام تطابق هذه الفلاتر.';
+
+  @override
+  String clientTasksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مهمة',
+      many: '$count مهمة',
+      few: '$count مهام',
+      two: 'مهمتان',
+      one: 'مهمة واحدة',
+      zero: 'لا توجد مهام',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get taskerNoComparison => 'لا يوجد نشاط في الفترة السابقة';
 
   @override

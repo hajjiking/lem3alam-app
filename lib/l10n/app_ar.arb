@@ -1,4 +1,8 @@
 {
+  "clientTasksTitle": "مهامي",
+  "clientTasksScope": "المهام التي نشرتها فقط",
+  "clientTasksEmpty": "لم تنشر أي مهام تطابق هذه الفلاتر.",
+  "clientTasksCount": "{count, plural, =0{لا توجد مهام} =1{مهمة واحدة} =2{مهمتان} few{{count} مهام} many{{count} مهمة} other{{count} مهمة}}",
   "taskerNoComparison": "لا يوجد نشاط في الفترة السابقة",
   "taskerPeriodChange": "{change}٪ مقارنة بالفترة السابقة",
   "taskerPeriodUnavailable": "إحصاءات هذه الفترة غير متاحة. حدّث الخادم ثم أعد التحميل.",

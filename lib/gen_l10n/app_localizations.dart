@@ -100,6 +100,30 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @clientTasksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My tasks'**
+  String get clientTasksTitle;
+
+  /// No description provided for @clientTasksScope.
+  ///
+  /// In en, this message translates to:
+  /// **'Only tasks you posted'**
+  String get clientTasksScope;
+
+  /// No description provided for @clientTasksEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven’t posted any tasks matching these filters.'**
+  String get clientTasksEmpty;
+
+  /// No description provided for @clientTasksCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 task} other{{count} tasks}}'**
+  String clientTasksCount(int count);
+
   /// No description provided for @taskerNoComparison.
   ///
   /// In en, this message translates to:

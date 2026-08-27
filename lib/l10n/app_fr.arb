@@ -1,4 +1,8 @@
 {
+  "clientTasksTitle": "Mes tâches",
+  "clientTasksScope": "Uniquement les tâches que vous avez publiées",
+  "clientTasksEmpty": "Vous n’avez publié aucune tâche correspondant à ces filtres.",
+  "clientTasksCount": "{count, plural, =1{1 tâche} other{{count} tâches}}",
   "taskerNoComparison": "Aucune activité sur la période précédente",
   "taskerPeriodChange": "{change} % par rapport à la période précédente",
   "taskerPeriodUnavailable": "Les statistiques de cette période sont indisponibles. Mettez à jour le serveur et actualisez.",

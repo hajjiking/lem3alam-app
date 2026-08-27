@@ -1901,13 +1901,17 @@ class _ShimmerState extends State<_Shimmer>
 }
 
 class AppCardListSkeleton extends StatelessWidget {
-  const AppCardListSkeleton({super.key, this.itemCount = 6});
+  const AppCardListSkeleton(
+      {super.key, this.itemCount = 6, this.shrinkWrap = false});
 
   final int itemCount;
+  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: shrinkWrap,
+      physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
       padding: const EdgeInsets.all(16),
       itemCount: itemCount,
       separatorBuilder: (_, __) => const SizedBox(height: 12),
@@ -1924,12 +1928,12 @@ class AppCardListSkeleton extends StatelessWidget {
                 SizedBox(height: 8),
                 AppSkeletonBox(height: 14, width: 240),
                 SizedBox(height: 12),
-                Row(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
                   children: [
                     AppSkeletonBox(height: 24, width: 86, radius: 999),
-                    SizedBox(width: 8),
                     AppSkeletonBox(height: 24, width: 76, radius: 999),
-                    SizedBox(width: 8),
                     AppSkeletonBox(height: 24, width: 96, radius: 999),
                   ],
                 ),

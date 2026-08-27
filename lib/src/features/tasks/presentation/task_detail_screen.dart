@@ -60,6 +60,8 @@ class TaskDetailScreen extends ConsumerWidget {
         ],
       ),
       body: taskAsync.when(
+        skipLoadingOnReload: false,
+        skipLoadingOnRefresh: false,
         loading: () => const _TaskDetailSkeleton(),
         error: (e, _) => AppErrorState(
           title: l10n.unableToLoad,
