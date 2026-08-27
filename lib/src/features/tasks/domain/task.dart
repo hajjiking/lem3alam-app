@@ -64,6 +64,10 @@ class Task {
   final bool isSaved;
   final List<TaskOffer> offers;
   final DateTime? completionRequestedAt;
+  bool get awaitsCompletionApproval =>
+      isActiveAssignment &&
+      assignedTaskerId != null &&
+      completionRequestedAt != null;
 
   bool get isActiveAssignment =>
       status == 'assigned' || status == 'in_progress';

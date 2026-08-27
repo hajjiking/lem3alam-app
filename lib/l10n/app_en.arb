@@ -1,4 +1,45 @@
 {
+  "completionApprovalTitle": "Completion approval",
+  "completionApprovalCount": "Completion approval ({count})",
+  "completionApprovalSubtitle": "Review the delivered work, then approve completion or return it for changes.",
+  "completionApprovalLoadError": "Could not load completion requests. Please try again.",
+  "noCompletionApprovals": "No tasks are waiting for your approval.",
+  "approveCompletion": "Approve completion",
+  "returnForChanges": "Return for changes",
+  "confirmApproveCompletion": "Approve completion of “{task}”? This marks the task completed. It does not release payment.",
+  "confirmReturnForChanges": "Return “{task}” to the tasker for changes? The task will remain in progress.",
+  "completionApproved": "Completion approved",
+  "taskReturnedForChanges": "Task returned for changes",
+  "completionRequestChanged": "This completion request has changed. Review the refreshed task before deciding.",
+  "completionRequestedOn": "Requested on {date}",
+  "@completionApprovalCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@confirmApproveCompletion": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "@confirmReturnForChanges": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
+  "@completionRequestedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "activeAssignmentsTitle": "Active assignments",
   "activeAssignmentsCount": "Active assignments ({count})",
   "activeAssignmentsSubtitle": "Tasks you have been hired for — deliver and request completion.",

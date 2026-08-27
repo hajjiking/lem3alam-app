@@ -29,6 +29,7 @@ import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dash
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dashboard_tasks.dart';
 import 'package:lem3alam_mobile/src/routing/app_router.dart';
 import 'package:lem3alam_mobile/src/features/tasks/data/client_offers_repository.dart';
+import 'package:lem3alam_mobile/src/features/tasks/data/client_completion_repository.dart';
 import 'package:lem3alam_mobile/src/features/tasks/data/tasker_assignments_repository.dart';
 
 // Fixtures stay in tests. Production always reads the authenticated dashboard API.
@@ -109,6 +110,7 @@ Widget _app(DashboardRepository repository,
       overrides: [
         taskerAssignmentsProvider.overrideWith((ref) async => []),
         clientOffersProvider.overrideWith((ref) async => []),
+        clientCompletionProvider.overrideWith((ref) async => []),
         authControllerProvider.overrideWith(() => _Auth(role)),
         localeControllerProvider.overrideWith(() => _Locale(locale)),
         dashboardRepositoryProvider.overrideWithValue(repository),
@@ -383,6 +385,7 @@ void main() {
     await tester.pumpWidget(ProviderScope(
         overrides: [
           clientOffersProvider.overrideWith((ref) async => []),
+          clientCompletionProvider.overrideWith((ref) async => []),
           authControllerProvider.overrideWith(_Auth.new),
           localeControllerProvider
               .overrideWith(() => _Locale(const Locale('en'))),

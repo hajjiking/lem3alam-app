@@ -9,6 +9,56 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get completionApprovalTitle => 'Completion approval';
+
+  @override
+  String completionApprovalCount(int count) {
+    return 'Completion approval ($count)';
+  }
+
+  @override
+  String get completionApprovalSubtitle =>
+      'Review the delivered work, then approve completion or return it for changes.';
+
+  @override
+  String get completionApprovalLoadError =>
+      'Could not load completion requests. Please try again.';
+
+  @override
+  String get noCompletionApprovals => 'No tasks are waiting for your approval.';
+
+  @override
+  String get approveCompletion => 'Approve completion';
+
+  @override
+  String get returnForChanges => 'Return for changes';
+
+  @override
+  String confirmApproveCompletion(String task) {
+    return 'Approve completion of “$task”? This marks the task completed. It does not release payment.';
+  }
+
+  @override
+  String confirmReturnForChanges(String task) {
+    return 'Return “$task” to the tasker for changes? The task will remain in progress.';
+  }
+
+  @override
+  String get completionApproved => 'Completion approved';
+
+  @override
+  String get taskReturnedForChanges => 'Task returned for changes';
+
+  @override
+  String get completionRequestChanged =>
+      'This completion request has changed. Review the refreshed task before deciding.';
+
+  @override
+  String completionRequestedOn(String date) {
+    return 'Requested on $date';
+  }
+
+  @override
   String get activeAssignmentsTitle => 'Active assignments';
 
   @override

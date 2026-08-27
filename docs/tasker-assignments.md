@@ -25,7 +25,8 @@ new database migration is introduced here.
 Completion requests are idempotent and require current assignment ownership.
 They set `completion_requested_at` and `in_progress`, never `completed`, and do
 not create or release payments. Approval remains in the existing client
-completion workflow. This change does not add client approval controls to the app.
+completion workflow. Client approval controls are now available in the app;
+see [client completion deployment](client-completion-approval.md) for its API requirements.
 
 ## Verification
 

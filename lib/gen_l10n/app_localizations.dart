@@ -100,6 +100,84 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @completionApprovalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion approval'**
+  String get completionApprovalTitle;
+
+  /// No description provided for @completionApprovalCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion approval ({count})'**
+  String completionApprovalCount(int count);
+
+  /// No description provided for @completionApprovalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review the delivered work, then approve completion or return it for changes.'**
+  String get completionApprovalSubtitle;
+
+  /// No description provided for @completionApprovalLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load completion requests. Please try again.'**
+  String get completionApprovalLoadError;
+
+  /// No description provided for @noCompletionApprovals.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks are waiting for your approval.'**
+  String get noCompletionApprovals;
+
+  /// No description provided for @approveCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve completion'**
+  String get approveCompletion;
+
+  /// No description provided for @returnForChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Return for changes'**
+  String get returnForChanges;
+
+  /// No description provided for @confirmApproveCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve completion of “{task}”? This marks the task completed. It does not release payment.'**
+  String confirmApproveCompletion(String task);
+
+  /// No description provided for @confirmReturnForChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Return “{task}” to the tasker for changes? The task will remain in progress.'**
+  String confirmReturnForChanges(String task);
+
+  /// No description provided for @completionApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion approved'**
+  String get completionApproved;
+
+  /// No description provided for @taskReturnedForChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Task returned for changes'**
+  String get taskReturnedForChanges;
+
+  /// No description provided for @completionRequestChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'This completion request has changed. Review the refreshed task before deciding.'**
+  String get completionRequestChanged;
+
+  /// No description provided for @completionRequestedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested on {date}'**
+  String completionRequestedOn(String date);
+
   /// No description provided for @activeAssignmentsTitle.
   ///
   /// In en, this message translates to:

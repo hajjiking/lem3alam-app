@@ -9,6 +9,8 @@ import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../../tasks/data/client_offers_repository.dart';
 import '../../tasks/presentation/client_offers_panel.dart';
+import '../../tasks/data/client_completion_repository.dart';
+import '../../tasks/presentation/client_completion_panel.dart';
 import '../application/client_dashboard_controller.dart';
 import '../domain/client_dashboard_stats.dart';
 import '../domain/dashboard_models.dart';
@@ -45,6 +47,7 @@ class ClientDashboardScreen extends ConsumerWidget {
       // Errors are rendered below; pull-to-refresh must still complete normally.
       ref.invalidate(clientDashboardProvider);
       ref.invalidate(clientOffersProvider);
+      ref.invalidate(clientCompletionProvider);
       try {
         await ref.read(clientDashboardProvider.future);
       } catch (_) {}
@@ -176,6 +179,8 @@ class ClientDashboardScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 24),
                           const ClientOffersPanel(),
+                          const SizedBox(height: 24),
+                          const ClientCompletionPanel(),
                           const SizedBox(height: 24),
                           ClientPromoBanner(
                               onPostTask: () =>

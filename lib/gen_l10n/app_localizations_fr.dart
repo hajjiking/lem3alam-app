@@ -9,6 +9,57 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get completionApprovalTitle => 'Validation des tâches';
+
+  @override
+  String completionApprovalCount(int count) {
+    return 'Validation des tâches ($count)';
+  }
+
+  @override
+  String get completionApprovalSubtitle =>
+      'Vérifiez le travail livré, puis validez-le ou demandez des modifications.';
+
+  @override
+  String get completionApprovalLoadError =>
+      'Impossible de charger les demandes de validation. Réessayez.';
+
+  @override
+  String get noCompletionApprovals =>
+      'Aucune tâche en attente de votre validation.';
+
+  @override
+  String get approveCompletion => 'Valider la réalisation';
+
+  @override
+  String get returnForChanges => 'Demander des modifications';
+
+  @override
+  String confirmApproveCompletion(String task) {
+    return 'Valider la réalisation de « $task » ? La tâche sera marquée comme terminée. Aucun paiement ne sera débloqué.';
+  }
+
+  @override
+  String confirmReturnForChanges(String task) {
+    return 'Renvoyer « $task » au prestataire pour modifications ? La tâche restera en cours.';
+  }
+
+  @override
+  String get completionApproved => 'Réalisation validée';
+
+  @override
+  String get taskReturnedForChanges => 'Tâche renvoyée pour modifications';
+
+  @override
+  String get completionRequestChanged =>
+      'Cette demande a changé. Vérifiez la tâche actualisée avant de décider.';
+
+  @override
+  String completionRequestedOn(String date) {
+    return 'Demande du $date';
+  }
+
+  @override
   String get activeAssignmentsTitle => 'Missions en cours';
 
   @override

@@ -9,6 +9,56 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get completionApprovalTitle => 'الموافقة على إكمال المهام';
+
+  @override
+  String completionApprovalCount(int count) {
+    return 'الموافقة على إكمال المهام ($count)';
+  }
+
+  @override
+  String get completionApprovalSubtitle =>
+      'راجع العمل المنجز ثم وافق على إكماله أو أعده لإجراء تعديلات.';
+
+  @override
+  String get completionApprovalLoadError =>
+      'تعذر تحميل طلبات إكمال المهام. حاول مجدداً.';
+
+  @override
+  String get noCompletionApprovals => 'لا توجد مهام بانتظار موافقتك.';
+
+  @override
+  String get approveCompletion => 'الموافقة على الإكمال';
+
+  @override
+  String get returnForChanges => 'إعادة للتعديل';
+
+  @override
+  String confirmApproveCompletion(String task) {
+    return 'هل توافق على إكمال «$task»؟ سيتم تحديد المهمة كمكتملة دون تحرير أي دفعة مالية.';
+  }
+
+  @override
+  String confirmReturnForChanges(String task) {
+    return 'هل تريد إعادة «$task» إلى مقدم الخدمة لإجراء تعديلات؟ ستبقى المهمة قيد التنفيذ.';
+  }
+
+  @override
+  String get completionApproved => 'تمت الموافقة على الإكمال';
+
+  @override
+  String get taskReturnedForChanges => 'تمت إعادة المهمة للتعديل';
+
+  @override
+  String get completionRequestChanged =>
+      'تغير طلب الإكمال. راجع المهمة المحدّثة قبل اتخاذ القرار.';
+
+  @override
+  String completionRequestedOn(String date) {
+    return 'تاريخ الطلب: $date';
+  }
+
+  @override
   String get activeAssignmentsTitle => 'المهام المسندة إليك';
 
   @override
