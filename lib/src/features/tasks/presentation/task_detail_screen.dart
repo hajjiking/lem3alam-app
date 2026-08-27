@@ -19,6 +19,7 @@ import 'tasks_controller.dart';
 import 'task_application_sheet.dart';
 import 'client_offers_panel.dart';
 import 'client_completion_panel.dart';
+import 'client_reviews_panel.dart';
 import 'tasker_assignments_panel.dart';
 import '../data/client_offers_repository.dart';
 
@@ -305,6 +306,10 @@ class TaskDetailScreen extends ConsumerWidget {
                   const SizedBox(height: 16),
                 ],
                 if (isClient && task.clientId == user?.id) ...[
+                  if (task.status == 'completed') ...[
+                    ClientTaskReviewSection(task: task),
+                    const SizedBox(height: 16),
+                  ],
                   if (task.awaitsCompletionApproval) ...[
                     ClientCompletionCard(
                         key: ValueKey('completion-${user?.id}-${task.id}'),

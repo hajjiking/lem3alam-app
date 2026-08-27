@@ -1,4 +1,13 @@
 {
+  "leaveReview": "Laisser un avis",
+  "reviewSaved": "Votre avis a été envoyé.",
+  "reviewAlreadySubmitted": "Vous avez déjà évalué cette tâche.",
+  "reviewUnavailable": "Cette tâche ne peut plus être évaluée. Fermez le formulaire pour actualiser son statut.",
+  "reviewTasksLoadError": "Impossible de charger vos avis. Réessayez.",
+  "noReviewableTasks": "Aucune tâche terminée en attente de votre avis.",
+  "reviewPublicNotice": "Votre avis sera publié sur le profil du prestataire.",
+  "reviewCommentLength": "Écrivez entre 20 et 500 caractères.",
+  "reviewStars": "{count} étoiles sur 5",
   "completionApprovalTitle": "Validation des tâches",
   "completionApprovalCount": "Validation des tâches ({count})",
   "completionApprovalSubtitle": "Vérifiez le travail livré, puis validez-le ou demandez des modifications.",

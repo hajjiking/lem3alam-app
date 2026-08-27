@@ -1,4 +1,20 @@
 {
+  "leaveReview": "Leave a Review",
+  "reviewSaved": "Your review has been submitted.",
+  "reviewAlreadySubmitted": "You have already reviewed this task.",
+  "reviewUnavailable": "This task is no longer available to review. Close the form to refresh its review status.",
+  "reviewTasksLoadError": "Could not load your review details. Please try again.",
+  "noReviewableTasks": "No completed tasks are waiting for your review.",
+  "reviewPublicNotice": "Your review will appear on the tasker's profile.",
+  "reviewCommentLength": "Write between 20 and 500 characters.",
+  "reviewStars": "{count} out of 5 stars",
+  "@reviewStars": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "completionApprovalTitle": "Completion approval",
   "completionApprovalCount": "Completion approval ({count})",
   "completionApprovalSubtitle": "Review the delivered work, then approve completion or return it for changes.",

@@ -7,6 +7,10 @@ import '../../../core/config/app_config.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/networking/pagination.dart';
 import '../../../core/ui/app_widgets.dart';
+import '../../auth/presentation/auth_controller.dart';
+import '../../tasks/domain/task.dart';
+import '../../tasks/presentation/client_reviews_panel.dart';
+import '../../tasks/presentation/client_review_sheet.dart';
 import '../data/taskers_repository_impl.dart';
 import '../domain/tasker_profile.dart';
 import '../domain/tasker_review.dart';
@@ -310,6 +314,7 @@ class _TaskerReviewsScreenState extends ConsumerState<TaskerReviewsScreen> {
                                 'tasker_review_written',
                                 properties: {'tasker_id': widget.taskerId},
                               );
+                              _profile = null;
                               _loadFirst();
                             },
                           ),
@@ -795,204 +800,48 @@ class _HelpfulButtonState extends State<_HelpfulButton> {
   }
 }
 
-class _WriteReviewBar extends ConsumerStatefulWidget {
-  const _WriteReviewBar({
-    required this.taskerId,
-    required this.profile,
-    required this.onSubmitted,
-  });
-
+class _WriteReviewBar extends ConsumerWidget {
+  const _WriteReviewBar(
+      {required this.taskerId,
+      required this.profile,
+      required this.onSubmitted});
   final int taskerId;
   final TaskerProfile? profile;
   final VoidCallback onSubmitted;
 
   @override
-  ConsumerState<_WriteReviewBar> createState() => _WriteReviewBarState();
-}
-
-class _WriteReviewBarState extends ConsumerState<_WriteReviewBar> {
-  var _submitting = false;
-  var _rating = 0;
-  final _comment = TextEditingController();
-
-  @override
-  void dispose() {
-    _comment.dispose();
-    super.dispose();
-  }
-
-  Future<void> _open() async {
-    final l10n = context.l10n;
-    final colorScheme = Theme.of(context).colorScheme;
-    setState(() {
-      _rating = 0;
-      _comment.clear();
-    });
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => StatefulBuilder(
-        builder: (context, setSheet) {
-          final media = MediaQuery.of(context);
-          return Padding(
-            padding:
-                EdgeInsets.fromLTRB(20, 14, 20, 20 + media.viewInsets.bottom),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    width: 48,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: colorScheme.outlineVariant.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  l10n.writeReview,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                ),
-                const SizedBox(height: 14),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(5, (i) {
-                      final filled = i < _rating;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(12),
-                            onTap: () {
-                              setSheet(() => _rating = i + 1);
-                              setState(() => _rating = i + 1);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Icon(
-                                filled
-                                    ? Icons.star_rounded
-                                    : Icons.star_outline_rounded,
-                                size: 34,
-                                color: context.appTokens.warning,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                TextFormField(
-                  controller: _comment,
-                  minLines: 4,
-                  maxLines: 6,
-                  decoration: InputDecoration(
-                    hintText: l10n.shareYourExperience,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: BorderSide(
-                          color: colorScheme.outlineVariant
-                              .withValues(alpha: 0.6)),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: FilledButton.icon(
-                        onPressed: _rating == 0 || _submitting
-                            ? null
-                            : () async {
-                                setState(() => _submitting = true);
-                                try {
-                                  Navigator.pop(context);
-                                  widget.onSubmitted();
-                                } finally {
-                                  if (mounted) {
-                                    setState(() => _submitting = false);
-                                  }
-                                }
-                              },
-                        style: FilledButton.styleFrom(
-                          minimumSize: const Size.fromHeight(56),
-                        ),
-                        icon: _submitting
-                            ? SizedBox(
-                                height: 18,
-                                width: 18,
-                                child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: context.appColors.onPrimary),
-                              )
-                            : const Icon(Icons.send_rounded),
-                        label: Text(_rating == 0
-                            ? l10n.selectRatingFirst
-                            : l10n.submitReview),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
-    final colorScheme = Theme.of(context).colorScheme;
-    final l10n = context.l10n;
-    return Container(
-      decoration: BoxDecoration(
-        color: colorScheme.surface.withValues(alpha: 0.98),
-        border: Border(
-          top: BorderSide(
-              color: colorScheme.outlineVariant.withValues(alpha: 0.45),
-              width: 1),
-        ),
-      ),
-      padding: EdgeInsets.fromLTRB(16, 10, 16, 10 + media.padding.bottom),
-      child: SafeArea(
-        top: false,
-        child: AppResponsiveCenter(
-          maxWidth: 900,
-          child: Row(
-            children: [
-              Expanded(
-                child: FilledButton.icon(
-                  onPressed: _submitting ? null : _open,
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size.fromHeight(56),
-                  ),
-                  icon: const Icon(Icons.edit_note_rounded),
-                  label: Text(l10n.writeReview),
-                ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.watch(authControllerProvider).user?.isClient != true) {
+      return const SizedBox.shrink();
+    }
+    return Material(
+        color: Theme.of(context).colorScheme.surface,
+        child: SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: FilledButton.icon(
+                onPressed: () async {
+                  final task = await showModalBottomSheet<Task>(
+                      context: context,
+                      isScrollControlled: true,
+                      showDragHandle: true,
+                      builder: (pickerContext) => SafeArea(
+                          top: false,
+                          child: SingleChildScrollView(
+                              padding: const EdgeInsets.all(16),
+                              child: ClientReviewsPanel(
+                                  taskerId: taskerId,
+                                  onSelect: (task) =>
+                                      Navigator.of(pickerContext).pop(task)))));
+                  if (task == null || !context.mounted) return;
+                  final saved = await showClientReviewSheet(context, ref, task);
+                  if (saved && context.mounted) onSubmitted();
+                },
+                icon: const Icon(Icons.rate_review_outlined),
+                label: Text(context.l10n.leaveReview),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            )));
   }
 }
 

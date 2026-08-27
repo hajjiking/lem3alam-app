@@ -100,6 +100,60 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @leaveReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave a Review'**
+  String get leaveReview;
+
+  /// No description provided for @reviewSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Your review has been submitted.'**
+  String get reviewSaved;
+
+  /// No description provided for @reviewAlreadySubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already reviewed this task.'**
+  String get reviewAlreadySubmitted;
+
+  /// No description provided for @reviewUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This task is no longer available to review. Close the form to refresh its review status.'**
+  String get reviewUnavailable;
+
+  /// No description provided for @reviewTasksLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your review details. Please try again.'**
+  String get reviewTasksLoadError;
+
+  /// No description provided for @noReviewableTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed tasks are waiting for your review.'**
+  String get noReviewableTasks;
+
+  /// No description provided for @reviewPublicNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your review will appear on the tasker\'s profile.'**
+  String get reviewPublicNotice;
+
+  /// No description provided for @reviewCommentLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Write between 20 and 500 characters.'**
+  String get reviewCommentLength;
+
+  /// No description provided for @reviewStars.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} out of 5 stars'**
+  String reviewStars(int count);
+
   /// No description provided for @completionApprovalTitle.
   ///
   /// In en, this message translates to:

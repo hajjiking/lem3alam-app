@@ -11,6 +11,8 @@ import '../../tasks/data/client_offers_repository.dart';
 import '../../tasks/presentation/client_offers_panel.dart';
 import '../../tasks/data/client_completion_repository.dart';
 import '../../tasks/presentation/client_completion_panel.dart';
+import '../../tasks/data/client_reviews_repository.dart';
+import '../../tasks/presentation/client_reviews_panel.dart';
 import '../application/client_dashboard_controller.dart';
 import '../domain/client_dashboard_stats.dart';
 import '../domain/dashboard_models.dart';
@@ -48,6 +50,7 @@ class ClientDashboardScreen extends ConsumerWidget {
       ref.invalidate(clientDashboardProvider);
       ref.invalidate(clientOffersProvider);
       ref.invalidate(clientCompletionProvider);
+      ref.invalidate(clientReviewableTasksProvider);
       try {
         await ref.read(clientDashboardProvider.future);
       } catch (_) {}
@@ -181,6 +184,8 @@ class ClientDashboardScreen extends ConsumerWidget {
                           const ClientOffersPanel(),
                           const SizedBox(height: 24),
                           const ClientCompletionPanel(),
+                          const SizedBox(height: 24),
+                          const ClientReviewsPanel(),
                           const SizedBox(height: 24),
                           ClientPromoBanner(
                               onPostTask: () =>

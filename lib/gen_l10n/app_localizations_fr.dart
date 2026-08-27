@@ -9,6 +9,39 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get leaveReview => 'Laisser un avis';
+
+  @override
+  String get reviewSaved => 'Votre avis a été envoyé.';
+
+  @override
+  String get reviewAlreadySubmitted => 'Vous avez déjà évalué cette tâche.';
+
+  @override
+  String get reviewUnavailable =>
+      'Cette tâche ne peut plus être évaluée. Fermez le formulaire pour actualiser son statut.';
+
+  @override
+  String get reviewTasksLoadError =>
+      'Impossible de charger vos avis. Réessayez.';
+
+  @override
+  String get noReviewableTasks =>
+      'Aucune tâche terminée en attente de votre avis.';
+
+  @override
+  String get reviewPublicNotice =>
+      'Votre avis sera publié sur le profil du prestataire.';
+
+  @override
+  String get reviewCommentLength => 'Écrivez entre 20 et 500 caractères.';
+
+  @override
+  String reviewStars(int count) {
+    return '$count étoiles sur 5';
+  }
+
+  @override
   String get completionApprovalTitle => 'Validation des tâches';
 
   @override

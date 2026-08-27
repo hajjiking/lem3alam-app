@@ -15,6 +15,7 @@ import 'package:lem3alam_mobile/src/features/auth/presentation/auth_controller.d
 import 'package:lem3alam_mobile/src/features/auth/presentation/auth_state.dart';
 import 'package:lem3alam_mobile/src/features/tasks/data/client_offers_repository.dart';
 import 'package:lem3alam_mobile/src/features/tasks/data/client_completion_repository.dart';
+import 'package:lem3alam_mobile/src/features/tasks/data/client_reviews_repository.dart';
 import 'package:lem3alam_mobile/src/features/tasks/domain/task.dart';
 import 'package:lem3alam_mobile/src/features/tasks/domain/tasks_repository.dart';
 import 'package:lem3alam_mobile/src/features/tasks/presentation/client_offers_panel.dart';
@@ -162,6 +163,7 @@ void main() {
           clientDashboardProvider
               .overrideWith((ref) async => DashboardSnapshot.empty),
           clientCompletionProvider.overrideWith((ref) async => []),
+          clientReviewableTasksProvider.overrideWith((ref) async => []),
           tasksRepositoryProvider.overrideWithValue(tasks),
           clientOffersRepositoryProvider
               .overrideWithValue(_repo(tasks, _Api())),

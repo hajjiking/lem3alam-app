@@ -9,6 +9,39 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get leaveReview => 'Leave a Review';
+
+  @override
+  String get reviewSaved => 'Your review has been submitted.';
+
+  @override
+  String get reviewAlreadySubmitted => 'You have already reviewed this task.';
+
+  @override
+  String get reviewUnavailable =>
+      'This task is no longer available to review. Close the form to refresh its review status.';
+
+  @override
+  String get reviewTasksLoadError =>
+      'Could not load your review details. Please try again.';
+
+  @override
+  String get noReviewableTasks =>
+      'No completed tasks are waiting for your review.';
+
+  @override
+  String get reviewPublicNotice =>
+      'Your review will appear on the tasker\'s profile.';
+
+  @override
+  String get reviewCommentLength => 'Write between 20 and 500 characters.';
+
+  @override
+  String reviewStars(int count) {
+    return '$count out of 5 stars';
+  }
+
+  @override
   String get completionApprovalTitle => 'Completion approval';
 
   @override

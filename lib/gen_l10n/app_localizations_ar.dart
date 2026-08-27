@@ -9,6 +9,36 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get leaveReview => 'اترك تقييماً';
+
+  @override
+  String get reviewSaved => 'تم إرسال تقييمك.';
+
+  @override
+  String get reviewAlreadySubmitted => 'سبق لك تقييم هذه المهمة.';
+
+  @override
+  String get reviewUnavailable =>
+      'لم تعد هذه المهمة متاحة للتقييم. أغلق النموذج لتحديث حالة التقييم.';
+
+  @override
+  String get reviewTasksLoadError => 'تعذر تحميل تفاصيل تقييمك. حاول مجدداً.';
+
+  @override
+  String get noReviewableTasks => 'لا توجد مهام مكتملة بانتظار تقييمك.';
+
+  @override
+  String get reviewPublicNotice => 'سيظهر تقييمك في الملف الشخصي لمقدم الخدمة.';
+
+  @override
+  String get reviewCommentLength => 'اكتب ما بين 20 و500 حرف.';
+
+  @override
+  String reviewStars(int count) {
+    return '$count من 5 نجوم';
+  }
+
+  @override
   String get completionApprovalTitle => 'الموافقة على إكمال المهام';
 
   @override

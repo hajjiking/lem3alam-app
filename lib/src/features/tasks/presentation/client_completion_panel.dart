@@ -11,6 +11,7 @@ import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../../dashboard/application/client_dashboard_controller.dart';
 import '../data/client_completion_repository.dart';
+import '../data/client_reviews_repository.dart';
 import '../domain/task.dart';
 import 'tasks_controller.dart';
 
@@ -159,6 +160,7 @@ class _ClientCompletionCardState extends ConsumerState<ClientCompletionCard> {
 
   void _refresh(int taskId) {
     ref.invalidate(clientCompletionProvider);
+    ref.invalidate(clientReviewableTasksProvider);
     ref.invalidate(taskDetailProvider(taskId));
     ref.invalidate(tasksListControllerProvider);
     ref.invalidate(clientDashboardProvider);

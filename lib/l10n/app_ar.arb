@@ -1,4 +1,13 @@
 {
+  "leaveReview": "اترك تقييماً",
+  "reviewSaved": "تم إرسال تقييمك.",
+  "reviewAlreadySubmitted": "سبق لك تقييم هذه المهمة.",
+  "reviewUnavailable": "لم تعد هذه المهمة متاحة للتقييم. أغلق النموذج لتحديث حالة التقييم.",
+  "reviewTasksLoadError": "تعذر تحميل تفاصيل تقييمك. حاول مجدداً.",
+  "noReviewableTasks": "لا توجد مهام مكتملة بانتظار تقييمك.",
+  "reviewPublicNotice": "سيظهر تقييمك في الملف الشخصي لمقدم الخدمة.",
+  "reviewCommentLength": "اكتب ما بين 20 و500 حرف.",
+  "reviewStars": "{count} من 5 نجوم",
   "completionApprovalTitle": "الموافقة على إكمال المهام",
   "completionApprovalCount": "الموافقة على إكمال المهام ({count})",
   "completionApprovalSubtitle": "راجع العمل المنجز ثم وافق على إكماله أو أعده لإجراء تعديلات.",
