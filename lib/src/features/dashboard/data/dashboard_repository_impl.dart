@@ -1,22 +1,36 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/networking/api_client.dart';
+import '../../auth/presentation/auth_controller.dart';
 import '../domain/dashboard_models.dart';
 import '../domain/dashboard_repository.dart';
 import 'dashboard_api.dart';
 
 final dashboardRepositoryProvider = Provider<DashboardRepository>((ref) {
-  return DashboardRepositoryImpl(DashboardApi(ref.watch(apiClientProvider)));
+  final role =
+      ref.watch(authControllerProvider.select((state) => state.user?.role));
+  return DashboardRepositoryImpl(
+    DashboardApi(ref.watch(apiClientProvider)),
+    audience: switch (role) {
+      'client' => DashboardAudience.client,
+      'tasker' => DashboardAudience.tasker,
+      _ => DashboardAudience.automatic,
+    },
+  );
 });
 
 class DashboardRepositoryImpl implements DashboardRepository {
-  DashboardRepositoryImpl(this._api);
+  DashboardRepositoryImpl(
+    this._api, {
+    this.audience = DashboardAudience.automatic,
+  });
 
   final DashboardApi _api;
+  final DashboardAudience audience;
 
   @override
   Future<DashboardSnapshot> fetchDashboard() async {
-    final response = await _api.fetch();
+    final response = await _api.fetch(audience: audience);
     final data = response['data'];
     if (response['success'] == false ||
         data is! Map ||

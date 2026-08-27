@@ -23,6 +23,8 @@ class ClientStatsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final numbers = NumberFormat.decimalPattern(l10n.localeName);
+    final percentage = NumberFormat.percentPattern(l10n.localeName)
+      ..maximumFractionDigits = 2;
     final items = [
       DashboardStatViewData(
           label: l10n.dashboardActiveTasks,
@@ -38,8 +40,7 @@ class ClientStatsRow extends StatelessWidget {
           label: l10n.dashboardSuccessRate,
           value: stats.successRate == null
               ? '—'
-              : NumberFormat.percentPattern(l10n.localeName)
-                  .format(stats.successRate! / 100),
+              : percentage.format(stats.successRate! / 100),
           icon: Icons.bar_chart_rounded,
           accent: context.appTokens.warning),
     ];
