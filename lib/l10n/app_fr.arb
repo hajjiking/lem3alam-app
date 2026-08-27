@@ -1,4 +1,7 @@
 {
+  "taskerAvailableTasks": "Toutes les tâches disponibles",
+  "taskerBrowseInfo": "Parcourez les tâches ouvertes de tous les clients et postulez. Seuls les clients peuvent publier des tâches.",
+  "taskerViewAndApply": "Voir et postuler",
   "clientTasksTitle": "Mes tâches",
   "clientTasksScope": "Uniquement les tâches que vous avez publiées",
   "clientTasksEmpty": "Vous n’avez publié aucune tâche correspondant à ces filtres.",

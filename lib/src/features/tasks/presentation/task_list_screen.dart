@@ -325,10 +325,9 @@ class _TaskListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final selectedCategoryId = ref.watch(selectedCategoryIdProvider);
-    final recommended =
-        canCreate ? <Task>[] : page.items.take(4).toList(growable: false);
-    final rest = page.items.skip(recommended.length).toList(growable: false);
+    final isTasker = ref.watch(
+        authControllerProvider.select((auth) => auth.user?.isTasker == true));
+    final rest = page.items;
 
     return RefreshIndicator.adaptive(
       onRefresh: onRefresh,
@@ -352,13 +351,16 @@ class _TaskListView extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: AppHeroPromoCard(
-                title: l10n.promoTodayTitle,
-                subtitle: l10n.promoTodaySubtitle,
-                ctaLabel: l10n.bookNow,
-                icon: Icons.handyman_outlined,
-                onCtaTap: () => context.goNamed(AppRouteNames.taskCreate),
-              ),
+              child: isTasker
+                  ? AppInlineBanner(
+                      message: l10n.taskerBrowseInfo, tone: AppBannerTone.info)
+                  : AppHeroPromoCard(
+                      title: l10n.promoTodayTitle,
+                      subtitle: l10n.promoTodaySubtitle,
+                      ctaLabel: l10n.bookNow,
+                      icon: Icons.handyman_outlined,
+                      onCtaTap: () => context.goNamed(AppRouteNames.taskCreate),
+                    ),
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 22)),
@@ -370,60 +372,17 @@ class _TaskListView extends ConsumerWidget {
               ),
             ),
           ),
-          if (recommended.isNotEmpty) ...[
-            const SliverToBoxAdapter(child: SizedBox(height: 22)),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: AppSectionHeader(
-                  title: l10n.recommendedForYou,
-                  subtitle: selectedCategoryId == null
-                      ? l10n.pickedForYourNeeds
-                      : l10n.inCategory,
-                  actionLabel: l10n.seeAll,
-                  onActionTap: () async {
-                    if (!scrollController.hasClients) return;
-                    await scrollController.animateTo(
-                      scrollController.position.maxScrollExtent,
-                      duration: const Duration(milliseconds: 350),
-                      curve: Curves.easeOutCubic,
-                    );
-                  },
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 12)),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 380,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recommended.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 14),
-                  itemBuilder: (context, index) {
-                    final task = recommended[index];
-                    return SizedBox(
-                      width: 320,
-                      child: _TaskCard(
-                          task: task, variant: _TaskCardVariant.highlighted),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
           const SliverToBoxAdapter(child: SizedBox(height: 22)),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppSectionHeader(
-                title: canCreate ? l10n.clientTasksTitle : l10n.allTasks,
+                title: canCreate
+                    ? l10n.clientTasksTitle
+                    : l10n.taskerAvailableTasks,
                 subtitle: canCreate
                     ? '${l10n.clientTasksScope} · ${l10n.clientTasksCount(page.total)}'
-                    : page.items.isEmpty
-                        ? ''
-                        : l10n.tasksAvailableCount(page.items.length),
+                    : l10n.tasksAvailableCount(page.total),
               ),
             ),
           ),
@@ -439,10 +398,10 @@ class _TaskListView extends ConsumerWidget {
                       ? l10n.clientTasksEmpty
                       : l10n.emptyTasksSubtitle,
                   icon: Icons.inbox_outlined,
-                  actionLabel: canCreate ? l10n.createTask : l10n.login,
-                  onAction: () => context.goNamed(canCreate
-                      ? AppRouteNames.taskCreate
-                      : AppRouteNames.login),
+                  actionLabel: canCreate ? l10n.createTask : l10n.refreshAction,
+                  onAction: canCreate
+                      ? () => context.goNamed(AppRouteNames.taskCreate)
+                      : onRefresh,
                 ),
               ),
             )
@@ -459,7 +418,13 @@ class _TaskListView extends ConsumerWidget {
                       child: Center(child: CircularProgressIndicator()),
                     );
                   }
-                  return _TaskCard(task: rest[index]);
+                  final task = rest[index];
+                  return _TaskCard(
+                      task: task,
+                      onApply: isTasker && task.status == 'open'
+                          ? () => context.goNamed(AppRouteNames.taskDetail,
+                              pathParameters: {'id': task.id.toString()})
+                          : null);
                 },
               ),
             ),
@@ -663,14 +628,11 @@ class _PopularCategories extends ConsumerWidget {
   }
 }
 
-enum _TaskCardVariant { standard, highlighted }
-
 class _TaskCard extends StatelessWidget {
-  const _TaskCard(
-      {required this.task, this.variant = _TaskCardVariant.standard});
+  const _TaskCard({required this.task, this.onApply});
 
   final Task task;
-  final _TaskCardVariant variant;
+  final VoidCallback? onApply;
 
   @override
   Widget build(BuildContext context) {
@@ -680,7 +642,6 @@ class _TaskCard extends StatelessWidget {
     final statusColor = taskStatusColor(context, task.status);
     final urgencyColor = taskUrgencyColor(context, task.urgency);
     final localizedCategoryName = task.localizedCategoryName(languageCode);
-    final isHighlight = variant == _TaskCardVariant.highlighted;
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -695,7 +656,7 @@ class _TaskCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             AspectRatio(
-              aspectRatio: isHighlight ? 320 / 170 : 360 / 150,
+              aspectRatio: 360 / 150,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -750,7 +711,7 @@ class _TaskCard extends StatelessWidget {
                               type: MaterialType.transparency,
                               child: Text(
                                 task.title,
-                                maxLines: isHighlight ? 2 : 2,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme
@@ -774,6 +735,13 @@ class _TaskCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                    if (onApply != null) ...[
+                      const SizedBox(height: 10),
+                      FilledButton.icon(
+                          onPressed: onApply,
+                          icon: const Icon(Icons.send_outlined),
+                          label: Text(l10n.taskerViewAndApply)),
+                    ],
                     const SizedBox(height: 10),
                     Row(
                       children: [

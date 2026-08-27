@@ -9,6 +9,16 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get taskerAvailableTasks => 'All available tasks';
+
+  @override
+  String get taskerBrowseInfo =>
+      'Browse open tasks from all clients and apply. Posting is available for clients only.';
+
+  @override
+  String get taskerViewAndApply => 'View and apply';
+
+  @override
   String get clientTasksTitle => 'My tasks';
 
   @override

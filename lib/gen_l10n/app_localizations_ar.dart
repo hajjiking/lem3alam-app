@@ -9,6 +9,16 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get taskerAvailableTasks => 'جميع المهام المتاحة';
+
+  @override
+  String get taskerBrowseInfo =>
+      'تصفح المهام المفتوحة من جميع العملاء وتقدم إليها. نشر المهام متاح للعملاء فقط.';
+
+  @override
+  String get taskerViewAndApply => 'عرض المهمة والتقدم إليها';
+
+  @override
   String get clientTasksTitle => 'مهامي';
 
   @override

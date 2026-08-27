@@ -100,6 +100,24 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @taskerAvailableTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'All available tasks'**
+  String get taskerAvailableTasks;
+
+  /// No description provided for @taskerBrowseInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse open tasks from all clients and apply. Posting is available for clients only.'**
+  String get taskerBrowseInfo;
+
+  /// No description provided for @taskerViewAndApply.
+  ///
+  /// In en, this message translates to:
+  /// **'View and apply'**
+  String get taskerViewAndApply;
+
   /// No description provided for @clientTasksTitle.
   ///
   /// In en, this message translates to:

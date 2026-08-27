@@ -1,4 +1,7 @@
 {
+  "taskerAvailableTasks": "All available tasks",
+  "taskerBrowseInfo": "Browse open tasks from all clients and apply. Posting is available for clients only.",
+  "taskerViewAndApply": "View and apply",
   "clientTasksTitle": "My tasks",
   "clientTasksScope": "Only tasks you posted",
   "clientTasksEmpty": "You haven’t posted any tasks matching these filters.",

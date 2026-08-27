@@ -1,4 +1,7 @@
 {
+  "taskerAvailableTasks": "جميع المهام المتاحة",
+  "taskerBrowseInfo": "تصفح المهام المفتوحة من جميع العملاء وتقدم إليها. نشر المهام متاح للعملاء فقط.",
+  "taskerViewAndApply": "عرض المهمة والتقدم إليها",
   "clientTasksTitle": "مهامي",
   "clientTasksScope": "المهام التي نشرتها فقط",
   "clientTasksEmpty": "لم تنشر أي مهام تطابق هذه الفلاتر.",
