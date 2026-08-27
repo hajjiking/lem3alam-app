@@ -18,6 +18,7 @@ import 'task_image_support.dart';
 import 'tasks_controller.dart';
 import 'task_application_sheet.dart';
 import 'client_offers_panel.dart';
+import 'tasker_assignments_panel.dart';
 import '../data/client_offers_repository.dart';
 
 class TaskDetailScreen extends ConsumerWidget {
@@ -293,6 +294,15 @@ class TaskDetailScreen extends ConsumerWidget {
                     ),
                   ),
                 const SizedBox(height: 16),
+                if (isTasker &&
+                    task.assignedTaskerId == user?.id &&
+                    task.isActiveAssignment) ...[
+                  TaskerAssignmentCard(
+                      key: ValueKey('assignment-${user?.id}-${task.id}'),
+                      task: task,
+                      showDetails: false),
+                  const SizedBox(height: 16),
+                ],
                 if (isClient && task.clientId == user?.id) ...[
                   TaskOffersSection(task: task),
                   const SizedBox(height: 16),

@@ -31,6 +31,7 @@ class Task {
     this.clientRating,
     this.isSaved = false,
     this.offers = const [],
+    this.completionRequestedAt,
   });
 
   final int id;
@@ -62,6 +63,10 @@ class Task {
   final double? clientRating;
   final bool isSaved;
   final List<TaskOffer> offers;
+  final DateTime? completionRequestedAt;
+
+  bool get isActiveAssignment =>
+      status == 'assigned' || status == 'in_progress';
 
   String? get primaryImagePath => images.isEmpty ? null : images.first;
   String? get primaryImageSource => primaryImageUrl ?? primaryImagePath;
@@ -163,6 +168,8 @@ class Task {
       distanceKm: double.tryParse(json['distance_km']?.toString() ?? ''),
       clientRating: double.tryParse(json['client_rating']?.toString() ?? ''),
       isSaved: json['is_saved'] == true || json['is_saved']?.toString() == '1',
+      completionRequestedAt:
+          DateTime.tryParse(json['completion_requested_at']?.toString() ?? ''),
       offers: (json['applications'] as List? ?? const [])
           .whereType<Map<String, dynamic>>()
           .map(TaskOffer.fromJson)

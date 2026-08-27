@@ -9,6 +9,45 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get activeAssignmentsTitle => 'المهام المسندة إليك';
+
+  @override
+  String activeAssignmentsCount(int count) {
+    return 'المهام المسندة إليك ($count)';
+  }
+
+  @override
+  String get activeAssignmentsSubtitle =>
+      'المهام التي تم توظيفك لإنجازها — أنجز العمل وأرسل طلب إكماله.';
+
+  @override
+  String get noActiveAssignments =>
+      'لا توجد مهام مسندة إليك حالياً. ستظهر هنا عندما يختارك العميل.';
+
+  @override
+  String get assignmentsLoadError =>
+      'تعذر تحميل المهام المسندة إليك. حاول مجدداً.';
+
+  @override
+  String get requestCompletion => 'طلب إكمال المهمة';
+
+  @override
+  String confirmRequestCompletion(String task) {
+    return 'هل أنجزت «$task»؟ أرسل طلب إكمال المهمة للعميل للموافقة عليه.';
+  }
+
+  @override
+  String get awaitingClientApproval => 'بانتظار موافقة العميل';
+
+  @override
+  String get completionRequestSent =>
+      'تم إرسال طلب الإكمال. بانتظار موافقة العميل.';
+
+  @override
+  String get assignmentNoLongerActive =>
+      'لم تعد هذه المهمة نشطة. حدّث الصفحة لمعرفة حالتها.';
+
+  @override
   String get clientOffersTitle => 'عروض جديدة بانتظارك';
 
   @override

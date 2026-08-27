@@ -1,4 +1,28 @@
 {
+  "activeAssignmentsTitle": "Active assignments",
+  "activeAssignmentsCount": "Active assignments ({count})",
+  "activeAssignmentsSubtitle": "Tasks you have been hired for — deliver and request completion.",
+  "noActiveAssignments": "No active assignments yet. Tasks will appear here when a client hires you.",
+  "assignmentsLoadError": "Could not load your assignments. Please try again.",
+  "requestCompletion": "Request completion",
+  "confirmRequestCompletion": "Have you finished “{task}”? Send a completion request to the client for approval.",
+  "awaitingClientApproval": "Awaiting client approval",
+  "completionRequestSent": "Completion requested. Awaiting client approval.",
+  "assignmentNoLongerActive": "This assignment is no longer active. Refresh to see its current status.",
+  "@activeAssignmentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@confirmRequestCompletion": {
+    "placeholders": {
+      "task": {
+        "type": "String"
+      }
+    }
+  },
   "clientOffersTitle": "New offers waiting",
   "clientOffersWaiting": "New offers waiting ({count})",
   "clientOffersSubtitle": "Review tasker proposals and pick the best fit.",

@@ -9,6 +9,45 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get activeAssignmentsTitle => 'Active assignments';
+
+  @override
+  String activeAssignmentsCount(int count) {
+    return 'Active assignments ($count)';
+  }
+
+  @override
+  String get activeAssignmentsSubtitle =>
+      'Tasks you have been hired for — deliver and request completion.';
+
+  @override
+  String get noActiveAssignments =>
+      'No active assignments yet. Tasks will appear here when a client hires you.';
+
+  @override
+  String get assignmentsLoadError =>
+      'Could not load your assignments. Please try again.';
+
+  @override
+  String get requestCompletion => 'Request completion';
+
+  @override
+  String confirmRequestCompletion(String task) {
+    return 'Have you finished “$task”? Send a completion request to the client for approval.';
+  }
+
+  @override
+  String get awaitingClientApproval => 'Awaiting client approval';
+
+  @override
+  String get completionRequestSent =>
+      'Completion requested. Awaiting client approval.';
+
+  @override
+  String get assignmentNoLongerActive =>
+      'This assignment is no longer active. Refresh to see its current status.';
+
+  @override
   String get clientOffersTitle => 'New offers waiting';
 
   @override

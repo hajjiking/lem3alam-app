@@ -11,6 +11,7 @@ import 'package:lem3alam_mobile/src/features/dashboard/data/dashboard_repository
 import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_models.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_repository.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:lem3alam_mobile/src/features/tasks/data/tasker_assignments_repository.dart';
 
 class _DashboardAuthController extends AuthController {
   @override
@@ -37,6 +38,7 @@ class _EmptyDashboardRepository implements DashboardRepository {
 Widget _dashboardApp({required Locale locale, required ThemeMode themeMode}) {
   return ProviderScope(
     overrides: [
+      taskerAssignmentsProvider.overrideWith((ref) async => []),
       authControllerProvider.overrideWith(_DashboardAuthController.new),
       dashboardRepositoryProvider
           .overrideWithValue(_EmptyDashboardRepository()),

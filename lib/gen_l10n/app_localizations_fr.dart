@@ -9,6 +9,45 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get activeAssignmentsTitle => 'Missions en cours';
+
+  @override
+  String activeAssignmentsCount(int count) {
+    return 'Missions en cours ($count)';
+  }
+
+  @override
+  String get activeAssignmentsSubtitle =>
+      'Les tâches qui vous sont confiées — réalisez-les et demandez leur validation.';
+
+  @override
+  String get noActiveAssignments =>
+      'Aucune mission en cours. Vos tâches apparaîtront ici lorsqu’un client vous engagera.';
+
+  @override
+  String get assignmentsLoadError =>
+      'Impossible de charger vos missions. Réessayez.';
+
+  @override
+  String get requestCompletion => 'Demander la validation';
+
+  @override
+  String confirmRequestCompletion(String task) {
+    return 'Avez-vous terminé « $task » ? Envoyez une demande de validation au client.';
+  }
+
+  @override
+  String get awaitingClientApproval => 'En attente de validation du client';
+
+  @override
+  String get completionRequestSent =>
+      'Demande envoyée. En attente de validation du client.';
+
+  @override
+  String get assignmentNoLongerActive =>
+      'Cette mission n’est plus active. Actualisez pour voir son statut.';
+
+  @override
   String get clientOffersTitle => 'Nouvelles offres en attente';
 
   @override

@@ -14,6 +14,8 @@ import '../domain/dashboard_models.dart';
 import 'widgets/dashboard_widgets.dart';
 import 'dashboard_actions.dart';
 import 'widgets/tasker_analytics_section.dart';
+import '../../tasks/data/tasker_assignments_repository.dart';
+import '../../tasks/presentation/tasker_assignments_panel.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -84,7 +86,10 @@ class DashboardScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: scheme.surface,
       body: RefreshIndicator(
-          onRefresh: controller.load,
+          onRefresh: () async {
+            ref.invalidate(taskerAssignmentsProvider);
+            await controller.load();
+          },
           child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
             key: const PageStorageKey('tasker-dashboard-scroll'),
@@ -139,6 +144,8 @@ class DashboardScreen extends ConsumerWidget {
                                   onRetry: controller.load)
                             else if (dashboard.hasLoaded) ...[
                               DashboardStatsRow(items: statItems),
+                              const SizedBox(height: 28),
+                              const TaskerAssignmentsPanel(),
                               const SizedBox(height: 28),
                               TaskerAnalyticsSection(
                                   snapshot: dashboard.snapshot,

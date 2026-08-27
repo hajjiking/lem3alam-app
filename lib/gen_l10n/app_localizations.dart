@@ -100,6 +100,66 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @activeAssignmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active assignments'**
+  String get activeAssignmentsTitle;
+
+  /// No description provided for @activeAssignmentsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Active assignments ({count})'**
+  String activeAssignmentsCount(int count);
+
+  /// No description provided for @activeAssignmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks you have been hired for — deliver and request completion.'**
+  String get activeAssignmentsSubtitle;
+
+  /// No description provided for @noActiveAssignments.
+  ///
+  /// In en, this message translates to:
+  /// **'No active assignments yet. Tasks will appear here when a client hires you.'**
+  String get noActiveAssignments;
+
+  /// No description provided for @assignmentsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your assignments. Please try again.'**
+  String get assignmentsLoadError;
+
+  /// No description provided for @requestCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Request completion'**
+  String get requestCompletion;
+
+  /// No description provided for @confirmRequestCompletion.
+  ///
+  /// In en, this message translates to:
+  /// **'Have you finished “{task}”? Send a completion request to the client for approval.'**
+  String confirmRequestCompletion(String task);
+
+  /// No description provided for @awaitingClientApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting client approval'**
+  String get awaitingClientApproval;
+
+  /// No description provided for @completionRequestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Completion requested. Awaiting client approval.'**
+  String get completionRequestSent;
+
+  /// No description provided for @assignmentNoLongerActive.
+  ///
+  /// In en, this message translates to:
+  /// **'This assignment is no longer active. Refresh to see its current status.'**
+  String get assignmentNoLongerActive;
+
   /// No description provided for @clientOffersTitle.
   ///
   /// In en, this message translates to:

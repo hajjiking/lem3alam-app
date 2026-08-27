@@ -20,6 +20,7 @@ import 'package:lem3alam_mobile/src/features/dashboard/data/dashboard_repository
 import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_models.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/domain/dashboard_repository.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:lem3alam_mobile/src/features/tasks/data/tasker_assignments_repository.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dashboard_performance.dart';
 import 'package:lem3alam_mobile/src/features/dashboard/presentation/widgets/dashboard_stats.dart';
 
@@ -108,6 +109,7 @@ Widget _app(
         GlobalKey? capture}) =>
     ProviderScope(
       overrides: [
+        taskerAssignmentsProvider.overrideWith((ref) async => []),
         authControllerProvider.overrideWith(_Auth.new),
         dashboardRepositoryProvider.overrideWithValue(
             _Repo(load ?? () async => DashboardSnapshot.fromJson(_data())))
@@ -288,6 +290,7 @@ void main() {
     await tester.pumpWidget(_app());
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('This Week'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('This Week'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('This Month'));
@@ -308,6 +311,7 @@ void main() {
         .pumpWidget(_app(load: () async => DashboardSnapshot.fromJson(data)));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('This Week'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('This Week'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('This Month'));
