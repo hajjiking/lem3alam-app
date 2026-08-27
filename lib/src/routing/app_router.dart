@@ -12,7 +12,8 @@ import '../features/auth/presentation/auth_state.dart';
 import '../features/admin/presentation/admin_home_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
-import '../features/dashboard/presentation/dashboard_screen.dart';
+import '../features/dashboard/application/client_dashboard_controller.dart';
+import '../features/dashboard/presentation/client_dashboard_screen.dart';
 import '../features/dashboard/presentation/tasker_categories_screen.dart';
 import '../features/dashboard/presentation/widgets/dashboard_bottom_navigation.dart';
 import '../features/location/presentation/map_picker_screen.dart';
@@ -320,7 +321,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/dashboard',
                 name: AppRouteNames.dashboard,
-                pageBuilder: (context, state) => const NoTransitionPage(child: DashboardScreen()),
+                pageBuilder: (context, state) => const NoTransitionPage(child: RoleDashboardScreen()),
                 routes: [
                   GoRoute(
                     path: 'categories',
@@ -380,15 +381,28 @@ class _AppShell extends ConsumerWidget {
       child: Scaffold(
         body: navigationShell,
         bottomNavigationBar: DashboardBottomNavigation(
-          selectedIndex: location.startsWith('/taskers/')
+          selectedIndex: auth.user?.isClient == true && location == '/tasks/create'
+              ? 2 : location.startsWith('/taskers/') && auth.user?.isClient != true
               ? 4
               : (navigationShell.currentIndex == 1 ? 0 : 1),
           homeLabel: l10n.home,
           tasksLabel: l10n.tasks,
           messagesLabel: l10n.dashboardMessages,
-          earningsLabel: l10n.dashboardEarnings,
+          earningsLabel: auth.user?.isClient == true ? l10n.clientDashboardPayments : l10n.dashboardEarnings,
           profileLabel: l10n.dashboardProfile,
+          postTaskLabel: auth.user?.isClient == true ? l10n.dashboardPostTask : null,
           onSelected: (index) {
+            if (auth.user?.isClient == true) {
+              if (index == 2) {
+                context.goNamed(AppRouteNames.taskCreate);
+                return;
+              }
+              if (index == 3 || index == 4) {
+                _showUnavailable(context, index == 3 ? l10n.dashboardMessages : l10n.clientDashboardPayments);
+                return;
+              }
+              if (index == 0) ref.invalidate(clientDashboardProvider);
+            }
             switch (index) {
               case 0:
                 if (auth.status != AuthStatus.authenticated) {

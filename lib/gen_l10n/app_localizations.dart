@@ -100,6 +100,60 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @clientDashboardReadySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to get things done today?'**
+  String get clientDashboardReadySubtitle;
+
+  /// No description provided for @clientDashboardPromoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A little help goes a long way'**
+  String get clientDashboardPromoTitle;
+
+  /// No description provided for @clientDashboardPromoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Post a task and find the right professional for your home.'**
+  String get clientDashboardPromoSubtitle;
+
+  /// No description provided for @clientDashboardLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn’t load your dashboard. Check your connection and try again.'**
+  String get clientDashboardLoadError;
+
+  /// No description provided for @clientDashboardEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks yet. Post your first task to get started.'**
+  String get clientDashboardEmpty;
+
+  /// No description provided for @clientDashboardNoRecentTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching tasks among your latest 10. View all to see your full task history.'**
+  String get clientDashboardNoRecentTasks;
+
+  /// No description provided for @clientDashboardSuccessInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Success rate is shown only when the API provides it. A dash means it is unavailable, not zero.'**
+  String get clientDashboardSuccessInfo;
+
+  /// No description provided for @clientDashboardPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get clientDashboardPayments;
+
+  /// No description provided for @clientDashboardUnknownTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Date unavailable'**
+  String get clientDashboardUnknownTime;
+
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:

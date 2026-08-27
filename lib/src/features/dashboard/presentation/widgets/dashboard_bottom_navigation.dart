@@ -10,6 +10,7 @@ class DashboardBottomNavigation extends StatelessWidget {
     required this.earningsLabel,
     required this.profileLabel,
     required this.onSelected,
+    this.postTaskLabel,
   });
 
   final int selectedIndex;
@@ -19,6 +20,7 @@ class DashboardBottomNavigation extends StatelessWidget {
   final String earningsLabel;
   final String profileLabel;
   final ValueChanged<int> onSelected;
+  final String? postTaskLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,8 @@ class DashboardBottomNavigation extends StatelessWidget {
     final items = <(String, IconData, IconData)>[
       (homeLabel, Icons.home_outlined, Icons.home_rounded),
       (tasksLabel, Icons.assignment_outlined, Icons.assignment_rounded),
+      if (postTaskLabel != null)
+        (postTaskLabel!, Icons.add_rounded, Icons.add_rounded),
       (
         messagesLabel,
         Icons.chat_bubble_outline_rounded,
@@ -36,7 +40,8 @@ class DashboardBottomNavigation extends StatelessWidget {
         Icons.account_balance_wallet_outlined,
         Icons.account_balance_wallet_rounded
       ),
-      (profileLabel, Icons.person_outline_rounded, Icons.person_rounded),
+      if (postTaskLabel == null)
+        (profileLabel, Icons.person_outline_rounded, Icons.person_rounded),
     ];
 
     return Material(
@@ -46,7 +51,9 @@ class DashboardBottomNavigation extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: SizedBox(
-          height: 76,
+          height: postTaskLabel == null
+              ? 76
+              : 78 + MediaQuery.textScalerOf(context).scale(14),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -58,6 +65,7 @@ class DashboardBottomNavigation extends StatelessWidget {
                         ? items[index].$3
                         : items[index].$2,
                     selected: selectedIndex == index,
+                    prominent: postTaskLabel != null && index == 2,
                     onTap: () => onSelected(index),
                   ),
                 ),
@@ -75,12 +83,14 @@ class _NavItem extends StatelessWidget {
     required this.icon,
     required this.selected,
     required this.onTap,
+    this.prominent = false,
   });
 
   final String label;
   final IconData icon;
   final bool selected;
   final VoidCallback onTap;
+  final bool prominent;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +109,16 @@ class _NavItem extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: color, size: 27),
+              if (prominent)
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                      color: scheme.primary, shape: BoxShape.circle),
+                  child: Icon(icon, color: scheme.onPrimary, size: 36),
+                )
+              else
+                Icon(icon, color: color, size: 27),
               const SizedBox(height: 3),
               Text(
                 label,
@@ -107,16 +126,17 @@ class _NavItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelSmall?.copyWith(color: color),
               ),
-              const SizedBox(height: 3),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 180),
-                height: 3,
-                width: selected ? 34 : 0,
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(999),
+              if (!prominent) const SizedBox(height: 3),
+              if (!prominent)
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  height: 3,
+                  width: selected ? 34 : 0,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(999),
+                  ),
                 ),
-              ),
             ],
           ),
         ),

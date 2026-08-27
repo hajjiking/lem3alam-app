@@ -13,6 +13,7 @@ import '../../../core/networking/api_exception.dart';
 import '../../../core/ui/app_widgets.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
+import '../../dashboard/application/client_dashboard_controller.dart';
 import '../domain/task.dart';
 import 'task_image_support.dart';
 import 'tasks_controller.dart';
@@ -320,6 +321,7 @@ class TaskDetailScreen extends ConsumerWidget {
                           .read(taskMutationControllerProvider)
                           .delete(task.id);
                       ref.invalidate(tasksListControllerProvider);
+                      ref.invalidate(clientDashboardProvider);
                       if (context.mounted) context.goNamed(AppRouteNames.tasks);
                     },
                     icon: const Icon(Icons.delete_outline),
@@ -436,6 +438,7 @@ Future<void> _showApplySheet(
                                 .apply(taskId: taskId, payload: payload);
                             ref.invalidate(taskDetailProvider(taskId));
                             ref.invalidate(tasksListControllerProvider);
+                            ref.invalidate(clientDashboardProvider);
                             if (context.mounted) {
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(

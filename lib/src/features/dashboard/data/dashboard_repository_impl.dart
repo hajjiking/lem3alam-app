@@ -18,7 +18,24 @@ class DashboardRepositoryImpl implements DashboardRepository {
   Future<DashboardSnapshot> fetchDashboard() async {
     final response = await _api.fetch();
     final data = response['data'];
-    if (data is! Map) return DashboardSnapshot.empty;
+    if (response['success'] == false ||
+        data is! Map ||
+        data['stats'] is! Map ||
+        data['recent_tasks'] is! List) {
+      throw const FormatException('Invalid dashboard response');
+    }
+    final stats = data['stats'] as Map;
+    for (final key in [
+      'active_tasks',
+      'completed_tasks',
+      'pending_tasks',
+      'accepted_tasks'
+    ]) {
+      final count = num.tryParse(stats[key]?.toString() ?? '');
+      if (count == null || !count.isFinite || count < 0 || count % 1 != 0) {
+        throw FormatException('Invalid dashboard statistic: $key');
+      }
+    }
     return DashboardSnapshot.fromJson(Map<String, dynamic>.from(data));
   }
 }

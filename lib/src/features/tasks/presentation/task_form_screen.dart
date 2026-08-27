@@ -15,6 +15,7 @@ import '../../../core/ui/app_theme.dart';
 import '../../../core/ui/app_widgets.dart';
 import '../../../routing/app_router.dart';
 import '../../location/presentation/map_picker_screen.dart';
+import '../../dashboard/application/client_dashboard_controller.dart';
 import '../domain/task.dart';
 import 'tasks_controller.dart';
 import '../data/tasks_repository_impl.dart';
@@ -307,6 +308,7 @@ class _TaskFormScreenState extends ConsumerState<TaskFormScreen> {
             );
 
       ref.invalidate(tasksListControllerProvider);
+      ref.invalidate(clientDashboardProvider);
       _images.clear();
       if (mounted) {
         context.goNamed(

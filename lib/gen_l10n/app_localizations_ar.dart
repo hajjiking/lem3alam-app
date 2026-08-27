@@ -9,6 +9,38 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get clientDashboardReadySubtitle => 'مستعد لإنجاز مهامك اليوم؟';
+
+  @override
+  String get clientDashboardPromoTitle => 'مساعدة بسيطة تصنع الفرق';
+
+  @override
+  String get clientDashboardPromoSubtitle =>
+      'انشر مهمة واعثر على المهني المناسب لمنزلك.';
+
+  @override
+  String get clientDashboardLoadError =>
+      'تعذر تحميل لوحة التحكم. تحقق من اتصالك وحاول مرة أخرى.';
+
+  @override
+  String get clientDashboardEmpty =>
+      'لا توجد مهام بعد. انشر مهمتك الأولى للبدء.';
+
+  @override
+  String get clientDashboardNoRecentTasks =>
+      'لا توجد مهام مطابقة ضمن آخر 10 مهام. اعرض الكل للاطلاع على السجل الكامل.';
+
+  @override
+  String get clientDashboardSuccessInfo =>
+      'تظهر نسبة النجاح فقط عندما توفرها الواجهة البرمجية. تعني الشرطة أن القيمة غير متاحة وليست صفراً.';
+
+  @override
+  String get clientDashboardPayments => 'المدفوعات';
+
+  @override
+  String get clientDashboardUnknownTime => 'التاريخ غير متاح';
+
+  @override
   String get appName => 'لمعلم';
 
   @override

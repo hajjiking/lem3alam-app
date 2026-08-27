@@ -9,6 +9,38 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get clientDashboardReadySubtitle => 'Ready to get things done today?';
+
+  @override
+  String get clientDashboardPromoTitle => 'A little help goes a long way';
+
+  @override
+  String get clientDashboardPromoSubtitle =>
+      'Post a task and find the right professional for your home.';
+
+  @override
+  String get clientDashboardLoadError =>
+      'We couldn’t load your dashboard. Check your connection and try again.';
+
+  @override
+  String get clientDashboardEmpty =>
+      'No tasks yet. Post your first task to get started.';
+
+  @override
+  String get clientDashboardNoRecentTasks =>
+      'No matching tasks among your latest 10. View all to see your full task history.';
+
+  @override
+  String get clientDashboardSuccessInfo =>
+      'Success rate is shown only when the API provides it. A dash means it is unavailable, not zero.';
+
+  @override
+  String get clientDashboardPayments => 'Payments';
+
+  @override
+  String get clientDashboardUnknownTime => 'Date unavailable';
+
+  @override
   String get appName => 'lem3alam';
 
   @override

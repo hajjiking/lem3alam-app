@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/ui/app_theme.dart';
+
 class DashboardStatViewData {
   const DashboardStatViewData({
     required this.label,
@@ -16,6 +18,66 @@ class DashboardStatViewData {
   final IconData icon;
   final IconData? labelIcon;
   final Color accent;
+}
+
+/// Compact detail-style variant shared by dashboards with drill-down metrics.
+class DashboardDetailStatCard extends StatelessWidget {
+  const DashboardDetailStatCard(
+      {super.key,
+      required this.data,
+      required this.actionLabel,
+      required this.onTap});
+
+  final DashboardStatViewData data;
+  final String actionLabel;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      decoration: AppStyle.cardDecoration(context),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(children: [
+            Container(
+              width: 52,
+              height: 60,
+              decoration: BoxDecoration(
+                color: data.accent.withValues(alpha: .1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(data.icon, color: data.accent, size: 30),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(data.label,
+                    style: theme.textTheme.labelLarge
+                        ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                const SizedBox(height: 4),
+                Text(data.value,
+                    style: theme.textTheme.headlineMedium
+                        ?.copyWith(fontWeight: FontWeight.w900)),
+              ],
+            )),
+          ]),
+          const Divider(height: 24),
+          TextButton(
+            onPressed: onTap,
+            child: Row(children: [
+              Expanded(child: Text(actionLabel)),
+              const Icon(Icons.chevron_right_rounded),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class DashboardStatsRow extends StatelessWidget {

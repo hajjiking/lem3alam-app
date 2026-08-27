@@ -9,6 +9,39 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get clientDashboardReadySubtitle =>
+      'Prêt à avancer dans vos projets aujourd’hui ?';
+
+  @override
+  String get clientDashboardPromoTitle => 'Un coup de main fait la différence';
+
+  @override
+  String get clientDashboardPromoSubtitle =>
+      'Publiez une tâche et trouvez le bon professionnel pour votre maison.';
+
+  @override
+  String get clientDashboardLoadError =>
+      'Impossible de charger votre tableau de bord. Vérifiez votre connexion et réessayez.';
+
+  @override
+  String get clientDashboardEmpty =>
+      'Aucune tâche pour le moment. Publiez votre première tâche pour commencer.';
+
+  @override
+  String get clientDashboardNoRecentTasks =>
+      'Aucune tâche correspondante parmi vos 10 dernières. Affichez tout pour consulter votre historique.';
+
+  @override
+  String get clientDashboardSuccessInfo =>
+      'Le taux de réussite s’affiche uniquement si l’API le fournit. Un tiret indique une valeur indisponible, pas zéro.';
+
+  @override
+  String get clientDashboardPayments => 'Paiements';
+
+  @override
+  String get clientDashboardUnknownTime => 'Date indisponible';
+
+  @override
   String get appName => 'lem3alam';
 
   @override

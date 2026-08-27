@@ -1,4 +1,13 @@
 {
+  "clientDashboardReadySubtitle": "مستعد لإنجاز مهامك اليوم؟",
+  "clientDashboardPromoTitle": "مساعدة بسيطة تصنع الفرق",
+  "clientDashboardPromoSubtitle": "انشر مهمة واعثر على المهني المناسب لمنزلك.",
+  "clientDashboardLoadError": "تعذر تحميل لوحة التحكم. تحقق من اتصالك وحاول مرة أخرى.",
+  "clientDashboardEmpty": "لا توجد مهام بعد. انشر مهمتك الأولى للبدء.",
+  "clientDashboardNoRecentTasks": "لا توجد مهام مطابقة ضمن آخر 10 مهام. اعرض الكل للاطلاع على السجل الكامل.",
+  "clientDashboardSuccessInfo": "تظهر نسبة النجاح فقط عندما توفرها الواجهة البرمجية. تعني الشرطة أن القيمة غير متاحة وليست صفراً.",
+  "clientDashboardPayments": "المدفوعات",
+  "clientDashboardUnknownTime": "التاريخ غير متاح",
   "@@locale": "ar",
   "appName": "لمعلم",
   "loading": "تحميل...",

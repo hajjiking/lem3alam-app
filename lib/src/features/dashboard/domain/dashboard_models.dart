@@ -12,6 +12,7 @@ class DashboardStats {
     required this.rating,
     required this.pendingTasks,
     required this.acceptedTasks,
+    this.successRate,
   });
 
   final int activeTasks;
@@ -20,6 +21,8 @@ class DashboardStats {
   final double rating;
   final int pendingTasks;
   final int acceptedTasks;
+  // Optional API percentage; never infer it from the ten recent tasks.
+  final double? successRate;
 
   factory DashboardStats.fromJson(Map<String, dynamic> json) => DashboardStats(
         activeTasks: _asInt(json['active_tasks']),
@@ -28,6 +31,7 @@ class DashboardStats {
         rating: _asDouble(json['rating']),
         pendingTasks: _asInt(json['pending_tasks']),
         acceptedTasks: _asInt(json['accepted_tasks']),
+        successRate: _percentage(json['success_rate']),
       );
 }
 
@@ -40,6 +44,8 @@ class DashboardTask {
     required this.hoursAgo,
     required this.status,
     required this.price,
+    this.isCancelled = false,
+    this.hasCreatedAt = true,
   });
 
   final int id;
@@ -48,7 +54,9 @@ class DashboardTask {
   final String city;
   final int hoursAgo;
   final DashboardTaskStatus status;
-  final int price;
+  final num price;
+  final bool isCancelled;
+  final bool hasCreatedAt;
 
   factory DashboardTask.fromJson(Map<String, dynamic> json) {
     final category = json['category'];
@@ -65,9 +73,18 @@ class DashboardTask {
       city: json['city']?.toString() ?? '',
       hoursAgo: age < 0 ? 0 : age,
       status: _dashboardTaskStatus(json['dashboard_status']?.toString()),
-      price: _asInt(json['budget']),
+      price: _asDouble(json['budget']),
+      isCancelled: json['status'] == 'cancelled',
+      hasCreatedAt: createdAt != null,
     );
   }
+}
+
+double? _percentage(dynamic value) {
+  final parsed = double.tryParse(value?.toString() ?? '');
+  return parsed != null && parsed.isFinite && parsed >= 0 && parsed <= 100
+      ? parsed
+      : null;
 }
 
 class WeeklyPerformancePoint {

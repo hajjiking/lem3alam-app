@@ -149,22 +149,23 @@ class _FilterTab extends StatelessWidget {
             color: selected ? scheme.primary : scheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(13),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: LayoutBuilder(builder: (context, constraints) {
+            final text = Text(label,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.labelLarge?.copyWith(color: foreground));
+            if (constraints.maxWidth < 170) {
+              return Column(mainAxisSize: MainAxisSize.min, children: [
+                Icon(icon, size: 20, color: foreground),
+                const SizedBox(height: 4),
+                text,
+              ]);
+            }
+            return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(icon, size: 20, color: foreground),
               const SizedBox(width: 7),
-              Flexible(
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style:
-                      theme.textTheme.labelLarge?.copyWith(color: foreground),
-                ),
-              ),
-            ],
-          ),
+              Flexible(child: text),
+            ]);
+          }),
         ),
       ),
     );
@@ -361,13 +362,16 @@ class _InfoChip extends StatelessWidget {
             Icon(icon, color: foreground, size: 16),
             const SizedBox(width: 5),
           ],
-          Text(
+          Flexible(
+              child: Text(
             label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: foreground,
                   fontWeight: FontWeight.w700,
                 ),
-          ),
+          )),
         ],
       ),
     );

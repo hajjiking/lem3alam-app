@@ -7,12 +7,16 @@ class DashboardPromoBanner extends StatelessWidget {
     required this.subtitle,
     required this.actionLabel,
     required this.onTap,
+    this.illustrationAsset,
+    this.actionIcon = Icons.trending_up_rounded,
   });
 
   final String title;
   final String subtitle;
   final String actionLabel;
   final VoidCallback onTap;
+  final String? illustrationAsset;
+  final IconData actionIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +39,17 @@ class DashboardPromoBanner extends StatelessWidget {
               color: scheme.surfaceContainerLowest.withValues(alpha: 0.58),
               borderRadius: BorderRadius.circular(24),
             ),
-            child:
-                Icon(Icons.campaign_outlined, color: scheme.primary, size: 54),
+            child: illustrationAsset == null
+                ? Icon(Icons.campaign_outlined, color: scheme.primary, size: 54)
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: Image.asset(illustrationAsset!,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.home_repair_service_outlined,
+                            color: scheme.primary,
+                            size: 54)),
+                  ),
           );
           final copy = Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +76,7 @@ class DashboardPromoBanner extends StatelessWidget {
             onPressed: onTap,
             label: Text(actionLabel),
             iconAlignment: IconAlignment.start,
-            icon: const Icon(Icons.trending_up_rounded),
+            icon: Icon(actionIcon),
           );
 
           if (compact) {

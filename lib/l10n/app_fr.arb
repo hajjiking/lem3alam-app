@@ -1,4 +1,13 @@
 {
+  "clientDashboardReadySubtitle": "Prêt à avancer dans vos projets aujourd’hui ?",
+  "clientDashboardPromoTitle": "Un coup de main fait la différence",
+  "clientDashboardPromoSubtitle": "Publiez une tâche et trouvez le bon professionnel pour votre maison.",
+  "clientDashboardLoadError": "Impossible de charger votre tableau de bord. Vérifiez votre connexion et réessayez.",
+  "clientDashboardEmpty": "Aucune tâche pour le moment. Publiez votre première tâche pour commencer.",
+  "clientDashboardNoRecentTasks": "Aucune tâche correspondante parmi vos 10 dernières. Affichez tout pour consulter votre historique.",
+  "clientDashboardSuccessInfo": "Le taux de réussite s’affiche uniquement si l’API le fournit. Un tiret indique une valeur indisponible, pas zéro.",
+  "clientDashboardPayments": "Paiements",
+  "clientDashboardUnknownTime": "Date indisponible",
   "@@locale": "fr",
   "appName": "lem3alam",
   "loading": "Chargement...",
