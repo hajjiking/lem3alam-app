@@ -9,6 +9,68 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get taskerNoComparison => 'Aucune activité sur la période précédente';
+
+  @override
+  String taskerPeriodChange(String change) {
+    return '$change % par rapport à la période précédente';
+  }
+
+  @override
+  String get taskerPeriodUnavailable =>
+      'Les statistiques de cette période sont indisponibles. Mettez à jour le serveur et actualisez.';
+
+  @override
+  String get taskerAnalyticsPrivate =>
+      'Uniquement vos revenus payés et vos tâches terminées. La comparaison porte sur la même durée de la période précédente.';
+
+  @override
+  String get taskerNoActivity =>
+      'Vous n’avez aucun revenu ni tâche terminée enregistré sur cette période.';
+
+  @override
+  String get taskerDashboardLoadError =>
+      'Impossible de charger votre tableau de bord';
+
+  @override
+  String get taskerDashboardRetryHint =>
+      'Vérifiez votre connexion et connectez-vous à votre compte prestataire, puis réessayez.';
+
+  @override
+  String get adminLast7Days => '7 derniers jours';
+
+  @override
+  String get adminLast30Days => '30 derniers jours';
+
+  @override
+  String get adminStarted => 'Démarrées';
+
+  @override
+  String get adminNoPeriodActivity =>
+      'Aucune activité de tâche enregistrée sur cette période.';
+
+  @override
+  String get adminNoCategoryActivity =>
+      'Aucune tâche à regrouper par catégorie.';
+
+  @override
+  String get adminNoRecentActivity => 'Aucune tâche récente.';
+
+  @override
+  String get adminUnknownValue => 'Indisponible';
+
+  @override
+  String get adminPaidVolume => 'Montant payé';
+
+  @override
+  String get adminChartData => 'Voir les données du graphique';
+
+  @override
+  String adminAnalyticsDates(String timezone) {
+    return 'Tâches publiées, démarrées et terminées par jour. Fuseau horaire : $timezone.';
+  }
+
+  @override
   String get clientDashboardReadySubtitle =>
       'Prêt à avancer dans vos projets aujourd’hui ?';
 

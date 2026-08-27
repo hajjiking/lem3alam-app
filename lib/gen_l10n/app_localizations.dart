@@ -100,6 +100,108 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @taskerNoComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous-period activity'**
+  String get taskerNoComparison;
+
+  /// No description provided for @taskerPeriodChange.
+  ///
+  /// In en, this message translates to:
+  /// **'{change}% vs previous period'**
+  String taskerPeriodChange(String change);
+
+  /// No description provided for @taskerPeriodUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Analytics for this period are unavailable. Update the server and refresh.'**
+  String get taskerPeriodUnavailable;
+
+  /// No description provided for @taskerAnalyticsPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Only your paid earnings and completed work. Changes compare the same elapsed time in the previous period.'**
+  String get taskerAnalyticsPrivate;
+
+  /// No description provided for @taskerNoActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no recorded earnings or completed tasks in this period.'**
+  String get taskerNoActivity;
+
+  /// No description provided for @taskerDashboardLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t load your tasker dashboard'**
+  String get taskerDashboardLoadError;
+
+  /// No description provided for @taskerDashboardRetryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and sign in to your tasker account, then retry.'**
+  String get taskerDashboardRetryHint;
+
+  /// No description provided for @adminLast7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 days'**
+  String get adminLast7Days;
+
+  /// No description provided for @adminLast30Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 days'**
+  String get adminLast30Days;
+
+  /// No description provided for @adminStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get adminStarted;
+
+  /// No description provided for @adminNoPeriodActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No recorded task activity in this period.'**
+  String get adminNoPeriodActivity;
+
+  /// No description provided for @adminNoCategoryActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks to group by category yet.'**
+  String get adminNoCategoryActivity;
+
+  /// No description provided for @adminNoRecentActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'No recent tasks yet.'**
+  String get adminNoRecentActivity;
+
+  /// No description provided for @adminUnknownValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get adminUnknownValue;
+
+  /// No description provided for @adminPaidVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid volume'**
+  String get adminPaidVolume;
+
+  /// No description provided for @adminChartData.
+  ///
+  /// In en, this message translates to:
+  /// **'View chart data'**
+  String get adminChartData;
+
+  /// No description provided for @adminAnalyticsDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily posted, started and completed events. Dates follow {timezone}.'**
+  String adminAnalyticsDates(String timezone);
+
   /// No description provided for @clientDashboardReadySubtitle.
   ///
   /// In en, this message translates to:

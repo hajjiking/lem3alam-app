@@ -1,148 +1,135 @@
-enum AdminMetricKind {
-  totalUsers,
-  totalTasks,
-  completedTasks,
-  activeTaskers,
-  pendingTasks,
-  pendingReviews,
-}
-
 enum AdminColorKey { primary, success, purple, warning, info, error }
-
-enum AdminTaskStatus { inProgress, completed, pending, cancelled }
-
-enum AdminRecentTaskKind {
-  washingMachine,
-  kitchenFaucet,
-  ledLights,
-}
-
-enum AdminCategoryKind { homeRepairs, plumbing, electrical, cleaning, painting }
 
 enum AdminDashboardRange { week, month }
 
-class AdminMetric {
-  const AdminMetric({
-    required this.kind,
-    required this.value,
-    required this.deltaPercent,
-    required this.colorKey,
-  });
+class TaskSeriesPoint {
+  const TaskSeriesPoint(
+      {required this.date,
+      required this.posted,
+      required this.started,
+      required this.completed});
 
-  final AdminMetricKind kind;
-  final int value;
-  final double deltaPercent;
-  final AdminColorKey colorKey;
+  final DateTime date;
+  final double posted;
+  final double started;
+  final double completed;
 
-  bool get isPositive => deltaPercent >= 0;
-
-  AdminMetric copyWith({int? value}) {
-    return AdminMetric(
-      kind: kind,
-      value: value ?? this.value,
-      deltaPercent: deltaPercent,
-      colorKey: colorKey,
-    );
+  factory TaskSeriesPoint.fromJson(Map<String, dynamic> json) {
+    final date = DateTime.tryParse(json['date']?.toString() ?? '');
+    if (date == null) throw const FormatException('Invalid analytics date');
+    return TaskSeriesPoint(
+        date: date,
+        posted: analyticsCount(json['posted']).toDouble(),
+        started: analyticsCount(json['started']).toDouble(),
+        completed: analyticsCount(json['completed']).toDouble());
   }
 }
 
-class TaskSeriesPoint {
-  const TaskSeriesPoint({
-    required this.dayIndex,
-    required this.posted,
-    required this.inProgress,
-    required this.completed,
-  });
-
-  final int dayIndex;
-  final double posted;
-  final double inProgress;
-  final double completed;
+class AdminStatusCount {
+  const AdminStatusCount({required this.status, required this.count});
+  final String status;
+  final int count;
 }
 
-class TaskStatusSlice {
-  const TaskStatusSlice({
-    required this.status,
-    required this.value,
-    required this.colorKey,
-  });
-
-  final AdminTaskStatus status;
-  final int value;
-  final AdminColorKey colorKey;
-}
-
-class RecentTaskAdminModel {
-  const RecentTaskAdminModel({
-    required this.kind,
-    required this.customerName,
-    required this.status,
-    required this.minutesAgo,
-    required this.thumbnailUrl,
-  });
-
-  final AdminRecentTaskKind kind;
-  final String customerName;
-  final AdminTaskStatus status;
-  final int minutesAgo;
-  final String thumbnailUrl;
-}
-
-class CategoryStat {
-  const CategoryStat({
-    required this.kind,
-    required this.count,
-    required this.percent,
-    required this.colorKey,
-  });
-
-  final AdminCategoryKind kind;
+class AdminCategoryStat {
+  const AdminCategoryStat(
+      {required this.id,
+      required this.name,
+      required this.count,
+      required this.percent});
+  final int? id;
+  final String? name;
   final int count;
   final double percent;
-  final AdminColorKey colorKey;
 }
 
-class AdminDashboardSnapshot {
-  const AdminDashboardSnapshot({
-    required this.metrics,
-    required this.weeklySeries,
-    required this.monthlySeries,
-    required this.statusSlices,
-    required this.recentTasks,
-    required this.categories,
-  });
+class AdminRecentTask {
+  const AdminRecentTask(
+      {required this.id,
+      required this.title,
+      required this.customerName,
+      required this.status,
+      required this.createdAt,
+      required this.thumbnailUrl});
+  final int id;
+  final String title;
+  final String? customerName;
+  final String status;
+  final DateTime? createdAt;
+  final String? thumbnailUrl;
+}
 
-  final List<AdminMetric> metrics;
+class AdminDashboardAnalytics {
+  const AdminDashboardAnalytics(
+      {required this.weeklySeries,
+      required this.monthlySeries,
+      required this.statusCounts,
+      required this.categories,
+      required this.recentTasks,
+      required this.timezone});
+
   final List<TaskSeriesPoint> weeklySeries;
   final List<TaskSeriesPoint> monthlySeries;
-  final List<TaskStatusSlice> statusSlices;
-  final List<RecentTaskAdminModel> recentTasks;
-  final List<CategoryStat> categories;
+  final List<AdminStatusCount> statusCounts;
+  final List<AdminCategoryStat> categories;
+  final List<AdminRecentTask> recentTasks;
+  final String timezone;
 
-  int valueFor(AdminMetricKind kind) {
-    return metrics.firstWhere((metric) => metric.kind == kind).value;
-  }
+  int get totalTasks => statusCounts.fold(0, (sum, item) => sum + item.count);
 
-  AdminDashboardSnapshot withLiveTotals({
-    required int usersCount,
-    required int tasksCount,
-  }) {
-    return AdminDashboardSnapshot(
-      metrics: [
-        for (final metric in metrics)
-          switch (metric.kind) {
-            AdminMetricKind.totalUsers when usersCount > 0 =>
-              metric.copyWith(value: usersCount),
-            AdminMetricKind.totalTasks when tasksCount > 0 =>
-              metric.copyWith(value: tasksCount),
-            _ => metric,
-          },
-      ],
-      weeklySeries: weeklySeries,
-      monthlySeries: monthlySeries,
-      statusSlices: statusSlices,
-      recentTasks: recentTasks,
-      categories: categories,
-    );
+  factory AdminDashboardAnalytics.fromJson(Map<String, dynamic> json) =>
+      AdminDashboardAnalytics(
+        timezone: json['timezone']?.toString() ?? '',
+        weeklySeries:
+            _rows(json, 'weekly_series').map(TaskSeriesPoint.fromJson).toList(),
+        monthlySeries: _rows(json, 'monthly_series')
+            .map(TaskSeriesPoint.fromJson)
+            .toList(),
+        statusCounts: _rows(json, 'status_counts')
+            .map((row) => AdminStatusCount(
+                status: row['status'].toString(),
+                count: analyticsCount(row['count'])))
+            .toList(),
+        categories: _rows(json, 'top_categories').map((row) {
+          final percent = double.tryParse(row['percent']?.toString() ?? '');
+          if (percent == null ||
+              !percent.isFinite ||
+              percent < 0 ||
+              percent > 100) {
+            throw const FormatException('Invalid category percentage');
+          }
+          return AdminCategoryStat(
+              id: row['id'] == null ? null : analyticsCount(row['id']),
+              name: row['name']?.toString(),
+              count: analyticsCount(row['count']),
+              percent: percent);
+        }).toList(),
+        recentTasks: _rows(json, 'recent_tasks')
+            .map((row) => AdminRecentTask(
+                  id: analyticsCount(row['id']),
+                  title: row['title']?.toString() ?? '',
+                  customerName: row['customer_name']?.toString(),
+                  status: row['status'].toString(),
+                  createdAt:
+                      DateTime.tryParse(row['created_at']?.toString() ?? ''),
+                  thumbnailUrl: row['primary_image_url']?.toString(),
+                ))
+            .toList(),
+      );
+}
+
+List<Map<String, dynamic>> _rows(Map<String, dynamic> json, String key) {
+  final rows = json[key];
+  if (rows is! List || rows.any((row) => row is! Map)) {
+    throw FormatException('Invalid analytics list: $key');
   }
+  return rows.map((row) => Map<String, dynamic>.from(row as Map)).toList();
+}
+
+int analyticsCount(dynamic value) {
+  final count = num.tryParse(value?.toString() ?? '');
+  if (count == null || !count.isFinite || count < 0 || count % 1 != 0) {
+    throw const FormatException('Invalid analytics count');
+  }
+  return count.toInt();
 }

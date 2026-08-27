@@ -17,7 +17,7 @@ class DashboardStats {
 
   final int activeTasks;
   final int completedTasks;
-  final int totalEarnings;
+  final num totalEarnings;
   final double rating;
   final int pendingTasks;
   final int acceptedTasks;
@@ -27,7 +27,7 @@ class DashboardStats {
   factory DashboardStats.fromJson(Map<String, dynamic> json) => DashboardStats(
         activeTasks: _asInt(json['active_tasks']),
         completedTasks: _asInt(json['completed_tasks']),
-        totalEarnings: _asInt(json['total_earnings']),
+        totalEarnings: _asDouble(json['total_earnings']),
         rating: _asDouble(json['rating']),
         pendingTasks: _asInt(json['pending_tasks']),
         acceptedTasks: _asInt(json['accepted_tasks']),
@@ -88,15 +88,25 @@ double? _percentage(dynamic value) {
 }
 
 class WeeklyPerformancePoint {
-  const WeeklyPerformancePoint({required this.dayIndex, required this.value});
+  const WeeklyPerformancePoint(
+      {required this.dayIndex,
+      required this.value,
+      this.date,
+      this.tasksCompleted});
 
   final int dayIndex;
   final double value;
+  final DateTime? date;
+  final int? tasksCompleted;
 
   factory WeeklyPerformancePoint.fromJson(Map<String, dynamic> json) =>
       WeeklyPerformancePoint(
         dayIndex: _asInt(json['day_index']),
-        value: _asDouble(json['value']),
+        value: _performanceNumber(json['value']).toDouble(),
+        date: DateTime.tryParse(json['date']?.toString() ?? ''),
+        tasksCompleted: json['tasks_completed'] == null
+            ? null
+            : _asInt(json['tasks_completed']),
       );
 }
 
@@ -107,29 +117,34 @@ class DashboardPerformance {
     required this.earningsChangePercent,
     required this.tasksChangePercent,
     required this.points,
+    this.timezone,
   });
 
-  final int earnings;
+  final num earnings;
   final int tasksCompleted;
-  final int earningsChangePercent;
-  final int tasksChangePercent;
+  final num? earningsChangePercent;
+  final num? tasksChangePercent;
   final List<WeeklyPerformancePoint> points;
+  final String? timezone;
 
   factory DashboardPerformance.fromJson(Map<String, dynamic> json) {
     final points = json['points'];
+    if (points is! List || points.any((point) => point is! Map)) {
+      throw const FormatException('Invalid performance points');
+    }
     return DashboardPerformance(
-      earnings: _asInt(json['earnings']),
-      tasksCompleted: _asInt(json['tasks_completed']),
-      earningsChangePercent: _asInt(json['earnings_change_percent']),
-      tasksChangePercent: _asInt(json['tasks_change_percent']),
-      points: points is List
-          ? points
-              .whereType<Map>()
-              .map((point) => WeeklyPerformancePoint.fromJson(
-                    Map<String, dynamic>.from(point),
-                  ))
-              .toList(growable: false)
-          : const [],
+      earnings: _performanceNumber(json['earnings']),
+      tasksCompleted: _performanceNumber(json['tasks_completed']).toInt(),
+      earningsChangePercent: _nullableNumber(json['earnings_change_percent']),
+      tasksChangePercent: _nullableNumber(json['tasks_change_percent']),
+      timezone: json['timezone']?.toString(),
+      points: points
+          .whereType<Map>()
+          .where((point) => point['is_future'] != true)
+          .map((point) => WeeklyPerformancePoint.fromJson(
+                Map<String, dynamic>.from(point),
+              ))
+          .toList(growable: false),
     );
   }
 }
@@ -139,17 +154,27 @@ class DashboardSnapshot {
     required this.stats,
     required this.tasks,
     required this.performance,
+    this.monthlyPerformance,
+    this.hasPerformance = true,
   });
 
   final DashboardStats stats;
   final List<DashboardTask> tasks;
   final DashboardPerformance performance;
+  final DashboardPerformance? monthlyPerformance;
+  final bool hasPerformance;
 
   factory DashboardSnapshot.fromJson(Map<String, dynamic> json) {
     final stats = json['stats'];
     final tasks = json['recent_tasks'];
     final performance = json['performance'];
+    final monthlyPerformance = json['monthly_performance'];
     return DashboardSnapshot(
+      hasPerformance: performance is Map,
+      monthlyPerformance: monthlyPerformance is Map
+          ? DashboardPerformance.fromJson(
+              Map<String, dynamic>.from(monthlyPerformance))
+          : null,
       stats: stats is Map
           ? DashboardStats.fromJson(Map<String, dynamic>.from(stats))
           : empty.stats,
@@ -170,6 +195,7 @@ class DashboardSnapshot {
   }
 
   static const empty = DashboardSnapshot(
+    hasPerformance: false,
     stats: DashboardStats(
       activeTasks: 0,
       completedTasks: 0,
@@ -187,6 +213,19 @@ class DashboardSnapshot {
       points: [],
     ),
   );
+}
+
+double? _nullableNumber(dynamic value) {
+  final number = double.tryParse(value?.toString() ?? '');
+  return number != null && number.isFinite ? number : null;
+}
+
+num _performanceNumber(dynamic value) {
+  final number = num.tryParse(value?.toString() ?? '');
+  if (number == null || !number.isFinite || number < 0) {
+    throw const FormatException('Invalid tasker performance value');
+  }
+  return number;
 }
 
 int _asInt(dynamic value) => switch (value) {

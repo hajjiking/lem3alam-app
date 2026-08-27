@@ -1,8 +1,17 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show NumberFormat;
 
 import '../../domain/admin_dashboard_models.dart';
+
+int taskChartGridStep(List<TaskSeriesPoint> points) {
+  final maximum = points.fold<double>(
+      0,
+      (value, point) => math.max(value,
+          math.max(point.posted, math.max(point.started, point.completed))));
+  return math.max(1, (maximum / 4).ceil());
+}
 
 class AdminChartLegendItem {
   const AdminChartLegendItem({required this.label, required this.color});
@@ -83,6 +92,10 @@ class TasksOverviewChart extends StatelessWidget {
                               scheme.outlineVariant.withValues(alpha: 0.48),
                           labelColor: scheme.onSurfaceVariant,
                           labelStyle: theme.textTheme.labelSmall,
+                          formatTick: NumberFormat.compact(
+                                  locale: Localizations.localeOf(context)
+                                      .toString())
+                              .format,
                         ),
                         child: const SizedBox.expand(),
                       ),
@@ -152,6 +165,7 @@ class _TasksLineChartPainter extends CustomPainter {
     required this.gridColor,
     required this.labelColor,
     required this.labelStyle,
+    required this.formatTick,
   });
 
   final List<TaskSeriesPoint> points;
@@ -161,6 +175,7 @@ class _TasksLineChartPainter extends CustomPainter {
   final Color gridColor;
   final Color labelColor;
   final TextStyle? labelStyle;
+  final String Function(num) formatTick;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -174,13 +189,15 @@ class _TasksLineChartPainter extends CustomPainter {
       ..color = gridColor
       ..strokeWidth = 1;
 
+    final step = taskChartGridStep(points);
+    final ceiling = step * 4;
     for (var index = 0; index <= 4; index++) {
-      final value = index * 200;
-      final y = top + chartHeight - (value / 800) * chartHeight;
+      final value = index * step;
+      final y = top + chartHeight - (value / ceiling) * chartHeight;
       canvas.drawLine(Offset(left, y), Offset(size.width, y), gridPaint);
       final painter = TextPainter(
         text: TextSpan(
-          text: '$value',
+          text: formatTick(value),
           style: (labelStyle ?? const TextStyle()).copyWith(
             color: labelColor,
             fontSize: 10,
@@ -199,7 +216,7 @@ class _TasksLineChartPainter extends CustomPainter {
         final x = points.length == 1
             ? left + chartWidth / 2
             : left + (chartWidth * index / (points.length - 1));
-        final normalized = (readValue(points[index]) / 800).clamp(0.0, 1.0);
+        final normalized = (readValue(points[index]) / ceiling).clamp(0.0, 1.0);
         final y = top + chartHeight - normalized * chartHeight;
         if (index == 0) {
           path.moveTo(x, y);
@@ -220,7 +237,7 @@ class _TasksLineChartPainter extends CustomPainter {
     }
 
     drawSeries((point) => point.posted, postedColor);
-    drawSeries((point) => point.inProgress, inProgressColor);
+    drawSeries((point) => point.started, inProgressColor);
     drawSeries((point) => point.completed, completedColor);
   }
 

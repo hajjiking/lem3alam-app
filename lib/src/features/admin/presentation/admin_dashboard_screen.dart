@@ -10,6 +10,7 @@ import '../../dashboard/presentation/widgets/dashboard_header.dart';
 import 'admin_dashboard_controller.dart';
 import 'widgets/metric_card.dart';
 import 'widgets/metrics_grid.dart';
+import 'widgets/admin_analytics_section.dart';
 
 class AdminDashboardScreen extends ConsumerWidget {
   const AdminDashboardScreen({
@@ -42,7 +43,7 @@ class AdminDashboardScreen extends ConsumerWidget {
       locale: l10n.localeName,
       name: 'MAD',
       symbol: '${l10n.dashboardCurrencyMad} ',
-      decimalDigits: 0,
+      decimalDigits: 2,
     );
 
     final metrics = summaryAsync.maybeWhen(
@@ -66,18 +67,35 @@ class AdminDashboardScreen extends ConsumerWidget {
           accent: scheme.error,
         ),
         AdminMetricCardData(
-          label: l10n.revenue,
-          value: currencyFormat.format(summary.revenue),
+          label:
+              summary.paidVolume == null ? l10n.revenue : l10n.adminPaidVolume,
+          value: currencyFormat.format(summary.paidVolume ?? summary.revenue),
           icon: Icons.payments_outlined,
           accent: tokens.warning,
         ),
+        if (summary.completedTasks != null)
+          AdminMetricCardData(
+              label: l10n.adminCompletedTasks,
+              value: numberFormat.format(summary.completedTasks),
+              icon: Icons.task_alt_rounded,
+              accent: tokens.success),
+        if (summary.activeTasks != null)
+          AdminMetricCardData(
+              label: l10n.dashboardActiveTasks,
+              value: numberFormat.format(summary.activeTasks),
+              icon: Icons.pending_actions_rounded,
+              accent: tokens.info),
       ],
       orElse: () => const <AdminMetricCardData>[],
     );
 
     return RefreshIndicator(
-      onRefresh: () =>
-          ref.read(adminActionControllerProvider.notifier).refreshAll(),
+      onRefresh: () async {
+        ref.invalidate(adminDashboardProvider);
+        try {
+          await ref.read(adminDashboardProvider.future);
+        } catch (_) {}
+      },
       child: ListView(
         key: const PageStorageKey('admin-dashboard-scroll'),
         padding: EdgeInsets.zero,
@@ -125,9 +143,8 @@ class AdminDashboardScreen extends ConsumerWidget {
                             title: l10n.unableToLoadAdminOverview,
                             subtitle: l10n.checkConnectionOrAdminPermissions,
                             debugDetails: summaryAsync.error.toString(),
-                            onRetry: () => ref
-                                .read(adminActionControllerProvider.notifier)
-                                .refreshAll(),
+                            onRetry: () =>
+                                ref.invalidate(adminDashboardProvider),
                           )
                         else ...[
                           AdminMetricsGrid(
@@ -139,11 +156,16 @@ class AdminDashboardScreen extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          AppInlineBanner(
-                            message: l10n.adminDetailedAnalyticsUnavailable,
-                            tone: AppBannerTone.info,
-                            icon: Icons.query_stats_rounded,
-                          ),
+                          if (summaryAsync.value?.analytics != null)
+                            AdminAnalyticsSection(
+                                data: summaryAsync.value!.analytics!,
+                                onTasksTap: onTasksTap)
+                          else
+                            AppInlineBanner(
+                              message: l10n.adminDetailedAnalyticsUnavailable,
+                              tone: AppBannerTone.info,
+                              icon: Icons.query_stats_rounded,
+                            ),
                         ],
                       ],
                     ),

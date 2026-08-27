@@ -5,8 +5,9 @@ class AdminApi {
 
   final ApiClient _client;
 
-  Future<Map<String, dynamic>> dashboard() {
-    return _client.getJson<Map<String, dynamic>>('admin/dashboard');
+  Future<Map<String, dynamic>> dashboard({String? locale}) {
+    return _client.getJson<Map<String, dynamic>>('admin/dashboard',
+        queryParameters: locale == null ? null : {'locale': locale});
   }
 
   Future<Map<String, dynamic>> users({

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/networking/pagination.dart';
+import '../../auth/presentation/auth_controller.dart';
+import '../domain/admin_dashboard_models.dart';
 import '../data/admin_repository_impl.dart';
 import '../domain/admin_dashboard_summary.dart';
 import '../domain/admin_nearby_task_settings.dart';
@@ -20,8 +22,19 @@ class _AdminRefreshTick extends Notifier<int> {
 final adminDashboardProvider =
     FutureProvider<AdminDashboardSummary>((ref) async {
   ref.watch(_adminRefreshTickProvider);
+  ref.watch(authControllerProvider.select((state) => state.user?.id));
   return ref.watch(adminRepositoryProvider).fetchDashboard();
-});
+}, retry: (count, error) => null);
+
+final adminDashboardRangeProvider =
+    NotifierProvider<AdminDashboardRangeController, AdminDashboardRange>(
+        AdminDashboardRangeController.new);
+
+class AdminDashboardRangeController extends Notifier<AdminDashboardRange> {
+  @override
+  AdminDashboardRange build() => AdminDashboardRange.week;
+  void select(AdminDashboardRange range) => state = range;
+}
 
 final adminUsersProvider =
     FutureProvider<Paginated<AdminUserItem>>((ref) async {

@@ -9,6 +9,66 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get taskerNoComparison => 'لا يوجد نشاط في الفترة السابقة';
+
+  @override
+  String taskerPeriodChange(String change) {
+    return '$change٪ مقارنة بالفترة السابقة';
+  }
+
+  @override
+  String get taskerPeriodUnavailable =>
+      'إحصاءات هذه الفترة غير متاحة. حدّث الخادم ثم أعد التحميل.';
+
+  @override
+  String get taskerAnalyticsPrivate =>
+      'أرباحك المدفوعة ومهامك المكتملة فقط. تتم المقارنة بالمدة المنقضية نفسها من الفترة السابقة.';
+
+  @override
+  String get taskerNoActivity =>
+      'لا توجد أرباح أو مهام مكتملة مسجلة لك خلال هذه الفترة.';
+
+  @override
+  String get taskerDashboardLoadError => 'تعذر تحميل لوحة تحكم المهني';
+
+  @override
+  String get taskerDashboardRetryHint =>
+      'تحقق من اتصالك وسجّل الدخول إلى حسابك كمهني، ثم أعد المحاولة.';
+
+  @override
+  String get adminLast7Days => 'آخر 7 أيام';
+
+  @override
+  String get adminLast30Days => 'آخر 30 يوماً';
+
+  @override
+  String get adminStarted => 'بدأت';
+
+  @override
+  String get adminNoPeriodActivity =>
+      'لا يوجد نشاط مسجل للمهام خلال هذه الفترة.';
+
+  @override
+  String get adminNoCategoryActivity => 'لا توجد مهام لتصنيفها حسب الفئة بعد.';
+
+  @override
+  String get adminNoRecentActivity => 'لا توجد مهام حديثة بعد.';
+
+  @override
+  String get adminUnknownValue => 'غير متاح';
+
+  @override
+  String get adminPaidVolume => 'المبالغ المدفوعة';
+
+  @override
+  String get adminChartData => 'عرض بيانات الرسم';
+
+  @override
+  String adminAnalyticsDates(String timezone) {
+    return 'المهام المنشورة والمبدوءة والمكتملة يومياً. المنطقة الزمنية: $timezone.';
+  }
+
+  @override
   String get clientDashboardReadySubtitle => 'مستعد لإنجاز مهامك اليوم؟';
 
   @override

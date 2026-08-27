@@ -31,6 +31,7 @@ class _Auth extends AuthController {
 Map<String, dynamic> _dashboardResponse() => {
       'success': true,
       'data': {
+        'user': {'id': 1},
         'stats': {
           'active_tasks': 1,
           'completed_tasks': 2,

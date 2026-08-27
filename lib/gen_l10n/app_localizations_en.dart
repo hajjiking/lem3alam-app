@@ -9,6 +9,66 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get taskerNoComparison => 'No previous-period activity';
+
+  @override
+  String taskerPeriodChange(String change) {
+    return '$change% vs previous period';
+  }
+
+  @override
+  String get taskerPeriodUnavailable =>
+      'Analytics for this period are unavailable. Update the server and refresh.';
+
+  @override
+  String get taskerAnalyticsPrivate =>
+      'Only your paid earnings and completed work. Changes compare the same elapsed time in the previous period.';
+
+  @override
+  String get taskerNoActivity =>
+      'You have no recorded earnings or completed tasks in this period.';
+
+  @override
+  String get taskerDashboardLoadError => 'Couldn’t load your tasker dashboard';
+
+  @override
+  String get taskerDashboardRetryHint =>
+      'Check your connection and sign in to your tasker account, then retry.';
+
+  @override
+  String get adminLast7Days => 'Last 7 days';
+
+  @override
+  String get adminLast30Days => 'Last 30 days';
+
+  @override
+  String get adminStarted => 'Started';
+
+  @override
+  String get adminNoPeriodActivity =>
+      'No recorded task activity in this period.';
+
+  @override
+  String get adminNoCategoryActivity => 'No tasks to group by category yet.';
+
+  @override
+  String get adminNoRecentActivity => 'No recent tasks yet.';
+
+  @override
+  String get adminUnknownValue => 'Unavailable';
+
+  @override
+  String get adminPaidVolume => 'Paid volume';
+
+  @override
+  String get adminChartData => 'View chart data';
+
+  @override
+  String adminAnalyticsDates(String timezone) {
+    return 'Daily posted, started and completed events. Dates follow $timezone.';
+  }
+
+  @override
   String get clientDashboardReadySubtitle => 'Ready to get things done today?';
 
   @override

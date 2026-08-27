@@ -7,11 +7,12 @@ import '../domain/dashboard_repository.dart';
 import 'dashboard_api.dart';
 
 final dashboardRepositoryProvider = Provider<DashboardRepository>((ref) {
-  final role =
-      ref.watch(authControllerProvider.select((state) => state.user?.role));
+  final user = ref.watch(authControllerProvider
+      .select((state) => (state.user?.id, state.user?.role)));
   return DashboardRepositoryImpl(
     DashboardApi(ref.watch(apiClientProvider)),
-    audience: switch (role) {
+    expectedUserId: user.$1,
+    audience: switch (user.$2) {
       'client' => DashboardAudience.client,
       'tasker' => DashboardAudience.tasker,
       _ => DashboardAudience.automatic,
@@ -23,10 +24,12 @@ class DashboardRepositoryImpl implements DashboardRepository {
   DashboardRepositoryImpl(
     this._api, {
     this.audience = DashboardAudience.automatic,
+    this.expectedUserId,
   });
 
   final DashboardApi _api;
   final DashboardAudience audience;
+  final int? expectedUserId;
 
   @override
   Future<DashboardSnapshot> fetchDashboard() async {
@@ -39,6 +42,14 @@ class DashboardRepositoryImpl implements DashboardRepository {
       throw const FormatException('Invalid dashboard response');
     }
     final stats = data['stats'] as Map;
+    if (expectedUserId != null) {
+      final owner = data['user'];
+      if (owner is! Map ||
+          owner['id'].toString() != expectedUserId.toString()) {
+        throw const FormatException(
+            'Dashboard response belongs to a different account');
+      }
+    }
     for (final key in [
       'active_tasks',
       'completed_tasks',

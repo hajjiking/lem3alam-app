@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/networking/api_client.dart';
+import '../../../core/l10n/locale_controller.dart';
 import '../../../core/networking/pagination.dart';
 import '../domain/admin_dashboard_summary.dart';
 import '../domain/admin_nearby_task_settings.dart';
@@ -10,18 +11,23 @@ import '../domain/admin_user_item.dart';
 import 'admin_api.dart';
 
 final adminRepositoryProvider = Provider<AdminRepository>((ref) {
-  return AdminRepositoryImpl(AdminApi(ref.watch(apiClientProvider)));
+  return AdminRepositoryImpl(AdminApi(ref.watch(apiClientProvider)),
+      locale: ref.watch(localeControllerProvider).languageCode);
 });
 
 class AdminRepositoryImpl implements AdminRepository {
-  AdminRepositoryImpl(this._api);
+  AdminRepositoryImpl(this._api, {this.locale});
 
   final AdminApi _api;
+  final String? locale;
 
   @override
   Future<AdminDashboardSummary> fetchDashboard() async {
-    final json = await _api.dashboard();
-    final data = (json['data'] as Map<String, dynamic>?) ?? const {};
+    final json = await _api.dashboard(locale: locale);
+    if (json['data'] is! Map) {
+      throw const FormatException('Invalid admin dashboard response');
+    }
+    final data = Map<String, dynamic>.from(json['data'] as Map);
     return AdminDashboardSummary.fromJson(data);
   }
 

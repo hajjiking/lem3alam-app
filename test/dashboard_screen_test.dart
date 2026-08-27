@@ -68,12 +68,12 @@ void main() {
     await tester.pumpWidget(
       _dashboardApp(locale: const Locale('en'), themeMode: ThemeMode.light),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(find.text('Hello, Mohamed 👋'), findsOneWidget);
     expect(
       find.text(
-        'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.',
+        'Analytics for this period are unavailable. Update the server and refresh.',
       ),
       findsOneWidget,
     );
@@ -81,7 +81,8 @@ void main() {
 
     expect(find.text('Online'), findsNothing);
 
-    expect(find.text('Performance'), findsNothing);
+    expect(find.text('Performance'), findsOneWidget);
+    expect(find.text('Active Tasks'), findsOneWidget);
   });
 
   testWidgets('dashboard supports dark theme and Arabic RTL', (tester) async {
@@ -91,7 +92,7 @@ void main() {
     await tester.pumpWidget(
       _dashboardApp(locale: const Locale('ar'), themeMode: ThemeMode.dark),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     final dashboard = find.byType(DashboardScreen);
     expect(dashboard, findsOneWidget);
@@ -103,7 +104,7 @@ void main() {
 
     expect(
       find.text(
-        'بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية.',
+        'إحصاءات هذه الفترة غير متاحة. حدّث الخادم ثم أعد التحميل.',
       ),
       findsOneWidget,
     );

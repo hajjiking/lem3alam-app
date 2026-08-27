@@ -20,6 +20,10 @@ class DashboardPerformanceSection extends StatelessWidget {
     required this.dayLabels,
     required this.points,
     required this.onRangeSelected,
+    this.earningsChangePercent,
+    this.tasksChangePercent,
+    this.isAvailable = true,
+    this.unavailableLabel = '',
   });
 
   final String title;
@@ -35,6 +39,10 @@ class DashboardPerformanceSection extends StatelessWidget {
   final List<String> dayLabels;
   final List<WeeklyPerformancePoint> points;
   final ValueChanged<DashboardPerformanceRange> onRangeSelected;
+  final num? earningsChangePercent;
+  final num? tasksChangePercent;
+  final bool isAvailable;
+  final String unavailableLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -92,63 +100,71 @@ class DashboardPerformanceSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final compact = constraints.maxWidth < 700;
-                final metrics = Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: _PerformanceMetric(
-                        label: earningsLabel,
-                        value: earningsValue,
-                        changeLabel: earningsChangeLabel,
-                      ),
-                    ),
-                    VerticalDivider(color: scheme.outlineVariant),
-                    Expanded(
-                      child: _PerformanceMetric(
-                        label: tasksCompletedLabel,
-                        value: tasksCompletedValue,
-                        changeLabel: tasksChangeLabel,
-                      ),
-                    ),
-                  ],
-                );
-                final chart =
-                    _WeeklyChart(dayLabels: dayLabels, points: points);
-
-                if (compact) {
-                  return Column(
+        if (!isAvailable)
+          Card(
+              child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(unavailableLabel)))
+        else
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final compact = constraints.maxWidth < 700;
+                  final metrics = Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      IntrinsicHeight(child: metrics),
-                      const SizedBox(height: 22),
-                      chart,
+                      Expanded(
+                        child: _PerformanceMetric(
+                          label: earningsLabel,
+                          value: earningsValue,
+                          changeLabel: earningsChangeLabel,
+                          changePercent: earningsChangePercent,
+                        ),
+                      ),
+                      VerticalDivider(color: scheme.outlineVariant),
+                      Expanded(
+                        child: _PerformanceMetric(
+                          label: tasksCompletedLabel,
+                          value: tasksCompletedValue,
+                          changeLabel: tasksChangeLabel,
+                          changePercent: tasksChangePercent,
+                        ),
+                      ),
                     ],
                   );
-                }
+                  final chart =
+                      _WeeklyChart(dayLabels: dayLabels, points: points);
 
-                return SizedBox(
-                  height: 178,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(flex: 4, child: IntrinsicHeight(child: metrics)),
-                      const SizedBox(width: 22),
-                      VerticalDivider(color: scheme.outlineVariant),
-                      const SizedBox(width: 16),
-                      Expanded(flex: 5, child: chart),
-                    ],
-                  ),
-                );
-              },
+                  if (compact) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        IntrinsicHeight(child: metrics),
+                        const SizedBox(height: 22),
+                        chart,
+                      ],
+                    );
+                  }
+
+                  return IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                            flex: 4, child: IntrinsicHeight(child: metrics)),
+                        const SizedBox(width: 22),
+                        VerticalDivider(color: scheme.outlineVariant),
+                        const SizedBox(width: 16),
+                        Expanded(flex: 5, child: chart),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
-        ),
       ],
     );
   }
@@ -159,16 +175,23 @@ class _PerformanceMetric extends StatelessWidget {
     required this.label,
     required this.value,
     required this.changeLabel,
+    required this.changePercent,
   });
 
   final String label;
   final String value;
   final String changeLabel;
+  final num? changePercent;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
+    final trendColor = changePercent == null || changePercent == 0
+        ? scheme.onSurfaceVariant
+        : changePercent! < 0
+            ? scheme.error
+            : scheme.tertiary;
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
       child: Column(
@@ -185,23 +208,28 @@ class _PerformanceMetric extends StatelessWidget {
           const SizedBox(height: 7),
           Text(
             value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
             style: theme.textTheme.headlineSmall
                 ?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              Icon(Icons.arrow_upward_rounded,
-                  color: scheme.tertiary, size: 20),
-              const SizedBox(width: 4),
+              if (changePercent != null) ...[
+                Icon(
+                    changePercent! < 0
+                        ? Icons.arrow_downward_rounded
+                        : changePercent! > 0
+                            ? Icons.arrow_upward_rounded
+                            : Icons.horizontal_rule_rounded,
+                    color: trendColor,
+                    size: 20),
+                const SizedBox(width: 4),
+              ],
               Flexible(
                 child: Text(
                   changeLabel,
-                  maxLines: 2,
                   style: theme.textTheme.labelMedium?.copyWith(
-                    color: scheme.tertiary,
+                    color: trendColor,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -281,7 +309,7 @@ class _WeeklyChartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (points.length < 2 || size.isEmpty) return;
+    if (points.isEmpty || size.isEmpty) return;
 
     final gridPaint = Paint()
       ..color = gridColor
@@ -291,17 +319,16 @@ class _WeeklyChartPainter extends CustomPainter {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
     }
 
-    final minValue = points.map((point) => point.value).reduce(math.min);
     final maxValue = points.map((point) => point.value).reduce(math.max);
-    final range = math.max(maxValue - minValue, 1.0);
+    final range = math.max(maxValue, 1.0);
     const verticalPadding = 8.0;
     final plotHeight = math.max(size.height - verticalPadding * 2, 1.0);
     final offsets = <Offset>[];
 
     for (var index = 0; index < points.length; index++) {
-      final progress = index / (points.length - 1);
+      final progress = points.length == 1 ? .5 : index / (points.length - 1);
       final x = (isRtl ? 1 - progress : progress) * size.width;
-      final normalized = (points[index].value - minValue) / range;
+      final normalized = points[index].value / range;
       final y = verticalPadding + (1 - normalized) * plotHeight;
       offsets.add(Offset(x, y));
     }

@@ -13,6 +13,7 @@ import '../features/admin/presentation/admin_home_screen.dart';
 import '../features/auth/presentation/login_screen.dart';
 import '../features/auth/presentation/register_screen.dart';
 import '../features/dashboard/application/client_dashboard_controller.dart';
+import '../features/dashboard/application/dashboard_controller.dart';
 import '../features/dashboard/presentation/client_dashboard_screen.dart';
 import '../features/dashboard/presentation/tasker_categories_screen.dart';
 import '../features/dashboard/presentation/widgets/dashboard_bottom_navigation.dart';
@@ -405,6 +406,7 @@ class _AppShell extends ConsumerWidget {
             }
             switch (index) {
               case 0:
+                if (auth.user?.isTasker == true) ref.invalidate(dashboardControllerProvider);
                 if (auth.status != AuthStatus.authenticated) {
                   context.goNamed(AppRouteNames.login);
                   return;

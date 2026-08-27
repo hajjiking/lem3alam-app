@@ -120,18 +120,22 @@ class _RecentTaskRow extends StatelessWidget {
               child: SizedBox(
                 width: 58,
                 height: 58,
-                child: CachedNetworkImage(
-                  imageUrl: data.thumbnailUrl,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => ColoredBox(
-                    color: scheme.surfaceContainer,
-                    child: Icon(data.fallbackIcon, color: scheme.primary),
-                  ),
-                  errorWidget: (context, url, error) => ColoredBox(
-                    color: scheme.surfaceContainer,
-                    child: Icon(data.fallbackIcon, color: scheme.primary),
-                  ),
-                ),
+                child: data.thumbnailUrl.isEmpty
+                    ? ColoredBox(
+                        color: scheme.surfaceContainer,
+                        child: Icon(data.fallbackIcon, color: scheme.primary))
+                    : CachedNetworkImage(
+                        imageUrl: data.thumbnailUrl,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => ColoredBox(
+                          color: scheme.surfaceContainer,
+                          child: Icon(data.fallbackIcon, color: scheme.primary),
+                        ),
+                        errorWidget: (context, url, error) => ColoredBox(
+                          color: scheme.surfaceContainer,
+                          child: Icon(data.fallbackIcon, color: scheme.primary),
+                        ),
+                      ),
               ),
             ),
             const SizedBox(width: 12),
