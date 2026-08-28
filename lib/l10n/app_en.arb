@@ -1,4 +1,5 @@
 {
+  "cashFeeAccounting": "Receive the full gross amount in cash. The platform fee reduces your recorded net earnings; this confirmation does not collect the fee from you.",
   "cashPaymentsTitle": "Cash payment confirmation",
   "cashPaymentsLoadError": "Could not load cash payments awaiting confirmation.",
   "cashConfirm": "Confirm cash received",
@@ -30,7 +31,7 @@
   "earningsCategory": "Earnings by Category",
   "earningsUncategorized": "Other services",
   "earningsFeeInfo": "About Platform Fees",
-  "earningsFeeBody": "Estimates use a {rate}% platform fee. Completed payments use their recorded fees; actual rates may differ.",
+  "earningsFeeBody": "New payments and estimates use a {rate}% platform fee. Historical payments keep their recorded fees; actual rates may differ.",
   "earningsEstimateBasis": "Expected amounts use the accepted offer, or the task’s minimum budget when no accepted price is available. Estimates are not earned income.",
   "earningsTransactions": "Recent Transactions",
   "earningsGrossLabel": "Gross",

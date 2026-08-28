@@ -13,9 +13,16 @@ receipt → completed payment with `paid_at` → tasker earnings/dashboard updat
   tasker's accepted fixed-price offer, otherwise a fixed budget with equal min/max.
   Ranges, hourly rates without an invoice, missing offers and conflicting payment
   records require review. No guessed minimum is used as an actual payment.
-- Existing fees/net values are preserved. Newly prepared payments retain the
-  existing API's **zero-fee policy**, not the Earnings chart's 5% estimate.
-  A separate explicit billing-policy change is needed to charge a new fee.
+- New payments use the shared **5% fee policy**, rounded half-up once per payment
+  in integer centimes: 450.00 MAD gross → 22.50 MAD fee → 427.50 MAD net.
+  The same rate drives earnings estimates. Existing recorded/manual fees remain
+  authoritative. Completed, refunded, failed and disputed records are not rewritten.
+- Unconfirmed MAD payments created by the old automatic completion flow with
+  zero fees, gross equal to net, no payment/release date, and no recorded fee-policy
+  marker are corrected when prepared/confirmed. GET previews the correction
+  without writing; confirmation must match the reviewed gross, fee and net.
+  A policy marker prevents repeated correction. Manually created zero-fee rows
+  and explicit fee waivers are not silently converted.
 - Task row locks serialize preparation, cash confirmation and API payment creation.
   Existing payments are reused; duplicate/ambiguous records are not auto-repaired.
   Retrying a successful cash confirmation returns success without changing
@@ -42,14 +49,18 @@ implemented by this change.
 
 - `GET /api/v1/tasker/cash-payments?page=1&per_page=100`
   (optional `task_id`, still scoped to the authenticated tasker).
-- `POST /api/v1/tasks/{task}/confirm-cash` with the reviewed decimal amount,
-  e.g. `{"amount":"450.00"}`. It must match the server's stored quote.
+- `POST /api/v1/tasks/{task}/confirm-cash` with the reviewed decimal breakdown,
+  e.g. `{"amount":"450.00","platform_fee":"22.50","net_amount":"427.50"}`.
+  All three values must match the server quote; they do not override it.
 
 ## Deploy together
 
 From the Laravel project:
 
 - `app/Services/CompletionPaymentService.php`
+- `app/Services/PaymentFeeCalculator.php`
+- `app/Models/Payment.php`
+- `app/Http/Controllers/Api/TaskerEarningsController.php`
 - `app/Http/Controllers/Api/TaskerCashPaymentController.php`
 - `app/Http/Controllers/Api/ClientCompletionController.php`
 - `app/Http/Controllers/Api/PaymentController.php`
@@ -59,9 +70,11 @@ From the Laravel project:
 Refresh route/config caches using the normal deployment process, then rebuild
 and install the Flutter app. No migration or automatic historical payment write
 is required. This task does not deploy, confirm cash, or charge live accounts.
+Older app builds that send only the gross amount cannot confirm cash until
+updated: the fee and net amounts must now be reviewed and submitted as well.
 
 ## Verification
 
-- Laravel: `php artisan test --filter='CompletionPaymentApiTest|ClientCompletionApiTest|TaskerEarningsApiTest'`
+- Laravel: `php artisan test --filter='PaymentFeesApiTest|CompletionPaymentApiTest|ClientCompletionApiTest|TaskerEarningsApiTest'`
 - Flutter: `flutter test test/cash_payments_test.dart test/earnings_test.dart test/client_completion_test.dart`
 - `dart analyze lib test`

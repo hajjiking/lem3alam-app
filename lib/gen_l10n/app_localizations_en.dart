@@ -9,6 +9,10 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get cashFeeAccounting =>
+      'Receive the full gross amount in cash. The platform fee reduces your recorded net earnings; this confirmation does not collect the fee from you.';
+
+  @override
   String get cashPaymentsTitle => 'Cash payment confirmation';
 
   @override
@@ -112,7 +116,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String earningsFeeBody(String rate) {
-    return 'Estimates use a $rate% platform fee. Completed payments use their recorded fees; actual rates may differ.';
+    return 'New payments and estimates use a $rate% platform fee. Historical payments keep their recorded fees; actual rates may differ.';
   }
 
   @override

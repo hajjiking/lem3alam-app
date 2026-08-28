@@ -9,6 +9,10 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get cashFeeAccounting =>
+      'استلم المبلغ الإجمالي كاملاً نقداً. تُخصم رسوم المنصة من صافي أرباحك المسجّلة؛ هذا التأكيد لا يُحصّل الرسوم منك.';
+
+  @override
   String get cashPaymentsTitle => 'تأكيد الدفع نقداً';
 
   @override
@@ -111,7 +115,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String earningsFeeBody(String rate) {
-    return 'تستخدم التقديرات رسوماً بنسبة $rate٪. تستخدم المدفوعات المكتملة الرسوم المسجلة، وقد تختلف النسب الفعلية.';
+    return 'تُطبّق رسوم بنسبة $rate٪ على المدفوعات الجديدة والتقديرات. تحتفظ المدفوعات السابقة برسومها المسجّلة، وقد تختلف النسب الفعلية.';
   }
 
   @override

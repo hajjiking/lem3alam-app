@@ -35,6 +35,8 @@ Map<String, dynamic> _cash(int id, {int owner = 20, bool canConfirm = true}) =>
       'tasker_id': owner,
       'task_title': 'Repair faucet $id',
       'amount': canConfirm ? '450.00' : null,
+      'platform_fee': canConfirm ? '22.50' : null,
+      'net_amount': canConfirm ? '427.50' : null,
       'currency': 'MAD',
       'can_confirm': canConfirm,
     };
@@ -136,6 +138,8 @@ void main() {
       (tester) async {
     final api = _Api()..response = Completer<void>();
     await _pump(tester, api);
+    expect(find.text('−MAD22.50'), findsOneWidget);
+    expect(find.text('MAD427.50'), findsOneWidget);
     await tester.tap(find.text('Confirm cash received'));
     await tester.pumpAndSettle();
     expect(
@@ -151,7 +155,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(api.posts, [
-      {'amount': '450.00'}
+      {'amount': '450.00', 'platform_fee': '22.50', 'net_amount': '427.50'}
     ]);
     final button = tester.widget<FilledButton>(
         find.byWidgetPredicate((widget) => widget is FilledButton));
@@ -205,6 +209,16 @@ void main() {
     await _pump(tester, api);
     expect(find.text('Confirm cash received'), findsNothing);
     expect(find.textContaining('agreed final amount'), findsOneWidget);
+  });
+  test('missing or inconsistent server fees cannot be confirmed', () {
+    expect(() => CashPayment.fromJson({..._cash(7), 'platform_fee': null}),
+        throwsA(isA<FormatException>()));
+    expect(() => CashPayment.fromJson({..._cash(7), 'net_amount': '450.00'}),
+        throwsA(isA<FormatException>()));
+    final historical = CashPayment.fromJson(
+        {..._cash(7), 'platform_fee': '45.00', 'net_amount': '405.00'});
+    expect(historical.platformFee, '45.00');
+    expect(historical.netAmount, '405.00');
   });
   for (final locale in ['en', 'fr', 'ar']) {
     testWidgets(

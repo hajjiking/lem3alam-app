@@ -11,15 +11,26 @@ class CashPayment {
         taskerId = (json['tasker_id'] as num).toInt(),
         title = json['task_title'] as String,
         amount = json['amount'] as String?,
+        platformFee = json['platform_fee'] as String?,
+        netAmount = json['net_amount'] as String?,
         canConfirm = json['can_confirm'] == true {
-    if (json['currency'] != 'MAD' || (canConfirm && amount == null)) {
+    if (json['currency'] != 'MAD' ||
+        (canConfirm &&
+            (amount == null || platformFee == null || netAmount == null))) {
       throw const FormatException('Invalid cash payment');
     }
-    if (amount != null) FeeCalculator.minorUnits(amount!);
+    if (amount != null) {
+      FeeCalculator.minorUnits(amount!);
+      if (platformFee != null && netAmount != null) {
+        const FeeCalculator().calculate(FeeCalculator.minorUnits(amount!),
+            recordedFeeMinor: FeeCalculator.minorUnits(platformFee!),
+            recordedNetMinor: FeeCalculator.minorUnits(netAmount!));
+      }
+    }
   }
   final int taskId, taskerId;
   final String title;
-  final String? amount;
+  final String? amount, platformFee, netAmount;
   final bool canConfirm;
 }
 
@@ -100,7 +111,11 @@ class CashPaymentsRepository {
     try {
       final response = await api.postJson<Map<String, dynamic>>(
           'tasks/${payment.taskId}/confirm-cash',
-          data: {'amount': payment.amount});
+          data: {
+            'amount': payment.amount,
+            'platform_fee': payment.platformFee,
+            'net_amount': payment.netAmount
+          });
       if (owner != account || response['success'] != true) {
         throw const ApiException(message: 'err_forbidden');
       }

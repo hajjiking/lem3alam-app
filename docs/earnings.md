@@ -17,7 +17,7 @@ No reference-image amounts or example jobs are seeded in the production app.
   transaction, and verifies recorded gross minus fee equals recorded net.
 - Historical fees are preserved, including zero fees or rates other than 5%.
   Mismatched payment records produce a retry/error state, not invented totals.
-- The API's named **5% estimate rate** is display-only. Active-job estimates use
+- The API's **5% rate** is shared with the backend payment calculator. Active-job estimates use
   the accepted offer, or minimum task budget if there is no accepted offer.
   They are clearly labelled and excluded from totals, comparisons and charts.
   Estimates do not change billing rates or write payment records. Cash receipt

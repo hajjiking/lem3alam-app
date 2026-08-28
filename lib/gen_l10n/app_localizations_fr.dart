@@ -9,6 +9,10 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get cashFeeAccounting =>
+      'Recevez le montant brut intégral en espèces. Les frais de plateforme réduisent votre revenu net comptabilisé ; cette confirmation ne prélève pas ces frais.';
+
+  @override
   String get cashPaymentsTitle => 'Confirmation du paiement en espèces';
 
   @override
@@ -113,7 +117,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String earningsFeeBody(String rate) {
-    return 'Les estimations appliquent des frais de $rate %. Les paiements terminés utilisent les frais enregistrés ; les taux réels peuvent varier.';
+    return 'Les nouveaux paiements et les estimations appliquent des frais de $rate %. Les paiements historiques conservent leurs frais enregistrés ; les taux réels peuvent varier.';
   }
 
   @override

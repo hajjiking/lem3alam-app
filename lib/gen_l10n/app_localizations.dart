@@ -100,6 +100,12 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @cashFeeAccounting.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive the full gross amount in cash. The platform fee reduces your recorded net earnings; this confirmation does not collect the fee from you.'**
+  String get cashFeeAccounting;
+
   /// No description provided for @cashPaymentsTitle.
   ///
   /// In en, this message translates to:
@@ -283,7 +289,7 @@ abstract class AppLocalizations {
   /// No description provided for @earningsFeeBody.
   ///
   /// In en, this message translates to:
-  /// **'Estimates use a {rate}% platform fee. Completed payments use their recorded fees; actual rates may differ.'**
+  /// **'New payments and estimates use a {rate}% platform fee. Historical payments keep their recorded fees; actual rates may differ.'**
   String earningsFeeBody(String rate);
 
   /// No description provided for @earningsEstimateBasis.

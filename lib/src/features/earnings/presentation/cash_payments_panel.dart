@@ -74,10 +74,20 @@ class _CashPaymentCardState extends ConsumerState<CashPaymentCard> {
           context: context,
           builder: (dialogContext) => AlertDialog(
                   title: Text(l10n.cashConfirm),
-                  content: Text(l10n.cashConfirmBody(
-                      earningsMoney(context,
-                          FeeCalculator.minorUnits(payment.amount!), 'MAD'),
-                      payment.title)),
+                  content: SingleChildScrollView(
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                        Text(l10n.cashConfirmBody(
+                            earningsMoney(
+                                context,
+                                FeeCalculator.minorUnits(payment.amount!),
+                                'MAD'),
+                            payment.title)),
+                        const SizedBox(height: 12),
+                        CashPaymentBreakdown(payment: payment),
+                      ])),
                   actions: [
                     TextButton(
                         onPressed: () => Navigator.pop(dialogContext, false),
@@ -142,11 +152,10 @@ class _CashPaymentCardState extends ConsumerState<CashPaymentCard> {
           Text(payment.canConfirm
               ? l10n.cashAwaitingReceipt
               : l10n.cashAmountReview),
-          if (payment.amount != null)
+          if (payment.canConfirm)
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: EarningsMoney(FeeCalculator.minorUnits(payment.amount!),
-                    currency: 'MAD')),
+                child: CashPaymentBreakdown(payment: payment)),
           if (payment.canConfirm)
             FilledButton.icon(
                 onPressed: _busy ? null : _confirm,
@@ -158,5 +167,33 @@ class _CashPaymentCardState extends ConsumerState<CashPaymentCard> {
                     : const Icon(Icons.payments_outlined),
                 label: Text(l10n.cashConfirm)),
         ]));
+  }
+}
+
+class CashPaymentBreakdown extends StatelessWidget {
+  const CashPaymentBreakdown({super.key, required this.payment});
+  final CashPayment payment;
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      for (final value in [
+        (l10n.earningsGross, FeeCalculator.minorUnits(payment.amount!)),
+        (l10n.earningsFees, -FeeCalculator.minorUnits(payment.platformFee!)),
+        (l10n.earningsNet, FeeCalculator.minorUnits(payment.netAmount!)),
+      ])
+        Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Wrap(
+                spacing: 12,
+                runSpacing: 2,
+                alignment: WrapAlignment.spaceBetween,
+                children: [
+                  Text(value.$1),
+                  EarningsMoney(value.$2, currency: 'MAD')
+                ])),
+      Text(l10n.cashFeeAccounting,
+          style: Theme.of(context).textTheme.bodySmall),
+    ]);
   }
 }
