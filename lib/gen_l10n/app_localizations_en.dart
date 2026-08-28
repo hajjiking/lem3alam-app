@@ -9,6 +9,109 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String messagesSubtitle(String role) {
+    String _temp0 = intl.Intl.selectLogic(
+      role,
+      {
+        'tasker': 'Chat with clients and manage your conversations',
+        'client': 'Chat with taskers and manage your conversations',
+        'other': 'Manage your conversations',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get messagesSearch => 'Search messages…';
+
+  @override
+  String get messagesUnread => 'Unread';
+
+  @override
+  String get messagesArchived => 'Archived';
+
+  @override
+  String get messagesEmpty => 'No conversations yet.';
+
+  @override
+  String get messagesNoMatch => 'No conversations match your filters.';
+
+  @override
+  String get messagesSelect => 'Select a conversation to start chatting.';
+
+  @override
+  String get messagesLoadError => 'Could not load messages. Please try again.';
+
+  @override
+  String get messagesSyncError =>
+      'Messages could not refresh. Your previous messages are still shown.';
+
+  @override
+  String get messagesType => 'Type a message…';
+
+  @override
+  String get messagesSend => 'Send message';
+
+  @override
+  String get messagesAttach => 'Add attachment';
+
+  @override
+  String get messagesCall => 'Call';
+
+  @override
+  String get messagesMore => 'Conversation options';
+
+  @override
+  String get messagesBlock => 'Block contact';
+
+  @override
+  String get messagesReport => 'Report contact';
+
+  @override
+  String get messagesArchive => 'Archive chat';
+
+  @override
+  String get messagesUnarchive => 'Unarchive chat';
+
+  @override
+  String get messagesLocalArchive =>
+      'Archiving only changes the conversation list on this device.';
+
+  @override
+  String get messagesToday => 'Today';
+
+  @override
+  String get messagesYesterday => 'Yesterday';
+
+  @override
+  String get messagesOffline => 'Offline';
+
+  @override
+  String get messagesPresenceUnknown => 'Presence unavailable';
+
+  @override
+  String get messagesSent => 'Sent';
+
+  @override
+  String get messagesDelivered => 'Delivered';
+
+  @override
+  String get messagesRead => 'Read';
+
+  @override
+  String get messagesOlder => 'Load earlier messages';
+
+  @override
+  String get messagesNoThread => 'No messages in this conversation yet.';
+
+  @override
+  String get messagesSendError =>
+      'Message was not sent. Your draft is kept; check the conversation before retrying.';
+
+  @override
+  String get messagesFilters => 'Filter conversations';
+
+  @override
   String get leaveReview => 'Leave a Review';
 
   @override

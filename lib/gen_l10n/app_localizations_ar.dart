@@ -9,6 +9,109 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String messagesSubtitle(String role) {
+    String _temp0 = intl.Intl.selectLogic(
+      role,
+      {
+        'tasker': 'تواصل مع العملاء وأدر محادثاتك',
+        'client': 'تواصل مع المعلمين وأدر محادثاتك',
+        'other': 'أدر محادثاتك',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get messagesSearch => 'البحث في الرسائل…';
+
+  @override
+  String get messagesUnread => 'غير مقروءة';
+
+  @override
+  String get messagesArchived => 'المؤرشفة';
+
+  @override
+  String get messagesEmpty => 'لا توجد محادثات بعد.';
+
+  @override
+  String get messagesNoMatch => 'لا توجد محادثات تطابق عوامل التصفية.';
+
+  @override
+  String get messagesSelect => 'اختر محادثة لبدء التواصل.';
+
+  @override
+  String get messagesLoadError => 'تعذر تحميل الرسائل. حاول مرة أخرى.';
+
+  @override
+  String get messagesSyncError =>
+      'تعذر تحديث الرسائل. لا تزال الرسائل السابقة ظاهرة.';
+
+  @override
+  String get messagesType => 'اكتب رسالة…';
+
+  @override
+  String get messagesSend => 'إرسال الرسالة';
+
+  @override
+  String get messagesAttach => 'إضافة مرفق';
+
+  @override
+  String get messagesCall => 'اتصال';
+
+  @override
+  String get messagesMore => 'خيارات المحادثة';
+
+  @override
+  String get messagesBlock => 'حظر جهة الاتصال';
+
+  @override
+  String get messagesReport => 'الإبلاغ عن جهة الاتصال';
+
+  @override
+  String get messagesArchive => 'أرشفة المحادثة';
+
+  @override
+  String get messagesUnarchive => 'إلغاء أرشفة المحادثة';
+
+  @override
+  String get messagesLocalArchive =>
+      'تؤثر الأرشفة على قائمة المحادثات في هذا الجهاز فقط.';
+
+  @override
+  String get messagesToday => 'اليوم';
+
+  @override
+  String get messagesYesterday => 'أمس';
+
+  @override
+  String get messagesOffline => 'غير متصل';
+
+  @override
+  String get messagesPresenceUnknown => 'حالة الاتصال غير متاحة';
+
+  @override
+  String get messagesSent => 'تم الإرسال';
+
+  @override
+  String get messagesDelivered => 'تم التسليم';
+
+  @override
+  String get messagesRead => 'تمت القراءة';
+
+  @override
+  String get messagesOlder => 'تحميل الرسائل السابقة';
+
+  @override
+  String get messagesNoThread => 'لا توجد رسائل في هذه المحادثة بعد.';
+
+  @override
+  String get messagesSendError =>
+      'لم تُرسل الرسالة. تم الاحتفاظ بالمسودة؛ تحقق من المحادثة قبل إعادة المحاولة.';
+
+  @override
+  String get messagesFilters => 'تصفية المحادثات';
+
+  @override
   String get leaveReview => 'اترك تقييماً';
 
   @override

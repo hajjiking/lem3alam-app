@@ -9,6 +9,111 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String messagesSubtitle(String role) {
+    String _temp0 = intl.Intl.selectLogic(
+      role,
+      {
+        'tasker': 'Discutez avec vos clients et gérez vos conversations',
+        'client': 'Discutez avec les prestataires et gérez vos conversations',
+        'other': 'Gérez vos conversations',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get messagesSearch => 'Rechercher des messages…';
+
+  @override
+  String get messagesUnread => 'Non lus';
+
+  @override
+  String get messagesArchived => 'Archivées';
+
+  @override
+  String get messagesEmpty => 'Aucune conversation pour le moment.';
+
+  @override
+  String get messagesNoMatch =>
+      'Aucune conversation ne correspond aux filtres.';
+
+  @override
+  String get messagesSelect => 'Sélectionnez une conversation.';
+
+  @override
+  String get messagesLoadError =>
+      'Impossible de charger les messages. Réessayez.';
+
+  @override
+  String get messagesSyncError =>
+      'Actualisation impossible. Les messages précédents restent affichés.';
+
+  @override
+  String get messagesType => 'Écrire un message…';
+
+  @override
+  String get messagesSend => 'Envoyer le message';
+
+  @override
+  String get messagesAttach => 'Ajouter une pièce jointe';
+
+  @override
+  String get messagesCall => 'Appeler';
+
+  @override
+  String get messagesMore => 'Options de conversation';
+
+  @override
+  String get messagesBlock => 'Bloquer le contact';
+
+  @override
+  String get messagesReport => 'Signaler le contact';
+
+  @override
+  String get messagesArchive => 'Archiver la conversation';
+
+  @override
+  String get messagesUnarchive => 'Désarchiver la conversation';
+
+  @override
+  String get messagesLocalArchive =>
+      'L’archivage modifie uniquement la liste sur cet appareil.';
+
+  @override
+  String get messagesToday => 'Aujourd’hui';
+
+  @override
+  String get messagesYesterday => 'Hier';
+
+  @override
+  String get messagesOffline => 'Hors ligne';
+
+  @override
+  String get messagesPresenceUnknown => 'Présence indisponible';
+
+  @override
+  String get messagesSent => 'Envoyé';
+
+  @override
+  String get messagesDelivered => 'Distribué';
+
+  @override
+  String get messagesRead => 'Lu';
+
+  @override
+  String get messagesOlder => 'Charger les messages précédents';
+
+  @override
+  String get messagesNoThread => 'Aucun message dans cette conversation.';
+
+  @override
+  String get messagesSendError =>
+      'Message non envoyé. Votre brouillon est conservé ; vérifiez la conversation avant de réessayer.';
+
+  @override
+  String get messagesFilters => 'Filtrer les conversations';
+
+  @override
   String get leaveReview => 'Laisser un avis';
 
   @override

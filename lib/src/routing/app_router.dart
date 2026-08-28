@@ -19,6 +19,8 @@ import '../features/dashboard/presentation/tasker_categories_screen.dart';
 import '../features/dashboard/presentation/widgets/dashboard_bottom_navigation.dart';
 import '../features/location/presentation/map_picker_screen.dart';
 import '../features/location/presentation/nearby_providers_map_screen.dart';
+import '../features/messages/presentation/messages_screen.dart';
+import '../features/messages/application/conversations_controller.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
 import '../features/taskers/presentation/tasker_reviews_screen.dart';
 import '../features/tasks/presentation/task_detail_screen.dart';
@@ -31,6 +33,7 @@ import 'router_notifier.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final _tasksBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'tasksBranch');
 final _dashboardBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboardBranch');
+final _messagesBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'messagesBranch');
 
 abstract class AppRouteNames {
   static const splash = 'splash';
@@ -51,6 +54,8 @@ abstract class AppRouteNames {
 
   static const taskerProfile = 'taskerProfile';
   static const taskerReviews = 'taskerReviews';
+  static const messages = 'messages';
+  static const messageThread = 'messageThread';
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -104,6 +109,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         }
         if (isProtectedTaskRoute && !isClient) return '/tasks';
         if (isNearbyTasks && !isTasker) return '/tasks';
+        if (location.startsWith('/messages') && !isClient && !isTasker) return '/admin';
       }
 
       return null;
@@ -347,6 +353,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
+          StatefulShellBranch(navigatorKey: _messagesBranchNavigatorKey, routes: [
+            GoRoute(path: '/messages', name: AppRouteNames.messages,
+              pageBuilder: (context, state) => const NoTransitionPage(child: MessagesScreen()),
+              routes: [GoRoute(path: ':peerId', name: AppRouteNames.messageThread,
+                builder: (context, state) => MessagesScreen(selected: (
+                  contactId: int.tryParse(state.pathParameters['peerId'] ?? '') ?? 0,
+                  taskId: int.tryParse(state.uri.queryParameters['task_id'] ?? ''),
+                )))])
+          ]),
         ],
       ),
     ],
@@ -366,6 +381,7 @@ class _AppShell extends ConsumerWidget {
 
     final currentNavigator = switch (navigationShell.currentIndex) {
       0 => _tasksBranchNavigatorKey.currentState,
+      2 => _messagesBranchNavigatorKey.currentState,
       _ => _dashboardBranchNavigatorKey.currentState,
     };
     final currentBranchCanPop = currentNavigator?.canPop() ?? false;
@@ -385,7 +401,10 @@ class _AppShell extends ConsumerWidget {
           selectedIndex: auth.user?.isClient == true && location == '/tasks/create'
               ? 2 : location.startsWith('/taskers/') && auth.user?.isClient != true
               ? 4
+              : navigationShell.currentIndex == 2 ? (auth.user?.isClient == true ? 3 : 2)
               : (navigationShell.currentIndex == 1 ? 0 : 1),
+          unreadMessageCount: auth.user?.isClient == true || auth.user?.isTasker == true
+              ? ref.watch(conversationsControllerProvider).asData?.value.unreadCount ?? 0 : 0,
           homeLabel: l10n.home,
           tasksLabel: l10n.tasks,
           messagesLabel: l10n.dashboardMessages,
@@ -398,8 +417,12 @@ class _AppShell extends ConsumerWidget {
                 context.goNamed(AppRouteNames.taskCreate);
                 return;
               }
-              if (index == 3 || index == 4) {
-                _showUnavailable(context, index == 3 ? l10n.dashboardMessages : l10n.clientDashboardPayments);
+              if (index == 3) {
+                navigationShell.goBranch(2);
+                return;
+              }
+              if (index == 4) {
+                _showUnavailable(context, l10n.clientDashboardPayments);
                 return;
               }
               if (index == 0) ref.invalidate(clientDashboardProvider);
@@ -423,7 +446,7 @@ class _AppShell extends ConsumerWidget {
                 );
                 return;
               case 2:
-                _showUnavailable(context, l10n.dashboardMessages);
+                navigationShell.goBranch(2);
                 return;
               case 3:
                 _showUnavailable(context, l10n.dashboardEarnings);

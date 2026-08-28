@@ -9,6 +9,7 @@ import '../../../core/analytics/app_analytics.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/ui/app_widgets.dart';
 import '../../../routing/app_router.dart';
+import '../../auth/presentation/auth_controller.dart';
 import '../domain/public_profile_model.dart';
 import 'tasker_public_profile_controller.dart';
 import 'widgets/widgets.dart';
@@ -90,6 +91,16 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
       'public_profile_message',
       properties: {'tasker_id': widget.taskerId},
     );
+    final user = ref.read(authControllerProvider).user;
+    if (user == null) {
+      context.pushNamed(AppRouteNames.login);
+    } else if (user.isClient) {
+      context.pushNamed(AppRouteNames.messageThread,
+          pathParameters: {'peerId': '${widget.taskerId}'});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(context.l10n.dashboardFeatureUnavailable(context.l10n.dashboardMessages))));
+    }
   }
 
   void _onBookNow(PublicProfileModel? model) {

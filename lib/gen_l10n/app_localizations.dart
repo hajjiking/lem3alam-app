@@ -100,6 +100,186 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @messagesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{role, select, tasker{Chat with clients and manage your conversations} client{Chat with taskers and manage your conversations} other{Manage your conversations}}'**
+  String messagesSubtitle(String role);
+
+  /// No description provided for @messagesSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search messages…'**
+  String get messagesSearch;
+
+  /// No description provided for @messagesUnread.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread'**
+  String get messagesUnread;
+
+  /// No description provided for @messagesArchived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get messagesArchived;
+
+  /// No description provided for @messagesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet.'**
+  String get messagesEmpty;
+
+  /// No description provided for @messagesNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations match your filters.'**
+  String get messagesNoMatch;
+
+  /// No description provided for @messagesSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a conversation to start chatting.'**
+  String get messagesSelect;
+
+  /// No description provided for @messagesLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load messages. Please try again.'**
+  String get messagesLoadError;
+
+  /// No description provided for @messagesSyncError.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages could not refresh. Your previous messages are still shown.'**
+  String get messagesSyncError;
+
+  /// No description provided for @messagesType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message…'**
+  String get messagesType;
+
+  /// No description provided for @messagesSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send message'**
+  String get messagesSend;
+
+  /// No description provided for @messagesAttach.
+  ///
+  /// In en, this message translates to:
+  /// **'Add attachment'**
+  String get messagesAttach;
+
+  /// No description provided for @messagesCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get messagesCall;
+
+  /// No description provided for @messagesMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation options'**
+  String get messagesMore;
+
+  /// No description provided for @messagesBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Block contact'**
+  String get messagesBlock;
+
+  /// No description provided for @messagesReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report contact'**
+  String get messagesReport;
+
+  /// No description provided for @messagesArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive chat'**
+  String get messagesArchive;
+
+  /// No description provided for @messagesUnarchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Unarchive chat'**
+  String get messagesUnarchive;
+
+  /// No description provided for @messagesLocalArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archiving only changes the conversation list on this device.'**
+  String get messagesLocalArchive;
+
+  /// No description provided for @messagesToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get messagesToday;
+
+  /// No description provided for @messagesYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get messagesYesterday;
+
+  /// No description provided for @messagesOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get messagesOffline;
+
+  /// No description provided for @messagesPresenceUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Presence unavailable'**
+  String get messagesPresenceUnknown;
+
+  /// No description provided for @messagesSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get messagesSent;
+
+  /// No description provided for @messagesDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get messagesDelivered;
+
+  /// No description provided for @messagesRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get messagesRead;
+
+  /// No description provided for @messagesOlder.
+  ///
+  /// In en, this message translates to:
+  /// **'Load earlier messages'**
+  String get messagesOlder;
+
+  /// No description provided for @messagesNoThread.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages in this conversation yet.'**
+  String get messagesNoThread;
+
+  /// No description provided for @messagesSendError.
+  ///
+  /// In en, this message translates to:
+  /// **'Message was not sent. Your draft is kept; check the conversation before retrying.'**
+  String get messagesSendError;
+
+  /// No description provided for @messagesFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter conversations'**
+  String get messagesFilters;
+
   /// No description provided for @leaveReview.
   ///
   /// In en, this message translates to:

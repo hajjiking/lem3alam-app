@@ -22,6 +22,8 @@ class DashboardHeader extends StatelessWidget {
     this.avatarFallback = Icons.person_rounded,
     this.showNotificationBadge = false,
     this.showAvailability = true,
+    this.titleActions,
+    this.compact = false,
   });
 
   final String appName;
@@ -41,6 +43,10 @@ class DashboardHeader extends StatelessWidget {
   final IconData avatarFallback;
   final bool showNotificationBadge;
   final bool showAvailability;
+  /// Optional header search/actions slot, used by Messages without moving it
+  /// into the content panel. Existing dashboard layouts retain their spacing.
+  final Widget? titleActions;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,7 @@ class DashboardHeader extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, safeTop + 24, 20, 67),
+        padding: EdgeInsetsDirectional.fromSTEB(20, safeTop + (compact ? 12 : 24), 20, compact ? 24 : 67),
         child: Align(
           alignment: AlignmentDirectional.topCenter,
           child: ConstrainedBox(
@@ -156,7 +162,7 @@ class DashboardHeader extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 70),
+                SizedBox(height: compact ? 24 : 70),
                 LayoutBuilder(
                   builder: (context, constraints) {
                     final compact = constraints.maxWidth < 360;
@@ -192,6 +198,15 @@ class DashboardHeader extends StatelessWidget {
                       offlineColor: scheme.outline,
                       onTap: onAvailabilityTap,
                     );
+
+                    if (titleActions != null) {
+                      if (constraints.maxWidth >= 780) {
+                        return Row(children: [Expanded(child: greetingBlock),
+                          const SizedBox(width: 24), SizedBox(width: 360, child: titleActions)]);
+                      }
+                      return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [greetingBlock, const SizedBox(height: 16), titleActions!]);
+                    }
 
                     if (compact) {
                       return Column(

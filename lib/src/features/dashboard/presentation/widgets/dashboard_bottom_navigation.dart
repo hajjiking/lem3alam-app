@@ -11,6 +11,7 @@ class DashboardBottomNavigation extends StatelessWidget {
     required this.profileLabel,
     required this.onSelected,
     this.postTaskLabel,
+    this.unreadMessageCount = 0,
   });
 
   final int selectedIndex;
@@ -21,6 +22,7 @@ class DashboardBottomNavigation extends StatelessWidget {
   final String profileLabel;
   final ValueChanged<int> onSelected;
   final String? postTaskLabel;
+  final int unreadMessageCount;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class DashboardBottomNavigation extends StatelessWidget {
                         : items[index].$2,
                     selected: selectedIndex == index,
                     prominent: postTaskLabel != null && index == 2,
+                    badgeCount: index == (postTaskLabel == null ? 2 : 3) ? unreadMessageCount : 0,
                     onTap: () => onSelected(index),
                   ),
                 ),
@@ -84,6 +87,7 @@ class _NavItem extends StatelessWidget {
     required this.selected,
     required this.onTap,
     this.prominent = false,
+    this.badgeCount = 0,
   });
 
   final String label;
@@ -91,6 +95,7 @@ class _NavItem extends StatelessWidget {
   final bool selected;
   final VoidCallback onTap;
   final bool prominent;
+  final int badgeCount;
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +123,8 @@ class _NavItem extends StatelessWidget {
                   child: Icon(icon, color: scheme.onPrimary, size: 36),
                 )
               else
-                Icon(icon, color: color, size: 27),
+                Badge(isLabelVisible: badgeCount > 0, label: Text('$badgeCount'),
+                  child: Icon(icon, color: color, size: 27)),
               const SizedBox(height: 3),
               Text(
                 label,
