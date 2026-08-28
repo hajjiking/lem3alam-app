@@ -21,6 +21,7 @@ import '../features/location/presentation/map_picker_screen.dart';
 import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/messages/presentation/messages_screen.dart';
 import '../features/messages/application/conversations_controller.dart';
+import '../features/earnings/presentation/earnings_screen.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
 import '../features/taskers/presentation/tasker_reviews_screen.dart';
 import '../features/tasks/presentation/task_detail_screen.dart';
@@ -34,6 +35,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final _tasksBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'tasksBranch');
 final _dashboardBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboardBranch');
 final _messagesBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'messagesBranch');
+final _earningsBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'earningsBranch');
 
 abstract class AppRouteNames {
   static const splash = 'splash';
@@ -56,6 +58,7 @@ abstract class AppRouteNames {
   static const taskerReviews = 'taskerReviews';
   static const messages = 'messages';
   static const messageThread = 'messageThread';
+  static const earnings = 'earnings';
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -110,6 +113,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         if (isProtectedTaskRoute && !isClient) return '/tasks';
         if (isNearbyTasks && !isTasker) return '/tasks';
         if (location.startsWith('/messages') && !isClient && !isTasker) return '/admin';
+        if (location.startsWith('/earnings') && !isTasker) return isAdmin ? '/admin' : '/dashboard';
       }
 
       return null;
@@ -362,6 +366,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   taskId: int.tryParse(state.uri.queryParameters['task_id'] ?? ''),
                 )))])
           ]),
+          StatefulShellBranch(navigatorKey: _earningsBranchNavigatorKey, routes: [
+            GoRoute(path: '/earnings', name: AppRouteNames.earnings,
+              pageBuilder: (context, state) => const NoTransitionPage(child: EarningsScreen())),
+          ]),
         ],
       ),
     ],
@@ -382,6 +390,7 @@ class _AppShell extends ConsumerWidget {
     final currentNavigator = switch (navigationShell.currentIndex) {
       0 => _tasksBranchNavigatorKey.currentState,
       2 => _messagesBranchNavigatorKey.currentState,
+      3 => _earningsBranchNavigatorKey.currentState,
       _ => _dashboardBranchNavigatorKey.currentState,
     };
     final currentBranchCanPop = currentNavigator?.canPop() ?? false;
@@ -402,6 +411,7 @@ class _AppShell extends ConsumerWidget {
               ? 2 : location.startsWith('/taskers/') && auth.user?.isClient != true
               ? 4
               : navigationShell.currentIndex == 2 ? (auth.user?.isClient == true ? 3 : 2)
+              : navigationShell.currentIndex == 3 ? 3
               : (navigationShell.currentIndex == 1 ? 0 : 1),
           unreadMessageCount: auth.user?.isClient == true || auth.user?.isTasker == true
               ? ref.watch(conversationsControllerProvider).asData?.value.unreadCount ?? 0 : 0,
@@ -449,7 +459,7 @@ class _AppShell extends ConsumerWidget {
                 navigationShell.goBranch(2);
                 return;
               case 3:
-                _showUnavailable(context, l10n.dashboardEarnings);
+                navigationShell.goBranch(3);
                 return;
               case 4:
                 if (auth.user?.isTasker == true) {

@@ -9,6 +9,145 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get earningsTitle => 'أرباحي';
+
+  @override
+  String get earningsSubtitle => 'تتبع أرباحك وأداءك';
+
+  @override
+  String get earningsLastMonth => 'الشهر الماضي';
+
+  @override
+  String get earningsThisYear => 'هذه السنة';
+
+  @override
+  String get earningsTotal => 'إجمالي الأرباح';
+
+  @override
+  String get earningsGross => 'الأرباح الإجمالية';
+
+  @override
+  String get earningsFees => 'رسوم المنصة';
+
+  @override
+  String get earningsNet => 'صافي الأرباح';
+
+  @override
+  String get earningsBalance => 'الرصيد المتاح';
+
+  @override
+  String get earningsBalanceUnavailable =>
+      'لا يوفر نظام الدفع رصيداً قابلاً للسحب حالياً. المدفوعات المكتملة أو المحررة ليست رصيد محفظة.';
+
+  @override
+  String earningsComparison(String percent) {
+    return '$percent٪ مقارنة بالفترة السابقة المماثلة';
+  }
+
+  @override
+  String get earningsNoComparison => 'لا توجد أرباح سابقة للمقارنة';
+
+  @override
+  String earningsCompletedChange(String count) {
+    return '$count مقارنة بالفترة السابقة المماثلة';
+  }
+
+  @override
+  String get earningsActiveNow => 'نشطة حالياً';
+
+  @override
+  String get earningsAllTime => 'طوال الوقت';
+
+  @override
+  String get earningsRating => 'متوسط التقييم';
+
+  @override
+  String get earningsJobs => 'إجمالي المهام';
+
+  @override
+  String get earningsOverview => 'نظرة عامة على الأرباح';
+
+  @override
+  String get earningsCumulative => 'صافي الأرباح التراكمي للمدفوعات المكتملة';
+
+  @override
+  String get earningsCategory => 'الأرباح حسب الفئة';
+
+  @override
+  String get earningsUncategorized => 'خدمات أخرى';
+
+  @override
+  String get earningsFeeInfo => 'حول رسوم المنصة';
+
+  @override
+  String earningsFeeBody(String rate) {
+    return 'تستخدم التقديرات رسوماً بنسبة $rate٪. تستخدم المدفوعات المكتملة الرسوم المسجلة، وقد تختلف النسب الفعلية.';
+  }
+
+  @override
+  String get earningsEstimateBasis =>
+      'تستخدم المبالغ المتوقعة العرض المقبول، أو الحد الأدنى لميزانية المهمة عند غياب سعر متفق عليه. التقديرات ليست أرباحاً محققة.';
+
+  @override
+  String get earningsTransactions => 'المعاملات الأخيرة';
+
+  @override
+  String get earningsGrossLabel => 'الإجمالي';
+
+  @override
+  String get earningsFeeLabel => 'الرسوم';
+
+  @override
+  String get earningsNetLabel => 'الصافي';
+
+  @override
+  String get earningsExpected => 'المتوقع';
+
+  @override
+  String get earningsEstimatedFee => 'رسوم تقديرية';
+
+  @override
+  String get earningsEstimatedNet => 'صافي تقديري';
+
+  @override
+  String earningsPaidOn(String date) {
+    return 'تم الدفع في $date';
+  }
+
+  @override
+  String earningsEstimatedOn(String date) {
+    return 'مهمة نشطة · $date';
+  }
+
+  @override
+  String get earningsLoadError =>
+      'تعذر تحميل أرباحك. حاول مجدداً. يجب تصحيح سجلات الدفع غير المتطابقة قبل عرض الإجماليات.';
+
+  @override
+  String get earningsEmpty => 'لا توجد مدفوعات مكتملة في هذه الفترة.';
+
+  @override
+  String get earningsNoTransactions => 'لا توجد معاملات لهذه الفترة.';
+
+  @override
+  String get earningsPrivate =>
+      'تظهر أرباحك فقط. تشمل الإجماليات المدفوعات المكتملة بالدرهم، وتستثني المعلقة والمستردة والفاشلة والمتنازع عليها.';
+
+  @override
+  String get earningsChartData => 'عرض بيانات الرسم البياني';
+
+  @override
+  String get earningsDetails => 'تفاصيل المعاملة';
+
+  @override
+  String get earningsPeriod => 'فترة الأرباح';
+
+  @override
+  String earningsReviewCount(String count) {
+    return '$count تقييمات';
+  }
+
+  @override
   String messagesSubtitle(String role) {
     String _temp0 = intl.Intl.selectLogic(
       role,

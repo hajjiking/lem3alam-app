@@ -9,6 +9,146 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get earningsTitle => 'Mes revenus';
+
+  @override
+  String get earningsSubtitle => 'Suivez vos revenus et vos performances';
+
+  @override
+  String get earningsLastMonth => 'Mois dernier';
+
+  @override
+  String get earningsThisYear => 'Cette année';
+
+  @override
+  String get earningsTotal => 'Revenus totaux';
+
+  @override
+  String get earningsGross => 'Revenus bruts';
+
+  @override
+  String get earningsFees => 'Frais de plateforme';
+
+  @override
+  String get earningsNet => 'Revenus nets';
+
+  @override
+  String get earningsBalance => 'Solde disponible';
+
+  @override
+  String get earningsBalanceUnavailable =>
+      'Le système de paiement ne fournit pas encore de solde retirable. Les paiements terminés ou libérés ne constituent pas un solde de portefeuille.';
+
+  @override
+  String earningsComparison(String percent) {
+    return '$percent % par rapport à la période comparable précédente';
+  }
+
+  @override
+  String get earningsNoComparison => 'Aucun revenu précédent à comparer';
+
+  @override
+  String earningsCompletedChange(String count) {
+    return '$count par rapport à la période comparable précédente';
+  }
+
+  @override
+  String get earningsActiveNow => 'Actuellement actifs';
+
+  @override
+  String get earningsAllTime => 'Depuis le début';
+
+  @override
+  String get earningsRating => 'Note moyenne';
+
+  @override
+  String get earningsJobs => 'Total des missions';
+
+  @override
+  String get earningsOverview => 'Aperçu des revenus';
+
+  @override
+  String get earningsCumulative =>
+      'Revenus nets cumulés des paiements terminés';
+
+  @override
+  String get earningsCategory => 'Revenus par catégorie';
+
+  @override
+  String get earningsUncategorized => 'Autres services';
+
+  @override
+  String get earningsFeeInfo => 'À propos des frais';
+
+  @override
+  String earningsFeeBody(String rate) {
+    return 'Les estimations appliquent des frais de $rate %. Les paiements terminés utilisent les frais enregistrés ; les taux réels peuvent varier.';
+  }
+
+  @override
+  String get earningsEstimateBasis =>
+      'Les montants prévus utilisent l’offre acceptée, ou le budget minimum de la mission en l’absence de prix accepté. Ils ne constituent pas des revenus acquis.';
+
+  @override
+  String get earningsTransactions => 'Transactions récentes';
+
+  @override
+  String get earningsGrossLabel => 'Brut';
+
+  @override
+  String get earningsFeeLabel => 'Frais';
+
+  @override
+  String get earningsNetLabel => 'Net';
+
+  @override
+  String get earningsExpected => 'Prévu';
+
+  @override
+  String get earningsEstimatedFee => 'Frais estimés';
+
+  @override
+  String get earningsEstimatedNet => 'Net estimé';
+
+  @override
+  String earningsPaidOn(String date) {
+    return 'Payé le $date';
+  }
+
+  @override
+  String earningsEstimatedOn(String date) {
+    return 'Mission active · $date';
+  }
+
+  @override
+  String get earningsLoadError =>
+      'Impossible de charger vos revenus. Réessayez. Les paiements incohérents doivent être corrigés avant d’afficher les totaux.';
+
+  @override
+  String get earningsEmpty => 'Aucun paiement terminé sur cette période.';
+
+  @override
+  String get earningsNoTransactions => 'Aucune transaction sur cette période.';
+
+  @override
+  String get earningsPrivate =>
+      'Seuls vos revenus sont affichés. Les totaux incluent les paiements terminés en MAD, sans les paiements en attente, remboursés, échoués ou contestés.';
+
+  @override
+  String get earningsChartData => 'Voir les données du graphique';
+
+  @override
+  String get earningsDetails => 'Détails de la transaction';
+
+  @override
+  String get earningsPeriod => 'Période des revenus';
+
+  @override
+  String earningsReviewCount(String count) {
+    return '$count avis';
+  }
+
+  @override
   String messagesSubtitle(String role) {
     String _temp0 = intl.Intl.selectLogic(
       role,

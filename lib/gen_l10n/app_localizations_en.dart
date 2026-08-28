@@ -9,6 +9,145 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get earningsTitle => 'My Earnings';
+
+  @override
+  String get earningsSubtitle => 'Track your earnings and performance';
+
+  @override
+  String get earningsLastMonth => 'Last Month';
+
+  @override
+  String get earningsThisYear => 'This Year';
+
+  @override
+  String get earningsTotal => 'Total Earnings';
+
+  @override
+  String get earningsGross => 'Gross Earnings';
+
+  @override
+  String get earningsFees => 'Platform Fees';
+
+  @override
+  String get earningsNet => 'Net Earnings';
+
+  @override
+  String get earningsBalance => 'Available Balance';
+
+  @override
+  String get earningsBalanceUnavailable =>
+      'A withdrawable balance is not available from the payment system yet. Completed or released payments are not a wallet balance.';
+
+  @override
+  String earningsComparison(String percent) {
+    return '$percent% versus the previous comparable period';
+  }
+
+  @override
+  String get earningsNoComparison => 'No previous earnings to compare';
+
+  @override
+  String earningsCompletedChange(String count) {
+    return '$count versus the previous comparable period';
+  }
+
+  @override
+  String get earningsActiveNow => 'Currently active';
+
+  @override
+  String get earningsAllTime => 'All time';
+
+  @override
+  String get earningsRating => 'Average Rating';
+
+  @override
+  String get earningsJobs => 'Total Jobs';
+
+  @override
+  String get earningsOverview => 'Earnings Overview';
+
+  @override
+  String get earningsCumulative => 'Cumulative net from completed payments';
+
+  @override
+  String get earningsCategory => 'Earnings by Category';
+
+  @override
+  String get earningsUncategorized => 'Other services';
+
+  @override
+  String get earningsFeeInfo => 'About Platform Fees';
+
+  @override
+  String earningsFeeBody(String rate) {
+    return 'Estimates use a $rate% platform fee. Completed payments use their recorded fees; actual rates may differ.';
+  }
+
+  @override
+  String get earningsEstimateBasis =>
+      'Expected amounts use the accepted offer, or the task’s minimum budget when no accepted price is available. Estimates are not earned income.';
+
+  @override
+  String get earningsTransactions => 'Recent Transactions';
+
+  @override
+  String get earningsGrossLabel => 'Gross';
+
+  @override
+  String get earningsFeeLabel => 'Fee';
+
+  @override
+  String get earningsNetLabel => 'Net';
+
+  @override
+  String get earningsExpected => 'Expected';
+
+  @override
+  String get earningsEstimatedFee => 'Est. Fee';
+
+  @override
+  String get earningsEstimatedNet => 'Est. Net';
+
+  @override
+  String earningsPaidOn(String date) {
+    return 'Paid on $date';
+  }
+
+  @override
+  String earningsEstimatedOn(String date) {
+    return 'Active assignment · $date';
+  }
+
+  @override
+  String get earningsLoadError =>
+      'Could not load your earnings. Please retry. Inconsistent payment records must be corrected before totals can be shown.';
+
+  @override
+  String get earningsEmpty => 'No completed payments in this period.';
+
+  @override
+  String get earningsNoTransactions => 'No transactions for this period.';
+
+  @override
+  String get earningsPrivate =>
+      'Only your earnings are shown. Totals include completed MAD payments; pending, refunded, failed and disputed payments are excluded.';
+
+  @override
+  String get earningsChartData => 'View chart data';
+
+  @override
+  String get earningsDetails => 'Transaction details';
+
+  @override
+  String get earningsPeriod => 'Earnings period';
+
+  @override
+  String earningsReviewCount(String count) {
+    return '$count reviews';
+  }
+
+  @override
   String messagesSubtitle(String role) {
     String _temp0 = intl.Intl.selectLogic(
       role,

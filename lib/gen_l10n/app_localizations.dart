@@ -100,6 +100,252 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @earningsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Earnings'**
+  String get earningsTitle;
+
+  /// No description provided for @earningsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your earnings and performance'**
+  String get earningsSubtitle;
+
+  /// No description provided for @earningsLastMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Month'**
+  String get earningsLastMonth;
+
+  /// No description provided for @earningsThisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This Year'**
+  String get earningsThisYear;
+
+  /// No description provided for @earningsTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Earnings'**
+  String get earningsTotal;
+
+  /// No description provided for @earningsGross.
+  ///
+  /// In en, this message translates to:
+  /// **'Gross Earnings'**
+  String get earningsGross;
+
+  /// No description provided for @earningsFees.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform Fees'**
+  String get earningsFees;
+
+  /// No description provided for @earningsNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Earnings'**
+  String get earningsNet;
+
+  /// No description provided for @earningsBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get earningsBalance;
+
+  /// No description provided for @earningsBalanceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'A withdrawable balance is not available from the payment system yet. Completed or released payments are not a wallet balance.'**
+  String get earningsBalanceUnavailable;
+
+  /// No description provided for @earningsComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% versus the previous comparable period'**
+  String earningsComparison(String percent);
+
+  /// No description provided for @earningsNoComparison.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous earnings to compare'**
+  String get earningsNoComparison;
+
+  /// No description provided for @earningsCompletedChange.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} versus the previous comparable period'**
+  String earningsCompletedChange(String count);
+
+  /// No description provided for @earningsActiveNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently active'**
+  String get earningsActiveNow;
+
+  /// No description provided for @earningsAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get earningsAllTime;
+
+  /// No description provided for @earningsRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Rating'**
+  String get earningsRating;
+
+  /// No description provided for @earningsJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Jobs'**
+  String get earningsJobs;
+
+  /// No description provided for @earningsOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings Overview'**
+  String get earningsOverview;
+
+  /// No description provided for @earningsCumulative.
+  ///
+  /// In en, this message translates to:
+  /// **'Cumulative net from completed payments'**
+  String get earningsCumulative;
+
+  /// No description provided for @earningsCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings by Category'**
+  String get earningsCategory;
+
+  /// No description provided for @earningsUncategorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Other services'**
+  String get earningsUncategorized;
+
+  /// No description provided for @earningsFeeInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'About Platform Fees'**
+  String get earningsFeeInfo;
+
+  /// No description provided for @earningsFeeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimates use a {rate}% platform fee. Completed payments use their recorded fees; actual rates may differ.'**
+  String earningsFeeBody(String rate);
+
+  /// No description provided for @earningsEstimateBasis.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected amounts use the accepted offer, or the task’s minimum budget when no accepted price is available. Estimates are not earned income.'**
+  String get earningsEstimateBasis;
+
+  /// No description provided for @earningsTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Transactions'**
+  String get earningsTransactions;
+
+  /// No description provided for @earningsGrossLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Gross'**
+  String get earningsGrossLabel;
+
+  /// No description provided for @earningsFeeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Fee'**
+  String get earningsFeeLabel;
+
+  /// No description provided for @earningsNetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Net'**
+  String get earningsNetLabel;
+
+  /// No description provided for @earningsExpected.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected'**
+  String get earningsExpected;
+
+  /// No description provided for @earningsEstimatedFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Est. Fee'**
+  String get earningsEstimatedFee;
+
+  /// No description provided for @earningsEstimatedNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Est. Net'**
+  String get earningsEstimatedNet;
+
+  /// No description provided for @earningsPaidOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on {date}'**
+  String earningsPaidOn(String date);
+
+  /// No description provided for @earningsEstimatedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Active assignment · {date}'**
+  String earningsEstimatedOn(String date);
+
+  /// No description provided for @earningsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your earnings. Please retry. Inconsistent payment records must be corrected before totals can be shown.'**
+  String get earningsLoadError;
+
+  /// No description provided for @earningsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed payments in this period.'**
+  String get earningsEmpty;
+
+  /// No description provided for @earningsNoTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions for this period.'**
+  String get earningsNoTransactions;
+
+  /// No description provided for @earningsPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Only your earnings are shown. Totals include completed MAD payments; pending, refunded, failed and disputed payments are excluded.'**
+  String get earningsPrivate;
+
+  /// No description provided for @earningsChartData.
+  ///
+  /// In en, this message translates to:
+  /// **'View chart data'**
+  String get earningsChartData;
+
+  /// No description provided for @earningsDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction details'**
+  String get earningsDetails;
+
+  /// No description provided for @earningsPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings period'**
+  String get earningsPeriod;
+
+  /// No description provided for @earningsReviewCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} reviews'**
+  String earningsReviewCount(String count);
+
   /// No description provided for @messagesSubtitle.
   ///
   /// In en, this message translates to:
