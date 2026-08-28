@@ -22,6 +22,7 @@ import 'client_completion_panel.dart';
 import 'client_reviews_panel.dart';
 import 'tasker_assignments_panel.dart';
 import '../data/client_offers_repository.dart';
+import '../../earnings/presentation/cash_payments_panel.dart';
 
 class TaskDetailScreen extends ConsumerWidget {
   const TaskDetailScreen({super.key, required this.taskId});
@@ -262,6 +263,12 @@ class TaskDetailScreen extends ConsumerWidget {
                   title: l10n.description,
                   child: Text(task.description),
                 ),
+                if (isTasker &&
+                    task.assignedTaskerId == user?.id &&
+                    task.status == 'completed')
+                  Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: CashPaymentsPanel(taskId: task.id)),
                 if (task.assignedTaskerId != null) const SizedBox(height: 12),
                 if (task.assignedTaskerId != null)
                   AppSectionCard(

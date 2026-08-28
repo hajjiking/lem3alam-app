@@ -4,7 +4,12 @@ Clients can review pending completion requests from their dashboard or task
 details, then confirm **Approve completion** or **Return for changes**.
 Only the task's owner can decide. Approving completes the task; returning it
 clears the request and leaves it in progress so the tasker can resubmit.
-Neither action creates or releases a payment.
+Approval also prepares payment using the agreed amount. Cash stays pending until
+the assigned tasker confirms receipt; previously verified non-cash payments are
+marked released. Unpaid electronic payments still need a connected processor.
+Returning a task for changes does not create or release a payment.
+See [cash-payment-confirmation.md](cash-payment-confirmation.md) for the workflow,
+limitations, and the full backend deployment file list.
 
 ## Deploy backend first
 

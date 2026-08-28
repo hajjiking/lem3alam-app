@@ -9,6 +9,36 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get cashPaymentsTitle => 'تأكيد الدفع نقداً';
+
+  @override
+  String get cashPaymentsLoadError =>
+      'تعذّر تحميل المدفوعات النقدية التي تنتظر التأكيد.';
+
+  @override
+  String get cashConfirm => 'تأكيد استلام المبلغ نقداً';
+
+  @override
+  String cashConfirmBody(String amount, String task) {
+    return 'هل استلمت $amount نقداً مقابل $task؟ أكّد فقط بعد استلام المبلغ كاملاً. سيُضاف إلى أرباحك.';
+  }
+
+  @override
+  String get cashConfirmed => 'تم تأكيد استلام المبلغ النقدي وتحديث أرباحك.';
+
+  @override
+  String get cashPaymentChanged =>
+      'تغيّر هذا الدفع. حدّث الصفحة وتحقق من المبلغ قبل التأكيد.';
+
+  @override
+  String get cashAwaitingReceipt =>
+      'وافق العميل على إتمام المهمة. أكّد بعد استلام المبلغ نقداً، ولن يُحتسب مدفوعاً حتى تؤكد الاستلام.';
+
+  @override
+  String get cashAmountReview =>
+      'المبلغ النهائي المتفق عليه أو سجل الدفع الصحيح غير متوفر. تواصل مع الدعم لمراجعة الدفع قبل التأكيد.';
+
+  @override
   String get earningsTitle => 'أرباحي';
 
   @override
@@ -307,7 +337,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String confirmApproveCompletion(String task) {
-    return 'هل توافق على إكمال «$task»؟ سيتم تحديد المهمة كمكتملة دون تحرير أي دفعة مالية.';
+    return 'هل توافق على إكمال «$task» وتجهيز الدفع؟ لا يُحتسب النقد مدفوعاً إلا بعد تأكيد المعلم استلامه. تُحرّر المدفوعات الإلكترونية المتحقق منها، وتبقى المدفوعات الأخرى بانتظار المعالجة.';
   }
 
   @override

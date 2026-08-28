@@ -9,6 +9,37 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get cashPaymentsTitle => 'Confirmation du paiement en espèces';
+
+  @override
+  String get cashPaymentsLoadError =>
+      'Impossible de charger les paiements en espèces à confirmer.';
+
+  @override
+  String get cashConfirm => 'Confirmer les espèces reçues';
+
+  @override
+  String cashConfirmBody(String amount, String task) {
+    return 'Avez-vous reçu $amount en espèces pour $task ? Confirmez uniquement après réception du paiement intégral. Il sera ajouté à vos revenus.';
+  }
+
+  @override
+  String get cashConfirmed =>
+      'Réception des espèces confirmée. Vos revenus ont été actualisés.';
+
+  @override
+  String get cashPaymentChanged =>
+      'Ce paiement a changé. Actualisez et vérifiez le montant avant de confirmer.';
+
+  @override
+  String get cashAwaitingReceipt =>
+      'Le client a approuvé cette tâche. Confirmez après avoir reçu les espèces. Le paiement ne sera comptabilisé qu’après votre confirmation.';
+
+  @override
+  String get cashAmountReview =>
+      'Le montant final convenu ou un paiement valide manque. Contactez l’assistance pour vérifier ce paiement avant de confirmer.';
+
+  @override
   String get earningsTitle => 'Mes revenus';
 
   @override
@@ -314,7 +345,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String confirmApproveCompletion(String task) {
-    return 'Valider la réalisation de « $task » ? La tâche sera marquée comme terminée. Aucun paiement ne sera débloqué.';
+    return 'Valider la réalisation de « $task » et préparer son paiement ? Les espèces ne sont comptabilisées qu’après confirmation du prestataire. Les paiements électroniques déjà vérifiés sont débloqués ; les autres restent à traiter.';
   }
 
   @override

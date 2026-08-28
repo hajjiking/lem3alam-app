@@ -22,6 +22,8 @@ import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/messages/presentation/messages_screen.dart';
 import '../features/messages/application/conversations_controller.dart';
 import '../features/earnings/presentation/earnings_screen.dart';
+import '../features/earnings/application/earnings_controller.dart';
+import '../features/earnings/data/cash_payments_repository.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
 import '../features/taskers/presentation/tasker_reviews_screen.dart';
 import '../features/tasks/presentation/task_detail_screen.dart';
@@ -459,6 +461,8 @@ class _AppShell extends ConsumerWidget {
                 navigationShell.goBranch(2);
                 return;
               case 3:
+                ref.invalidate(cashPaymentsProvider);
+                ref.invalidate(earningsControllerProvider);
                 navigationShell.goBranch(3);
                 return;
               case 4:

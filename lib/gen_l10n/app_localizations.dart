@@ -100,6 +100,54 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @cashPaymentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash payment confirmation'**
+  String get cashPaymentsTitle;
+
+  /// No description provided for @cashPaymentsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load cash payments awaiting confirmation.'**
+  String get cashPaymentsLoadError;
+
+  /// No description provided for @cashConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm cash received'**
+  String get cashConfirm;
+
+  /// No description provided for @cashConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Have you received {amount} in cash for {task}? Confirm only after receiving the full payment. This will record it in your earnings.'**
+  String cashConfirmBody(String amount, String task);
+
+  /// No description provided for @cashConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash receipt confirmed. Your earnings have been updated.'**
+  String get cashConfirmed;
+
+  /// No description provided for @cashPaymentChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'This payment changed. Refresh and check the amount before confirming.'**
+  String get cashPaymentChanged;
+
+  /// No description provided for @cashAwaitingReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'The client approved this job. Confirm once you have received the cash. It will not count as paid until you confirm.'**
+  String get cashAwaitingReceipt;
+
+  /// No description provided for @cashAmountReview.
+  ///
+  /// In en, this message translates to:
+  /// **'An agreed final amount or a valid payment record is missing. Contact support to review this payment before confirming.'**
+  String get cashAmountReview;
+
   /// No description provided for @earningsTitle.
   ///
   /// In en, this message translates to:
@@ -625,7 +673,7 @@ abstract class AppLocalizations {
   /// No description provided for @confirmApproveCompletion.
   ///
   /// In en, this message translates to:
-  /// **'Approve completion of “{task}”? This marks the task completed. It does not release payment.'**
+  /// **'Approve completion of “{task}” and prepare its payment? Cash is recorded as paid only after the tasker confirms receipt. Previously verified non-cash payments are released; other electronic payments still need processing.'**
   String confirmApproveCompletion(String task);
 
   /// No description provided for @confirmReturnForChanges.

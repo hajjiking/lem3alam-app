@@ -13,6 +13,8 @@ import 'earnings_category_donut.dart';
 import 'platform_fees_info_card.dart';
 import 'recent_transactions_card.dart';
 import 'period_selector.dart';
+import 'cash_payments_panel.dart';
+import '../data/cash_payments_repository.dart';
 
 class EarningsScreen extends ConsumerWidget {
   const EarningsScreen({super.key});
@@ -24,6 +26,7 @@ class EarningsScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final state = ref.watch(earningsControllerProvider);
     Future<void> refresh() async {
+      ref.invalidate(cashPaymentsProvider);
       try {
         await ref.read(earningsControllerProvider.notifier).refresh();
       } catch (_) {}
@@ -54,6 +57,10 @@ class EarningsScreen extends ConsumerWidget {
                       onProfileTap: () =>
                           openDashboardProfile(context, user?.id, true),
                       onAvailabilityTap: () {})),
+              const SliverToBoxAdapter(
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: CashPaymentsPanel())),
               SliverToBoxAdapter(
                   child: state.when(
                       skipLoadingOnRefresh: false,

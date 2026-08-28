@@ -20,7 +20,8 @@ No reference-image amounts or example jobs are seeded in the production app.
 - The API's named **5% estimate rate** is display-only. Active-job estimates use
   the accepted offer, or minimum task budget if there is no accepted offer.
   They are clearly labelled and excluded from totals, comparisons and charts.
-  This implementation does not change billing rates or write payment records.
+  Estimates do not change billing rates or write payment records. Cash receipt
+  confirmation is a separate explicit write, described below.
 - Summary, cumulative chart and category totals are derived from the same fully
   paginated ledger. Fees are summed per payment, not rounded on an aggregate.
   Category percentages use largest-remainder rounding to sum to 100% when net
@@ -38,8 +39,8 @@ No reference-image amounts or example jobs are seeded in the production app.
 
 ## Deploy
 
-Deploy `app/Http/Controllers/Api/TaskerEarningsController.php` and `routes/api.php`
-from the Laravel project together. No schema migration is required. Refresh the
+Deploy the Laravel files listed in [cash-payment-confirmation.md](cash-payment-confirmation.md)
+together with `app/Http/Controllers/Api/TaskerEarningsController.php`. No schema migration is required. Refresh the
 route/config caches through your normal deployment process, then rebuild and
 install the Flutter app. Nothing has been deployed or paid out by this task.
 
@@ -58,3 +59,12 @@ tasker-specific statistics, and period metadata. Currency is currently MAD only.
   (written to `build/earnings-previews`).
 
 No live financial accounts or production transactions are used by the tests.
+
+## Cash receipt confirmation
+
+Client approval now prepares a pending payment. A tasker sees **Confirm cash
+received** above the Earnings summary and in completed task details. It remains
+outside earned totals until the tasker confirms actual receipt. Confirmation
+refreshes earnings and the tasker dashboard. Reopening the Earnings tab or pulling
+to refresh fetches newly approved jobs. See [the payment workflow](cash-payment-confirmation.md)
+for non-cash limitations and deployment details.

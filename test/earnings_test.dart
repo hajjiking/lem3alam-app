@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:lem3alam_mobile/src/features/earnings/data/cash_payments_repository.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
@@ -177,6 +178,7 @@ Future<void> _pump(WidgetTester tester, _Api api,
         authControllerProvider.overrideWith(_Auth.new),
         localeControllerProvider.overrideWith(_Locale.new),
         earningsRepositoryProvider.overrideWithValue(_repo(api)),
+        cashPaymentsProvider(null).overrideWith((ref) async => []),
       ],
       child: MaterialApp(
           locale: Locale(language),
@@ -297,6 +299,7 @@ void main() {
       splashControllerProvider.overrideWith(_Ready.new),
       localeControllerProvider.overrideWith(_Locale.new),
       earningsRepositoryProvider.overrideWithValue(_repo(_Api())),
+      cashPaymentsProvider(null).overrideWith((ref) async => []),
       conversationsControllerProvider.overrideWith(() => _Conversations()),
     ]);
     addTearDown(container.dispose);

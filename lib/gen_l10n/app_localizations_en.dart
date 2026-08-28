@@ -9,6 +9,37 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get cashPaymentsTitle => 'Cash payment confirmation';
+
+  @override
+  String get cashPaymentsLoadError =>
+      'Could not load cash payments awaiting confirmation.';
+
+  @override
+  String get cashConfirm => 'Confirm cash received';
+
+  @override
+  String cashConfirmBody(String amount, String task) {
+    return 'Have you received $amount in cash for $task? Confirm only after receiving the full payment. This will record it in your earnings.';
+  }
+
+  @override
+  String get cashConfirmed =>
+      'Cash receipt confirmed. Your earnings have been updated.';
+
+  @override
+  String get cashPaymentChanged =>
+      'This payment changed. Refresh and check the amount before confirming.';
+
+  @override
+  String get cashAwaitingReceipt =>
+      'The client approved this job. Confirm once you have received the cash. It will not count as paid until you confirm.';
+
+  @override
+  String get cashAmountReview =>
+      'An agreed final amount or a valid payment record is missing. Contact support to review this payment before confirming.';
+
+  @override
   String get earningsTitle => 'My Earnings';
 
   @override
@@ -310,7 +341,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String confirmApproveCompletion(String task) {
-    return 'Approve completion of “$task”? This marks the task completed. It does not release payment.';
+    return 'Approve completion of “$task” and prepare its payment? Cash is recorded as paid only after the tasker confirms receipt. Previously verified non-cash payments are released; other electronic payments still need processing.';
   }
 
   @override
