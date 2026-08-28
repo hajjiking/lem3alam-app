@@ -22,6 +22,8 @@ import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/messages/presentation/messages_screen.dart';
 import '../features/messages/application/conversations_controller.dart';
 import '../features/earnings/presentation/earnings_screen.dart';
+import '../features/payments/presentation/client_payments_screen.dart';
+import '../features/payments/application/client_payments_controller.dart';
 import '../features/earnings/application/earnings_controller.dart';
 import '../features/earnings/data/cash_payments_repository.dart';
 import '../features/taskers/presentation/tasker_profile_screen.dart';
@@ -38,6 +40,7 @@ final _tasksBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'tasksBra
 final _dashboardBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboardBranch');
 final _messagesBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'messagesBranch');
 final _earningsBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'earningsBranch');
+final _paymentsBranchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'paymentsBranch');
 
 abstract class AppRouteNames {
   static const splash = 'splash';
@@ -61,6 +64,7 @@ abstract class AppRouteNames {
   static const messages = 'messages';
   static const messageThread = 'messageThread';
   static const earnings = 'earnings';
+  static const payments = 'payments';
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -116,6 +120,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         if (isNearbyTasks && !isTasker) return '/tasks';
         if (location.startsWith('/messages') && !isClient && !isTasker) return '/admin';
         if (location.startsWith('/earnings') && !isTasker) return isAdmin ? '/admin' : '/dashboard';
+        if (location.startsWith('/payments') && !isClient) return isAdmin ? '/admin' : '/dashboard';
       }
 
       return null;
@@ -372,6 +377,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             GoRoute(path: '/earnings', name: AppRouteNames.earnings,
               pageBuilder: (context, state) => const NoTransitionPage(child: EarningsScreen())),
           ]),
+          StatefulShellBranch(navigatorKey: _paymentsBranchNavigatorKey, routes: [
+            GoRoute(path: '/payments', name: AppRouteNames.payments,
+              pageBuilder: (context, state) => const NoTransitionPage(child: ClientPaymentsScreen())),
+          ]),
         ],
       ),
     ],
@@ -388,11 +397,13 @@ class _AppShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final auth = ref.watch(authControllerProvider);
+    final clientPaymentsPage = auth.user?.isClient == true && navigationShell.currentIndex == 4;
 
     final currentNavigator = switch (navigationShell.currentIndex) {
       0 => _tasksBranchNavigatorKey.currentState,
       2 => _messagesBranchNavigatorKey.currentState,
       3 => _earningsBranchNavigatorKey.currentState,
+      4 => _paymentsBranchNavigatorKey.currentState,
       _ => _dashboardBranchNavigatorKey.currentState,
     };
     final currentBranchCanPop = currentNavigator?.canPop() ?? false;
@@ -413,7 +424,7 @@ class _AppShell extends ConsumerWidget {
               ? 2 : location.startsWith('/taskers/') && auth.user?.isClient != true
               ? 4
               : navigationShell.currentIndex == 2 ? (auth.user?.isClient == true ? 3 : 2)
-              : navigationShell.currentIndex == 3 ? 3
+              : navigationShell.currentIndex == 3 || navigationShell.currentIndex == 4 ? 3
               : (navigationShell.currentIndex == 1 ? 0 : 1),
           unreadMessageCount: auth.user?.isClient == true || auth.user?.isTasker == true
               ? ref.watch(conversationsControllerProvider).asData?.value.unreadCount ?? 0 : 0,
@@ -422,9 +433,15 @@ class _AppShell extends ConsumerWidget {
           messagesLabel: l10n.dashboardMessages,
           earningsLabel: auth.user?.isClient == true ? l10n.clientDashboardPayments : l10n.dashboardEarnings,
           profileLabel: l10n.dashboardProfile,
-          postTaskLabel: auth.user?.isClient == true ? l10n.dashboardPostTask : null,
+          postTaskLabel: auth.user?.isClient == true && !clientPaymentsPage ? l10n.dashboardPostTask : null,
           onSelected: (index) {
             if (auth.user?.isClient == true) {
+              if (clientPaymentsPage && index >= 2) {
+                if (index == 2) navigationShell.goBranch(2);
+                if (index == 3) ref.invalidate(clientPaymentsControllerProvider);
+                if (index == 4) _showUnavailable(context, l10n.dashboardProfile);
+                return;
+              }
               if (index == 2) {
                 context.goNamed(AppRouteNames.taskCreate);
                 return;
@@ -434,7 +451,8 @@ class _AppShell extends ConsumerWidget {
                 return;
               }
               if (index == 4) {
-                _showUnavailable(context, l10n.clientDashboardPayments);
+                ref.invalidate(clientPaymentsControllerProvider);
+                navigationShell.goBranch(4);
                 return;
               }
               if (index == 0) ref.invalidate(clientDashboardProvider);

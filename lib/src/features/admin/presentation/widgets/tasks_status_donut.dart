@@ -63,26 +63,31 @@ class TasksStatusDonut extends StatelessWidget {
                       ),
                     ),
                     Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: Text(
-                              totalValue,
-                              style: theme.textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            totalLabel,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Directionality(
+                                    textDirection: TextDirection.ltr,
+                                    child: Text(
+                                      totalValue,
+                                      style: theme.textTheme.headlineSmall
+                                          ?.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    totalLabel,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ))),
                     ),
                   ],
                 ),
@@ -116,14 +121,24 @@ class _StatusLegendRow extends StatelessWidget {
           decoration: BoxDecoration(color: item.color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 10),
-        Expanded(child: Text(item.label, style: theme.textTheme.bodyMedium)),
-        Directionality(
-          textDirection: TextDirection.ltr,
-          child: Text(
-            '${item.value} (${item.percentLabel})',
-            style: theme.textTheme.labelMedium,
-          ),
-        ),
+        Expanded(child: LayoutBuilder(builder: (context, constraints) {
+          final label = Text(item.label, style: theme.textTheme.bodyMedium);
+          final value = Directionality(
+            textDirection: TextDirection.ltr,
+            child: Text(
+              '${item.value} (${item.percentLabel})',
+              style: theme.textTheme.labelMedium,
+            ),
+          );
+          if (constraints.maxWidth <
+              420 * MediaQuery.textScalerOf(context).scale(14) / 14) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [label, value]);
+          }
+          return Row(
+              children: [Expanded(child: label), Flexible(child: value)]);
+        })),
       ],
     );
   }

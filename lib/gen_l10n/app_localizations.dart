@@ -100,6 +100,222 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @paymentsPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment period'**
+  String get paymentsPeriod;
+
+  /// No description provided for @paymentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Payments'**
+  String get paymentsTitle;
+
+  /// No description provided for @paymentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your spending and manage your payments'**
+  String get paymentsSubtitle;
+
+  /// No description provided for @paymentsWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet Balance'**
+  String get paymentsWallet;
+
+  /// No description provided for @paymentsSpent.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Spent'**
+  String get paymentsSpent;
+
+  /// No description provided for @paymentsRefunds.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunds'**
+  String get paymentsRefunds;
+
+  /// No description provided for @paymentsBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Budget'**
+  String get paymentsBudget;
+
+  /// No description provided for @paymentsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get paymentsUnavailable;
+
+  /// No description provided for @paymentsUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet balances, top-ups, saved cards and remaining budgets are not supported by the current payment system. No funds will be added or card details collected here.'**
+  String get paymentsUnsupported;
+
+  /// No description provided for @paymentsRefundNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund totals are unavailable because refund amounts and dates are not recorded separately.'**
+  String get paymentsRefundNotice;
+
+  /// No description provided for @paymentsAddFunds.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Funds'**
+  String get paymentsAddFunds;
+
+  /// No description provided for @paymentsFundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add funds to your wallet'**
+  String get paymentsFundTitle;
+
+  /// No description provided for @paymentsPosted.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks Posted'**
+  String get paymentsPosted;
+
+  /// No description provided for @paymentsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Tasks'**
+  String get paymentsCompleted;
+
+  /// No description provided for @paymentsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get paymentsActive;
+
+  /// No description provided for @paymentsOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending Overview'**
+  String get paymentsOverview;
+
+  /// No description provided for @paymentsCumulative.
+  ///
+  /// In en, this message translates to:
+  /// **'Cumulative gross spending from completed payments'**
+  String get paymentsCumulative;
+
+  /// No description provided for @paymentsCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending by Category'**
+  String get paymentsCategory;
+
+  /// No description provided for @paymentsRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Payments'**
+  String get paymentsRecent;
+
+  /// No description provided for @paymentsAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All Payments'**
+  String get paymentsAll;
+
+  /// No description provided for @paymentsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No payments in this period.'**
+  String get paymentsEmpty;
+
+  /// No description provided for @paymentsMethods.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Methods'**
+  String get paymentsMethods;
+
+  /// No description provided for @paymentsAddCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Card'**
+  String get paymentsAddCard;
+
+  /// No description provided for @paymentsNoCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved cards are not available yet.'**
+  String get paymentsNoCards;
+
+  /// No description provided for @paymentsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load your payments. Please retry.'**
+  String get paymentsLoadError;
+
+  /// No description provided for @paymentsPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Only your MAD payments are shown. Spending includes completed gross payments, not pending amounts or tasker net earnings.'**
+  String get paymentsPrivate;
+
+  /// No description provided for @paymentsUndated.
+  ///
+  /// In en, this message translates to:
+  /// **'Some completed payments have no payment date. They are included only in the all-time total, not in period charts.'**
+  String get paymentsUndated;
+
+  /// No description provided for @paymentsPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get paymentsPaid;
+
+  /// No description provided for @paymentsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get paymentsPending;
+
+  /// No description provided for @paymentsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get paymentsFailed;
+
+  /// No description provided for @paymentsRefunded.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunded'**
+  String get paymentsRefunded;
+
+  /// No description provided for @paymentsDisputed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disputed'**
+  String get paymentsDisputed;
+
+  /// No description provided for @paymentsPaidDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on'**
+  String get paymentsPaidDate;
+
+  /// No description provided for @paymentsCreatedDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment created on'**
+  String get paymentsCreatedDate;
+
+  /// No description provided for @paymentsOriginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Original payment amount'**
+  String get paymentsOriginal;
+
+  /// No description provided for @paymentsAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment amount'**
+  String get paymentsAmount;
+
   /// No description provided for @cashFeeAccounting.
   ///
   /// In en, this message translates to:

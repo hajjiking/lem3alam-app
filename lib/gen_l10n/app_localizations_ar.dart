@@ -9,6 +9,119 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get paymentsPeriod => 'فترة المدفوعات';
+
+  @override
+  String get paymentsTitle => 'مدفوعاتي';
+
+  @override
+  String get paymentsSubtitle => 'تتبع إنفاقك وأدر مدفوعاتك';
+
+  @override
+  String get paymentsWallet => 'رصيد المحفظة';
+
+  @override
+  String get paymentsSpent => 'إجمالي الإنفاق';
+
+  @override
+  String get paymentsRefunds => 'المبالغ المستردة';
+
+  @override
+  String get paymentsBudget => 'الميزانية المتبقية';
+
+  @override
+  String get paymentsUnavailable => 'غير متاح';
+
+  @override
+  String get paymentsUnsupported =>
+      'نظام الدفع الحالي لا يدعم أرصدة المحافظ أو شحنها أو البطاقات المحفوظة أو الميزانية المتبقية. لن تتم إضافة أموال أو جمع بيانات البطاقات هنا.';
+
+  @override
+  String get paymentsRefundNotice =>
+      'إجمالي المبالغ المستردة غير متاح لأن مبالغ الاسترداد وتواريخها لا تُسجل بشكل منفصل.';
+
+  @override
+  String get paymentsAddFunds => 'إضافة أموال';
+
+  @override
+  String get paymentsFundTitle => 'أضف أموالاً إلى محفظتك';
+
+  @override
+  String get paymentsPosted => 'المهام المنشورة';
+
+  @override
+  String get paymentsCompleted => 'المهام المكتملة';
+
+  @override
+  String get paymentsActive => 'قيد التنفيذ';
+
+  @override
+  String get paymentsOverview => 'نظرة عامة على الإنفاق';
+
+  @override
+  String get paymentsCumulative =>
+      'الإنفاق الإجمالي التراكمي للمدفوعات المكتملة';
+
+  @override
+  String get paymentsCategory => 'الإنفاق حسب الفئة';
+
+  @override
+  String get paymentsRecent => 'المدفوعات الأخيرة';
+
+  @override
+  String get paymentsAll => 'جميع المدفوعات';
+
+  @override
+  String get paymentsEmpty => 'لا توجد مدفوعات خلال هذه الفترة.';
+
+  @override
+  String get paymentsMethods => 'طرق الدفع';
+
+  @override
+  String get paymentsAddCard => 'إضافة بطاقة جديدة';
+
+  @override
+  String get paymentsNoCards => 'البطاقات المحفوظة غير متاحة حالياً.';
+
+  @override
+  String get paymentsLoadError => 'تعذر تحميل مدفوعاتك. يرجى إعادة المحاولة.';
+
+  @override
+  String get paymentsPrivate =>
+      'تظهر مدفوعاتك بالدرهم فقط. يشمل الإنفاق المبالغ الإجمالية المدفوعة، وليس المبالغ المعلقة أو صافي أرباح مقدم الخدمة.';
+
+  @override
+  String get paymentsUndated =>
+      'بعض المدفوعات المكتملة بلا تاريخ دفع. تُحتسب في الإجمالي العام فقط ولا تظهر في مخططات الفترات.';
+
+  @override
+  String get paymentsPaid => 'مكتمل';
+
+  @override
+  String get paymentsPending => 'قيد الانتظار';
+
+  @override
+  String get paymentsFailed => 'فشل';
+
+  @override
+  String get paymentsRefunded => 'مسترد';
+
+  @override
+  String get paymentsDisputed => 'متنازع عليه';
+
+  @override
+  String get paymentsPaidDate => 'تاريخ الدفع';
+
+  @override
+  String get paymentsCreatedDate => 'تاريخ إنشاء الدفعة';
+
+  @override
+  String get paymentsOriginal => 'مبلغ الدفعة الأصلي';
+
+  @override
+  String get paymentsAmount => 'مبلغ الدفعة';
+
+  @override
   String get cashFeeAccounting =>
       'استلم المبلغ الإجمالي كاملاً نقداً. تُخصم رسوم المنصة من صافي أرباحك المسجّلة؛ هذا التأكيد لا يُحصّل الرسوم منك.';
 

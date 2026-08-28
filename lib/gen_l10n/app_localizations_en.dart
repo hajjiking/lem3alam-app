@@ -9,6 +9,119 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get paymentsPeriod => 'Payment period';
+
+  @override
+  String get paymentsTitle => 'My Payments';
+
+  @override
+  String get paymentsSubtitle => 'Track your spending and manage your payments';
+
+  @override
+  String get paymentsWallet => 'Wallet Balance';
+
+  @override
+  String get paymentsSpent => 'Total Spent';
+
+  @override
+  String get paymentsRefunds => 'Refunds';
+
+  @override
+  String get paymentsBudget => 'Remaining Budget';
+
+  @override
+  String get paymentsUnavailable => 'Unavailable';
+
+  @override
+  String get paymentsUnsupported =>
+      'Wallet balances, top-ups, saved cards and remaining budgets are not supported by the current payment system. No funds will be added or card details collected here.';
+
+  @override
+  String get paymentsRefundNotice =>
+      'Refund totals are unavailable because refund amounts and dates are not recorded separately.';
+
+  @override
+  String get paymentsAddFunds => 'Add Funds';
+
+  @override
+  String get paymentsFundTitle => 'Add funds to your wallet';
+
+  @override
+  String get paymentsPosted => 'Tasks Posted';
+
+  @override
+  String get paymentsCompleted => 'Completed Tasks';
+
+  @override
+  String get paymentsActive => 'In Progress';
+
+  @override
+  String get paymentsOverview => 'Spending Overview';
+
+  @override
+  String get paymentsCumulative =>
+      'Cumulative gross spending from completed payments';
+
+  @override
+  String get paymentsCategory => 'Spending by Category';
+
+  @override
+  String get paymentsRecent => 'Recent Payments';
+
+  @override
+  String get paymentsAll => 'All Payments';
+
+  @override
+  String get paymentsEmpty => 'No payments in this period.';
+
+  @override
+  String get paymentsMethods => 'Payment Methods';
+
+  @override
+  String get paymentsAddCard => 'Add New Card';
+
+  @override
+  String get paymentsNoCards => 'Saved cards are not available yet.';
+
+  @override
+  String get paymentsLoadError => 'Could not load your payments. Please retry.';
+
+  @override
+  String get paymentsPrivate =>
+      'Only your MAD payments are shown. Spending includes completed gross payments, not pending amounts or tasker net earnings.';
+
+  @override
+  String get paymentsUndated =>
+      'Some completed payments have no payment date. They are included only in the all-time total, not in period charts.';
+
+  @override
+  String get paymentsPaid => 'Completed';
+
+  @override
+  String get paymentsPending => 'Pending';
+
+  @override
+  String get paymentsFailed => 'Failed';
+
+  @override
+  String get paymentsRefunded => 'Refunded';
+
+  @override
+  String get paymentsDisputed => 'Disputed';
+
+  @override
+  String get paymentsPaidDate => 'Paid on';
+
+  @override
+  String get paymentsCreatedDate => 'Payment created on';
+
+  @override
+  String get paymentsOriginal => 'Original payment amount';
+
+  @override
+  String get paymentsAmount => 'Payment amount';
+
+  @override
   String get cashFeeAccounting =>
       'Receive the full gross amount in cash. The platform fee reduces your recorded net earnings; this confirmation does not collect the fee from you.';
 

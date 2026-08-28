@@ -9,6 +9,121 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get paymentsPeriod => 'Période des paiements';
+
+  @override
+  String get paymentsTitle => 'Mes paiements';
+
+  @override
+  String get paymentsSubtitle => 'Suivez vos dépenses et gérez vos paiements';
+
+  @override
+  String get paymentsWallet => 'Solde du portefeuille';
+
+  @override
+  String get paymentsSpent => 'Total dépensé';
+
+  @override
+  String get paymentsRefunds => 'Remboursements';
+
+  @override
+  String get paymentsBudget => 'Budget restant';
+
+  @override
+  String get paymentsUnavailable => 'Indisponible';
+
+  @override
+  String get paymentsUnsupported =>
+      'Le système actuel ne prend pas en charge les soldes, recharges, cartes enregistrées ou budgets restants. Aucun fonds ne sera ajouté et aucune donnée de carte ne sera collectée ici.';
+
+  @override
+  String get paymentsRefundNotice =>
+      'Le total des remboursements est indisponible : leurs montants et dates ne sont pas enregistrés séparément.';
+
+  @override
+  String get paymentsAddFunds => 'Ajouter des fonds';
+
+  @override
+  String get paymentsFundTitle => 'Alimentez votre portefeuille';
+
+  @override
+  String get paymentsPosted => 'Missions publiées';
+
+  @override
+  String get paymentsCompleted => 'Missions terminées';
+
+  @override
+  String get paymentsActive => 'En cours';
+
+  @override
+  String get paymentsOverview => 'Évolution des dépenses';
+
+  @override
+  String get paymentsCumulative =>
+      'Dépenses brutes cumulées des paiements effectués';
+
+  @override
+  String get paymentsCategory => 'Dépenses par catégorie';
+
+  @override
+  String get paymentsRecent => 'Paiements récents';
+
+  @override
+  String get paymentsAll => 'Tous les paiements';
+
+  @override
+  String get paymentsEmpty => 'Aucun paiement sur cette période.';
+
+  @override
+  String get paymentsMethods => 'Moyens de paiement';
+
+  @override
+  String get paymentsAddCard => 'Ajouter une carte';
+
+  @override
+  String get paymentsNoCards =>
+      'Les cartes enregistrées ne sont pas encore disponibles.';
+
+  @override
+  String get paymentsLoadError =>
+      'Impossible de charger vos paiements. Réessayez.';
+
+  @override
+  String get paymentsPrivate =>
+      'Seuls vos paiements en MAD sont affichés. Les dépenses incluent les montants bruts payés, pas les paiements en attente ni les gains nets du prestataire.';
+
+  @override
+  String get paymentsUndated =>
+      'Certains paiements effectués n’ont pas de date. Ils figurent uniquement dans le total historique, pas dans les graphiques par période.';
+
+  @override
+  String get paymentsPaid => 'Effectué';
+
+  @override
+  String get paymentsPending => 'En attente';
+
+  @override
+  String get paymentsFailed => 'Échoué';
+
+  @override
+  String get paymentsRefunded => 'Remboursé';
+
+  @override
+  String get paymentsDisputed => 'Contesté';
+
+  @override
+  String get paymentsPaidDate => 'Payé le';
+
+  @override
+  String get paymentsCreatedDate => 'Paiement créé le';
+
+  @override
+  String get paymentsOriginal => 'Montant du paiement initial';
+
+  @override
+  String get paymentsAmount => 'Montant du paiement';
+
+  @override
   String get cashFeeAccounting =>
       'Recevez le montant brut intégral en espèces. Les frais de plateforme réduisent votre revenu net comptabilisé ; cette confirmation ne prélève pas ces frais.';
 
