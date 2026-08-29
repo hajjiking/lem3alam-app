@@ -9,6 +9,118 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get profileEdit => 'تعديل الملف';
+
+  @override
+  String get profileEditUnavailable =>
+      'تعديل الملف غير متاح بعد في واجهة التطبيق.';
+
+  @override
+  String get profileAboutMe => 'نبذة عني';
+
+  @override
+  String get profileSkillsExpertise => 'المهارات والخبرات';
+
+  @override
+  String get profileJobsCompleted => 'الأعمال المكتملة';
+
+  @override
+  String get profileJobsInProgress => 'الأعمال قيد التنفيذ';
+
+  @override
+  String get profileSuccessRate => 'معدل النجاح';
+
+  @override
+  String get profileTopPerformer => 'أداء متميز';
+
+  @override
+  String get profileIdVerified => 'الهوية موثقة';
+
+  @override
+  String get profileMemberSince => 'عضو منذ';
+
+  @override
+  String get profileResponseTime => 'وقت الاستجابة';
+
+  @override
+  String get profileNotRecorded => 'غير مسجل';
+
+  @override
+  String profileMoreSkills(int count) {
+    return '+$count أخرى';
+  }
+
+  @override
+  String profileReviewsTitle(String count) {
+    return 'التقييمات ($count)';
+  }
+
+  @override
+  String get profileRecentJobs => 'الأعمال الأخيرة';
+
+  @override
+  String get profileBadges => 'الشارات والإنجازات';
+
+  @override
+  String get profileShare => 'مشاركة الملف';
+
+  @override
+  String get profileNotification => 'الإشعارات';
+
+  @override
+  String get profileNoBio => 'لم تتم إضافة نبذة بعد.';
+
+  @override
+  String get profileNoRecentJobs =>
+      'لا توجد أعمال مكتملة أو نشطة خلال هذه الفترة.';
+
+  @override
+  String get profileBadgeHighSuccess => 'معدل إكمال مرتفع';
+
+  @override
+  String get profileBadgeTrusted => 'مقدم خدمة موثوق';
+
+  @override
+  String get profileBadgeTrustedCaption => 'أكثر من 20 عملاً مكتملاً';
+
+  @override
+  String get profileBadgeFiveStar => 'تقييم خمس نجوم';
+
+  @override
+  String profileBadgeReviewCaption(String count) {
+    return '$count تقييماً';
+  }
+
+  @override
+  String profileMinutesAgo(String count) {
+    return 'منذ $count دقيقة';
+  }
+
+  @override
+  String profileHoursAgo(String count) {
+    return 'منذ $count ساعة';
+  }
+
+  @override
+  String profileDaysAgo(String count) {
+    return 'منذ $count يوم';
+  }
+
+  @override
+  String profileWeeksAgo(String count) {
+    return 'منذ $count أسبوع';
+  }
+
+  @override
+  String get profileCompletionBasis => 'بناءً على الأعمال المكتملة والمسندة';
+
+  @override
+  String get profileCurrentPeriod => 'الفترة المحددة حالياً';
+
+  @override
+  String get profilePrivate => 'يتم عرض ملفك وأرباحك وتقييماتك وأعمالك فقط.';
+
+  @override
   String get paymentsPeriod => 'فترة المدفوعات';
 
   @override

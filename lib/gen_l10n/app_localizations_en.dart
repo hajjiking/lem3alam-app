@@ -9,6 +9,119 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get profileEdit => 'Edit Profile';
+
+  @override
+  String get profileEditUnavailable =>
+      'Profile editing is not available in the mobile API yet.';
+
+  @override
+  String get profileAboutMe => 'About Me';
+
+  @override
+  String get profileSkillsExpertise => 'Skills & Expertise';
+
+  @override
+  String get profileJobsCompleted => 'Jobs Completed';
+
+  @override
+  String get profileJobsInProgress => 'Jobs In Progress';
+
+  @override
+  String get profileSuccessRate => 'Success Rate';
+
+  @override
+  String get profileTopPerformer => 'Top Performer';
+
+  @override
+  String get profileIdVerified => 'ID Verified';
+
+  @override
+  String get profileMemberSince => 'Member since';
+
+  @override
+  String get profileResponseTime => 'Response time';
+
+  @override
+  String get profileNotRecorded => 'Not recorded';
+
+  @override
+  String profileMoreSkills(int count) {
+    return '+$count more';
+  }
+
+  @override
+  String profileReviewsTitle(String count) {
+    return 'Reviews ($count)';
+  }
+
+  @override
+  String get profileRecentJobs => 'Recent Jobs';
+
+  @override
+  String get profileBadges => 'Badges & Achievements';
+
+  @override
+  String get profileShare => 'Share Profile';
+
+  @override
+  String get profileNotification => 'Notifications';
+
+  @override
+  String get profileNoBio => 'No biography has been added yet.';
+
+  @override
+  String get profileNoRecentJobs =>
+      'No completed or active jobs in this period.';
+
+  @override
+  String get profileBadgeHighSuccess => 'High completion rate';
+
+  @override
+  String get profileBadgeTrusted => 'Trusted Tasker';
+
+  @override
+  String get profileBadgeTrustedCaption => '20+ completed jobs';
+
+  @override
+  String get profileBadgeFiveStar => '5-Star Rated';
+
+  @override
+  String profileBadgeReviewCaption(String count) {
+    return '$count reviews';
+  }
+
+  @override
+  String profileMinutesAgo(String count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String profileHoursAgo(String count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String profileDaysAgo(String count) {
+    return '$count days ago';
+  }
+
+  @override
+  String profileWeeksAgo(String count) {
+    return '$count weeks ago';
+  }
+
+  @override
+  String get profileCompletionBasis => 'Based on completed and assigned jobs';
+
+  @override
+  String get profileCurrentPeriod => 'Current selected period';
+
+  @override
+  String get profilePrivate =>
+      'Only your own profile, earnings, reviews and assignments are shown.';
+
+  @override
   String get paymentsPeriod => 'Payment period';
 
   @override

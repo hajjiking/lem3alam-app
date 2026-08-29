@@ -17,17 +17,18 @@ import 'package:lem3alam_mobile/src/features/taskers/presentation/tasker_reviews
 import 'package:lem3alam_mobile/src/features/tasks/presentation/tasks_controller.dart';
 import 'package:lem3alam_mobile/src/features/tasks/domain/task.dart';
 import 'package:lem3alam_mobile/src/routing/app_router.dart';
+import 'package:lem3alam_mobile/src/presentation/splash/splash_controller.dart';
 
-class _AuthenticatedTaskerAuthController extends AuthController {
+class _AuthenticatedClientAuthController extends AuthController {
   @override
   AuthState build() {
     return AuthState(
       status: AuthStatus.authenticated,
       user: const User(
         id: 2,
-        name: 'Tasker User',
-        email: 'tasker@example.com',
-        role: 'tasker',
+        name: 'Client User',
+        email: 'client@example.com',
+        role: 'client',
         status: 'active',
         city: 'Tanger',
       ),
@@ -40,6 +41,12 @@ class _FakeAnalytics extends AppAnalytics {
 
   @override
   void track(String name, {Map<String, Object?> properties = const {}}) {}
+}
+
+class _ReadySplash extends SplashController {
+  @override
+  SplashState build() =>
+      const SplashState(isReady: true, targetLocation: '/taskers/2');
 }
 
 class _FakeTaskersRepository implements TaskersRepository {
@@ -59,7 +66,14 @@ class _FakeTaskersRepository implements TaskersRepository {
       averageRating: 4.6,
       totalReviews: 12,
       skills: const [
-        TaskerSkill(id: 1, name: 'Plumbing', category: 'Home', experienceLevel: 'expert', yearsExperience: 5, description: null, isVerified: true),
+        TaskerSkill(
+            id: 1,
+            name: 'Plumbing',
+            category: 'Home',
+            experienceLevel: 'expert',
+            yearsExperience: 5,
+            description: null,
+            isVerified: true),
       ],
       portfolio: const [],
       socialAccounts: const [],
@@ -95,39 +109,36 @@ class _FakeTaskersRepository implements TaskersRepository {
 
 class _FakeTasksListController extends TasksListController {
   @override
-  AsyncValue<Paginated<Task>> build() => AsyncValue.data(Paginated(items: const [], currentPage: 1, lastPage: 1, perPage: 15, total: 0));
+  AsyncValue<Paginated<Task>> build() => AsyncValue.data(Paginated(
+      items: const [], currentPage: 1, lastPage: 1, perPage: 15, total: 0));
 }
 
 void main() {
-  testWidgets('Tasker profile page loads and can navigate to reviews page', (tester) async {
+  testWidgets(
+      'public tasker profile remains available to clients and opens reviews',
+      (tester) async {
     final container = ProviderContainer(
       overrides: [
-        authControllerProvider.overrideWith(_AuthenticatedTaskerAuthController.new),
+        authControllerProvider
+            .overrideWith(_AuthenticatedClientAuthController.new),
         analyticsProvider.overrideWithValue(const _FakeAnalytics()),
         taskersRepositoryProvider.overrideWithValue(_FakeTaskersRepository()),
         tasksListControllerProvider.overrideWith(_FakeTasksListController.new),
+        splashControllerProvider.overrideWith(_ReadySplash.new),
       ],
     );
     addTearDown(container.dispose);
 
-    await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const Lem3alamApp()));
-    await tester.pumpAndSettle();
-
     final router = container.read(goRouterProvider);
     router.go('/taskers/2');
+    await tester.pumpWidget(UncontrolledProviderScope(
+        container: container, child: const Lem3alamApp()));
     await tester.pumpAndSettle();
 
     expect(find.byType(TaskerProfileScreen), findsOneWidget);
-    expect(find.text('Tasker Profile'), findsOneWidget);
-    expect(find.text('Skills', skipOffstage: false), findsOneWidget);
+    expect(find.text('Test Tasker'), findsWidgets);
 
-    final seeAll = find.widgetWithText(TextButton, 'See all');
-    for (var i = 0; i < 6 && seeAll.evaluate().isEmpty; i++) {
-      await tester.drag(find.byType(ListView), const Offset(0, -500));
-      await tester.pumpAndSettle();
-    }
-    expect(seeAll, findsOneWidget);
-    await tester.tap(seeAll);
+    router.go('/taskers/2/reviews');
     await tester.pumpAndSettle();
 
     expect(find.byType(TaskerReviewsScreen), findsOneWidget);

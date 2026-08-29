@@ -57,12 +57,17 @@ class EarningsStat {
             (json['previous_completed_tasks'] as num).toInt(),
         inProgressCount = (json['in_progress_count'] as num).toInt(),
         totalJobsAllTime = (json['total_jobs_all_time'] as num).toInt(),
+        completedJobsAllTime =
+            (json['completed_jobs_all_time'] as num?)?.toInt() ??
+                (json['total_jobs_all_time'] as num).toInt() -
+                    (json['in_progress_count'] as num).toInt(),
         averageRating = num.tryParse('${json['average_rating']}')?.toDouble(),
         reviewCount = (json['review_count'] as num).toInt();
   final int completedTasks,
       previousCompletedTasks,
       inProgressCount,
       totalJobsAllTime,
+      completedJobsAllTime,
       reviewCount;
   final double? averageRating;
 }

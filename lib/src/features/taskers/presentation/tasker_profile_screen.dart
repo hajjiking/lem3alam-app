@@ -13,6 +13,7 @@ import '../../auth/presentation/auth_controller.dart';
 import '../domain/public_profile_model.dart';
 import 'tasker_public_profile_controller.dart';
 import 'widgets/widgets.dart';
+import 'tasker_own_profile_screen.dart';
 
 class TaskerProfileScreen extends ConsumerStatefulWidget {
   const TaskerProfileScreen({super.key, required this.taskerId});
@@ -99,7 +100,8 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
           pathParameters: {'peerId': '${widget.taskerId}'});
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(context.l10n.dashboardFeatureUnavailable(context.l10n.dashboardMessages))));
+          content: Text(context.l10n
+              .dashboardFeatureUnavailable(context.l10n.dashboardMessages))));
     }
   }
 
@@ -122,6 +124,10 @@ class _TaskerProfileScreenState extends ConsumerState<TaskerProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final signedIn = ref.watch(authControllerProvider).user;
+    if (signedIn?.isTasker == true && signedIn?.id == widget.taskerId) {
+      return TaskerOwnProfileScreen(taskerId: widget.taskerId);
+    }
     final scheme = Theme.of(context).colorScheme;
     final brightness = Theme.of(context).brightness;
     final bg = scheme.surface;

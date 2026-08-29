@@ -100,6 +100,198 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @profileEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get profileEdit;
+
+  /// No description provided for @profileEditUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile editing is not available in the mobile API yet.'**
+  String get profileEditUnavailable;
+
+  /// No description provided for @profileAboutMe.
+  ///
+  /// In en, this message translates to:
+  /// **'About Me'**
+  String get profileAboutMe;
+
+  /// No description provided for @profileSkillsExpertise.
+  ///
+  /// In en, this message translates to:
+  /// **'Skills & Expertise'**
+  String get profileSkillsExpertise;
+
+  /// No description provided for @profileJobsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Jobs Completed'**
+  String get profileJobsCompleted;
+
+  /// No description provided for @profileJobsInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Jobs In Progress'**
+  String get profileJobsInProgress;
+
+  /// No description provided for @profileSuccessRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Success Rate'**
+  String get profileSuccessRate;
+
+  /// No description provided for @profileTopPerformer.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Performer'**
+  String get profileTopPerformer;
+
+  /// No description provided for @profileIdVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'ID Verified'**
+  String get profileIdVerified;
+
+  /// No description provided for @profileMemberSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since'**
+  String get profileMemberSince;
+
+  /// No description provided for @profileResponseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Response time'**
+  String get profileResponseTime;
+
+  /// No description provided for @profileNotRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not recorded'**
+  String get profileNotRecorded;
+
+  /// No description provided for @profileMoreSkills.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more'**
+  String profileMoreSkills(int count);
+
+  /// No description provided for @profileReviewsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews ({count})'**
+  String profileReviewsTitle(String count);
+
+  /// No description provided for @profileRecentJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Jobs'**
+  String get profileRecentJobs;
+
+  /// No description provided for @profileBadges.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges & Achievements'**
+  String get profileBadges;
+
+  /// No description provided for @profileShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Profile'**
+  String get profileShare;
+
+  /// No description provided for @profileNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get profileNotification;
+
+  /// No description provided for @profileNoBio.
+  ///
+  /// In en, this message translates to:
+  /// **'No biography has been added yet.'**
+  String get profileNoBio;
+
+  /// No description provided for @profileNoRecentJobs.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed or active jobs in this period.'**
+  String get profileNoRecentJobs;
+
+  /// No description provided for @profileBadgeHighSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'High completion rate'**
+  String get profileBadgeHighSuccess;
+
+  /// No description provided for @profileBadgeTrusted.
+  ///
+  /// In en, this message translates to:
+  /// **'Trusted Tasker'**
+  String get profileBadgeTrusted;
+
+  /// No description provided for @profileBadgeTrustedCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'20+ completed jobs'**
+  String get profileBadgeTrustedCaption;
+
+  /// No description provided for @profileBadgeFiveStar.
+  ///
+  /// In en, this message translates to:
+  /// **'5-Star Rated'**
+  String get profileBadgeFiveStar;
+
+  /// No description provided for @profileBadgeReviewCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} reviews'**
+  String profileBadgeReviewCaption(String count);
+
+  /// No description provided for @profileMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String profileMinutesAgo(String count);
+
+  /// No description provided for @profileHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String profileHoursAgo(String count);
+
+  /// No description provided for @profileDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String profileDaysAgo(String count);
+
+  /// No description provided for @profileWeeksAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} weeks ago'**
+  String profileWeeksAgo(String count);
+
+  /// No description provided for @profileCompletionBasis.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on completed and assigned jobs'**
+  String get profileCompletionBasis;
+
+  /// No description provided for @profileCurrentPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Current selected period'**
+  String get profileCurrentPeriod;
+
+  /// No description provided for @profilePrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Only your own profile, earnings, reviews and assignments are shown.'**
+  String get profilePrivate;
+
   /// No description provided for @paymentsPeriod.
   ///
   /// In en, this message translates to:

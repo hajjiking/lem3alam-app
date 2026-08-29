@@ -13,6 +13,7 @@ class TaskerProfile {
     required this.available,
     required this.isVerified,
     this.yearsExperience,
+    this.createdAt,
     this.isTopRated = false,
     required this.averageRating,
     required this.totalReviews,
@@ -36,6 +37,7 @@ class TaskerProfile {
   final bool available;
   final bool isVerified;
   final int? yearsExperience;
+  final DateTime? createdAt;
   final bool isTopRated;
   final double averageRating;
   final int totalReviews;
@@ -118,6 +120,7 @@ class TaskerProfile {
       isVerified: json['is_verified'] == true || json['is_verified'] == 1,
       yearsExperience: _intOptional(json['years_experience']) ??
           _intOptional(json['experience_years']),
+      createdAt: DateTime.tryParse(json['created_at']?.toString() ?? ''),
       isTopRated: json['is_top_rated'] == true ||
           json['is_top_rated'] == 1 ||
           json['top_rated'] == true ||

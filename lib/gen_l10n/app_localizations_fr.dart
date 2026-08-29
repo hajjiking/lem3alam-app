@@ -9,6 +9,120 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get profileEdit => 'Modifier le profil';
+
+  @override
+  String get profileEditUnavailable =>
+      'La modification du profil n’est pas encore disponible dans l’API mobile.';
+
+  @override
+  String get profileAboutMe => 'À propos';
+
+  @override
+  String get profileSkillsExpertise => 'Compétences et expertise';
+
+  @override
+  String get profileJobsCompleted => 'Missions terminées';
+
+  @override
+  String get profileJobsInProgress => 'Missions en cours';
+
+  @override
+  String get profileSuccessRate => 'Taux de réussite';
+
+  @override
+  String get profileTopPerformer => 'Meilleur prestataire';
+
+  @override
+  String get profileIdVerified => 'Identité vérifiée';
+
+  @override
+  String get profileMemberSince => 'Membre depuis';
+
+  @override
+  String get profileResponseTime => 'Temps de réponse';
+
+  @override
+  String get profileNotRecorded => 'Non enregistré';
+
+  @override
+  String profileMoreSkills(int count) {
+    return '+$count de plus';
+  }
+
+  @override
+  String profileReviewsTitle(String count) {
+    return 'Avis ($count)';
+  }
+
+  @override
+  String get profileRecentJobs => 'Missions récentes';
+
+  @override
+  String get profileBadges => 'Badges et réalisations';
+
+  @override
+  String get profileShare => 'Partager le profil';
+
+  @override
+  String get profileNotification => 'Notifications';
+
+  @override
+  String get profileNoBio => 'Aucune biographie n’a encore été ajoutée.';
+
+  @override
+  String get profileNoRecentJobs =>
+      'Aucune mission terminée ou active sur cette période.';
+
+  @override
+  String get profileBadgeHighSuccess => 'Taux d’achèvement élevé';
+
+  @override
+  String get profileBadgeTrusted => 'Prestataire de confiance';
+
+  @override
+  String get profileBadgeTrustedCaption => 'Plus de 20 missions terminées';
+
+  @override
+  String get profileBadgeFiveStar => 'Noté 5 étoiles';
+
+  @override
+  String profileBadgeReviewCaption(String count) {
+    return '$count avis';
+  }
+
+  @override
+  String profileMinutesAgo(String count) {
+    return 'Il y a $count minutes';
+  }
+
+  @override
+  String profileHoursAgo(String count) {
+    return 'Il y a $count heures';
+  }
+
+  @override
+  String profileDaysAgo(String count) {
+    return 'Il y a $count jours';
+  }
+
+  @override
+  String profileWeeksAgo(String count) {
+    return 'Il y a $count semaines';
+  }
+
+  @override
+  String get profileCompletionBasis =>
+      'Basé sur les missions terminées et attribuées';
+
+  @override
+  String get profileCurrentPeriod => 'Période sélectionnée';
+
+  @override
+  String get profilePrivate =>
+      'Seuls votre profil, vos gains, vos avis et vos missions sont affichés.';
+
+  @override
   String get paymentsPeriod => 'Période des paiements';
 
   @override
