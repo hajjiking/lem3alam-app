@@ -85,11 +85,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       final isTaskList = location == '/tasks';
       final isTaskDetail = RegExp(r'^/tasks/\d+$').hasMatch(location);
       final isNearbyTasks = location == '/nearby-tasks';
+      final isClientNotificationTask = RegExp(r'^/client/tasks/[^/]+$').hasMatch(location);
+      final isTaskerNotificationRequest = RegExp(r'^/tasker/requests/[^/]+$').hasMatch(location);
+      final isTaskerNotificationEarning = RegExp(r'^/tasker/earnings/[^/]+$').hasMatch(location);
+      final isNotificationChat = RegExp(r'^/chat/[^/]+$').hasMatch(location);
       final isTaskerProfile = RegExp(r'^/taskers/\d+$').hasMatch(location);
       final isTaskerReviews = RegExp(r'^/taskers/\d+/reviews$').hasMatch(location);
       final isPublicRoute = isAuthRoute || isTaskerProfile || isTaskerReviews;
       final isProtectedTaskRoute = location == '/tasks/create' || RegExp(r'^/tasks/\d+/edit$').hasMatch(location);
-      final isTaskDataRoute = isTaskList || isTaskDetail || isNearbyTasks || isProtectedTaskRoute;
+      final isTaskDataRoute = isTaskList || isTaskDetail || isNearbyTasks || isProtectedTaskRoute ||
+          isClientNotificationTask || isTaskerNotificationRequest;
       final isClient = auth.user?.role == 'client';
       final isTasker = auth.user?.role == 'tasker';
       final isAdmin = auth.user?.isAdmin == true;
@@ -118,6 +123,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         }
         if (isProtectedTaskRoute && !isClient) return '/tasks';
         if (isNearbyTasks && !isTasker) return '/tasks';
+        if (isClientNotificationTask && !isClient) return '/dashboard';
+        if ((isTaskerNotificationRequest || isTaskerNotificationEarning) && !isTasker) {
+          return '/dashboard';
+        }
+        if (isNotificationChat && !isClient && !isTasker) return '/admin';
         if (location.startsWith('/messages') && !isClient && !isTasker) return '/admin';
         if (location.startsWith('/earnings') && !isTasker) return isAdmin ? '/admin' : '/dashboard';
         if (location.startsWith('/payments') && !isClient) return isAdmin ? '/admin' : '/dashboard';
@@ -213,6 +223,35 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             },
           );
         },
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/client/tasks/:targetId',
+        builder: (context, state) => TaskDetailScreen(
+          taskId: int.tryParse(state.pathParameters['targetId'] ?? '') ?? 0,
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/chat/:targetId',
+        builder: (context, state) => MessagesScreen(
+          selected: (
+            contactId: int.tryParse(state.pathParameters['targetId'] ?? '') ?? 0,
+            taskId: int.tryParse(state.uri.queryParameters['task_id'] ?? ''),
+          ),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/tasker/requests/:targetId',
+        builder: (context, state) => TaskDetailScreen(
+          taskId: int.tryParse(state.pathParameters['targetId'] ?? '') ?? 0,
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/tasker/earnings/:targetId',
+        builder: (context, state) => const EarningsScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => _AppShell(

@@ -5,6 +5,7 @@ import 'package:lem3alam_mobile/gen_l10n/app_localizations.dart';
 
 import 'core/l10n/locale_controller.dart';
 import 'core/ui/app_theme.dart';
+import 'features/notifications/presentation/notification_navigation_coordinator.dart';
 import 'routing/app_router.dart';
 
 class Lem3alamApp extends ConsumerWidget {
@@ -35,8 +36,15 @@ class Lem3alamApp extends ConsumerWidget {
       ],
       builder: (context, child) {
         final activeLocale = Localizations.maybeLocaleOf(context) ?? locale;
-        final textDirection = activeLocale.languageCode == 'ar' ? TextDirection.rtl : TextDirection.ltr;
-        return Directionality(textDirection: textDirection, child: child ?? const SizedBox.shrink());
+        final textDirection = activeLocale.languageCode == 'ar'
+            ? TextDirection.rtl
+            : TextDirection.ltr;
+        return NotificationNavigationCoordinator(
+          child: Directionality(
+            textDirection: textDirection,
+            child: child ?? const SizedBox.shrink(),
+          ),
+        );
       },
       routerConfig: router,
     );
