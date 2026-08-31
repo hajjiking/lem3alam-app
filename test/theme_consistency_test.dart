@@ -249,7 +249,7 @@ void main() {
       expect(date.style!.color, theme.colorScheme.onPrimary);
     });
 
-    testWidgets('$mode profile tabs render without layout errors',
+    testWidgets('$mode public profile renders without layout errors',
         (tester) async {
       await tester.binding.setSurfaceSize(const Size(390, 844));
       addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -263,13 +263,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       await _snapshot(tester, key, 'profile_$mode');
-      for (var index = 1;
-          index < tester.widget<TabBar>(find.byType(TabBar)).tabs.length;
-          index++) {
-        tester.widget<TabBar>(find.byType(TabBar)).controller!.animateTo(index);
-        await tester.pumpAndSettle();
-        expect(tester.takeException(), isNull, reason: 'Profile tab $index');
-      }
+      expect(find.byType(TabBar), findsNothing,
+          reason: 'The client public profile is a single read-only page.');
+      await tester.drag(find.byType(CustomScrollView), const Offset(0, -600));
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
     });
   }
 }

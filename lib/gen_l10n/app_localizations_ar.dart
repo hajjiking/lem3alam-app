@@ -9,6 +9,49 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get publicProfileTitle => 'الملف الشخصي';
+  @override
+  String get publicProfileMessage => 'مراسلة';
+  @override
+  String get publicProfileSave => 'حفظ';
+  @override
+  String get publicProfileSaved => 'محفوظ';
+  @override
+  String publicProfileRespondsWithin(String count) => 'يرد خلال $count دقيقة';
+  @override
+  String publicProfileThisMonth(String count) => '$count هذا الشهر';
+  @override
+  String get publicProfileAverageRating => 'متوسط التقييم';
+  @override
+  String get publicProfileExcellent => 'ممتاز';
+  @override
+  String get publicProfileGreat => 'رائع';
+  @override
+  String get publicProfileGood => 'جيد';
+  @override
+  String get publicProfileNeedsImprovement => 'بحاجة إلى تحسين';
+  @override
+  String get publicProfileVerified => 'موثّق';
+  @override
+  String get publicProfileEmailVerified => 'البريد الإلكتروني موثّق';
+  @override
+  String get publicProfilePhoneVerified => 'الهاتف موثّق';
+  @override
+  String get publicProfileAreasExpertise => 'مجالات الخبرة';
+  @override
+  String get publicProfileMyWork => 'أعمالي';
+  @override
+  String get publicProfileViewAll => 'عرض الكل';
+  @override
+  String get publicProfileCall => 'اتصال';
+  @override
+  String get publicProfileSendMessage => 'إرسال رسالة';
+  @override
+  String get publicProfileReport => 'الإبلاغ عن الملف';
+  @override
+  String get publicProfileBlock => 'حظر';
+
+  @override
   String get profileEdit => 'تعديل الملف';
 
   @override

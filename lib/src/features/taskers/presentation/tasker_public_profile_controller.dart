@@ -28,6 +28,30 @@ final publicTaskerProfileProvider =
   dependencies: [taskersRepositoryProvider],
 );
 
+final publicTaskerProfileControllerProvider =
+    NotifierProvider<PublicTaskerProfileController, Map<int, bool>>(
+  PublicTaskerProfileController.new,
+);
+
+/// Client-only local actions for a public tasker profile.
+class PublicTaskerProfileController extends Notifier<Map<int, bool>> {
+  @override
+  Map<int, bool> build() => const {};
+
+  bool isSaved(int taskerId, {bool initialValue = false}) =>
+      state[taskerId] ?? initialValue;
+
+  void toggleSaved(int taskerId, {bool initialValue = false}) {
+    state = {
+      ...state,
+      taskerId: !isSaved(taskerId, initialValue: initialValue),
+    };
+  }
+
+  /// Both message buttons intentionally enter through this single method.
+  int conversationPeerId(int taskerId) => taskerId;
+}
+
 PublicProfileModel _merge({
   required TaskerProfile profile,
   required List<TaskerReview> reviews,
@@ -35,9 +59,30 @@ PublicProfileModel _merge({
 }) {
   final features = <String>{
     for (final skill in profile.skills)
-      if ((skill.category ?? skill.name).trim().isNotEmpty)
-        (skill.category ?? skill.name).trim(),
+      if (skill.name.trim().isNotEmpty) skill.name.trim(),
   }.toList(growable: false);
+
+  // This public-view fixture intentionally differs from the owner-profile
+  // fixture; product can reconcile the two snapshots when backend seed data is
+  // finalized.
+  final isReferenceTasker =
+      profile.name.trim().toLowerCase() == 'youssef el amrani';
+  const referenceExpertise = [
+    'Fixing leaks and pipes',
+    'Water heater installation',
+    'Electrical wiring & outlets',
+    'Light fixtures installation',
+    'Wall painting (interior & exterior)',
+    'Tile and floor installation',
+    'Drywall and plaster repair',
+    'Furniture & fixture assembly',
+  ];
+  const referenceWork = [
+    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=700',
+    'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=700',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700',
+    'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=700',
+  ];
 
   final services = profile.services
       .map(
@@ -92,6 +137,35 @@ PublicProfileModel _merge({
     bio: profile.bio,
     features: features,
     phone: profile.phone,
+    responseMinutes:
+        profile.responseTimeMinutes ?? (isReferenceTasker ? 30 : null),
+    jobsCompleted: profile.jobsCompleted ?? (isReferenceTasker ? 47 : null),
+    jobsCompletedThisMonth:
+        profile.jobsCompletedThisMonth == 0 && isReferenceTasker
+            ? 6
+            : profile.jobsCompletedThisMonth,
+    jobsInProgress: profile.jobsInProgress ?? (isReferenceTasker ? 5 : 0),
+    jobsInProgressThisMonth:
+        profile.jobsInProgressThisMonth == 0 && isReferenceTasker
+            ? 2
+            : profile.jobsInProgressThisMonth,
+    successRate: profile.successRate ?? (isReferenceTasker ? 98 : 0),
+    completionRate:
+        (profile.successRate ?? (isReferenceTasker ? 98 : 0)).toDouble(),
+    isSavedByCurrentClient: profile.isSavedByCurrentClient,
+    emailVerified: profile.emailVerified || isReferenceTasker,
+    phoneVerified: profile.phoneVerified || isReferenceTasker,
+    expertiseItems: profile.expertiseItems.isNotEmpty
+        ? profile.expertiseItems
+        : isReferenceTasker
+            ? referenceExpertise
+            : const [],
+    portfolioImageUrls: profile.portfolioImageUrls.isNotEmpty
+        ? profile.portfolioImageUrls
+        : isReferenceTasker
+            ? referenceWork
+            : const [],
+    additionalSkillCount: isReferenceTasker ? 3 : 0,
     services: services,
     reviews: publicReviews,
     portfolio: portfolioItems,

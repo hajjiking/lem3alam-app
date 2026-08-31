@@ -7,11 +7,13 @@ class StatisticCard extends StatelessWidget {
     required this.items,
     this.columns,
     this.padding = const EdgeInsets.all(20),
+    this.centered = false,
   }) : assert(items.length > 0);
 
   final List<StatisticItem> items;
   final int? columns;
   final EdgeInsetsGeometry padding;
+  final bool centered;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class StatisticCard extends StatelessWidget {
                     0,
                   ),
                   child: i < items.length
-                      ? _Tile(item: items[i])
+                      ? _Tile(item: items[i], centered: centered)
                       : const SizedBox.shrink(),
                 ),
               );
@@ -58,15 +60,17 @@ class StatisticCard extends StatelessWidget {
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.item});
+  const _Tile({required this.item, required this.centered});
   final StatisticItem item;
+  final bool centered;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final accent = item.accent ?? scheme.primary;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+          centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Container(
           width: 38,
@@ -80,8 +84,9 @@ class _Tile extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           item.value,
-          maxLines: 1,
+          maxLines: centered ? 2 : 1,
           overflow: TextOverflow.ellipsis,
+          textAlign: centered ? TextAlign.center : null,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w800,
                 color: scheme.onSurface,
@@ -97,6 +102,19 @@ class _Tile extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
         ),
+        if (item.caption != null) ...[
+          const SizedBox(height: 4),
+          Text(
+            item.caption!,
+            maxLines: centered ? 2 : 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: centered ? TextAlign.center : null,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: item.captionColor ?? scheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+        ],
       ],
     );
   }
@@ -108,10 +126,14 @@ class StatisticItem {
     required this.label,
     required this.value,
     this.accent,
+    this.caption,
+    this.captionColor,
   });
 
   final IconData icon;
   final String label;
   final String value;
   final Color? accent;
+  final String? caption;
+  final Color? captionColor;
 }

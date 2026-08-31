@@ -9,6 +9,50 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get publicProfileTitle => 'Profile';
+  @override
+  String get publicProfileMessage => 'Message';
+  @override
+  String get publicProfileSave => 'Save';
+  @override
+  String get publicProfileSaved => 'Saved';
+  @override
+  String publicProfileRespondsWithin(String count) =>
+      'Responds within $count minutes';
+  @override
+  String publicProfileThisMonth(String count) => '$count this month';
+  @override
+  String get publicProfileAverageRating => 'Average Rating';
+  @override
+  String get publicProfileExcellent => 'Excellent';
+  @override
+  String get publicProfileGreat => 'Great';
+  @override
+  String get publicProfileGood => 'Good';
+  @override
+  String get publicProfileNeedsImprovement => 'Needs improvement';
+  @override
+  String get publicProfileVerified => 'Verified';
+  @override
+  String get publicProfileEmailVerified => 'Email Verified';
+  @override
+  String get publicProfilePhoneVerified => 'Phone Verified';
+  @override
+  String get publicProfileAreasExpertise => 'Areas of Expertise';
+  @override
+  String get publicProfileMyWork => 'My Work';
+  @override
+  String get publicProfileViewAll => 'View All';
+  @override
+  String get publicProfileCall => 'Call';
+  @override
+  String get publicProfileSendMessage => 'Send Message';
+  @override
+  String get publicProfileReport => 'Report Profile';
+  @override
+  String get publicProfileBlock => 'Block';
+
+  @override
   String get profileEdit => 'Edit Profile';
 
   @override

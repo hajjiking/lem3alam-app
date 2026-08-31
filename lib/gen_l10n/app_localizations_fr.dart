@@ -9,6 +9,50 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get publicProfileTitle => 'Profil';
+  @override
+  String get publicProfileMessage => 'Message';
+  @override
+  String get publicProfileSave => 'Enregistrer';
+  @override
+  String get publicProfileSaved => 'Enregistré';
+  @override
+  String publicProfileRespondsWithin(String count) =>
+      'Répond sous $count minutes';
+  @override
+  String publicProfileThisMonth(String count) => '$count ce mois-ci';
+  @override
+  String get publicProfileAverageRating => 'Note moyenne';
+  @override
+  String get publicProfileExcellent => 'Excellent';
+  @override
+  String get publicProfileGreat => 'Très bien';
+  @override
+  String get publicProfileGood => 'Bien';
+  @override
+  String get publicProfileNeedsImprovement => 'À améliorer';
+  @override
+  String get publicProfileVerified => 'Vérifié';
+  @override
+  String get publicProfileEmailVerified => 'E-mail vérifié';
+  @override
+  String get publicProfilePhoneVerified => 'Téléphone vérifié';
+  @override
+  String get publicProfileAreasExpertise => 'Domaines d’expertise';
+  @override
+  String get publicProfileMyWork => 'Mes réalisations';
+  @override
+  String get publicProfileViewAll => 'Tout voir';
+  @override
+  String get publicProfileCall => 'Appeler';
+  @override
+  String get publicProfileSendMessage => 'Envoyer un message';
+  @override
+  String get publicProfileReport => 'Signaler le profil';
+  @override
+  String get publicProfileBlock => 'Bloquer';
+
+  @override
   String get profileEdit => 'Modifier le profil';
 
   @override

@@ -22,6 +22,17 @@ class TaskerProfile {
     this.services = const [],
     this.portfolio = const [],
     this.socialAccounts = const [],
+    this.responseTimeMinutes,
+    this.isSavedByCurrentClient = false,
+    this.emailVerified = false,
+    this.phoneVerified = false,
+    this.expertiseItems = const [],
+    this.portfolioImageUrls = const [],
+    this.jobsCompleted,
+    this.jobsCompletedThisMonth = 0,
+    this.jobsInProgress,
+    this.jobsInProgressThisMonth = 0,
+    this.successRate,
   });
 
   final int id;
@@ -46,6 +57,17 @@ class TaskerProfile {
   final List<TaskerService> services;
   final List<TaskerPortfolioItem> portfolio;
   final List<TaskerSocialAccount> socialAccounts;
+  final int? responseTimeMinutes;
+  final bool isSavedByCurrentClient;
+  final bool emailVerified;
+  final bool phoneVerified;
+  final List<String> expertiseItems;
+  final List<String> portfolioImageUrls;
+  final int? jobsCompleted;
+  final int jobsCompletedThisMonth;
+  final int? jobsInProgress;
+  final int jobsInProgressThisMonth;
+  final int? successRate;
 
   String displayTitle(String fallback) {
     final t = (professionalTitle ?? '').trim();
@@ -132,6 +154,23 @@ class TaskerProfile {
       services: services,
       portfolio: portfolio,
       socialAccounts: socials,
+      responseTimeMinutes: _intOptional(json['response_time_minutes']) ??
+          _intOptional(json['response_minutes']),
+      isSavedByCurrentClient: json['is_saved_by_current_client'] == true ||
+          json['is_saved_by_current_client'] == 1,
+      emailVerified:
+          json['email_verified'] == true || json['email_verified'] == 1,
+      phoneVerified:
+          json['phone_verified'] == true || json['phone_verified'] == 1,
+      expertiseItems: _stringList(json['expertise_items']),
+      portfolioImageUrls: _stringList(json['portfolio_image_urls']),
+      jobsCompleted: _intOptional(json['jobs_completed']),
+      jobsCompletedThisMonth:
+          _intOptional(json['jobs_completed_this_month']) ?? 0,
+      jobsInProgress: _intOptional(json['jobs_in_progress']),
+      jobsInProgressThisMonth:
+          _intOptional(json['jobs_in_progress_this_month']) ?? 0,
+      successRate: _intOptional(json['success_rate']),
     );
   }
 }
@@ -278,4 +317,12 @@ double? _doubleOptional(dynamic value) {
   if (value is double) return value;
   if (value is num) return value.toDouble();
   return double.tryParse(value.toString());
+}
+
+List<String> _stringList(dynamic value) {
+  if (value is! List) return const [];
+  return value
+      .map((item) => item?.toString().trim() ?? '')
+      .where((item) => item.isNotEmpty)
+      .toList(growable: false);
 }

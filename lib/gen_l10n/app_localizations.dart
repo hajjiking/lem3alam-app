@@ -100,6 +100,28 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  String get publicProfileTitle;
+  String get publicProfileMessage;
+  String get publicProfileSave;
+  String get publicProfileSaved;
+  String publicProfileRespondsWithin(String count);
+  String publicProfileThisMonth(String count);
+  String get publicProfileAverageRating;
+  String get publicProfileExcellent;
+  String get publicProfileGreat;
+  String get publicProfileGood;
+  String get publicProfileNeedsImprovement;
+  String get publicProfileVerified;
+  String get publicProfileEmailVerified;
+  String get publicProfilePhoneVerified;
+  String get publicProfileAreasExpertise;
+  String get publicProfileMyWork;
+  String get publicProfileViewAll;
+  String get publicProfileCall;
+  String get publicProfileSendMessage;
+  String get publicProfileReport;
+  String get publicProfileBlock;
+
   /// No description provided for @profileEdit.
   ///
   /// In en, this message translates to:

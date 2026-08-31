@@ -27,6 +27,16 @@ class PublicProfileModel {
     this.portfolio = const [],
     this.availabilityDates = const [],
     this.unavailableDates = const [],
+    this.jobsInProgress = 0,
+    this.jobsCompletedThisMonth = 0,
+    this.jobsInProgressThisMonth = 0,
+    this.successRate = 0,
+    this.isSavedByCurrentClient = false,
+    this.emailVerified = false,
+    this.phoneVerified = false,
+    this.expertiseItems = const [],
+    this.portfolioImageUrls = const [],
+    this.additionalSkillCount = 0,
   });
 
   factory PublicProfileModel.fromJson(Map<String, dynamic> json) {
@@ -115,6 +125,20 @@ class PublicProfileModel {
       portfolio: portfolio,
       availabilityDates: av,
       unavailableDates: un,
+      jobsInProgress: _int(json['jobs_in_progress']) ?? 0,
+      jobsCompletedThisMonth: _int(json['jobs_completed_this_month']) ?? 0,
+      jobsInProgressThisMonth: _int(json['jobs_in_progress_this_month']) ?? 0,
+      successRate: _int(json['success_rate']) ??
+          (_double(json['completion_rate']) ?? 0).round(),
+      isSavedByCurrentClient: json['is_saved_by_current_client'] == true ||
+          json['is_saved_by_current_client'] == 1,
+      emailVerified:
+          json['email_verified'] == true || json['email_verified'] == 1,
+      phoneVerified:
+          json['phone_verified'] == true || json['phone_verified'] == 1,
+      expertiseItems: _strings(json['expertise_items']),
+      portfolioImageUrls: _strings(json['portfolio_image_urls']),
+      additionalSkillCount: _int(json['additional_skill_count']) ?? 0,
     );
   }
 
@@ -143,6 +167,16 @@ class PublicProfileModel {
   final List<PublicPortfolioItem> portfolio;
   final List<DateTime> availabilityDates;
   final List<DateTime> unavailableDates;
+  final int jobsInProgress;
+  final int jobsCompletedThisMonth;
+  final int jobsInProgressThisMonth;
+  final int successRate;
+  final bool isSavedByCurrentClient;
+  final bool emailVerified;
+  final bool phoneVerified;
+  final List<String> expertiseItems;
+  final List<String> portfolioImageUrls;
+  final int additionalSkillCount;
 
   static int? _int(dynamic v) {
     if (v is int) return v;
@@ -156,6 +190,14 @@ class PublicProfileModel {
     if (v is num) return v.toDouble();
     if (v == null) return null;
     return double.tryParse(v.toString());
+  }
+
+  static List<String> _strings(dynamic value) {
+    if (value is! List) return const [];
+    return value
+        .map((item) => item?.toString().trim() ?? '')
+        .where((item) => item.isNotEmpty)
+        .toList(growable: false);
   }
 }
 
