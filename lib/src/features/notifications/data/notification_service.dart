@@ -64,6 +64,8 @@ typedef NotificationCallback = void Function(
 );
 
 class NotificationService {
+  static const _platformCallTimeout = Duration(seconds: 10);
+
   NotificationService({
     FirebaseMessaging? messaging,
     FlutterLocalNotificationsPlugin? localNotifications,
@@ -150,7 +152,9 @@ class NotificationService {
   }
 
   Future<String?> refreshToken() async {
-    final token = await _messaging?.getToken();
+    final token = await _messaging
+        ?.getToken()
+        .timeout(_platformCallTimeout, onTimeout: () => null);
     if (token != null) await _handleToken(token);
     return token;
   }
