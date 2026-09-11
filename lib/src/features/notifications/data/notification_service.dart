@@ -10,14 +10,39 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../application/notification_state.dart';
 import '../domain/notification_payload.dart';
 
-const notificationChannel = AndroidNotificationChannel(
-  'lem3alam_high_importance',
-  'Important notifications',
-  description: 'Task, message, and payment notifications.',
+const generalNotificationChannel = AndroidNotificationChannel(
+  'lem3alam_general',
+  'General Notifications',
+  description: 'General Lem3alam notifications.',
   importance: Importance.max,
   playSound: true,
   enableVibration: true,
 );
+const messageNotificationChannel = AndroidNotificationChannel(
+  'lem3alam_messages',
+  'Messages',
+  description: 'New conversation and message notifications.',
+  importance: Importance.high,
+);
+const taskNotificationChannel = AndroidNotificationChannel(
+  'lem3alam_tasks',
+  'Task updates',
+  description: 'Applications, assignments, and task status updates.',
+  importance: Importance.high,
+);
+const paymentNotificationChannel = AndroidNotificationChannel(
+  'lem3alam_payments',
+  'Payments and earnings',
+  description: 'Payment, earning, fee, and payout updates.',
+  importance: Importance.high,
+);
+
+const notificationChannels = [
+  generalNotificationChannel,
+  messageNotificationChannel,
+  taskNotificationChannel,
+  paymentNotificationChannel,
+];
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -32,26 +57,17 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       iOS: DarwinInitializationSettings(),
     );
     await plugin.initialize(settings);
-    await plugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(notificationChannel);
+    final android = plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    for (final channel in notificationChannels) {
+      await android?.createNotificationChannel(channel);
+    }
+    final type = message.data['type']?.toString() ?? '';
     await plugin.show(
       message.messageId?.hashCode ?? DateTime.now().millisecondsSinceEpoch,
       message.data['title']?.toString() ?? 'Lem3alam',
       message.data['body']?.toString() ?? '',
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'lem3alam_high_importance',
-          'Important notifications',
-          channelDescription: 'Task, message, and payment notifications.',
-          importance: Importance.max,
-          priority: Priority.high,
-          playSound: true,
-          enableVibration: true,
-        ),
-        iOS: DarwinNotificationDetails(presentSound: true),
-      ),
+      _detailsForType(type),
       payload: jsonEncode(message.data),
     );
   }
@@ -62,6 +78,9 @@ typedef NotificationCallback = void Function(
   NotificationPayload payload,
   NotificationSource source,
 );
+typedef ShouldPresentLocalNotification = bool Function(
+  NotificationPayload payload,
+);
 
 class NotificationService {
   static const _platformCallTimeout = Duration(seconds: 10);
@@ -71,6 +90,7 @@ class NotificationService {
     FlutterLocalNotificationsPlugin? localNotifications,
     required NotificationCallback onReceived,
     required NotificationCallback onTapped,
+    this.shouldPresentLocalNotification,
   })  : _messaging = messaging ??
             (Firebase.apps.isEmpty ? null : FirebaseMessaging.instance),
         _localNotifications =
@@ -82,6 +102,7 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _localNotifications;
   final NotificationCallback _onReceived;
   final NotificationCallback _onTapped;
+  final ShouldPresentLocalNotification? shouldPresentLocalNotification;
   final StreamController<String?> _tokenController =
       StreamController<String?>.broadcast();
 
@@ -145,10 +166,11 @@ class NotificationService {
       settings,
       onDidReceiveNotificationResponse: _onLocalNotificationTap,
     );
-    await _localNotifications
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(notificationChannel);
+    final android = _localNotifications.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    for (final channel in notificationChannels) {
+      await android?.createNotificationChannel(channel);
+    }
   }
 
   Future<String?> refreshToken() async {
@@ -215,27 +237,16 @@ class NotificationService {
     final title = notification?.title ?? message.data['title']?.toString();
     final body = notification?.body ?? message.data['body']?.toString();
     if (!_supportsLocalNotifications || (title == null && body == null)) return;
+    if (payload != null &&
+        shouldPresentLocalNotification?.call(payload) == false) {
+      return;
+    }
 
     await _localNotifications.show(
       message.messageId?.hashCode ?? DateTime.now().millisecondsSinceEpoch,
       title ?? 'Lem3alam',
       body ?? '',
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'lem3alam_high_importance',
-          'Important notifications',
-          channelDescription: 'Task, message, and payment notifications.',
-          importance: Importance.max,
-          priority: Priority.high,
-          playSound: true,
-          enableVibration: true,
-        ),
-        iOS: DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      ),
+      _detailsForType(message.data['type']?.toString() ?? ''),
       payload: payload == null ? null : jsonEncode(payload.toJson()),
     );
   }
@@ -276,4 +287,41 @@ class NotificationService {
     await _tokenSubscription?.cancel();
     await _tokenController.close();
   }
+}
+
+NotificationDetails _detailsForType(String type) {
+  final value = type.toLowerCase();
+  final AndroidNotificationChannel channel;
+  if (value.contains('message') || value.contains('chat')) {
+    channel = messageNotificationChannel;
+  } else if (value.contains('payment') ||
+      value.contains('earning') ||
+      value.contains('payout') ||
+      value.contains('fee') ||
+      value.contains('refund')) {
+    channel = paymentNotificationChannel;
+  } else if (value.contains('task') ||
+      value.contains('application') ||
+      value == 'new_request') {
+    channel = taskNotificationChannel;
+  } else {
+    channel = generalNotificationChannel;
+  }
+
+  return NotificationDetails(
+    android: AndroidNotificationDetails(
+      channel.id,
+      channel.name,
+      channelDescription: channel.description,
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      enableVibration: true,
+    ),
+    iOS: const DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    ),
+  );
 }

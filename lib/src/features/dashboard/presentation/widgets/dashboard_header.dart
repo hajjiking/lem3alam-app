@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/ui/app_theme.dart';
+import '../../../notifications/application/notification_center_controller.dart';
 
-class DashboardHeader extends StatelessWidget {
+class DashboardHeader extends ConsumerWidget {
   const DashboardHeader({
     super.key,
     required this.appName,
@@ -43,13 +45,14 @@ class DashboardHeader extends StatelessWidget {
   final IconData avatarFallback;
   final bool showNotificationBadge;
   final bool showAvailability;
+
   /// Optional header search/actions slot, used by Messages without moving it
   /// into the content panel. Existing dashboard layouts retain their spacing.
   final Widget? titleActions;
   final bool compact;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final tokens = theme.extension<Lem3alamThemeTokens>()!;
@@ -57,6 +60,9 @@ class DashboardHeader extends StatelessWidget {
         ? scheme.onPrimaryContainer
         : scheme.onPrimary;
     final safeTop = MediaQuery.paddingOf(context).top;
+    final liveNotificationCount = ref.watch(unreadNotificationCountProvider);
+    final effectiveNotificationCount =
+        notificationCount ?? liveNotificationCount;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -67,7 +73,8 @@ class DashboardHeader extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, safeTop + (compact ? 12 : 24), 20, compact ? 24 : 67),
+        padding: EdgeInsetsDirectional.fromSTEB(
+            20, safeTop + (compact ? 12 : 24), 20, compact ? 24 : 67),
         child: Align(
           alignment: AlignmentDirectional.topCenter,
           child: ConstrainedBox(
@@ -112,15 +119,17 @@ class DashboardHeader extends StatelessWidget {
                       onPressed: onNotificationsTap,
                       style: IconButton.styleFrom(foregroundColor: foreground),
                       icon: Badge(
-                        isLabelVisible:
-                            showNotificationBadge || notificationCount != null,
-                        label: notificationCount == null
+                        isLabelVisible: showNotificationBadge ||
+                            effectiveNotificationCount > 0,
+                        label: effectiveNotificationCount <= 0
                             ? null
                             : Text(
-                                '$notificationCount',
+                                effectiveNotificationCount > 99
+                                    ? '99+'
+                                    : '$effectiveNotificationCount',
                                 textDirection: TextDirection.ltr,
                               ),
-                        smallSize: notificationCount == null ? 9 : null,
+                        smallSize: effectiveNotificationCount <= 0 ? 9 : null,
                         backgroundColor: scheme.error,
                         child: const Icon(
                           Icons.notifications_none_rounded,
@@ -201,11 +210,19 @@ class DashboardHeader extends StatelessWidget {
 
                     if (titleActions != null) {
                       if (constraints.maxWidth >= 780) {
-                        return Row(children: [Expanded(child: greetingBlock),
-                          const SizedBox(width: 24), SizedBox(width: 360, child: titleActions)]);
+                        return Row(children: [
+                          Expanded(child: greetingBlock),
+                          const SizedBox(width: 24),
+                          SizedBox(width: 360, child: titleActions)
+                        ]);
                       }
-                      return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [greetingBlock, const SizedBox(height: 16), titleActions!]);
+                      return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            greetingBlock,
+                            const SizedBox(height: 16),
+                            titleActions!
+                          ]);
                     }
 
                     if (compact) {

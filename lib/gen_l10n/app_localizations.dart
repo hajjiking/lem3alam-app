@@ -100,26 +100,130 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @publicProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
   String get publicProfileTitle;
+
+  /// No description provided for @publicProfileMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
   String get publicProfileMessage;
+
+  /// No description provided for @publicProfileSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
   String get publicProfileSave;
+
+  /// No description provided for @publicProfileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
   String get publicProfileSaved;
+
+  /// No description provided for @publicProfileRespondsWithin.
+  ///
+  /// In en, this message translates to:
+  /// **'Responds within {count} minutes'**
   String publicProfileRespondsWithin(String count);
+
+  /// No description provided for @publicProfileThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} this month'**
   String publicProfileThisMonth(String count);
+
+  /// No description provided for @publicProfileAverageRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Rating'**
   String get publicProfileAverageRating;
+
+  /// No description provided for @publicProfileExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
   String get publicProfileExcellent;
+
+  /// No description provided for @publicProfileGreat.
+  ///
+  /// In en, this message translates to:
+  /// **'Great'**
   String get publicProfileGreat;
+
+  /// No description provided for @publicProfileGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
   String get publicProfileGood;
+
+  /// No description provided for @publicProfileNeedsImprovement.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs improvement'**
   String get publicProfileNeedsImprovement;
+
+  /// No description provided for @publicProfileVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
   String get publicProfileVerified;
+
+  /// No description provided for @publicProfileEmailVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Verified'**
   String get publicProfileEmailVerified;
+
+  /// No description provided for @publicProfilePhoneVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Verified'**
   String get publicProfilePhoneVerified;
+
+  /// No description provided for @publicProfileAreasExpertise.
+  ///
+  /// In en, this message translates to:
+  /// **'Areas of Expertise'**
   String get publicProfileAreasExpertise;
+
+  /// No description provided for @publicProfileMyWork.
+  ///
+  /// In en, this message translates to:
+  /// **'My Work'**
   String get publicProfileMyWork;
+
+  /// No description provided for @publicProfileViewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
   String get publicProfileViewAll;
+
+  /// No description provided for @publicProfileCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
   String get publicProfileCall;
+
+  /// No description provided for @publicProfileSendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
   String get publicProfileSendMessage;
+
+  /// No description provided for @publicProfileReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Profile'**
   String get publicProfileReport;
+
+  /// No description provided for @publicProfileBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
   String get publicProfileBlock;
 
   /// No description provided for @profileEdit.
@@ -3979,6 +4083,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.'**
   String get dashboardLiveDataUnavailable;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsMarkAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get notificationsMarkAllRead;
+
+  /// No description provided for @notificationsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get notificationsEmptyTitle;
+
+  /// No description provided for @notificationsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll let you know when there are updates about your tasks, messages, or payments.'**
+  String get notificationsEmptyBody;
+
+  /// No description provided for @notificationsToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get notificationsToday;
+
+  /// No description provided for @notificationsYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get notificationsYesterday;
+
+  /// No description provided for @notificationsEarlier.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get notificationsEarlier;
+
+  /// No description provided for @notificationsNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get notificationsNew;
+
+  /// No description provided for @notificationsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load notifications'**
+  String get notificationsLoadError;
+
+  /// No description provided for @notificationsSomethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get notificationsSomethingWentWrong;
+
+  /// No description provided for @notificationsMarkReadError.
+  ///
+  /// In en, this message translates to:
+  /// **'The notification could not be marked as read.'**
+  String get notificationsMarkReadError;
+
+  /// No description provided for @notificationsMarkAllError.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications could not be marked as read.'**
+  String get notificationsMarkAllError;
+
+  /// No description provided for @notificationsNoDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'This update has no available page. Its details are shown here.'**
+  String get notificationsNoDestination;
+
+  /// No description provided for @notificationsJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get notificationsJustNow;
+
+  /// No description provided for @notificationsMinutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min ago'**
+  String notificationsMinutesAgo(int count);
+
+  /// No description provided for @notificationsHoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hr ago'**
+  String notificationsHoursAgo(int count);
+
+  /// No description provided for @notificationsDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String notificationsDaysAgo(int count);
+
+  /// No description provided for @disputeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'File a Dispute'**
+  String get disputeTitle;
+
+  /// No description provided for @disputeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Let us know what happened. We’ll review your request and help find a fair resolution.'**
+  String get disputeSubtitle;
+
+  /// No description provided for @disputeDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get disputeDetails;
+
+  /// No description provided for @disputeEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get disputeEvidence;
+
+  /// No description provided for @disputeReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get disputeReview;
+
+  /// No description provided for @disputeSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get disputeSubmitted;
+
+  /// No description provided for @disputeEvidenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Evidence'**
+  String get disputeEvidenceTitle;
+
+  /// No description provided for @disputeEvidenceSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload photos, messages, or documents to support your dispute.'**
+  String get disputeEvidenceSubtitle;
+
+  /// No description provided for @disputeReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review & Submit'**
+  String get disputeReviewTitle;
+
+  /// No description provided for @disputeReviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review your information before submitting your dispute.'**
+  String get disputeReviewSubtitle;
+
+  /// No description provided for @disputeType.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute Type'**
+  String get disputeType;
+
+  /// No description provided for @disputePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Issue'**
+  String get disputePayment;
+
+  /// No description provided for @disputeQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality of Work'**
+  String get disputeQuality;
+
+  /// No description provided for @disputeNoShow.
+  ///
+  /// In en, this message translates to:
+  /// **'No-Show'**
+  String get disputeNoShow;
+
+  /// No description provided for @disputeCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication Issue'**
+  String get disputeCommunication;
+
+  /// No description provided for @disputeOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get disputeOther;
+
+  /// No description provided for @disputeAgainst.
+  ///
+  /// In en, this message translates to:
+  /// **'Who are you filing against?'**
+  String get disputeAgainst;
+
+  /// No description provided for @disputeAgainstLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Against'**
+  String get disputeAgainstLabel;
+
+  /// No description provided for @disputeSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get disputeSubject;
+
+  /// No description provided for @disputeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get disputeDescription;
+
+  /// No description provided for @disputeDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the issue in detail. Include what happened, when it happened, and what you expect as a resolution.'**
+  String get disputeDescriptionHint;
+
+  /// No description provided for @disputeCounter.
+  ///
+  /// In en, this message translates to:
+  /// **'{used}/{max}'**
+  String disputeCounter(int used, int max);
+
+  /// No description provided for @disputeUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Files'**
+  String get disputeUpload;
+
+  /// No description provided for @disputeUploadHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload photos, screenshots, invoices, or documents (max {count} files, {size} MB each).'**
+  String disputeUploadHelp(int count, int size);
+
+  /// No description provided for @disputeTapUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to upload files'**
+  String get disputeTapUpload;
+
+  /// No description provided for @disputeFormats.
+  ///
+  /// In en, this message translates to:
+  /// **'JPG, PNG, PDF (max {size} MB each)'**
+  String disputeFormats(int size);
+
+  /// No description provided for @disputeAddMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Add more'**
+  String get disputeAddMore;
+
+  /// No description provided for @disputeNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional Information (Optional)'**
+  String get disputeNotes;
+
+  /// No description provided for @disputeNotesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add any additional notes, links, or relevant information…'**
+  String get disputeNotesHint;
+
+  /// No description provided for @disputeNextEvidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Add Evidence'**
+  String get disputeNextEvidence;
+
+  /// No description provided for @disputeNextReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Review'**
+  String get disputeNextReview;
+
+  /// No description provided for @disputeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get disputeBack;
+
+  /// No description provided for @disputeSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Dispute'**
+  String get disputeSubmit;
+
+  /// No description provided for @disputeSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute Summary'**
+  String get disputeSummary;
+
+  /// No description provided for @disputeEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get disputeEdit;
+
+  /// No description provided for @disputeAttachments.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments ({count})'**
+  String disputeAttachments(int count);
+
+  /// No description provided for @disputeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute Submitted!'**
+  String get disputeSuccess;
+
+  /// No description provided for @disputeSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your dispute has been submitted. We’ll review it and get back to you within {days} business days.'**
+  String disputeSuccessBody(String days);
+
+  /// No description provided for @disputeNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'You’ll receive an email and in-app notification once there is an update.'**
+  String get disputeNotification;
+
+  /// No description provided for @disputeView.
+  ///
+  /// In en, this message translates to:
+  /// **'View My Disputes'**
+  String get disputeView;
+
+  /// No description provided for @disputeHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Home'**
+  String get disputeHome;
+
+  /// No description provided for @disputeWhatNext.
+  ///
+  /// In en, this message translates to:
+  /// **'What happens next?'**
+  String get disputeWhatNext;
+
+  /// No description provided for @disputeTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Our team will review your dispute within {days} business days.'**
+  String disputeTimeline(String days);
+
+  /// No description provided for @disputeContact.
+  ///
+  /// In en, this message translates to:
+  /// **'We may contact you for additional information.'**
+  String get disputeContact;
+
+  /// No description provided for @disputeResolution.
+  ///
+  /// In en, this message translates to:
+  /// **'You’ll be notified about the resolution by email and in-app notifications.'**
+  String get disputeResolution;
+
+  /// No description provided for @disputeDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard this dispute?'**
+  String get disputeDiscard;
+
+  /// No description provided for @disputeDiscardBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your unsent information will be lost.'**
+  String get disputeDiscardBody;
+
+  /// No description provided for @disputeDiscardAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get disputeDiscardAction;
+
+  /// No description provided for @disputeFileError.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose up to {count} JPG, PNG or PDF files, no larger than {size} MB each.'**
+  String disputeFileError(int count, int size);
+
+  /// No description provided for @disputeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to submit. Your draft is saved here; please try again.'**
+  String get disputeFailed;
+
+  /// No description provided for @disputeUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This task has no eligible counterpart for a dispute.'**
+  String get disputeUnavailable;
+
+  /// No description provided for @disputeMock.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo submission — no dispute is sent to the support team yet.'**
+  String get disputeMock;
+
+  /// No description provided for @disputeListPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute history will be available when the disputes service is connected.'**
+  String get disputeListPlaceholder;
+
+  /// No description provided for @disputeRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name}'**
+  String disputeRemove(String name);
+
+  /// No description provided for @disputePickFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to read the selected files. Please try again.'**
+  String get disputePickFailed;
 }
 
 class _AppLocalizationsDelegate

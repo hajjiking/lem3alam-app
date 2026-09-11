@@ -87,8 +87,7 @@ class ClientDashboardScreen extends ConsumerWidget {
               notificationsLabel: l10n.dashboardNotifications,
               profileLabel: l10n.dashboardProfile,
               onMenuTap: () => showDashboardMenu(context, ref),
-              onNotificationsTap: () => showDashboardFeatureNotice(
-                  context, l10n.dashboardNotifications),
+              onNotificationsTap: () => openNotifications(context),
               onProfileTap: () =>
                   openDashboardProfile(context, user?.id, false),
               onAvailabilityTap: () {},

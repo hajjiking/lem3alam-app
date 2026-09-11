@@ -10,44 +10,68 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get publicProfileTitle => 'الملف الشخصي';
+
   @override
   String get publicProfileMessage => 'مراسلة';
+
   @override
   String get publicProfileSave => 'حفظ';
+
   @override
   String get publicProfileSaved => 'محفوظ';
+
   @override
-  String publicProfileRespondsWithin(String count) => 'يرد خلال $count دقيقة';
+  String publicProfileRespondsWithin(String count) {
+    return 'يرد خلال $count دقيقة';
+  }
+
   @override
-  String publicProfileThisMonth(String count) => '$count هذا الشهر';
+  String publicProfileThisMonth(String count) {
+    return '$count هذا الشهر';
+  }
+
   @override
   String get publicProfileAverageRating => 'متوسط التقييم';
+
   @override
   String get publicProfileExcellent => 'ممتاز';
+
   @override
   String get publicProfileGreat => 'رائع';
+
   @override
   String get publicProfileGood => 'جيد';
+
   @override
   String get publicProfileNeedsImprovement => 'بحاجة إلى تحسين';
+
   @override
   String get publicProfileVerified => 'موثّق';
+
   @override
   String get publicProfileEmailVerified => 'البريد الإلكتروني موثّق';
+
   @override
   String get publicProfilePhoneVerified => 'الهاتف موثّق';
+
   @override
   String get publicProfileAreasExpertise => 'مجالات الخبرة';
+
   @override
   String get publicProfileMyWork => 'أعمالي';
+
   @override
   String get publicProfileViewAll => 'عرض الكل';
+
   @override
   String get publicProfileCall => 'اتصال';
+
   @override
   String get publicProfileSendMessage => 'إرسال رسالة';
+
   @override
   String get publicProfileReport => 'الإبلاغ عن الملف';
+
   @override
   String get publicProfileBlock => 'حظر';
 
@@ -2190,4 +2214,253 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get dashboardLiveDataUnavailable =>
       'بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية.';
+
+  @override
+  String get notificationsTitle => 'الإشعارات';
+
+  @override
+  String get notificationsMarkAllRead => 'تحديد الكل كمقروء';
+
+  @override
+  String get notificationsEmptyTitle => 'لا توجد إشعارات بعد';
+
+  @override
+  String get notificationsEmptyBody =>
+      'سنخبرك عند وجود تحديثات حول مهامك أو رسائلك أو مدفوعاتك.';
+
+  @override
+  String get notificationsToday => 'اليوم';
+
+  @override
+  String get notificationsYesterday => 'أمس';
+
+  @override
+  String get notificationsEarlier => 'سابقاً';
+
+  @override
+  String get notificationsNew => 'جديد';
+
+  @override
+  String get notificationsLoadError => 'تعذر تحميل الإشعارات';
+
+  @override
+  String get notificationsSomethingWentWrong =>
+      'حدث خطأ. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get notificationsMarkReadError => 'تعذر تحديد الإشعار كمقروء.';
+
+  @override
+  String get notificationsMarkAllError => 'تعذر تحديد الإشعارات كمقروءة.';
+
+  @override
+  String get notificationsNoDestination =>
+      'لا توجد صفحة متاحة لهذا التحديث. يتم عرض التفاصيل هنا.';
+
+  @override
+  String get notificationsJustNow => 'الآن';
+
+  @override
+  String notificationsMinutesAgo(int count) {
+    return 'قبل $count دقيقة';
+  }
+
+  @override
+  String notificationsHoursAgo(int count) {
+    return 'قبل $count ساعة';
+  }
+
+  @override
+  String notificationsDaysAgo(int count) {
+    return 'قبل $count أيام';
+  }
+
+  @override
+  String get disputeTitle => 'تقديم نزاع';
+
+  @override
+  String get disputeSubtitle =>
+      'أخبرنا بما حدث. سنراجع طلبك ونساعدك في إيجاد حل عادل.';
+
+  @override
+  String get disputeDetails => 'التفاصيل';
+
+  @override
+  String get disputeEvidence => 'الأدلة';
+
+  @override
+  String get disputeReview => 'المراجعة';
+
+  @override
+  String get disputeSubmitted => 'تم الإرسال';
+
+  @override
+  String get disputeEvidenceTitle => 'إضافة أدلة';
+
+  @override
+  String get disputeEvidenceSubtitle =>
+      'أرفق صوراً أو رسائل أو مستندات لدعم نزاعك.';
+
+  @override
+  String get disputeReviewTitle => 'المراجعة والإرسال';
+
+  @override
+  String get disputeReviewSubtitle => 'يرجى مراجعة المعلومات قبل إرسال النزاع.';
+
+  @override
+  String get disputeType => 'نوع النزاع';
+
+  @override
+  String get disputePayment => 'مشكلة في الدفع';
+
+  @override
+  String get disputeQuality => 'جودة العمل';
+
+  @override
+  String get disputeNoShow => 'عدم الحضور';
+
+  @override
+  String get disputeCommunication => 'مشكلة في التواصل';
+
+  @override
+  String get disputeOther => 'أخرى';
+
+  @override
+  String get disputeAgainst => 'ضد من تقدم النزاع؟';
+
+  @override
+  String get disputeAgainstLabel => 'ضد';
+
+  @override
+  String get disputeSubject => 'الموضوع';
+
+  @override
+  String get disputeDescription => 'الوصف';
+
+  @override
+  String get disputeDescriptionHint =>
+      'صف المشكلة بالتفصيل، ومتى حدثت، والحل الذي تتوقعه.';
+
+  @override
+  String disputeCounter(int used, int max) {
+    return '$used/$max';
+  }
+
+  @override
+  String get disputeUpload => 'رفع الملفات';
+
+  @override
+  String disputeUploadHelp(int count, int size) {
+    return 'ارفع صوراً أو لقطات شاشة أو فواتير أو مستندات (بحد أقصى $count ملفات، $size ميغابايت لكل ملف).';
+  }
+
+  @override
+  String get disputeTapUpload => 'اضغط لرفع الملفات';
+
+  @override
+  String disputeFormats(int size) {
+    return 'JPG، PNG، PDF (بحد أقصى $size ميغابايت لكل ملف)';
+  }
+
+  @override
+  String get disputeAddMore => 'إضافة المزيد';
+
+  @override
+  String get disputeNotes => 'معلومات إضافية (اختياري)';
+
+  @override
+  String get disputeNotesHint => 'أضف ملاحظات أو روابط أو معلومات ذات صلة…';
+
+  @override
+  String get disputeNextEvidence => 'التالي: إضافة أدلة';
+
+  @override
+  String get disputeNextReview => 'التالي: المراجعة';
+
+  @override
+  String get disputeBack => 'رجوع';
+
+  @override
+  String get disputeSubmit => 'إرسال النزاع';
+
+  @override
+  String get disputeSummary => 'ملخص النزاع';
+
+  @override
+  String get disputeEdit => 'تعديل';
+
+  @override
+  String disputeAttachments(int count) {
+    return 'المرفقات ($count)';
+  }
+
+  @override
+  String get disputeSuccess => 'تم إرسال النزاع!';
+
+  @override
+  String disputeSuccessBody(String days) {
+    return 'تم إرسال نزاعك. سنراجعه ونرد عليك خلال $days أيام عمل.';
+  }
+
+  @override
+  String get disputeNotification =>
+      'ستتلقى بريداً إلكترونياً وإشعاراً داخل التطبيق عند توفر تحديث.';
+
+  @override
+  String get disputeView => 'عرض نزاعاتي';
+
+  @override
+  String get disputeHome => 'العودة للرئيسية';
+
+  @override
+  String get disputeWhatNext => 'ماذا يحدث بعد ذلك؟';
+
+  @override
+  String disputeTimeline(String days) {
+    return 'سيراجع فريقنا نزاعك خلال $days أيام عمل.';
+  }
+
+  @override
+  String get disputeContact => 'قد نتواصل معك للحصول على معلومات إضافية.';
+
+  @override
+  String get disputeResolution =>
+      'سيتم إبلاغك بالحل عبر البريد الإلكتروني وإشعارات التطبيق.';
+
+  @override
+  String get disputeDiscard => 'تجاهل هذا النزاع؟';
+
+  @override
+  String get disputeDiscardBody => 'ستفقد المعلومات التي لم ترسلها.';
+
+  @override
+  String get disputeDiscardAction => 'تجاهل';
+
+  @override
+  String disputeFileError(int count, int size) {
+    return 'اختر حتى $count ملفات JPG أو PNG أو PDF، لا يتجاوز حجم كل منها $size ميغابايت.';
+  }
+
+  @override
+  String get disputeFailed => 'تعذر الإرسال. مسودتك محفوظة هنا؛ حاول مجدداً.';
+
+  @override
+  String get disputeUnavailable =>
+      'لا يوجد طرف مقابل مؤهل للنزاع في هذه المهمة.';
+
+  @override
+  String get disputeMock =>
+      'إرسال تجريبي — لن يتم إرسال النزاع إلى فريق الدعم حالياً.';
+
+  @override
+  String get disputeListPlaceholder =>
+      'سيصبح سجل النزاعات متاحاً عند ربط خدمة النزاعات.';
+
+  @override
+  String disputeRemove(String name) {
+    return 'إزالة $name';
+  }
+
+  @override
+  String get disputePickFailed => 'تعذرت قراءة الملفات المحددة. حاول مجدداً.';
 }

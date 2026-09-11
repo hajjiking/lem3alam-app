@@ -6,8 +6,10 @@ import '../../tasks/presentation/task_image_support.dart';
 import '../domain/conversation_model.dart';
 
 class TaskContextCard extends StatelessWidget {
-  const TaskContextCard({super.key, required this.task});
+  const TaskContextCard({super.key, required this.task, this.category, this.dateLabel, this.interactive = true});
   final ConversationTaskContext task;
+  final String? category, dateLabel;
+  final bool interactive;
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -17,7 +19,7 @@ class TaskContextCard extends StatelessWidget {
     return Card(
         margin: const EdgeInsets.fromLTRB(12, 8, 12, 8),
         child: InkWell(
-            onTap: () => context.pushNamed(AppRouteNames.taskDetail,
+            onTap: !interactive ? null : () => context.pushNamed(AppRouteNames.taskDetail,
                 pathParameters: {'id': '${task.id}'}),
             child: Padding(
                 padding: const EdgeInsets.all(12),
@@ -42,6 +44,8 @@ class TaskContextCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.titleSmall),
+                        if (category != null) Text(category!, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        if (dateLabel != null) Text(dateLabel!),
                         if (task.location?.isNotEmpty == true)
                           Row(children: [
                             Icon(Icons.location_on_outlined,
@@ -54,7 +58,7 @@ class TaskContextCard extends StatelessWidget {
                           ]),
                         if (task.budgetMin != null)
                           Text(
-                              '${format.format(task.budgetMin)}${task.budgetMax != null && task.budgetMax != task.budgetMin ? ' – ${format.format(task.budgetMax)}' : ''} MAD',
+                              '${format.format(task.budgetMin)}${task.budgetMax != null && task.budgetMax != task.budgetMin ? ' â€“ ${format.format(task.budgetMax)}' : ''} MAD',
                               textDirection: TextDirection.ltr,
                               style: TextStyle(
                                   color: scheme.primary,

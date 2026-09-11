@@ -20,8 +20,20 @@
   "publicProfileSendMessage": "Send Message",
   "publicProfileReport": "Report Profile",
   "publicProfileBlock": "Block",
-  "@publicProfileRespondsWithin": {"placeholders":{"count":{"type":"String"}}},
-  "@publicProfileThisMonth": {"placeholders":{"count":{"type":"String"}}},
+  "@publicProfileRespondsWithin": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@publicProfileThisMonth": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "profileEdit": "Edit Profile",
   "profileEditUnavailable": "Profile editing is not available in the mobile API yet.",
   "profileAboutMe": "About Me",
@@ -54,13 +66,55 @@
   "profileCompletionBasis": "Based on completed and assigned jobs",
   "profileCurrentPeriod": "Current selected period",
   "profilePrivate": "Only your own profile, earnings, reviews and assignments are shown.",
-  "@profileMoreSkills": {"placeholders":{"count":{"type":"int"}}},
-  "@profileReviewsTitle": {"placeholders":{"count":{"type":"String"}}},
-  "@profileBadgeReviewCaption": {"placeholders":{"count":{"type":"String"}}},
-  "@profileMinutesAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileHoursAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileDaysAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileWeeksAgo": {"placeholders":{"count":{"type":"String"}}},
+  "@profileMoreSkills": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@profileReviewsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileBadgeReviewCaption": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileWeeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "paymentsPeriod": "Payment period",
   "paymentsTitle": "My Payments",
   "paymentsSubtitle": "Track your spending and manage your payments",
@@ -102,7 +156,16 @@
   "cashPaymentsLoadError": "Could not load cash payments awaiting confirmation.",
   "cashConfirm": "Confirm cash received",
   "cashConfirmBody": "Have you received {amount} in cash for {task}? Confirm only after receiving the full payment. This will record it in your earnings.",
-  "@cashConfirmBody": {"placeholders": {"amount": {"type": "String"}, "task": {"type": "String"}}},
+  "@cashConfirmBody": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "task": {
+        "type": "String"
+      }
+    }
+  },
   "cashConfirmed": "Cash receipt confirmed. Your earnings have been updated.",
   "cashPaymentChanged": "This payment changed. Refresh and check the amount before confirming.",
   "cashAwaitingReceipt": "The client approved this job. Confirm once you have received the cash. It will not count as paid until you confirm.",
@@ -148,12 +211,48 @@
   "earningsDetails": "Transaction details",
   "earningsPeriod": "Earnings period",
   "earningsReviewCount": "{count} reviews",
-  "@earningsComparison": {"placeholders":{"percent":{"type":"String"}}},
-  "@earningsCompletedChange": {"placeholders":{"count":{"type":"String"}}},
-  "@earningsFeeBody": {"placeholders":{"rate":{"type":"String"}}},
-  "@earningsPaidOn": {"placeholders":{"date":{"type":"String"}}},
-  "@earningsEstimatedOn": {"placeholders":{"date":{"type":"String"}}},
-  "@earningsReviewCount": {"placeholders":{"count":{"type":"String"}}},
+  "@earningsComparison": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "@earningsCompletedChange": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@earningsFeeBody": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "@earningsPaidOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@earningsEstimatedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "@earningsReviewCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "messagesSubtitle": "{role, select, tasker{Chat with clients and manage your conversations} client{Chat with taskers and manage your conversations} other{Manage your conversations}}",
   "messagesSearch": "Search messages…",
   "messagesUnread": "Unread",
@@ -184,7 +283,13 @@
   "messagesNoThread": "No messages in this conversation yet.",
   "messagesSendError": "Message was not sent. Your draft is kept; check the conversation before retrying.",
   "messagesFilters": "Filter conversations",
-  "@messagesSubtitle": {"placeholders":{"role":{"type":"String"}}},
+  "@messagesSubtitle": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
   "leaveReview": "Leave a Review",
   "reviewSaved": "Your review has been submitted.",
   "reviewAlreadySubmitted": "You have already reviewed this task.",
@@ -309,7 +414,13 @@
   "clientTasksScope": "Only tasks you posted",
   "clientTasksEmpty": "You haven’t posted any tasks matching these filters.",
   "clientTasksCount": "{count, plural, =1{1 task} other{{count} tasks}}",
-  "@clientTasksCount": {"placeholders": {"count": {"type": "int"}}},
+  "@clientTasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "taskerNoComparison": "No previous-period activity",
   "taskerPeriodChange": "{change}% vs previous period",
   "taskerPeriodUnavailable": "Analytics for this period are unavailable. Update the server and refresh.",
@@ -317,7 +428,13 @@
   "taskerNoActivity": "You have no recorded earnings or completed tasks in this period.",
   "taskerDashboardLoadError": "Couldn’t load your tasker dashboard",
   "taskerDashboardRetryHint": "Check your connection and sign in to your tasker account, then retry.",
-  "@taskerPeriodChange": {"placeholders": {"change": {"type": "String"}}},
+  "@taskerPeriodChange": {
+    "placeholders": {
+      "change": {
+        "type": "String"
+      }
+    }
+  },
   "adminLast7Days": "Last 7 days",
   "adminLast30Days": "Last 30 days",
   "adminStarted": "Started",
@@ -328,7 +445,13 @@
   "adminPaidVolume": "Paid volume",
   "adminChartData": "View chart data",
   "adminAnalyticsDates": "Daily posted, started and completed events. Dates follow {timezone}.",
-  "@adminAnalyticsDates": {"placeholders": {"timezone": {"type": "String"}}},
+  "@adminAnalyticsDates": {
+    "placeholders": {
+      "timezone": {
+        "type": "String"
+      }
+    }
+  },
   "clientDashboardReadySubtitle": "Ready to get things done today?",
   "clientDashboardPromoTitle": "A little help goes a long way",
   "clientDashboardPromoSubtitle": "Post a task and find the right professional for your home.",
@@ -979,5 +1102,163 @@
   "adminCleaning": "Cleaning",
   "adminPainting": "Painting",
   "adminDetailedAnalyticsUnavailable": "Detailed analytics will appear when the admin API provides them. No sample data is displayed.",
-  "dashboardLiveDataUnavailable": "Dashboard data is not available from the API yet. No sample tasks or statistics are displayed."
+  "dashboardLiveDataUnavailable": "Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.",
+  "notificationsTitle": "Notifications",
+  "notificationsMarkAllRead": "Mark all as read",
+  "notificationsEmptyTitle": "No notifications yet",
+  "notificationsEmptyBody": "We'll let you know when there are updates about your tasks, messages, or payments.",
+  "notificationsToday": "Today",
+  "notificationsYesterday": "Yesterday",
+  "notificationsEarlier": "Earlier",
+  "notificationsNew": "New",
+  "notificationsLoadError": "Unable to load notifications",
+  "notificationsSomethingWentWrong": "Something went wrong. Please try again.",
+  "notificationsMarkReadError": "The notification could not be marked as read.",
+  "notificationsMarkAllError": "Notifications could not be marked as read.",
+  "notificationsNoDestination": "This update has no available page. Its details are shown here.",
+  "notificationsJustNow": "Just now",
+  "notificationsMinutesAgo": "{count} min ago",
+  "@notificationsMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsHoursAgo": "{count} hr ago",
+  "@notificationsHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsDaysAgo": "{count} days ago",
+  "@notificationsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTitle": "File a Dispute",
+  "disputeSubtitle": "Let us know what happened. We’ll review your request and help find a fair resolution.",
+  "disputeDetails": "Details",
+  "disputeEvidence": "Evidence",
+  "disputeReview": "Review",
+  "disputeSubmitted": "Submitted",
+  "disputeEvidenceTitle": "Add Evidence",
+  "disputeEvidenceSubtitle": "Upload photos, messages, or documents to support your dispute.",
+  "disputeReviewTitle": "Review & Submit",
+  "disputeReviewSubtitle": "Please review your information before submitting your dispute.",
+  "disputeType": "Dispute Type",
+  "disputePayment": "Payment Issue",
+  "disputeQuality": "Quality of Work",
+  "disputeNoShow": "No-Show",
+  "disputeCommunication": "Communication Issue",
+  "disputeOther": "Other",
+  "disputeAgainst": "Who are you filing against?",
+  "disputeAgainstLabel": "Against",
+  "disputeSubject": "Subject",
+  "disputeDescription": "Description",
+  "disputeDescriptionHint": "Please describe the issue in detail. Include what happened, when it happened, and what you expect as a resolution.",
+  "disputeCounter": "{used}/{max}",
+  "@disputeCounter": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeUpload": "Upload Files",
+  "disputeUploadHelp": "Upload photos, screenshots, invoices, or documents (max {count} files, {size} MB each).",
+  "@disputeUploadHelp": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTapUpload": "Tap to upload files",
+  "disputeFormats": "JPG, PNG, PDF (max {size} MB each)",
+  "@disputeFormats": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeAddMore": "Add more",
+  "disputeNotes": "Additional Information (Optional)",
+  "disputeNotesHint": "Add any additional notes, links, or relevant information…",
+  "disputeNextEvidence": "Next: Add Evidence",
+  "disputeNextReview": "Next: Review",
+  "disputeBack": "Back",
+  "disputeSubmit": "Submit Dispute",
+  "disputeSummary": "Dispute Summary",
+  "disputeEdit": "Edit",
+  "disputeAttachments": "Attachments ({count})",
+  "@disputeAttachments": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeSuccess": "Dispute Submitted!",
+  "disputeSuccessBody": "Your dispute has been submitted. We’ll review it and get back to you within {days} business days.",
+  "@disputeSuccessBody": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeNotification": "You’ll receive an email and in-app notification once there is an update.",
+  "disputeView": "View My Disputes",
+  "disputeHome": "Back to Home",
+  "disputeWhatNext": "What happens next?",
+  "disputeTimeline": "Our team will review your dispute within {days} business days.",
+  "@disputeTimeline": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeContact": "We may contact you for additional information.",
+  "disputeResolution": "You’ll be notified about the resolution by email and in-app notifications.",
+  "disputeDiscard": "Discard this dispute?",
+  "disputeDiscardBody": "Your unsent information will be lost.",
+  "disputeDiscardAction": "Discard",
+  "disputeFileError": "Choose up to {count} JPG, PNG or PDF files, no larger than {size} MB each.",
+  "@disputeFileError": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeFailed": "Unable to submit. Your draft is saved here; please try again.",
+  "disputeUnavailable": "This task has no eligible counterpart for a dispute.",
+  "disputeMock": "Demo submission — no dispute is sent to the support team yet.",
+  "disputeListPlaceholder": "Dispute history will be available when the disputes service is connected.",
+  "disputeRemove": "Remove {name}",
+  "@disputeRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "disputePickFailed": "Unable to read the selected files. Please try again."
 }

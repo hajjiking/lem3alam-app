@@ -31,6 +31,8 @@ dependencies:
   latlong2: ^0.9.1
   url_launcher: ^6.3.0
   shared_preferences: ^2.3.2
+  # Native image/document evidence selection for disputes.
+  file_picker: ^11.0.3
 
 dev_dependencies:
   flutter_test:

@@ -20,8 +20,20 @@
   "publicProfileSendMessage": "Envoyer un message",
   "publicProfileReport": "Signaler le profil",
   "publicProfileBlock": "Bloquer",
-  "@publicProfileRespondsWithin": {"placeholders":{"count":{"type":"String"}}},
-  "@publicProfileThisMonth": {"placeholders":{"count":{"type":"String"}}},
+  "@publicProfileRespondsWithin": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@publicProfileThisMonth": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "profileEdit": "Modifier le profil",
   "profileEditUnavailable": "La modification du profil n’est pas encore disponible dans l’API mobile.",
   "profileAboutMe": "À propos",
@@ -54,13 +66,55 @@
   "profileCompletionBasis": "Basé sur les missions terminées et attribuées",
   "profileCurrentPeriod": "Période sélectionnée",
   "profilePrivate": "Seuls votre profil, vos gains, vos avis et vos missions sont affichés.",
-  "@profileMoreSkills": {"placeholders":{"count":{"type":"int"}}},
-  "@profileReviewsTitle": {"placeholders":{"count":{"type":"String"}}},
-  "@profileBadgeReviewCaption": {"placeholders":{"count":{"type":"String"}}},
-  "@profileMinutesAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileHoursAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileDaysAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileWeeksAgo": {"placeholders":{"count":{"type":"String"}}},
+  "@profileMoreSkills": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@profileReviewsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileBadgeReviewCaption": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileWeeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "paymentsPeriod": "Période des paiements",
   "paymentsTitle": "Mes paiements",
   "paymentsSubtitle": "Suivez vos dépenses et gérez vos paiements",
@@ -895,5 +949,163 @@
   "adminCleaning": "Nettoyage",
   "adminPainting": "Peinture",
   "adminDetailedAnalyticsUnavailable": "Les analyses détaillées apparaîtront lorsque l’API d’administration les fournira. Aucune donnée d’exemple n’est affichée.",
-  "dashboardLiveDataUnavailable": "Les données du tableau de bord ne sont pas encore disponibles via l’API. Aucune tâche ni statistique d’exemple n’est affichée."
+  "dashboardLiveDataUnavailable": "Les données du tableau de bord ne sont pas encore disponibles via l’API. Aucune tâche ni statistique d’exemple n’est affichée.",
+  "notificationsTitle": "Notifications",
+  "notificationsMarkAllRead": "Tout marquer comme lu",
+  "notificationsEmptyTitle": "Aucune notification pour le moment",
+  "notificationsEmptyBody": "Nous vous informerons des nouveautés concernant vos tâches, messages ou paiements.",
+  "notificationsToday": "Aujourd’hui",
+  "notificationsYesterday": "Hier",
+  "notificationsEarlier": "Plus tôt",
+  "notificationsNew": "Nouveau",
+  "notificationsLoadError": "Impossible de charger les notifications",
+  "notificationsSomethingWentWrong": "Une erreur s’est produite. Veuillez réessayer.",
+  "notificationsMarkReadError": "La notification n’a pas pu être marquée comme lue.",
+  "notificationsMarkAllError": "Les notifications n’ont pas pu être marquées comme lues.",
+  "notificationsNoDestination": "Cette mise à jour n’a pas de page disponible. Ses détails sont affichés ici.",
+  "notificationsJustNow": "À l’instant",
+  "notificationsMinutesAgo": "Il y a {count} min",
+  "@notificationsMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsHoursAgo": "Il y a {count} h",
+  "@notificationsHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsDaysAgo": "Il y a {count} jours",
+  "@notificationsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTitle": "Déposer un litige",
+  "disputeSubtitle": "Expliquez-nous ce qui s’est passé. Nous examinerons votre demande pour trouver une solution équitable.",
+  "disputeDetails": "Détails",
+  "disputeEvidence": "Preuves",
+  "disputeReview": "Vérification",
+  "disputeSubmitted": "Envoyé",
+  "disputeEvidenceTitle": "Ajouter des preuves",
+  "disputeEvidenceSubtitle": "Ajoutez des photos, messages ou documents pour appuyer votre litige.",
+  "disputeReviewTitle": "Vérifier et envoyer",
+  "disputeReviewSubtitle": "Veuillez vérifier vos informations avant d’envoyer votre litige.",
+  "disputeType": "Type de litige",
+  "disputePayment": "Problème de paiement",
+  "disputeQuality": "Qualité du travail",
+  "disputeNoShow": "Absence",
+  "disputeCommunication": "Problème de communication",
+  "disputeOther": "Autre",
+  "disputeAgainst": "Contre qui déposez-vous ce litige ?",
+  "disputeAgainstLabel": "Contre",
+  "disputeSubject": "Objet",
+  "disputeDescription": "Description",
+  "disputeDescriptionHint": "Décrivez le problème en détail : les faits, leur date et la solution souhaitée.",
+  "disputeCounter": "{used}/{max}",
+  "@disputeCounter": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeUpload": "Ajouter des fichiers",
+  "disputeUploadHelp": "Ajoutez photos, captures, factures ou documents ({count} fichiers maximum, {size} Mo chacun).",
+  "@disputeUploadHelp": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTapUpload": "Appuyez pour ajouter des fichiers",
+  "disputeFormats": "JPG, PNG, PDF ({size} Mo maximum chacun)",
+  "@disputeFormats": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeAddMore": "Ajouter",
+  "disputeNotes": "Informations complémentaires (facultatif)",
+  "disputeNotesHint": "Ajoutez des notes, liens ou informations utiles…",
+  "disputeNextEvidence": "Suivant : preuves",
+  "disputeNextReview": "Suivant : vérifier",
+  "disputeBack": "Retour",
+  "disputeSubmit": "Envoyer le litige",
+  "disputeSummary": "Résumé du litige",
+  "disputeEdit": "Modifier",
+  "disputeAttachments": "Pièces jointes ({count})",
+  "@disputeAttachments": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeSuccess": "Litige envoyé !",
+  "disputeSuccessBody": "Votre litige a été envoyé. Nous vous répondrons sous {days} jours ouvrés.",
+  "@disputeSuccessBody": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeNotification": "Vous recevrez un e-mail et une notification dans l’application dès qu’une mise à jour sera disponible.",
+  "disputeView": "Voir mes litiges",
+  "disputeHome": "Retour à l’accueil",
+  "disputeWhatNext": "Que se passe-t-il ensuite ?",
+  "disputeTimeline": "Notre équipe examinera votre litige sous {days} jours ouvrés.",
+  "@disputeTimeline": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeContact": "Nous pourrons vous contacter pour plus d’informations.",
+  "disputeResolution": "La résolution vous sera communiquée par e-mail et dans l’application.",
+  "disputeDiscard": "Abandonner ce litige ?",
+  "disputeDiscardBody": "Les informations non envoyées seront perdues.",
+  "disputeDiscardAction": "Abandonner",
+  "disputeFileError": "Choisissez au maximum {count} fichiers JPG, PNG ou PDF de {size} Mo chacun.",
+  "@disputeFileError": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeFailed": "Envoi impossible. Votre brouillon est conservé ici ; réessayez.",
+  "disputeUnavailable": "Aucune partie adverse disponible pour cette tâche.",
+  "disputeMock": "Envoi de démonstration : aucun litige n’est transmis à l’assistance pour le moment.",
+  "disputeListPlaceholder": "L’historique sera disponible une fois le service des litiges connecté.",
+  "disputeRemove": "Supprimer {name}",
+  "@disputeRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "disputePickFailed": "Impossible de lire les fichiers sélectionnés. Réessayez."
 }

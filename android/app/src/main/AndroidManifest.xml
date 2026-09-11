@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="lem3alam_high_importance" />
+            android:value="lem3alam_general" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

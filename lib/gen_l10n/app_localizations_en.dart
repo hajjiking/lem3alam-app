@@ -10,45 +10,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicProfileTitle => 'Profile';
+
   @override
   String get publicProfileMessage => 'Message';
+
   @override
   String get publicProfileSave => 'Save';
+
   @override
   String get publicProfileSaved => 'Saved';
+
   @override
-  String publicProfileRespondsWithin(String count) =>
-      'Responds within $count minutes';
+  String publicProfileRespondsWithin(String count) {
+    return 'Responds within $count minutes';
+  }
+
   @override
-  String publicProfileThisMonth(String count) => '$count this month';
+  String publicProfileThisMonth(String count) {
+    return '$count this month';
+  }
+
   @override
   String get publicProfileAverageRating => 'Average Rating';
+
   @override
   String get publicProfileExcellent => 'Excellent';
+
   @override
   String get publicProfileGreat => 'Great';
+
   @override
   String get publicProfileGood => 'Good';
+
   @override
   String get publicProfileNeedsImprovement => 'Needs improvement';
+
   @override
   String get publicProfileVerified => 'Verified';
+
   @override
   String get publicProfileEmailVerified => 'Email Verified';
+
   @override
   String get publicProfilePhoneVerified => 'Phone Verified';
+
   @override
   String get publicProfileAreasExpertise => 'Areas of Expertise';
+
   @override
   String get publicProfileMyWork => 'My Work';
+
   @override
   String get publicProfileViewAll => 'View All';
+
   @override
   String get publicProfileCall => 'Call';
+
   @override
   String get publicProfileSendMessage => 'Send Message';
+
   @override
   String get publicProfileReport => 'Report Profile';
+
   @override
   String get publicProfileBlock => 'Block';
 
@@ -2219,4 +2242,259 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dashboardLiveDataUnavailable =>
       'Dashboard data is not available from the API yet. No sample tasks or statistics are displayed.';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsMarkAllRead => 'Mark all as read';
+
+  @override
+  String get notificationsEmptyTitle => 'No notifications yet';
+
+  @override
+  String get notificationsEmptyBody =>
+      'We\'ll let you know when there are updates about your tasks, messages, or payments.';
+
+  @override
+  String get notificationsToday => 'Today';
+
+  @override
+  String get notificationsYesterday => 'Yesterday';
+
+  @override
+  String get notificationsEarlier => 'Earlier';
+
+  @override
+  String get notificationsNew => 'New';
+
+  @override
+  String get notificationsLoadError => 'Unable to load notifications';
+
+  @override
+  String get notificationsSomethingWentWrong =>
+      'Something went wrong. Please try again.';
+
+  @override
+  String get notificationsMarkReadError =>
+      'The notification could not be marked as read.';
+
+  @override
+  String get notificationsMarkAllError =>
+      'Notifications could not be marked as read.';
+
+  @override
+  String get notificationsNoDestination =>
+      'This update has no available page. Its details are shown here.';
+
+  @override
+  String get notificationsJustNow => 'Just now';
+
+  @override
+  String notificationsMinutesAgo(int count) {
+    return '$count min ago';
+  }
+
+  @override
+  String notificationsHoursAgo(int count) {
+    return '$count hr ago';
+  }
+
+  @override
+  String notificationsDaysAgo(int count) {
+    return '$count days ago';
+  }
+
+  @override
+  String get disputeTitle => 'File a Dispute';
+
+  @override
+  String get disputeSubtitle =>
+      'Let us know what happened. We’ll review your request and help find a fair resolution.';
+
+  @override
+  String get disputeDetails => 'Details';
+
+  @override
+  String get disputeEvidence => 'Evidence';
+
+  @override
+  String get disputeReview => 'Review';
+
+  @override
+  String get disputeSubmitted => 'Submitted';
+
+  @override
+  String get disputeEvidenceTitle => 'Add Evidence';
+
+  @override
+  String get disputeEvidenceSubtitle =>
+      'Upload photos, messages, or documents to support your dispute.';
+
+  @override
+  String get disputeReviewTitle => 'Review & Submit';
+
+  @override
+  String get disputeReviewSubtitle =>
+      'Please review your information before submitting your dispute.';
+
+  @override
+  String get disputeType => 'Dispute Type';
+
+  @override
+  String get disputePayment => 'Payment Issue';
+
+  @override
+  String get disputeQuality => 'Quality of Work';
+
+  @override
+  String get disputeNoShow => 'No-Show';
+
+  @override
+  String get disputeCommunication => 'Communication Issue';
+
+  @override
+  String get disputeOther => 'Other';
+
+  @override
+  String get disputeAgainst => 'Who are you filing against?';
+
+  @override
+  String get disputeAgainstLabel => 'Against';
+
+  @override
+  String get disputeSubject => 'Subject';
+
+  @override
+  String get disputeDescription => 'Description';
+
+  @override
+  String get disputeDescriptionHint =>
+      'Please describe the issue in detail. Include what happened, when it happened, and what you expect as a resolution.';
+
+  @override
+  String disputeCounter(int used, int max) {
+    return '$used/$max';
+  }
+
+  @override
+  String get disputeUpload => 'Upload Files';
+
+  @override
+  String disputeUploadHelp(int count, int size) {
+    return 'Upload photos, screenshots, invoices, or documents (max $count files, $size MB each).';
+  }
+
+  @override
+  String get disputeTapUpload => 'Tap to upload files';
+
+  @override
+  String disputeFormats(int size) {
+    return 'JPG, PNG, PDF (max $size MB each)';
+  }
+
+  @override
+  String get disputeAddMore => 'Add more';
+
+  @override
+  String get disputeNotes => 'Additional Information (Optional)';
+
+  @override
+  String get disputeNotesHint =>
+      'Add any additional notes, links, or relevant information…';
+
+  @override
+  String get disputeNextEvidence => 'Next: Add Evidence';
+
+  @override
+  String get disputeNextReview => 'Next: Review';
+
+  @override
+  String get disputeBack => 'Back';
+
+  @override
+  String get disputeSubmit => 'Submit Dispute';
+
+  @override
+  String get disputeSummary => 'Dispute Summary';
+
+  @override
+  String get disputeEdit => 'Edit';
+
+  @override
+  String disputeAttachments(int count) {
+    return 'Attachments ($count)';
+  }
+
+  @override
+  String get disputeSuccess => 'Dispute Submitted!';
+
+  @override
+  String disputeSuccessBody(String days) {
+    return 'Your dispute has been submitted. We’ll review it and get back to you within $days business days.';
+  }
+
+  @override
+  String get disputeNotification =>
+      'You’ll receive an email and in-app notification once there is an update.';
+
+  @override
+  String get disputeView => 'View My Disputes';
+
+  @override
+  String get disputeHome => 'Back to Home';
+
+  @override
+  String get disputeWhatNext => 'What happens next?';
+
+  @override
+  String disputeTimeline(String days) {
+    return 'Our team will review your dispute within $days business days.';
+  }
+
+  @override
+  String get disputeContact => 'We may contact you for additional information.';
+
+  @override
+  String get disputeResolution =>
+      'You’ll be notified about the resolution by email and in-app notifications.';
+
+  @override
+  String get disputeDiscard => 'Discard this dispute?';
+
+  @override
+  String get disputeDiscardBody => 'Your unsent information will be lost.';
+
+  @override
+  String get disputeDiscardAction => 'Discard';
+
+  @override
+  String disputeFileError(int count, int size) {
+    return 'Choose up to $count JPG, PNG or PDF files, no larger than $size MB each.';
+  }
+
+  @override
+  String get disputeFailed =>
+      'Unable to submit. Your draft is saved here; please try again.';
+
+  @override
+  String get disputeUnavailable =>
+      'This task has no eligible counterpart for a dispute.';
+
+  @override
+  String get disputeMock =>
+      'Demo submission — no dispute is sent to the support team yet.';
+
+  @override
+  String get disputeListPlaceholder =>
+      'Dispute history will be available when the disputes service is connected.';
+
+  @override
+  String disputeRemove(String name) {
+    return 'Remove $name';
+  }
+
+  @override
+  String get disputePickFailed =>
+      'Unable to read the selected files. Please try again.';
 }

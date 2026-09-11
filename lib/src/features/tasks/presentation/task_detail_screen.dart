@@ -44,6 +44,10 @@ class TaskDetailScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.taskDetails),
         actions: [
+          if (taskAsync.asData?.value case final task?)
+            if ((isClient && task.clientId == user?.id && task.assignedTaskerId != null) ||
+                (isTasker && task.assignedTaskerId == user?.id && task.clientId != null))
+              IconButton(onPressed: () => context.push('/disputes/new?taskId=$taskId'), icon: const Icon(Icons.report_problem_outlined), tooltip: l10n.disputeTitle),
           IconButton(
             onPressed: () => showLanguagePicker(context),
             icon: const Icon(Icons.language),
@@ -289,7 +293,7 @@ class TaskDetailScreen extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             (task.assignedTaskerName ?? '').trim().isEmpty
-                                ? '—'
+                                ? 'â€”'
                                 : task.assignedTaskerName!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

@@ -24,9 +24,22 @@ void main() {
 
     test('rejects missing required fields', () {
       expect(
-        () => NotificationPayload.fromJson({...json}..remove('target_id')),
+        () =>
+            NotificationPayload.fromJson({...json}..remove('notification_id')),
         throwsFormatException,
       );
+    });
+
+    test('accepts defensive FCM payloads without role or target_id', () {
+      final payload = NotificationPayload.fromJson(const {
+        'notification_id': 'n-1',
+        'type': 'message_received',
+        'conversation_id': '52',
+      });
+
+      expect(payload.role, isNull);
+      expect(payload.targetId, isNull);
+      expect(payload.conversationId, 52);
     });
 
     test('rejects unsupported roles', () {

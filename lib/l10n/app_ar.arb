@@ -20,8 +20,20 @@
   "publicProfileSendMessage": "إرسال رسالة",
   "publicProfileReport": "الإبلاغ عن الملف",
   "publicProfileBlock": "حظر",
-  "@publicProfileRespondsWithin": {"placeholders":{"count":{"type":"String"}}},
-  "@publicProfileThisMonth": {"placeholders":{"count":{"type":"String"}}},
+  "@publicProfileRespondsWithin": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@publicProfileThisMonth": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "profileEdit": "تعديل الملف",
   "profileEditUnavailable": "تعديل الملف غير متاح بعد في واجهة التطبيق.",
   "profileAboutMe": "نبذة عني",
@@ -54,13 +66,55 @@
   "profileCompletionBasis": "بناءً على الأعمال المكتملة والمسندة",
   "profileCurrentPeriod": "الفترة المحددة حالياً",
   "profilePrivate": "يتم عرض ملفك وأرباحك وتقييماتك وأعمالك فقط.",
-  "@profileMoreSkills": {"placeholders":{"count":{"type":"int"}}},
-  "@profileReviewsTitle": {"placeholders":{"count":{"type":"String"}}},
-  "@profileBadgeReviewCaption": {"placeholders":{"count":{"type":"String"}}},
-  "@profileMinutesAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileHoursAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileDaysAgo": {"placeholders":{"count":{"type":"String"}}},
-  "@profileWeeksAgo": {"placeholders":{"count":{"type":"String"}}},
+  "@profileMoreSkills": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@profileReviewsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileBadgeReviewCaption": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@profileWeeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "paymentsPeriod": "فترة المدفوعات",
   "paymentsTitle": "مدفوعاتي",
   "paymentsSubtitle": "تتبع إنفاقك وأدر مدفوعاتك",
@@ -895,5 +949,163 @@
   "adminCleaning": "التنظيف",
   "adminPainting": "الصباغة",
   "adminDetailedAnalyticsUnavailable": "ستظهر التحليلات التفصيلية عندما توفرها واجهة برمجة الإدارة. لا يتم عرض أي بيانات تجريبية.",
-  "dashboardLiveDataUnavailable": "بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية."
+  "dashboardLiveDataUnavailable": "بيانات لوحة التحكم غير متاحة من الواجهة البرمجية بعد. لا يتم عرض مهام أو إحصاءات تجريبية.",
+  "notificationsTitle": "الإشعارات",
+  "notificationsMarkAllRead": "تحديد الكل كمقروء",
+  "notificationsEmptyTitle": "لا توجد إشعارات بعد",
+  "notificationsEmptyBody": "سنخبرك عند وجود تحديثات حول مهامك أو رسائلك أو مدفوعاتك.",
+  "notificationsToday": "اليوم",
+  "notificationsYesterday": "أمس",
+  "notificationsEarlier": "سابقاً",
+  "notificationsNew": "جديد",
+  "notificationsLoadError": "تعذر تحميل الإشعارات",
+  "notificationsSomethingWentWrong": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+  "notificationsMarkReadError": "تعذر تحديد الإشعار كمقروء.",
+  "notificationsMarkAllError": "تعذر تحديد الإشعارات كمقروءة.",
+  "notificationsNoDestination": "لا توجد صفحة متاحة لهذا التحديث. يتم عرض التفاصيل هنا.",
+  "notificationsJustNow": "الآن",
+  "notificationsMinutesAgo": "قبل {count} دقيقة",
+  "@notificationsMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsHoursAgo": "قبل {count} ساعة",
+  "@notificationsHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsDaysAgo": "قبل {count} أيام",
+  "@notificationsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTitle": "تقديم نزاع",
+  "disputeSubtitle": "أخبرنا بما حدث. سنراجع طلبك ونساعدك في إيجاد حل عادل.",
+  "disputeDetails": "التفاصيل",
+  "disputeEvidence": "الأدلة",
+  "disputeReview": "المراجعة",
+  "disputeSubmitted": "تم الإرسال",
+  "disputeEvidenceTitle": "إضافة أدلة",
+  "disputeEvidenceSubtitle": "أرفق صوراً أو رسائل أو مستندات لدعم نزاعك.",
+  "disputeReviewTitle": "المراجعة والإرسال",
+  "disputeReviewSubtitle": "يرجى مراجعة المعلومات قبل إرسال النزاع.",
+  "disputeType": "نوع النزاع",
+  "disputePayment": "مشكلة في الدفع",
+  "disputeQuality": "جودة العمل",
+  "disputeNoShow": "عدم الحضور",
+  "disputeCommunication": "مشكلة في التواصل",
+  "disputeOther": "أخرى",
+  "disputeAgainst": "ضد من تقدم النزاع؟",
+  "disputeAgainstLabel": "ضد",
+  "disputeSubject": "الموضوع",
+  "disputeDescription": "الوصف",
+  "disputeDescriptionHint": "صف المشكلة بالتفصيل، ومتى حدثت، والحل الذي تتوقعه.",
+  "disputeCounter": "{used}/{max}",
+  "@disputeCounter": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeUpload": "رفع الملفات",
+  "disputeUploadHelp": "ارفع صوراً أو لقطات شاشة أو فواتير أو مستندات (بحد أقصى {count} ملفات، {size} ميغابايت لكل ملف).",
+  "@disputeUploadHelp": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeTapUpload": "اضغط لرفع الملفات",
+  "disputeFormats": "JPG، PNG، PDF (بحد أقصى {size} ميغابايت لكل ملف)",
+  "@disputeFormats": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeAddMore": "إضافة المزيد",
+  "disputeNotes": "معلومات إضافية (اختياري)",
+  "disputeNotesHint": "أضف ملاحظات أو روابط أو معلومات ذات صلة…",
+  "disputeNextEvidence": "التالي: إضافة أدلة",
+  "disputeNextReview": "التالي: المراجعة",
+  "disputeBack": "رجوع",
+  "disputeSubmit": "إرسال النزاع",
+  "disputeSummary": "ملخص النزاع",
+  "disputeEdit": "تعديل",
+  "disputeAttachments": "المرفقات ({count})",
+  "@disputeAttachments": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeSuccess": "تم إرسال النزاع!",
+  "disputeSuccessBody": "تم إرسال نزاعك. سنراجعه ونرد عليك خلال {days} أيام عمل.",
+  "@disputeSuccessBody": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeNotification": "ستتلقى بريداً إلكترونياً وإشعاراً داخل التطبيق عند توفر تحديث.",
+  "disputeView": "عرض نزاعاتي",
+  "disputeHome": "العودة للرئيسية",
+  "disputeWhatNext": "ماذا يحدث بعد ذلك؟",
+  "disputeTimeline": "سيراجع فريقنا نزاعك خلال {days} أيام عمل.",
+  "@disputeTimeline": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "disputeContact": "قد نتواصل معك للحصول على معلومات إضافية.",
+  "disputeResolution": "سيتم إبلاغك بالحل عبر البريد الإلكتروني وإشعارات التطبيق.",
+  "disputeDiscard": "تجاهل هذا النزاع؟",
+  "disputeDiscardBody": "ستفقد المعلومات التي لم ترسلها.",
+  "disputeDiscardAction": "تجاهل",
+  "disputeFileError": "اختر حتى {count} ملفات JPG أو PNG أو PDF، لا يتجاوز حجم كل منها {size} ميغابايت.",
+  "@disputeFileError": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "disputeFailed": "تعذر الإرسال. مسودتك محفوظة هنا؛ حاول مجدداً.",
+  "disputeUnavailable": "لا يوجد طرف مقابل مؤهل للنزاع في هذه المهمة.",
+  "disputeMock": "إرسال تجريبي — لن يتم إرسال النزاع إلى فريق الدعم حالياً.",
+  "disputeListPlaceholder": "سيصبح سجل النزاعات متاحاً عند ربط خدمة النزاعات.",
+  "disputeRemove": "إزالة {name}",
+  "@disputeRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "disputePickFailed": "تعذرت قراءة الملفات المحددة. حاول مجدداً."
 }

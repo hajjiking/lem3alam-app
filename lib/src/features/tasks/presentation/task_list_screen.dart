@@ -14,6 +14,7 @@ import '../../../core/ui/app_widgets.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
 import '../../auth/presentation/auth_state.dart';
+import '../../notifications/application/notification_center_controller.dart';
 import '../domain/task.dart';
 import 'task_image_support.dart';
 import 'tasks_controller.dart';
@@ -60,6 +61,7 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
     final isClient = user?.isClient == true;
     final canCreate = isClient;
     final l10n = context.l10n;
+    ref.watch(unreadNotificationCountProvider);
     ref.listen(
         authControllerProvider
             .select((auth) => (auth.status, auth.user?.id, auth.user?.role)),
@@ -223,11 +225,18 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
             ),
           if (isLoggedIn)
             IconButton(
-              onPressed: () => ref
-                  .read(tasksListControllerProvider.notifier)
-                  .loadFirstPage(),
-              icon: const Icon(Icons.notifications_outlined),
-              tooltip: l10n.refreshAction,
+              onPressed: () => context.pushNamed(AppRouteNames.notifications),
+              icon: Badge(
+                isLabelVisible: ref.read(unreadNotificationCountProvider) > 0,
+                label: Text(
+                  ref.read(unreadNotificationCountProvider) > 99
+                      ? '99+'
+                      : '${ref.read(unreadNotificationCountProvider)}',
+                  textDirection: TextDirection.ltr,
+                ),
+                child: const Icon(Icons.notifications_outlined),
+              ),
+              tooltip: l10n.dashboardNotifications,
             ),
         ] else ...[
           IconButton(

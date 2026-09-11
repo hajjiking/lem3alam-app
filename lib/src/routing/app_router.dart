@@ -1,3 +1,4 @@
+import '../features/disputes/presentation/dispute_flow_screen.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -21,6 +22,7 @@ import '../features/location/presentation/map_picker_screen.dart';
 import '../features/location/presentation/nearby_providers_map_screen.dart';
 import '../features/messages/presentation/messages_screen.dart';
 import '../features/messages/application/conversations_controller.dart';
+import '../features/notifications/presentation/notifications_screen.dart';
 import '../features/earnings/presentation/earnings_screen.dart';
 import '../features/payments/presentation/client_payments_screen.dart';
 import '../features/payments/application/client_payments_controller.dart';
@@ -65,6 +67,7 @@ abstract class AppRouteNames {
   static const messageThread = 'messageThread';
   static const earnings = 'earnings';
   static const payments = 'payments';
+  static const notifications = 'notifications';
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -82,6 +85,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       final isSplash = location == '/splash';
       final isAuthRoute = location == '/login' || location == '/register';
       final isAdminHome = location == '/admin';
+      final isNotifications = location == '/notifications';
       final isTaskList = location == '/tasks';
       final isTaskDetail = RegExp(r'^/tasks/\d+$').hasMatch(location);
       final isNearbyTasks = location == '/nearby-tasks';
@@ -118,6 +122,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
       if (auth.status == AuthStatus.authenticated) {
         if (isAuthRoute) return isAdmin ? '/admin' : '/dashboard';
+        if (isNotifications && !isClient && !isTasker) return '/admin';
         if (isAdmin && !isAdminHome && location == '/dashboard') {
           return '/admin';
         }
@@ -136,6 +141,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      GoRoute(path: '/disputes/new', redirect: (context, state) {
+        final id = int.tryParse(state.uri.queryParameters['taskId'] ?? '');
+        return id == null || id <= 0 ? '/tasks' : null;
+      }, builder: (context, state) => DisputeFlowScreen(taskId: int.parse(state.uri.queryParameters['taskId']!))),
+      GoRoute(path: '/disputes', builder: (context, state) => const DisputesListScreen()),
       GoRoute(
         path: '/splash',
         name: AppRouteNames.splash,
@@ -230,6 +240,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => TaskDetailScreen(
           taskId: int.tryParse(state.pathParameters['targetId'] ?? '') ?? 0,
         ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/notifications',
+        name: AppRouteNames.notifications,
+        builder: (context, state) => const NotificationsScreen(),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,

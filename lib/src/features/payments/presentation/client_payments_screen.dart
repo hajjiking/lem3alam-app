@@ -47,8 +47,7 @@ class ClientPaymentsScreen extends ConsumerWidget {
                       notificationsLabel: l.dashboardNotifications,
                       profileLabel: l.dashboardProfile,
                       onMenuTap: () => showDashboardMenu(context, ref),
-                      onNotificationsTap: () => showDashboardFeatureNotice(
-                          context, l.dashboardNotifications),
+                      onNotificationsTap: () => openNotifications(context),
                       onProfileTap: () =>
                           openDashboardProfile(context, user?.id, false),
                       onAvailabilityTap: () {})),

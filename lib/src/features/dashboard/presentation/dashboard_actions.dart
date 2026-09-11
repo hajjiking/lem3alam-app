@@ -28,6 +28,10 @@ void openDashboardProfile(BuildContext context, int? userId, bool isTasker) {
   showDashboardFeatureNotice(context, context.l10n.dashboardProfile);
 }
 
+void openNotifications(BuildContext context) {
+  context.pushNamed(AppRouteNames.notifications);
+}
+
 Future<void> showDashboardMenu(BuildContext context, WidgetRef ref) async {
   final l10n = context.l10n;
   final themeModeNotifier = ref.read(themeModeControllerProvider.notifier);
