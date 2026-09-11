@@ -80,8 +80,6 @@ class DisputeSubmittedStep extends StatelessWidget {
                         Expanded(child: Text(next[i]))
                       ]))
           ])),
-      const SizedBox(height: 16),
-      Text(l.disputeMock, textAlign: TextAlign.center)
     ]);
   }
 

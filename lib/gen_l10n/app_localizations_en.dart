@@ -2482,14 +2482,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'This task has no eligible counterpart for a dispute.';
 
   @override
-  String get disputeMock =>
-      'Demo submission — no dispute is sent to the support team yet.';
-
-  @override
-  String get disputeListPlaceholder =>
-      'Dispute history will be available when the disputes service is connected.';
-
-  @override
   String disputeRemove(String name) {
     return 'Remove $name';
   }
@@ -2497,4 +2489,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get disputePickFailed =>
       'Unable to read the selected files. Please try again.';
+
+  @override
+  String get disputeEmpty => 'No disputes yet.';
+
+  @override
+  String get disputeOpen => 'Open';
+
+  @override
+  String get disputeInReview => 'Under review';
+
+  @override
+  String get disputeResolved => 'Resolved';
+
+  @override
+  String get disputeClosed => 'Closed';
+
+  @override
+  String get disputeNextPage => 'Next page';
+
+  @override
+  String get disputePreviousPage => 'Previous page';
 }

@@ -1250,8 +1250,6 @@
   },
   "disputeFailed": "Unable to submit. Your draft is saved here; please try again.",
   "disputeUnavailable": "This task has no eligible counterpart for a dispute.",
-  "disputeMock": "Demo submission — no dispute is sent to the support team yet.",
-  "disputeListPlaceholder": "Dispute history will be available when the disputes service is connected.",
   "disputeRemove": "Remove {name}",
   "@disputeRemove": {
     "placeholders": {
@@ -1260,5 +1258,12 @@
       }
     }
   },
-  "disputePickFailed": "Unable to read the selected files. Please try again."
+  "disputePickFailed": "Unable to read the selected files. Please try again.",
+  "disputeEmpty": "No disputes yet.",
+  "disputeOpen": "Open",
+  "disputeInReview": "Under review",
+  "disputeResolved": "Resolved",
+  "disputeClosed": "Closed",
+  "disputeNextPage": "Next page",
+  "disputePreviousPage": "Previous page"
 }

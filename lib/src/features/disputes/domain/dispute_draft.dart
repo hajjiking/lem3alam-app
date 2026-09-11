@@ -14,6 +14,7 @@ abstract final class DisputeLimits {
   static const maxFiles = 5;
   static const maxMegabytes = 5;
   static const maxBytes = maxMegabytes * 1024 * 1024;
+  static const subjectLength = 255;
   static const descriptionLength = 1000;
   static const notesLength = 500;
   static const warningRatio = .9;
@@ -55,6 +56,7 @@ class DisputeDraft {
       againstUserId != null &&
       disputeType != null &&
       subject.trim().isNotEmpty &&
+      subject.length <= DisputeLimits.subjectLength &&
       description.trim().isNotEmpty &&
       description.length <= DisputeLimits.descriptionLength &&
       additionalInfo.length <= DisputeLimits.notesLength;

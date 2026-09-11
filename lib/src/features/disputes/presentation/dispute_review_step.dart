@@ -58,10 +58,6 @@ class DisputeReviewStep extends StatelessWidget {
       Wrap(spacing: 12, runSpacing: 12, children: [
         for (final file in draft.evidenceFiles) EvidenceThumbnail(file: file)
       ]),
-      const SizedBox(height: 20),
-      Text(l.disputeMock,
-          style:
-              TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant))
     ]);
   }
 }

@@ -2449,18 +2449,31 @@ class AppLocalizationsAr extends AppLocalizations {
       'لا يوجد طرف مقابل مؤهل للنزاع في هذه المهمة.';
 
   @override
-  String get disputeMock =>
-      'إرسال تجريبي — لن يتم إرسال النزاع إلى فريق الدعم حالياً.';
-
-  @override
-  String get disputeListPlaceholder =>
-      'سيصبح سجل النزاعات متاحاً عند ربط خدمة النزاعات.';
-
-  @override
   String disputeRemove(String name) {
     return 'إزالة $name';
   }
 
   @override
   String get disputePickFailed => 'تعذرت قراءة الملفات المحددة. حاول مجدداً.';
+
+  @override
+  String get disputeEmpty => 'لا توجد نزاعات بعد.';
+
+  @override
+  String get disputeOpen => 'مفتوح';
+
+  @override
+  String get disputeInReview => 'قيد المراجعة';
+
+  @override
+  String get disputeResolved => 'تم الحل';
+
+  @override
+  String get disputeClosed => 'مغلق';
+
+  @override
+  String get disputeNextPage => 'الصفحة التالية';
+
+  @override
+  String get disputePreviousPage => 'الصفحة السابقة';
 }

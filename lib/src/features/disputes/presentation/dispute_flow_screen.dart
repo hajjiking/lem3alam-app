@@ -1,3 +1,4 @@
+import '../../../core/l10n/api_error_localizer.dart';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -296,7 +297,11 @@ class _DisputeFlowState extends ConsumerState<_DisputeFlow> {
                                         Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 16),
-                                            child: Text(l.disputeFailed,
+                                            child: Text(
+                                                state.error == null
+                                                    ? l.disputeFailed
+                                                    : localizeApiException(
+                                                        context, state.error!),
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -349,25 +354,5 @@ class _DisputeFlowState extends ConsumerState<_DisputeFlow> {
                                     ]
                                   ]);
                             }))))));
-  }
-}
-
-class DisputesListScreen extends StatelessWidget {
-  const DisputesListScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    // TODO: wire to real disputes list.
-    return Scaffold(
-        appBar: AppBar(title: Text(context.l10n.disputeView)),
-        body: Center(
-            child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  Text(context.l10n.disputeListPlaceholder,
-                      textAlign: TextAlign.center),
-                  TextButton(
-                      onPressed: () => context.go('/dashboard'),
-                      child: Text(context.l10n.disputeHome))
-                ]))));
   }
 }

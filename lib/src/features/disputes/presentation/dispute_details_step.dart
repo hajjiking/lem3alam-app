@@ -39,6 +39,7 @@ class DisputeDetailsStep extends StatelessWidget {
       DisputeTextField(
           label: '${l.disputeSubject} *',
           value: draft.subject,
+          limit: DisputeLimits.subjectLength,
           onChanged: (v) => onChanged(draft.copyWith(subject: v))),
       DisputeTextField(
           label: '${l.disputeDescription} *',

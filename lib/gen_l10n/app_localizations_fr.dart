@@ -2514,14 +2514,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucune partie adverse disponible pour cette tâche.';
 
   @override
-  String get disputeMock =>
-      'Envoi de démonstration : aucun litige n’est transmis à l’assistance pour le moment.';
-
-  @override
-  String get disputeListPlaceholder =>
-      'L’historique sera disponible une fois le service des litiges connecté.';
-
-  @override
   String disputeRemove(String name) {
     return 'Supprimer $name';
   }
@@ -2529,4 +2521,25 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get disputePickFailed =>
       'Impossible de lire les fichiers sélectionnés. Réessayez.';
+
+  @override
+  String get disputeEmpty => 'Aucun litige pour le moment.';
+
+  @override
+  String get disputeOpen => 'Ouvert';
+
+  @override
+  String get disputeInReview => 'En cours d’examen';
+
+  @override
+  String get disputeResolved => 'Résolu';
+
+  @override
+  String get disputeClosed => 'Fermé';
+
+  @override
+  String get disputeNextPage => 'Page suivante';
+
+  @override
+  String get disputePreviousPage => 'Page précédente';
 }

@@ -58,7 +58,7 @@ class TaskContextCard extends StatelessWidget {
                           ]),
                         if (task.budgetMin != null)
                           Text(
-                              '${format.format(task.budgetMin)}${task.budgetMax != null && task.budgetMax != task.budgetMin ? ' â€“ ${format.format(task.budgetMax)}' : ''} MAD',
+                              '${format.format(task.budgetMin)}${task.budgetMax != null && task.budgetMax != task.budgetMin ? ' – ${format.format(task.budgetMax)}' : ''} MAD',
                               textDirection: TextDirection.ltr,
                               style: TextStyle(
                                   color: scheme.primary,

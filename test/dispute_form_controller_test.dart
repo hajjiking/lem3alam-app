@@ -6,6 +6,9 @@ import 'package:lem3alam_mobile/src/features/disputes/data/disputes_repository.d
 import 'package:lem3alam_mobile/src/features/disputes/domain/dispute_draft.dart';
 
 class TestRepository implements DisputesRepository {
+  @override
+  Future<DisputesPage> list({int page = 1}) async =>
+      const DisputesPage(items: [], page: 1, lastPage: 1);
   bool fail = false;
   int calls = 0;
   @override

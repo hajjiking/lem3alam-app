@@ -293,7 +293,7 @@ class TaskDetailScreen extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             (task.assignedTaskerName ?? '').trim().isEmpty
-                                ? 'â€”'
+                                ? '—'
                                 : task.assignedTaskerName!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

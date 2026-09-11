@@ -4492,18 +4492,6 @@ abstract class AppLocalizations {
   /// **'This task has no eligible counterpart for a dispute.'**
   String get disputeUnavailable;
 
-  /// No description provided for @disputeMock.
-  ///
-  /// In en, this message translates to:
-  /// **'Demo submission — no dispute is sent to the support team yet.'**
-  String get disputeMock;
-
-  /// No description provided for @disputeListPlaceholder.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute history will be available when the disputes service is connected.'**
-  String get disputeListPlaceholder;
-
   /// No description provided for @disputeRemove.
   ///
   /// In en, this message translates to:
@@ -4515,6 +4503,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to read the selected files. Please try again.'**
   String get disputePickFailed;
+
+  /// No description provided for @disputeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No disputes yet.'**
+  String get disputeEmpty;
+
+  /// No description provided for @disputeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get disputeOpen;
+
+  /// No description provided for @disputeInReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get disputeInReview;
+
+  /// No description provided for @disputeResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get disputeResolved;
+
+  /// No description provided for @disputeClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get disputeClosed;
+
+  /// No description provided for @disputeNextPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Next page'**
+  String get disputeNextPage;
+
+  /// No description provided for @disputePreviousPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous page'**
+  String get disputePreviousPage;
 }
 
 class _AppLocalizationsDelegate

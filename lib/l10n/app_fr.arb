@@ -1097,8 +1097,6 @@
   },
   "disputeFailed": "Envoi impossible. Votre brouillon est conservé ici ; réessayez.",
   "disputeUnavailable": "Aucune partie adverse disponible pour cette tâche.",
-  "disputeMock": "Envoi de démonstration : aucun litige n’est transmis à l’assistance pour le moment.",
-  "disputeListPlaceholder": "L’historique sera disponible une fois le service des litiges connecté.",
   "disputeRemove": "Supprimer {name}",
   "@disputeRemove": {
     "placeholders": {
@@ -1107,5 +1105,12 @@
       }
     }
   },
-  "disputePickFailed": "Impossible de lire les fichiers sélectionnés. Réessayez."
+  "disputePickFailed": "Impossible de lire les fichiers sélectionnés. Réessayez.",
+  "disputeEmpty": "Aucun litige pour le moment.",
+  "disputeOpen": "Ouvert",
+  "disputeInReview": "En cours d’examen",
+  "disputeResolved": "Résolu",
+  "disputeClosed": "Fermé",
+  "disputeNextPage": "Page suivante",
+  "disputePreviousPage": "Page précédente"
 }

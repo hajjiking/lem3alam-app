@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/dispute_draft.dart';
+import '../../../core/networking/api_exception.dart';
 import '../data/disputes_repository.dart';
 
 final disputeFormProvider =
@@ -11,10 +12,12 @@ class DisputeFormState {
       {this.draft,
       this.step = 0,
       this.submitting = false,
-      this.failed = false});
+      this.failed = false,
+      this.error});
   final DisputeDraft? draft;
   final int step;
   final bool submitting, failed;
+  final ApiException? error;
 }
 
 enum EvidenceError { count, size, format }
@@ -66,9 +69,15 @@ class DisputeFormController extends Notifier<DisputeFormState> {
         state = const DisputeFormState(
             step: 3); // Clear sensitive draft and evidence on success.
       }
-    } catch (_) {
+    } catch (error) {
       if (ref.mounted) {
-        state = DisputeFormState(draft: draft, step: 2, failed: true);
+        state = DisputeFormState(
+            draft: draft,
+            step: 2,
+            failed: true,
+            error: error is ApiException
+                ? error
+                : const ApiException(message: 'err_unknown'));
       }
     }
   }

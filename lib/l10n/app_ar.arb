@@ -1097,8 +1097,6 @@
   },
   "disputeFailed": "تعذر الإرسال. مسودتك محفوظة هنا؛ حاول مجدداً.",
   "disputeUnavailable": "لا يوجد طرف مقابل مؤهل للنزاع في هذه المهمة.",
-  "disputeMock": "إرسال تجريبي — لن يتم إرسال النزاع إلى فريق الدعم حالياً.",
-  "disputeListPlaceholder": "سيصبح سجل النزاعات متاحاً عند ربط خدمة النزاعات.",
   "disputeRemove": "إزالة {name}",
   "@disputeRemove": {
     "placeholders": {
@@ -1107,5 +1105,12 @@
       }
     }
   },
-  "disputePickFailed": "تعذرت قراءة الملفات المحددة. حاول مجدداً."
+  "disputePickFailed": "تعذرت قراءة الملفات المحددة. حاول مجدداً.",
+  "disputeEmpty": "لا توجد نزاعات بعد.",
+  "disputeOpen": "مفتوح",
+  "disputeInReview": "قيد المراجعة",
+  "disputeResolved": "تم الحل",
+  "disputeClosed": "مغلق",
+  "disputeNextPage": "الصفحة التالية",
+  "disputePreviousPage": "الصفحة السابقة"
 }
