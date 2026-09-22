@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../routing/app_router.dart';
 import '../../dashboard/presentation/dashboard_actions.dart';
+import '../../safety/presentation/report_user_sheet.dart';
 import '../application/chat_thread_controller.dart';
 import '../application/conversations_controller.dart';
 import '../domain/conversation_model.dart';
@@ -82,9 +83,15 @@ class _ChatThreadPaneState extends ConsumerState<ChatThreadPane> {
               .showSnackBar(SnackBar(content: Text(l10n.errUnknown)));
         }
       }
+    } else if (action == 'report') {
+      await showReportUserSheet(
+        context,
+        ref,
+        reportedUserId: widget.conversation.contactId,
+        taskId: widget.conversation.taskId,
+      );
     } else {
-      showDashboardFeatureNotice(context,
-          action == 'block' ? l10n.messagesBlock : l10n.messagesReport);
+      showDashboardFeatureNotice(context, l10n.messagesBlock);
     }
   }
 

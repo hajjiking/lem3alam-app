@@ -4833,6 +4833,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reason: {reason}'**
   String kycRejectionReason(String reason);
+
+  /// No description provided for @reportUserTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report user'**
+  String get reportUserTitle;
+
+  /// No description provided for @reportUserExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what happened. The user will not be notified that you submitted this report.'**
+  String get reportUserExplanation;
+
+  /// No description provided for @reportReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reportReason;
+
+  /// No description provided for @reportDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional details (optional)'**
+  String get reportDetails;
+
+  /// No description provided for @reportChooseReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a reason for the report.'**
+  String get reportChooseReason;
+
+  /// No description provided for @reportSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit report'**
+  String get reportSubmit;
+
+  /// No description provided for @reportSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your report was submitted for review.'**
+  String get reportSubmitted;
+
+  /// No description provided for @reportHarassment.
+  ///
+  /// In en, this message translates to:
+  /// **'Harassment or threats'**
+  String get reportHarassment;
+
+  /// No description provided for @reportSpam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or misleading activity'**
+  String get reportSpam;
+
+  /// No description provided for @reportFraud.
+  ///
+  /// In en, this message translates to:
+  /// **'Fraud or attempted scam'**
+  String get reportFraud;
+
+  /// No description provided for @reportInappropriate.
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate content'**
+  String get reportInappropriate;
+
+  /// No description provided for @reportOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get reportOther;
 }
 
 class _AppLocalizationsDelegate

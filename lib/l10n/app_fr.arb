@@ -1162,4 +1162,16 @@
   "kycLoadError": "Impossible de charger le statut de vérification.",
   "kycRejectionReason": "Motif : {reason}",
   "@kycRejectionReason": {"placeholders": {"reason": {"type": "String"}}}
+  ,"reportUserTitle": "Signaler l’utilisateur",
+  "reportUserExplanation": "Décrivez ce qui s’est passé. L’utilisateur ne sera pas informé de votre signalement.",
+  "reportReason": "Motif",
+  "reportDetails": "Informations supplémentaires (facultatif)",
+  "reportChooseReason": "Choisissez un motif de signalement.",
+  "reportSubmit": "Envoyer le signalement",
+  "reportSubmitted": "Votre signalement a été envoyé pour examen.",
+  "reportHarassment": "Harcèlement ou menaces",
+  "reportSpam": "Spam ou activité trompeuse",
+  "reportFraud": "Fraude ou tentative d’arnaque",
+  "reportInappropriate": "Contenu inapproprié",
+  "reportOther": "Autre"
 }

@@ -8,6 +8,8 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/ui/app_theme.dart';
 import '../../../routing/app_router.dart';
 import '../../auth/presentation/auth_controller.dart';
+import '../../dashboard/presentation/dashboard_actions.dart';
+import '../../safety/presentation/report_user_sheet.dart';
 import '../domain/public_profile_model.dart';
 import 'areas_of_expertise_card.dart';
 import 'my_work_card.dart';
@@ -121,6 +123,20 @@ class _LoadedProfile extends ConsumerWidget {
                   },
                   onShare: () => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(context.l10n.profileShare))),
+                  onAction: (action) {
+                    if (action == 'report') {
+                      showReportUserSheet(
+                        context,
+                        ref,
+                        reportedUserId: profile.id,
+                      );
+                    } else {
+                      showDashboardFeatureNotice(
+                        context,
+                        context.l10n.publicProfileBlock,
+                      );
+                    }
+                  },
                 ),
                 _Constrained(
                   child: Padding(

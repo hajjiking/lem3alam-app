@@ -2698,4 +2698,41 @@ class AppLocalizationsFr extends AppLocalizations {
   String kycRejectionReason(String reason) {
     return 'Motif : $reason';
   }
+
+  @override
+  String get reportUserTitle => 'Signaler l’utilisateur';
+
+  @override
+  String get reportUserExplanation =>
+      'Décrivez ce qui s’est passé. L’utilisateur ne sera pas informé de votre signalement.';
+
+  @override
+  String get reportReason => 'Motif';
+
+  @override
+  String get reportDetails => 'Informations supplémentaires (facultatif)';
+
+  @override
+  String get reportChooseReason => 'Choisissez un motif de signalement.';
+
+  @override
+  String get reportSubmit => 'Envoyer le signalement';
+
+  @override
+  String get reportSubmitted => 'Votre signalement a été envoyé pour examen.';
+
+  @override
+  String get reportHarassment => 'Harcèlement ou menaces';
+
+  @override
+  String get reportSpam => 'Spam ou activité trompeuse';
+
+  @override
+  String get reportFraud => 'Fraude ou tentative d’arnaque';
+
+  @override
+  String get reportInappropriate => 'Contenu inapproprié';
+
+  @override
+  String get reportOther => 'Autre';
 }

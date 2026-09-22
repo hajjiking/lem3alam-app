@@ -2664,4 +2664,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String kycRejectionReason(String reason) {
     return 'Reason: $reason';
   }
+
+  @override
+  String get reportUserTitle => 'Report user';
+
+  @override
+  String get reportUserExplanation =>
+      'Tell us what happened. The user will not be notified that you submitted this report.';
+
+  @override
+  String get reportReason => 'Reason';
+
+  @override
+  String get reportDetails => 'Additional details (optional)';
+
+  @override
+  String get reportChooseReason => 'Choose a reason for the report.';
+
+  @override
+  String get reportSubmit => 'Submit report';
+
+  @override
+  String get reportSubmitted => 'Your report was submitted for review.';
+
+  @override
+  String get reportHarassment => 'Harassment or threats';
+
+  @override
+  String get reportSpam => 'Spam or misleading activity';
+
+  @override
+  String get reportFraud => 'Fraud or attempted scam';
+
+  @override
+  String get reportInappropriate => 'Inappropriate content';
+
+  @override
+  String get reportOther => 'Other';
 }

@@ -8,10 +8,12 @@ class PublicProfileAppBar extends StatelessWidget
     super.key,
     required this.onBack,
     required this.onShare,
+    required this.onAction,
   });
 
   final VoidCallback onBack;
   final VoidCallback onShare;
+  final ValueChanged<String> onAction;
 
   @override
   Size get preferredSize => const Size.fromHeight(64);
@@ -38,6 +40,7 @@ class PublicProfileAppBar extends StatelessWidget
         PopupMenuButton<String>(
           tooltip: MaterialLocalizations.of(context).showMenuTooltip,
           iconColor: Colors.white,
+          onSelected: onAction,
           itemBuilder: (context) => [
             PopupMenuItem(
               value: 'report',

@@ -1315,4 +1315,16 @@
   "kycLoadError": "Verification status could not be loaded.",
   "kycRejectionReason": "Reason: {reason}",
   "@kycRejectionReason": {"placeholders": {"reason": {"type": "String"}}}
+  ,"reportUserTitle": "Report user",
+  "reportUserExplanation": "Tell us what happened. The user will not be notified that you submitted this report.",
+  "reportReason": "Reason",
+  "reportDetails": "Additional details (optional)",
+  "reportChooseReason": "Choose a reason for the report.",
+  "reportSubmit": "Submit report",
+  "reportSubmitted": "Your report was submitted for review.",
+  "reportHarassment": "Harassment or threats",
+  "reportSpam": "Spam or misleading activity",
+  "reportFraud": "Fraud or attempted scam",
+  "reportInappropriate": "Inappropriate content",
+  "reportOther": "Other"
 }

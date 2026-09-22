@@ -2626,4 +2626,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String kycRejectionReason(String reason) {
     return 'السبب: $reason';
   }
+
+  @override
+  String get reportUserTitle => 'الإبلاغ عن المستخدم';
+
+  @override
+  String get reportUserExplanation =>
+      'أخبرنا بما حدث. لن يتم إشعار المستخدم بأنك أرسلت هذا البلاغ.';
+
+  @override
+  String get reportReason => 'السبب';
+
+  @override
+  String get reportDetails => 'تفاصيل إضافية (اختياري)';
+
+  @override
+  String get reportChooseReason => 'اختر سبب البلاغ.';
+
+  @override
+  String get reportSubmit => 'إرسال البلاغ';
+
+  @override
+  String get reportSubmitted => 'تم إرسال بلاغك للمراجعة.';
+
+  @override
+  String get reportHarassment => 'مضايقة أو تهديد';
+
+  @override
+  String get reportSpam => 'رسائل مزعجة أو نشاط مضلل';
+
+  @override
+  String get reportFraud => 'احتيال أو محاولة نصب';
+
+  @override
+  String get reportInappropriate => 'محتوى غير لائق';
+
+  @override
+  String get reportOther => 'سبب آخر';
 }

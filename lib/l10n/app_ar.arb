@@ -1162,4 +1162,16 @@
   "kycLoadError": "تعذر تحميل حالة التحقق.",
   "kycRejectionReason": "السبب: {reason}",
   "@kycRejectionReason": {"placeholders": {"reason": {"type": "String"}}}
+  ,"reportUserTitle": "الإبلاغ عن المستخدم",
+  "reportUserExplanation": "أخبرنا بما حدث. لن يتم إشعار المستخدم بأنك أرسلت هذا البلاغ.",
+  "reportReason": "السبب",
+  "reportDetails": "تفاصيل إضافية (اختياري)",
+  "reportChooseReason": "اختر سبب البلاغ.",
+  "reportSubmit": "إرسال البلاغ",
+  "reportSubmitted": "تم إرسال بلاغك للمراجعة.",
+  "reportHarassment": "مضايقة أو تهديد",
+  "reportSpam": "رسائل مزعجة أو نشاط مضلل",
+  "reportFraud": "احتيال أو محاولة نصب",
+  "reportInappropriate": "محتوى غير لائق",
+  "reportOther": "سبب آخر"
 }
