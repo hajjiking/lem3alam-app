@@ -2584,7 +2584,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clientProfileLoadError =>
-      "We couldn't load your profile. Please try again.";
+      'We couldn\'t load your profile. Please try again.';
 
   @override
   String get clientProfileRequired => 'This field is required.';
@@ -2607,4 +2607,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get clientProfilePhotoInvalid =>
       'Choose a JPG, PNG, or GIF image no larger than 2 MB.';
+
+  @override
+  String get kycTitle => 'Identity verification';
+
+  @override
+  String get kycVerified => 'Identity verified';
+
+  @override
+  String get kycPending => 'Verification under review';
+
+  @override
+  String get kycRejected => 'Verification needs attention';
+
+  @override
+  String get kycNotSubmitted => 'Identity not verified';
+
+  @override
+  String get kycExplanation => 'Submit one identity document for review.';
+
+  @override
+  String get kycSubmit => 'Verify my identity';
+
+  @override
+  String get kycSubmitAgain => 'Submit another document';
+
+  @override
+  String get kycChooseType => 'Choose document type';
+
+  @override
+  String get kycIdCard => 'National ID card';
+
+  @override
+  String get kycPassport => 'Passport';
+
+  @override
+  String get kycDriverLicense => 'Driver licence';
+
+  @override
+  String get kycSelfie => 'Identity selfie';
+
+  @override
+  String get kycAddressProof => 'Proof of address';
+
+  @override
+  String get kycSubmitted => 'Your document was submitted for review.';
+
+  @override
+  String get kycInvalidFile =>
+      'Choose a JPG, PNG, or PDF file no larger than 5 MB.';
+
+  @override
+  String get kycLoadError => 'Verification status could not be loaded.';
+
+  @override
+  String kycRejectionReason(String reason) {
+    return 'Reason: $reason';
+  }
 }

@@ -4630,37 +4630,209 @@ abstract class AppLocalizations {
   /// **'Final resolution'**
   String get disputeDecision;
 
+  /// No description provided for @clientProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Profile'**
   String get clientProfileTitle;
 
+  /// No description provided for @clientProfileSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your contact details and account preferences'**
   String get clientProfileSubtitle;
 
+  /// No description provided for @clientProfileContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact details'**
   String get clientProfileContact;
 
+  /// No description provided for @clientProfileVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified account'**
   String get clientProfileVerified;
 
+  /// No description provided for @clientProfileNotVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification pending'**
   String get clientProfileNotVerified;
 
+  /// No description provided for @clientProfileAppearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
   String get clientProfileAppearance;
 
+  /// No description provided for @clientProfileEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
   String get clientProfileEditTitle;
 
+  /// No description provided for @clientProfileSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully.'**
   String get clientProfileSaved;
 
+  /// No description provided for @clientProfileLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t load your profile. Please try again.'**
   String get clientProfileLoadError;
 
+  /// No description provided for @clientProfileRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
   String get clientProfileRequired;
 
+  /// No description provided for @clientProfileInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address.'**
   String get clientProfileInvalidEmail;
 
+  /// No description provided for @clientProfileChangePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Change profile photo'**
   String get clientProfileChangePhoto;
 
+  /// No description provided for @clientProfileChoosePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new photo'**
   String get clientProfileChoosePhoto;
 
+  /// No description provided for @clientProfileRemovePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove current photo'**
   String get clientProfileRemovePhoto;
 
+  /// No description provided for @clientProfilePhotoSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated.'**
   String get clientProfilePhotoSaved;
 
+  /// No description provided for @clientProfilePhotoInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a JPG, PNG, or GIF image no larger than 2 MB.'**
   String get clientProfilePhotoInvalid;
+
+  /// No description provided for @kycTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity verification'**
+  String get kycTitle;
+
+  /// No description provided for @kycVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity verified'**
+  String get kycVerified;
+
+  /// No description provided for @kycPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification under review'**
+  String get kycPending;
+
+  /// No description provided for @kycRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification needs attention'**
+  String get kycRejected;
+
+  /// No description provided for @kycNotSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity not verified'**
+  String get kycNotSubmitted;
+
+  /// No description provided for @kycExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit one identity document for review.'**
+  String get kycExplanation;
+
+  /// No description provided for @kycSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify my identity'**
+  String get kycSubmit;
+
+  /// No description provided for @kycSubmitAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit another document'**
+  String get kycSubmitAgain;
+
+  /// No description provided for @kycChooseType.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose document type'**
+  String get kycChooseType;
+
+  /// No description provided for @kycIdCard.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID card'**
+  String get kycIdCard;
+
+  /// No description provided for @kycPassport.
+  ///
+  /// In en, this message translates to:
+  /// **'Passport'**
+  String get kycPassport;
+
+  /// No description provided for @kycDriverLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver licence'**
+  String get kycDriverLicense;
+
+  /// No description provided for @kycSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity selfie'**
+  String get kycSelfie;
+
+  /// No description provided for @kycAddressProof.
+  ///
+  /// In en, this message translates to:
+  /// **'Proof of address'**
+  String get kycAddressProof;
+
+  /// No description provided for @kycSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your document was submitted for review.'**
+  String get kycSubmitted;
+
+  /// No description provided for @kycInvalidFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a JPG, PNG, or PDF file no larger than 5 MB.'**
+  String get kycInvalidFile;
+
+  /// No description provided for @kycLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification status could not be loaded.'**
+  String get kycLoadError;
+
+  /// No description provided for @kycRejectionReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason: {reason}'**
+  String kycRejectionReason(String reason);
 }
 
 class _AppLocalizationsDelegate

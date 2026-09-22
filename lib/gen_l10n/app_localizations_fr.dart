@@ -2640,4 +2640,62 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get clientProfilePhotoInvalid =>
       'Choisissez une image JPG, PNG ou GIF de 2 Mo maximum.';
+
+  @override
+  String get kycTitle => 'Vérification d’identité';
+
+  @override
+  String get kycVerified => 'Identité vérifiée';
+
+  @override
+  String get kycPending => 'Vérification en cours';
+
+  @override
+  String get kycRejected => 'La vérification nécessite votre attention';
+
+  @override
+  String get kycNotSubmitted => 'Identité non vérifiée';
+
+  @override
+  String get kycExplanation =>
+      'Envoyez un document d’identité pour vérification.';
+
+  @override
+  String get kycSubmit => 'Vérifier mon identité';
+
+  @override
+  String get kycSubmitAgain => 'Envoyer un autre document';
+
+  @override
+  String get kycChooseType => 'Choisir le type de document';
+
+  @override
+  String get kycIdCard => 'Carte nationale d’identité';
+
+  @override
+  String get kycPassport => 'Passeport';
+
+  @override
+  String get kycDriverLicense => 'Permis de conduire';
+
+  @override
+  String get kycSelfie => 'Selfie d’identité';
+
+  @override
+  String get kycAddressProof => 'Justificatif de domicile';
+
+  @override
+  String get kycSubmitted => 'Votre document a été envoyé pour vérification.';
+
+  @override
+  String get kycInvalidFile =>
+      'Choisissez un fichier JPG, PNG ou PDF de 5 Mo maximum.';
+
+  @override
+  String get kycLoadError => 'Impossible de charger le statut de vérification.';
+
+  @override
+  String kycRejectionReason(String reason) {
+    return 'Motif : $reason';
+  }
 }

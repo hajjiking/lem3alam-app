@@ -26,12 +26,24 @@ supports logout. Password changes, notification delivery preferences, and
 account deletion are separate follow-up capabilities because they require
 additional API and product decisions.
 
+## Identity verification
+
+The profile loads `GET /api/v1/kyc/documents` and shows the authenticated
+client's verified, pending, rejected, or not-submitted state. Rejection reasons
+are shown without exposing stored document paths.
+
+Clients can submit an ID card, passport, driver licence, identity selfie, or
+proof of address through `POST /api/v1/kyc/documents`. The app accepts one JPG,
+JPEG, PNG, or PDF file up to 5 MB, reads it with a bounded stream, and sends it
+as multipart field `document` with the selected `type`. A successful submission
+reloads server state and displays the pending review status.
+
 ## Verification
 
 Run:
 
 ```bash
-flutter test test/client_profile_test.dart
+flutter test test/client_profile_test.dart test/client_kyc_test.dart
 ```
 
 The tests cover response mapping, trimmed update payloads, account ownership,

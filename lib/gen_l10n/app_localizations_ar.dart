@@ -2569,4 +2569,61 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get clientProfilePhotoInvalid =>
       'اختر صورة JPG أو PNG أو GIF لا يتجاوز حجمها 2 ميغابايت.';
+
+  @override
+  String get kycTitle => 'التحقق من الهوية';
+
+  @override
+  String get kycVerified => 'تم التحقق من الهوية';
+
+  @override
+  String get kycPending => 'التحقق قيد المراجعة';
+
+  @override
+  String get kycRejected => 'التحقق يحتاج إلى إجراء';
+
+  @override
+  String get kycNotSubmitted => 'لم يتم التحقق من الهوية';
+
+  @override
+  String get kycExplanation => 'أرسل وثيقة هوية واحدة للمراجعة.';
+
+  @override
+  String get kycSubmit => 'التحقق من هويتي';
+
+  @override
+  String get kycSubmitAgain => 'إرسال وثيقة أخرى';
+
+  @override
+  String get kycChooseType => 'اختر نوع الوثيقة';
+
+  @override
+  String get kycIdCard => 'بطاقة التعريف الوطنية';
+
+  @override
+  String get kycPassport => 'جواز السفر';
+
+  @override
+  String get kycDriverLicense => 'رخصة السياقة';
+
+  @override
+  String get kycSelfie => 'صورة شخصية للتحقق';
+
+  @override
+  String get kycAddressProof => 'إثبات العنوان';
+
+  @override
+  String get kycSubmitted => 'تم إرسال وثيقتك للمراجعة.';
+
+  @override
+  String get kycInvalidFile =>
+      'اختر ملف JPG أو PNG أو PDF لا يتجاوز حجمه 5 ميغابايت.';
+
+  @override
+  String get kycLoadError => 'تعذر تحميل حالة التحقق.';
+
+  @override
+  String kycRejectionReason(String reason) {
+    return 'السبب: $reason';
+  }
 }

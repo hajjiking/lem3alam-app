@@ -17,8 +17,10 @@ import '../../auth/presentation/auth_controller.dart';
 import '../../dashboard/presentation/dashboard_actions.dart';
 import '../../dashboard/presentation/widgets/dashboard_header.dart';
 import '../application/client_profile_controller.dart';
+import '../application/client_kyc_controller.dart';
 import '../data/client_profile_repository.dart';
 import '../domain/client_profile.dart';
+import 'client_kyc_section.dart';
 
 class ClientProfileScreen extends ConsumerWidget {
   const ClientProfileScreen({super.key});
@@ -29,7 +31,10 @@ class ClientProfileScreen extends ConsumerWidget {
 
     Future<void> refresh() async {
       try {
-        await ref.read(clientProfileControllerProvider.notifier).refresh();
+        await Future.wait([
+          ref.read(clientProfileControllerProvider.notifier).refresh(),
+          ref.read(clientKycControllerProvider.notifier).refresh(),
+        ]);
       } catch (_) {}
     }
 
@@ -311,6 +316,8 @@ class _ProfileContent extends ConsumerWidget {
             ),
           ],
         ),
+        const SizedBox(height: 16),
+        const ClientKycSection(),
         const SizedBox(height: 16),
         _Section(
           title: l.settings,

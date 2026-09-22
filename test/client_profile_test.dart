@@ -55,8 +55,18 @@ class ProfileApiClient extends ApiClient {
   @override
   Future<T> getJson<T>(String path,
       {Map<String, dynamic>? queryParameters}) async {
-    expectSync(path, 'profile');
     if (error case final Object value) throw value;
+    if (path == 'kyc/documents') {
+      return {
+        'success': true,
+        'data': {
+          'is_verified': false,
+          'verified_at': null,
+          'documents': const [],
+        }
+      } as T;
+    }
+    expectSync(path, 'profile');
     return {'success': true, 'data': profile} as T;
   }
 
@@ -203,6 +213,7 @@ void main() {
       ProviderScope(
         overrides: [
           authControllerProvider.overrideWith(TestAuthController.new),
+          apiClientProvider.overrideWithValue(api),
           clientProfileRepositoryProvider.overrideWithValue(repository(api)),
         ],
         child: MaterialApp(
