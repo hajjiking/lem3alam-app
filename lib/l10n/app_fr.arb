@@ -1137,5 +1137,10 @@
   "clientProfileSaved": "Profil mis à jour avec succès.",
   "clientProfileLoadError": "Impossible de charger votre profil. Veuillez réessayer.",
   "clientProfileRequired": "Ce champ est obligatoire.",
-  "clientProfileInvalidEmail": "Saisissez une adresse e-mail valide."
+  "clientProfileInvalidEmail": "Saisissez une adresse e-mail valide.",
+  "clientProfileChangePhoto": "Modifier la photo de profil",
+  "clientProfileChoosePhoto": "Choisir une nouvelle photo",
+  "clientProfileRemovePhoto": "Supprimer la photo actuelle",
+  "clientProfilePhotoSaved": "Photo de profil mise à jour.",
+  "clientProfilePhotoInvalid": "Choisissez une image JPG, PNG ou GIF de 2 Mo maximum."
 }

@@ -1,3 +1,7 @@
+import 'dart:typed_data';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/l10n/api_error_localizer.dart';
 import '../../../core/l10n/l10n.dart';
 import '../../../core/l10n/language_picker.dart';
+import '../../../core/config/app_config.dart';
 import '../../../core/networking/api_exception.dart';
 import '../../../core/ui/app_theme.dart';
 import '../../../routing/app_router.dart';
@@ -12,6 +17,7 @@ import '../../auth/presentation/auth_controller.dart';
 import '../../dashboard/presentation/dashboard_actions.dart';
 import '../../dashboard/presentation/widgets/dashboard_header.dart';
 import '../application/client_profile_controller.dart';
+import '../data/client_profile_repository.dart';
 import '../domain/client_profile.dart';
 
 class ClientProfileScreen extends ConsumerWidget {
@@ -71,6 +77,7 @@ class ClientProfileScreen extends ConsumerWidget {
                     data: (data) => _ProfileContent(
                       profile: data,
                       onEdit: () => _editProfile(context, ref, data),
+                      onAvatarTap: () => _manageAvatar(context, ref, data),
                       onLogout: () async {
                         await ref
                             .read(authControllerProvider.notifier)
@@ -110,17 +117,119 @@ class ClientProfileScreen extends ConsumerWidget {
         );
     }
   }
+
+  Future<void> _manageAvatar(
+    BuildContext context,
+    WidgetRef ref,
+    ClientProfile profile,
+  ) async {
+    final action = await showModalBottomSheet<_AvatarAction>(
+      context: context,
+      showDragHandle: true,
+      useSafeArea: true,
+      builder: (sheetContext) => Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library_outlined),
+              title: Text(context.l10n.clientProfileChoosePhoto),
+              onTap: () => Navigator.pop(sheetContext, _AvatarAction.upload),
+            ),
+            if (profile.avatarUrl != null)
+              ListTile(
+                leading: Icon(
+                  Icons.delete_outline_rounded,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                title: Text(
+                  context.l10n.clientProfileRemovePhoto,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+                onTap: () => Navigator.pop(sheetContext, _AvatarAction.delete),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (action == null || !context.mounted) return;
+
+    try {
+      if (action == _AvatarAction.delete) {
+        await ref.read(clientProfileControllerProvider.notifier).deleteAvatar();
+      } else {
+        final file = await _pickAvatar(context);
+        if (file == null || !context.mounted) return;
+        await ref
+            .read(clientProfileControllerProvider.notifier)
+            .uploadAvatar(file);
+      }
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(context.l10n.clientProfilePhotoSaved)),
+          );
+      }
+    } on ApiException catch (error) {
+      if (!context.mounted) return;
+      final message = error.message == 'err_invalid_avatar'
+          ? context.l10n.clientProfilePhotoInvalid
+          : localizeApiException(context, error);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text(message)));
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(context.l10n.clientProfilePhotoInvalid)),
+          );
+      }
+    }
+  }
+
+  Future<ClientAvatarFile?> _pickAvatar(BuildContext context) async {
+    final result = await FilePicker.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: const ['jpg', 'jpeg', 'png', 'gif'],
+      allowMultiple: false,
+      withReadStream: true,
+    );
+    if (result == null || result.files.isEmpty) return null;
+    final selected = result.files.single;
+    if (selected.size <= 0 ||
+        selected.size > ClientProfileRepository.maxAvatarBytes) {
+      throw const ApiException(message: 'err_invalid_avatar');
+    }
+    final bytes = BytesBuilder(copy: false);
+    await for (final chunk
+        in selected.readStream ?? selected.xFile.openRead()) {
+      if (bytes.length + chunk.length >
+          ClientProfileRepository.maxAvatarBytes) {
+        throw const ApiException(message: 'err_invalid_avatar');
+      }
+      bytes.add(chunk);
+    }
+    return ClientAvatarFile(name: selected.name, bytes: bytes.takeBytes());
+  }
 }
+
+enum _AvatarAction { upload, delete }
 
 class _ProfileContent extends ConsumerWidget {
   const _ProfileContent({
     required this.profile,
     required this.onEdit,
+    required this.onAvatarTap,
     required this.onLogout,
   });
 
   final ClientProfile profile;
   final VoidCallback onEdit;
+  final VoidCallback onAvatarTap;
   final Future<void> Function() onLogout;
 
   @override
@@ -147,16 +256,10 @@ class _ProfileContent extends ConsumerWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: theme.colorScheme.primaryContainer,
-                  foregroundColor: theme.colorScheme.onPrimaryContainer,
-                  child: Text(
-                    initials,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
+                _ProfileAvatar(
+                  profile: profile,
+                  initials: initials,
+                  onTap: onAvatarTap,
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -243,6 +346,100 @@ class _ProfileContent extends ConsumerWidget {
       ],
     );
   }
+}
+
+class _ProfileAvatar extends StatelessWidget {
+  const _ProfileAvatar({
+    required this.profile,
+    required this.initials,
+    required this.onTap,
+  });
+
+  final ClientProfile profile;
+  final String initials;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final url = _absoluteAvatarUrl(profile.avatarUrl);
+    final fallback = ColoredBox(
+      color: theme.colorScheme.primaryContainer,
+      child: Center(
+        child: Text(
+          initials,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: theme.colorScheme.onPrimaryContainer,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ),
+    );
+    return Semantics(
+      button: true,
+      label: context.l10n.clientProfileChangePhoto,
+      child: InkWell(
+        key: const ValueKey('client-profile-avatar'),
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            ClipOval(
+              child: SizedBox.square(
+                dimension: 80,
+                child: url == null
+                    ? fallback
+                    : CachedNetworkImage(
+                        imageUrl: url,
+                        fit: BoxFit.cover,
+                        placeholder: (_, __) => fallback,
+                        errorWidget: (_, __, ___) => fallback,
+                      ),
+              ),
+            ),
+            PositionedDirectional(
+              end: -2,
+              bottom: -2,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary,
+                  shape: BoxShape.circle,
+                  border:
+                      Border.all(color: theme.colorScheme.surface, width: 2),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    size: 16,
+                    color: theme.colorScheme.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+String? _absoluteAvatarUrl(String? value) {
+  final raw = value?.trim() ?? '';
+  if (raw.isEmpty) return null;
+  final parsed = Uri.tryParse(raw);
+  if (parsed != null && parsed.hasScheme) return parsed.toString();
+  final api = Uri.parse(AppConfig.apiBaseUrl);
+  if (raw.startsWith('/')) {
+    return Uri(
+            scheme: api.scheme,
+            host: api.host,
+            port: api.hasPort ? api.port : null,
+            path: raw)
+        .toString();
+  }
+  return api.resolve(raw).toString();
 }
 
 class _EditProfileSheet extends ConsumerStatefulWidget {

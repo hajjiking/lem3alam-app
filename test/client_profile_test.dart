@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,6 +48,9 @@ class ProfileApiClient extends ApiClient {
   Map<String, dynamic> profile = profileJson();
   Map<String, dynamic>? updatePayload;
   Object? error;
+  int avatarUploads = 0;
+  int avatarDeletes = 0;
+  FormData? avatarPayload;
 
   @override
   Future<T> getJson<T>(String path,
@@ -63,6 +68,30 @@ class ProfileApiClient extends ApiClient {
     updatePayload = (data! as Map).cast<String, dynamic>();
     profile = {...profile, ...updatePayload!};
     return {'success': true, 'data': profile} as T;
+  }
+
+  @override
+  Future<T> postJson<T>(String path,
+      {Object? data, Map<String, dynamic>? queryParameters}) async {
+    expectSync(path, 'profile/avatar');
+    if (error case final Object value) throw value;
+    avatarUploads++;
+    avatarPayload = data! as FormData;
+    profile = {...profile, 'avatar': '/storage/avatars/profile.png'};
+    return {
+      'success': true,
+      'data': {'avatar_url': '/storage/avatars/profile.png'}
+    } as T;
+  }
+
+  @override
+  Future<T> deleteJson<T>(String path,
+      {Object? data, Map<String, dynamic>? queryParameters}) async {
+    expectSync(path, 'profile/avatar');
+    if (error case final Object value) throw value;
+    avatarDeletes++;
+    profile = {...profile, 'avatar': null};
+    return {'success': true, 'data': const {}} as T;
   }
 }
 
@@ -134,6 +163,35 @@ void main() {
     expect(expired, isTrue);
   });
 
+  test('repository uploads and removes a validated avatar', () async {
+    final api = ProfileApiClient();
+    final repo = repository(api);
+    final uploaded = await repo.uploadAvatar(ClientAvatarFile(
+      name: 'portrait.png',
+      bytes: Uint8List.fromList([1, 2, 3]),
+    ));
+
+    expect(api.avatarUploads, 1);
+    expect(api.avatarPayload?.files.single.key, 'avatar');
+    expect(uploaded.avatarUrl, '/storage/avatars/profile.png');
+
+    final removed = await repo.deleteAvatar();
+    expect(api.avatarDeletes, 1);
+    expect(removed.avatarUrl, isNull);
+  });
+
+  test('repository rejects an invalid avatar before upload', () async {
+    final api = ProfileApiClient();
+    await expectLater(
+      repository(api).uploadAvatar(ClientAvatarFile(
+        name: 'document.pdf',
+        bytes: Uint8List.fromList([1, 2, 3]),
+      )),
+      throwsA(isA<ApiException>()),
+    );
+    expect(api.avatarUploads, 0);
+  });
+
   testWidgets('client can open and save the profile editor', (tester) async {
     tester.view.physicalSize = const Size(430, 1000);
     tester.view.devicePixelRatio = 1;
@@ -159,6 +217,11 @@ void main() {
 
     expect(find.text('Amina Idrissi'), findsOneWidget);
     expect(find.text('Verified account'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('client-profile-avatar')));
+    await tester.pumpAndSettle();
+    expect(find.text('Choose a new photo'), findsOneWidget);
+    await tester.tapAt(const Offset(10, 10));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Edit Profile'));
     await tester.pumpAndSettle();
 

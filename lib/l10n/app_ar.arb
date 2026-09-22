@@ -1137,5 +1137,10 @@
   "clientProfileSaved": "تم تحديث الملف الشخصي بنجاح.",
   "clientProfileLoadError": "تعذر تحميل ملفك الشخصي. يرجى المحاولة مرة أخرى.",
   "clientProfileRequired": "هذا الحقل مطلوب.",
-  "clientProfileInvalidEmail": "أدخل عنوان بريد إلكتروني صالحًا."
+  "clientProfileInvalidEmail": "أدخل عنوان بريد إلكتروني صالحًا.",
+  "clientProfileChangePhoto": "تغيير الصورة الشخصية",
+  "clientProfileChoosePhoto": "اختيار صورة جديدة",
+  "clientProfileRemovePhoto": "إزالة الصورة الحالية",
+  "clientProfilePhotoSaved": "تم تحديث الصورة الشخصية.",
+  "clientProfilePhotoInvalid": "اختر صورة JPG أو PNG أو GIF لا يتجاوز حجمها 2 ميغابايت."
 }

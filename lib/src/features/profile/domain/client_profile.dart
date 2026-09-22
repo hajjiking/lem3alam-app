@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 class ClientProfile {
   const ClientProfile({
     required this.id,
@@ -40,6 +42,13 @@ class ClientProfile {
       ),
     );
   }
+}
+
+class ClientAvatarFile {
+  const ClientAvatarFile({required this.name, required this.bytes});
+
+  final String name;
+  final Uint8List bytes;
 }
 
 class ClientProfileUpdate {

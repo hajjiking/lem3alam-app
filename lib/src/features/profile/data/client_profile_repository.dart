@@ -18,6 +18,9 @@ final clientProfileRepositoryProvider =
 });
 
 class ClientProfileRepository {
+  static const maxAvatarBytes = 2 * 1024 * 1024;
+  static const allowedAvatarExtensions = {'jpg', 'jpeg', 'png', 'gif'};
+
   ClientProfileRepository({
     required this.api,
     required this.readAuth,
@@ -33,7 +36,36 @@ class ClientProfileRepository {
   Future<ClientProfile> update(ClientProfileUpdate update) =>
       _authenticated(() => api.updateProfile(update));
 
+  Future<ClientProfile> uploadAvatar(ClientAvatarFile file) async {
+    final extension = file.name.split('.').last.toLowerCase();
+    if (file.bytes.isEmpty ||
+        file.bytes.length > maxAvatarBytes ||
+        !allowedAvatarExtensions.contains(extension)) {
+      throw const ApiException(message: 'err_invalid_avatar');
+    }
+    await _authenticatedResponse(() => api.uploadAvatar(file));
+    return load();
+  }
+
+  Future<ClientProfile> deleteAvatar() async {
+    await _authenticatedResponse(api.deleteAvatar);
+    return load();
+  }
+
   Future<ClientProfile> _authenticated(
+    Future<Map<String, dynamic>> Function() request,
+  ) async {
+    final response = await _authenticatedResponse(request);
+    final requestedUser = readAuth().user!;
+    final data = _map(response['data']);
+    final profile = ClientProfile.fromJson(data);
+    if (profile.id != requestedUser.id) {
+      throw const FormatException('Profile owner does not match session');
+    }
+    return profile;
+  }
+
+  Future<Map<String, dynamic>> _authenticatedResponse(
     Future<Map<String, dynamic>> Function() request,
   ) async {
     final requestedUser = readAuth().user;
@@ -48,12 +80,7 @@ class ClientProfileRepository {
           currentUser?.isClient != true) {
         throw const ApiException(statusCode: 403, message: 'err_forbidden');
       }
-      final data = _map(response['data']);
-      final profile = ClientProfile.fromJson(data);
-      if (profile.id != requestedUser.id) {
-        throw const FormatException('Profile owner does not match session');
-      }
-      return profile;
+      return response;
     } on ApiException catch (error) {
       if (error.statusCode == 401 && readAuth().user?.id == requestedUser?.id) {
         await expireSession();

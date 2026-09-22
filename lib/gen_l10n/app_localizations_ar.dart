@@ -2553,4 +2553,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get clientProfileInvalidEmail => 'أدخل عنوان بريد إلكتروني صالحًا.';
+
+  @override
+  String get clientProfileChangePhoto => 'تغيير الصورة الشخصية';
+
+  @override
+  String get clientProfileChoosePhoto => 'اختيار صورة جديدة';
+
+  @override
+  String get clientProfileRemovePhoto => 'إزالة الصورة الحالية';
+
+  @override
+  String get clientProfilePhotoSaved => 'تم تحديث الصورة الشخصية.';
+
+  @override
+  String get clientProfilePhotoInvalid =>
+      'اختر صورة JPG أو PNG أو GIF لا يتجاوز حجمها 2 ميغابايت.';
 }

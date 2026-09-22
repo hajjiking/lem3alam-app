@@ -4651,6 +4651,16 @@ abstract class AppLocalizations {
   String get clientProfileRequired;
 
   String get clientProfileInvalidEmail;
+
+  String get clientProfileChangePhoto;
+
+  String get clientProfileChoosePhoto;
+
+  String get clientProfileRemovePhoto;
+
+  String get clientProfilePhotoSaved;
+
+  String get clientProfilePhotoInvalid;
 }
 
 class _AppLocalizationsDelegate

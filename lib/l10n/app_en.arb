@@ -1290,5 +1290,10 @@
   "clientProfileSaved": "Profile updated successfully.",
   "clientProfileLoadError": "We couldn't load your profile. Please try again.",
   "clientProfileRequired": "This field is required.",
-  "clientProfileInvalidEmail": "Enter a valid email address."
+  "clientProfileInvalidEmail": "Enter a valid email address.",
+  "clientProfileChangePhoto": "Change profile photo",
+  "clientProfileChoosePhoto": "Choose a new photo",
+  "clientProfileRemovePhoto": "Remove current photo",
+  "clientProfilePhotoSaved": "Profile photo updated.",
+  "clientProfilePhotoInvalid": "Choose a JPG, PNG, or GIF image no larger than 2 MB."
 }

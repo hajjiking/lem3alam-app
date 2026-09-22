@@ -22,11 +22,26 @@ class ClientProfileController extends AsyncNotifier<ClientProfile> {
   }
 
   Future<ClientProfile> save(ClientProfileUpdate update) async {
+    return _mutate(
+      () => ref.read(clientProfileRepositoryProvider).update(update),
+    );
+  }
+
+  Future<ClientProfile> uploadAvatar(ClientAvatarFile file) => _mutate(
+        () => ref.read(clientProfileRepositoryProvider).uploadAvatar(file),
+      );
+
+  Future<ClientProfile> deleteAvatar() => _mutate(
+        () => ref.read(clientProfileRepositoryProvider).deleteAvatar(),
+      );
+
+  Future<ClientProfile> _mutate(
+    Future<ClientProfile> Function() operation,
+  ) async {
     final previous = state.value;
     state = const AsyncLoading<ClientProfile>();
     try {
-      final profile =
-          await ref.read(clientProfileRepositoryProvider).update(update);
+      final profile = await operation();
       if (!ref.mounted) return profile;
       state = AsyncData(profile);
       final currentUser = ref.read(authControllerProvider).user;

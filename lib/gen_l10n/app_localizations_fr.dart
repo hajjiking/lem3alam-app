@@ -2624,4 +2624,20 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get clientProfileInvalidEmail =>
       'Saisissez une adresse e-mail valide.';
+
+  @override
+  String get clientProfileChangePhoto => 'Modifier la photo de profil';
+
+  @override
+  String get clientProfileChoosePhoto => 'Choisir une nouvelle photo';
+
+  @override
+  String get clientProfileRemovePhoto => 'Supprimer la photo actuelle';
+
+  @override
+  String get clientProfilePhotoSaved => 'Photo de profil mise à jour.';
+
+  @override
+  String get clientProfilePhotoInvalid =>
+      'Choisissez une image JPG, PNG ou GIF de 2 Mo maximum.';
 }
