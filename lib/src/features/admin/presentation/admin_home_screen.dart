@@ -133,6 +133,7 @@ class _AdminHomeScreenState extends ConsumerState<AdminHomeScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ListTile(leading: const Icon(Icons.gavel_outlined), title: Text(context.l10n.disputeView), onTap: () { Navigator.pop(context); context.push('/disputes'); }),
             ListTile(
               leading: const Icon(Icons.refresh_rounded),
               title: Text(l10n.refreshAction),

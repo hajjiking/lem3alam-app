@@ -1,3 +1,5 @@
+import 'dispute_actions.dart';
+import '../../auth/presentation/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +23,11 @@ class _DisputesListScreenState extends ConsumerState<DisputesListScreen> {
     return Scaffold(
       appBar: AppBar(
           title: Text(l.disputeView),
-          leading: BackButton(onPressed: () => context.go('/dashboard'))),
+          leading: BackButton(
+              onPressed: () => context.go(
+                  ref.read(authControllerProvider).user?.isAdmin == true
+                      ? '/admin'
+                      : '/dashboard'))),
       body: disputes.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
@@ -64,6 +70,10 @@ class _DisputesListScreenState extends ConsumerState<DisputesListScreen> {
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(dispute.description),
+                      DisputeActions(
+                          dispute: dispute,
+                          onUpdated: () =>
+                              ref.invalidate(disputesPageProvider(page))),
                       if (dispute.additionalInfo.isNotEmpty) ...[
                         const SizedBox(height: 12),
                         Text(l.disputeNotes),

@@ -41,6 +41,7 @@ This app uses `GoRouter` (Navigator 2.0) with an indexed-stack shell for the pri
 - Splash: `/splash`
 - Login: `/login`
 - Register: `/register`
+- Client profile and account settings: `/profile` (requires a client account)
 
 ### Task routes
 

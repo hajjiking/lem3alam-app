@@ -21,6 +21,23 @@ class User {
   bool get isTasker => role == 'tasker';
   bool get isAdmin => role == 'admin';
 
+  User copyWith({
+    String? name,
+    String? email,
+    String? status,
+    String? city,
+  }) {
+    return User(
+      id: id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      role: role,
+      status: status ?? this.status,
+      city: city ?? this.city,
+      adminRole: adminRole,
+    );
+  }
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: (json['id'] as num).toInt(),

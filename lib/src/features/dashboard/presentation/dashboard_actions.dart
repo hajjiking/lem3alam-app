@@ -25,6 +25,10 @@ void openDashboardProfile(BuildContext context, int? userId, bool isTasker) {
     );
     return;
   }
+  if (userId != null) {
+    context.goNamed(AppRouteNames.clientProfile);
+    return;
+  }
   showDashboardFeatureNotice(context, context.l10n.dashboardProfile);
 }
 
@@ -46,6 +50,13 @@ Future<void> showDashboardMenu(BuildContext context, WidgetRef ref) async {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          ListTile(
+              leading: const Icon(Icons.gavel_outlined),
+              title: Text(l10n.disputeView),
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                context.push('/disputes');
+              }),
           ListTile(
             leading: const Icon(Icons.language_rounded),
             title: Text(l10n.languageAction),

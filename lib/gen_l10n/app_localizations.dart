@@ -4545,6 +4545,112 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Previous page'**
   String get disputePreviousPage;
+
+  /// No description provided for @disputePropose.
+  ///
+  /// In en, this message translates to:
+  /// **'Propose a solution'**
+  String get disputePropose;
+
+  /// No description provided for @disputeAppeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Appeal the complaint'**
+  String get disputeAppeal;
+
+  /// No description provided for @disputeAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept solution'**
+  String get disputeAccept;
+
+  /// No description provided for @disputeRequestChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Request another solution'**
+  String get disputeRequestChange;
+
+  /// No description provided for @disputeDecide.
+  ///
+  /// In en, this message translates to:
+  /// **'Record final decision'**
+  String get disputeDecide;
+
+  /// No description provided for @disputeWaitingResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the respondent'**
+  String get disputeWaitingResponse;
+
+  /// No description provided for @disputeWaitingAcceptance.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the complainant’s decision'**
+  String get disputeWaitingAcceptance;
+
+  /// No description provided for @disputeEscalated.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalated to an admin or moderator'**
+  String get disputeEscalated;
+
+  /// No description provided for @disputeWorkflowHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'The first appeal or rejection allows another proposal. A second appeal or rejection goes to an admin or moderator.'**
+  String get disputeWorkflowHelp;
+
+  /// No description provided for @disputeActionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain your response or proposed solution'**
+  String get disputeActionMessage;
+
+  /// No description provided for @disputeSendResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Send response'**
+  String get disputeSendResponse;
+
+  /// No description provided for @disputeAcceptConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept this solution and close the dispute?'**
+  String get disputeAcceptConfirm;
+
+  /// No description provided for @disputeHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussion history'**
+  String get disputeHistory;
+
+  /// No description provided for @disputeDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Final resolution'**
+  String get disputeDecision;
+
+  String get clientProfileTitle;
+
+  String get clientProfileSubtitle;
+
+  String get clientProfileContact;
+
+  String get clientProfileVerified;
+
+  String get clientProfileNotVerified;
+
+  String get clientProfileAppearance;
+
+  String get clientProfileEditTitle;
+
+  String get clientProfileSaved;
+
+  String get clientProfileLoadError;
+
+  String get clientProfileRequired;
+
+  String get clientProfileInvalidEmail;
 }
 
 class _AppLocalizationsDelegate

@@ -1,0 +1,310 @@
+diff --git a/app/Http/Controllers/Api/DisputeController.php b/app/Http/Controllers/Api/DisputeController.php
+--- a/app/Http/Controllers/Api/DisputeController.php
++++ b/app/Http/Controllers/Api/DisputeController.php
+@@ -9,177 +9,90 @@
+ 
+ class DisputeController extends Controller
+ {
+-    /**
+-     * Get disputes for authenticated user
+-     */
+     public function index(Request $request)
+     {
+-        $user = $request->user();
+-
+-        $query = Dispute::where(function ($q) use ($user) {
+-            $q->where('complainant_id', $user->id)
+-                ->orWhere('respondent_id', $user->id);
+-        })->with(['task:id,title_fr,title_ar', 'complainant:id,name,avatar', 'respondent:id,name,avatar']);
+-
+-        // Filter by status
+-        if ($request->has('status')) {
+-            $query->where('status', $request->status);
+-        }
+-
+-        // Filter by type
+-        if ($request->has('type')) {
+-            $query->where('type', $request->type);
+-        }
+-
+-        $disputes = $query->orderBy('created_at', 'desc')
+-            ->paginate($request->get('per_page', 15));
+-
+-        return response()->json([
+-            'success' => true,
+-            'data' => $disputes,
+-            'message' => 'Disputes retrieved successfully',
+-        ]);
+-    }
+-
+-    /**
+-     * Get dispute details
+-     */
++        $filters = $request->validate([
++            'page' => 'sometimes|integer|min:1',
++            'per_page' => 'sometimes|integer|min:1|max:50',
++            'status' => 'sometimes|in:open,in_review,resolved,closed',
++            'type' => 'sometimes|in:payment,quality,no_show,communication,other',
++        ]);
++        $id = (int) $request->user()->id;
++        $query = Dispute::where(fn ($q) => $q->where('complainant_id', $id)->orWhere('respondent_id', $id))
++            ->with(['task:id,title,title_translations', 'complainant:id,name', 'respondent:id,name']);
++        foreach (['status', 'type'] as $field) {
++            if (isset($filters[$field])) $query->where($field, $filters[$field]);
++        }
++        return response()->json(['success' => true, 'data' => $query->orderByDesc('id')->paginate($filters['per_page'] ?? 15)]);
++    }
++
+     public function show(Request $request, $disputeId)
+     {
+-        $dispute = Dispute::with([
+-            'task:id,title_fr,title_ar,user_id',
+-            'complainant:id,name,avatar',
+-            'respondent:id,name,avatar',
+-        ])->find($disputeId);
+-
+-        if (! $dispute) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'Dispute not found',
+-            ], 404);
+-        }
+-
+-        $user = $request->user();
+-
+-        // Check if user is involved in this dispute
+-        if ($dispute->complainant_id !== $user->id && $dispute->respondent_id !== $user->id) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'Unauthorized to view this dispute',
+-            ], 403);
+-        }
+-
+-        return response()->json([
+-            'success' => true,
+-            'data' => $dispute,
+-            'message' => 'Dispute details retrieved successfully',
+-        ]);
+-    }
+-
+-    /**
+-     * Create a new dispute
+-     */
+-    public function store(Request $request, $taskId)
+-    {
+-        $request->validate([
+-            'respondent_id' => 'required|exists:users,id',
+-            'type' => 'required|in:payment,quality,communication,other',
+-            'title_fr' => 'required_without:title_ar|string|max:255',
+-            'title_ar' => 'required_without:title_fr|string|max:255',
+-            'description_fr' => 'required_without:description_ar|string|max:2000',
+-            'description_ar' => 'required_without:description_fr|string|max:2000',
+-            'evidence' => 'sometimes|file|mimes:jpeg,png,jpg,gif,pdf,doc,docx|max:10240',
+-        ]);
+-
+-        $task = Task::find($taskId);
+-
+-        if (! $task) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'Task not found',
+-            ], 404);
+-        }
+-
+-        $user = $request->user();
+-        $respondentId = $request->respondent_id;
+-
+-        // Check if user is involved in this task
+-        $isTaskOwner = $task->user_id === $user->id;
+-        $isTaskWorker = $task->taskApplications()->where('user_id', $user->id)->where('status', 'accepted')->exists();
+-
+-        if (! $isTaskOwner && ! $isTaskWorker) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'You are not involved in this task',
+-            ], 403);
+-        }
+-
+-        // Check if respondent is involved in this task
+-        $respondentIsOwner = $task->user_id === $respondentId;
+-        $respondentIsWorker = $task->taskApplications()->where('user_id', $respondentId)->where('status', 'accepted')->exists();
+-
+-        if (! $respondentIsOwner && ! $respondentIsWorker) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'Respondent is not involved in this task',
+-            ], 400);
+-        }
+-
+-        // Cannot dispute against yourself
+-        if ($user->id === $respondentId) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'You cannot create a dispute against yourself',
+-            ], 400);
+-        }
+-
+-        // Check if dispute already exists for this task between these users
+-        $existingDispute = Dispute::where('task_id', $taskId)
+-            ->where(function ($query) use ($user, $respondentId) {
+-                $query->where(function ($q) use ($user, $respondentId) {
+-                    $q->where('complainant_id', $user->id)
+-                        ->where('respondent_id', $respondentId);
+-                })->orWhere(function ($q) use ($user, $respondentId) {
+-                    $q->where('complainant_id', $respondentId)
+-                        ->where('respondent_id', $user->id);
+-                });
+-            })
+-            ->whereIn('status', ['open', 'in_progress'])
+-            ->first();
+-
+-        if ($existingDispute) {
+-            return response()->json([
+-                'success' => false,
+-                'message' => 'An active dispute already exists between you and this user for this task',
+-            ], 400);
+-        }
+-
+-        $disputeData = [
+-            'task_id' => $taskId,
+-            'complainant_id' => $user->id,
+-            'respondent_id' => $respondentId,
+-            'type' => $request->type,
+-            'title_fr' => $request->title_fr,
+-            'title_ar' => $request->title_ar,
+-            'description_fr' => $request->description_fr,
+-            'description_ar' => $request->description_ar,
+-            'status' => 'open',
+-        ];
+-
+-        // Handle evidence file upload
+-        if ($request->hasFile('evidence')) {
+-            $evidencePath = $request->file('evidence')->store('dispute_evidence', 'public');
+-            $disputeData['evidence'] = $evidencePath;
+-        }
+-
+-        $dispute = Dispute::create($disputeData);
+-        $dispute->load(['task', 'complainant', 'respondent']);
+-
+-        return response()->json([
+-            'success' => true,
+-            'data' => $dispute,
+-            'message' => 'Dispute created successfully',
+-        ], 201);
++        $dispute = Dispute::with(['task:id,title,title_translations', 'complainant:id,name', 'respondent:id,name'])->findOrFail($disputeId);
++        abort_unless(in_array((int) $request->user()->id, [(int) $dispute->complainant_id, (int) $dispute->respondent_id], true), 403);
++        return response()->json(['success' => true, 'data' => $dispute]);
++    }
++
++    public function evidence(Request $request, $disputeId, $index)
++    {
++        $dispute = Dispute::findOrFail($disputeId);
++        $user = $request->user();
++        abort_unless($user->role === 'admin' || in_array((int) $user->id, [(int) $dispute->complainant_id, (int) $dispute->respondent_id], true), 403);
++        $file = ($dispute->evidence ?? [])[(int) $index] ?? null;
++        abort_unless(is_array($file) && isset($file['path'], $file['name']), 404);
++        return \Illuminate\Support\Facades\Storage::disk('local')->download($file['path'], $file['name']);
++    }
++
++    public function store(Request $request)
++    {
++        $data = $request->validate([
++            'task_id' => 'required|integer|exists:tasks,id',
++            'respondent_id' => 'required|integer|exists:users,id',
++            'type' => 'required|in:payment,quality,no_show,communication,other',
++            'subject' => 'required|string|max:255',
++            'description' => 'required|string|max:1000',
++            'additional_info' => 'nullable|string|max:500',
++            'evidence' => 'sometimes|array|max:5',
++            'evidence.*' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120',
++        ]);
++        $user = $request->user();
++        abort_unless(in_array($user->role, ['client', 'tasker'], true), 403);
++        $paths = [];
++        try {
++            // Lock the task so concurrent requests cannot create duplicate active disputes.
++            $dispute = \Illuminate\Support\Facades\DB::transaction(function () use ($data, $request, $user, &$paths) {
++                $task = Task::lockForUpdate()->findOrFail($data['task_id']);
++                $id = (int) $user->id;
++                $respondent = (int) $data['respondent_id'];
++                $client = (int) $task->client_id;
++                $tasker = (int) $task->assigned_tasker_id;
++                abort_unless($client > 0 && $tasker > 0 && $client !== $tasker &&
++                    (($id === $client && $user->role === 'client' && $respondent === $tasker) ||
++                     ($id === $tasker && $user->role === 'tasker' && $respondent === $client)), 403);
++                $existing = Dispute::where('task_id', $task->id)
++                    ->whereIn('status', ['open', 'in_review'])
++                    ->where(fn ($q) => $q->where(fn ($q) => $q->where('complainant_id', $id)->where('respondent_id', $respondent))
++                        ->orWhere(fn ($q) => $q->where('complainant_id', $respondent)->where('respondent_id', $id)))
++                    ->exists();
++                abort_if($existing, 409, 'An active dispute already exists for this task.');
++                $evidence = [];
++                foreach ($request->file('evidence', []) as $file) {
++                    $path = $file->store('dispute_evidence', 'local');
++                    if ($path === false) throw new \RuntimeException('Unable to store evidence.');
++                    $paths[] = $path;
++                    $evidence[] = ['path' => $path, 'name' => $file->getClientOriginalName(), 'mime' => $file->getMimeType(), 'size' => $file->getSize()];
++                }
++                return Dispute::create([
++                    'task_id' => $task->id, 'complainant_id' => $id, 'respondent_id' => $respondent,
++                    'type' => $data['type'], 'subject' => $data['subject'], 'description' => $data['description'],
++                    'additional_info' => $data['additional_info'] ?? null, 'evidence' => $evidence, 'status' => 'open',
++                ]);
++            });
++        } catch (\Throwable $error) {
++            \Illuminate\Support\Facades\Storage::disk('local')->delete($paths);
++            throw $error;
++        }
++        return response()->json(['success' => true, 'data' => $dispute], 201);
+     }
+ 
+     /**
+diff --git a/app/Models/Dispute.php b/app/Models/Dispute.php
+--- a/app/Models/Dispute.php
++++ b/app/Models/Dispute.php
+@@ -12,6 +12,8 @@
+         'complainant_id',
+         'respondent_id',
+         'admin_id',
++        'type',
++        'additional_info',
+         'subject',
+         'subject_translations',
+         'description',
+diff --git a/database/migrations/2026_09_11_000001_add_type_and_additional_info_to_disputes.php b/database/migrations/2026_09_11_000001_add_type_and_additional_info_to_disputes.php
+new file mode 100644
+--- /dev/null
++++ b/database/migrations/2026_09_11_000001_add_type_and_additional_info_to_disputes.php
+@@ -0,0 +1,21 @@
++<?php
++
++use Illuminate\Database\Migrations\Migration;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Support\Facades\Schema;
++
++return new class extends Migration
++{
++    public function up(): void
++    {
++        Schema::table('disputes', function (Blueprint $table) {
++            $table->string('type', 32)->default('other');
++            $table->text('additional_info')->nullable();
++        });
++    }
++
++    public function down(): void
++    {
++        Schema::table('disputes', fn (Blueprint $table) => $table->dropColumn(['type', 'additional_info']));
++    }
++};
+diff --git a/routes/api.php b/routes/api.php
+--- a/routes/api.php
++++ b/routes/api.php
+@@ -289,6 +289,7 @@
+         // Disputes
+         Route::post('/disputes', [DisputeController::class, 'store']);
+         Route::get('/disputes', [DisputeController::class, 'index']);
++        Route::get('/disputes/{dispute}/evidence/{index}', [DisputeController::class, 'evidence'])->whereNumber('index');
+         Route::get('/disputes/{dispute}', [DisputeController::class, 'show']);
+ 
+         // Admin routes

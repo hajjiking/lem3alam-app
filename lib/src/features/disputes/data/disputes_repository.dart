@@ -9,6 +9,7 @@ import '../domain/dispute_draft.dart';
 abstract interface class DisputesRepository {
   Future<void> submit(DisputeDraft draft);
   Future<DisputesPage> list({int page = 1});
+  Future<void> act(int id, String action, String message, int version);
 }
 
 final disputesRepositoryProvider =
@@ -33,7 +34,19 @@ class DisputeRecord {
         subject = json['subject'] as String,
         description = json['description'] as String,
         status = json['status'] as String,
-        additionalInfo = json['additional_info'] as String? ?? '';
+        additionalInfo = json['additional_info'] as String? ?? '',
+        workflowState =
+            json['workflow_state'] as String? ?? 'awaiting_response',
+        version = (json['workflow_version'] as num?)?.toInt() ?? 0,
+        allowedActions =
+            (json['allowed_actions'] as List? ?? []).cast<String>(),
+        history = (json['workflow_history'] as List? ?? [])
+            .cast<Map<String, dynamic>>(),
+        resolution = json['resolution'] as String? ?? '';
+  final String workflowState, resolution;
+  final int version;
+  final List<String> allowedActions;
+  final List<Map<String, dynamic>> history;
   final int id, taskId;
   final String subject, description, status, additionalInfo;
 }
@@ -55,7 +68,9 @@ class ApiDisputesRepository implements DisputesRepository {
   int _userId() {
     final state = auth();
     if (state.status != AuthStatus.authenticated ||
-        !(state.user?.isClient == true || state.user?.isTasker == true)) {
+        !(state.user?.isClient == true ||
+            state.user?.isTasker == true ||
+            state.user?.isAdmin == true)) {
       throw const ApiException(statusCode: 403, message: 'err_forbidden');
     }
     return state.user!.id;
@@ -118,6 +133,13 @@ class ApiDisputesRepository implements DisputesRepository {
         int.tryParse('${result['respondent_id']}') != draft.againstUserId) {
       throw const ApiException(message: 'err_unknown');
     }
+  }
+
+  @override
+  Future<void> act(int id, String action, String message, int version) async {
+    await _request(() => api.postJson<Map<String, dynamic>>(
+        'disputes/$id/actions',
+        data: {'action': action, 'message': message, 'version': version}));
   }
 
   @override

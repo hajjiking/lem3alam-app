@@ -9,6 +9,8 @@ class TestRepository implements DisputesRepository {
   @override
   Future<DisputesPage> list({int page = 1}) async =>
       const DisputesPage(items: [], page: 1, lastPage: 1);
+  @override
+  Future<void> act(int id, String action, String message, int version) async {}
   bool fail = false;
   int calls = 0;
   @override

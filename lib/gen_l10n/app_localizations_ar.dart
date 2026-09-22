@@ -2476,4 +2476,81 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get disputePreviousPage => 'الصفحة السابقة';
+
+  @override
+  String get disputePropose => 'اقتراح حل';
+
+  @override
+  String get disputeAppeal => 'الاعتراض على الشكوى';
+
+  @override
+  String get disputeAccept => 'قبول الحل';
+
+  @override
+  String get disputeRequestChange => 'طلب حل آخر';
+
+  @override
+  String get disputeDecide => 'تسجيل القرار النهائي';
+
+  @override
+  String get disputeWaitingResponse => 'في انتظار رد الطرف الآخر';
+
+  @override
+  String get disputeWaitingAcceptance => 'في انتظار قرار المشتكي';
+
+  @override
+  String get disputeEscalated => 'تم التصعيد إلى الإدارة أو المشرف';
+
+  @override
+  String get disputeWorkflowHelp =>
+      'يسمح الاعتراض أو الرفض الأول باقتراح حل آخر. أما الاعتراض أو الرفض الثاني فيصعّد القضية إلى الإدارة أو المشرف.';
+
+  @override
+  String get disputeActionMessage => 'اشرح ردك أو الحل المقترح';
+
+  @override
+  String get disputeSendResponse => 'إرسال الرد';
+
+  @override
+  String get disputeAcceptConfirm => 'هل تقبل هذا الحل وتغلق النزاع؟';
+
+  @override
+  String get disputeHistory => 'سجل المناقشة';
+
+  @override
+  String get disputeDecision => 'الحل النهائي';
+
+  @override
+  String get clientProfileTitle => 'ملفي الشخصي';
+
+  @override
+  String get clientProfileSubtitle => 'إدارة معلومات الاتصال وتفضيلات الحساب';
+
+  @override
+  String get clientProfileContact => 'معلومات الاتصال';
+
+  @override
+  String get clientProfileVerified => 'حساب موثّق';
+
+  @override
+  String get clientProfileNotVerified => 'التوثيق قيد الانتظار';
+
+  @override
+  String get clientProfileAppearance => 'المظهر';
+
+  @override
+  String get clientProfileEditTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get clientProfileSaved => 'تم تحديث الملف الشخصي بنجاح.';
+
+  @override
+  String get clientProfileLoadError =>
+      'تعذر تحميل ملفك الشخصي. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get clientProfileRequired => 'هذا الحقل مطلوب.';
+
+  @override
+  String get clientProfileInvalidEmail => 'أدخل عنوان بريد إلكتروني صالحًا.';
 }

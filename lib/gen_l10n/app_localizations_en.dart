@@ -2510,4 +2510,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get disputePreviousPage => 'Previous page';
+
+  @override
+  String get disputePropose => 'Propose a solution';
+
+  @override
+  String get disputeAppeal => 'Appeal the complaint';
+
+  @override
+  String get disputeAccept => 'Accept solution';
+
+  @override
+  String get disputeRequestChange => 'Request another solution';
+
+  @override
+  String get disputeDecide => 'Record final decision';
+
+  @override
+  String get disputeWaitingResponse => 'Waiting for the respondent';
+
+  @override
+  String get disputeWaitingAcceptance =>
+      'Waiting for the complainant’s decision';
+
+  @override
+  String get disputeEscalated => 'Escalated to an admin or moderator';
+
+  @override
+  String get disputeWorkflowHelp =>
+      'The first appeal or rejection allows another proposal. A second appeal or rejection goes to an admin or moderator.';
+
+  @override
+  String get disputeActionMessage =>
+      'Explain your response or proposed solution';
+
+  @override
+  String get disputeSendResponse => 'Send response';
+
+  @override
+  String get disputeAcceptConfirm =>
+      'Accept this solution and close the dispute?';
+
+  @override
+  String get disputeHistory => 'Discussion history';
+
+  @override
+  String get disputeDecision => 'Final resolution';
+
+  @override
+  String get clientProfileTitle => 'My Profile';
+
+  @override
+  String get clientProfileSubtitle =>
+      'Manage your contact details and account preferences';
+
+  @override
+  String get clientProfileContact => 'Contact details';
+
+  @override
+  String get clientProfileVerified => 'Verified account';
+
+  @override
+  String get clientProfileNotVerified => 'Verification pending';
+
+  @override
+  String get clientProfileAppearance => 'Appearance';
+
+  @override
+  String get clientProfileEditTitle => 'Edit profile';
+
+  @override
+  String get clientProfileSaved => 'Profile updated successfully.';
+
+  @override
+  String get clientProfileLoadError =>
+      "We couldn't load your profile. Please try again.";
+
+  @override
+  String get clientProfileRequired => 'This field is required.';
+
+  @override
+  String get clientProfileInvalidEmail => 'Enter a valid email address.';
 }

@@ -2542,4 +2542,86 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get disputePreviousPage => 'Page précédente';
+
+  @override
+  String get disputePropose => 'Proposer une solution';
+
+  @override
+  String get disputeAppeal => 'Contester la plainte';
+
+  @override
+  String get disputeAccept => 'Accepter la solution';
+
+  @override
+  String get disputeRequestChange => 'Demander une autre solution';
+
+  @override
+  String get disputeDecide => 'Enregistrer la décision finale';
+
+  @override
+  String get disputeWaitingResponse => 'En attente de réponse';
+
+  @override
+  String get disputeWaitingAcceptance =>
+      'En attente de la décision du plaignant';
+
+  @override
+  String get disputeEscalated => 'Transmis à un administrateur ou modérateur';
+
+  @override
+  String get disputeWorkflowHelp =>
+      'La première contestation ou le premier refus permet une nouvelle proposition. Le deuxième transmet le dossier à un administrateur ou modérateur.';
+
+  @override
+  String get disputeActionMessage =>
+      'Expliquez votre réponse ou solution proposée';
+
+  @override
+  String get disputeSendResponse => 'Envoyer la réponse';
+
+  @override
+  String get disputeAcceptConfirm =>
+      'Accepter cette solution et clôturer le litige ?';
+
+  @override
+  String get disputeHistory => 'Historique des échanges';
+
+  @override
+  String get disputeDecision => 'Résolution finale';
+
+  @override
+  String get clientProfileTitle => 'Mon profil';
+
+  @override
+  String get clientProfileSubtitle =>
+      'Gérez vos coordonnées et préférences de compte';
+
+  @override
+  String get clientProfileContact => 'Coordonnées';
+
+  @override
+  String get clientProfileVerified => 'Compte vérifié';
+
+  @override
+  String get clientProfileNotVerified => 'Vérification en attente';
+
+  @override
+  String get clientProfileAppearance => 'Apparence';
+
+  @override
+  String get clientProfileEditTitle => 'Modifier le profil';
+
+  @override
+  String get clientProfileSaved => 'Profil mis à jour avec succès.';
+
+  @override
+  String get clientProfileLoadError =>
+      'Impossible de charger votre profil. Veuillez réessayer.';
+
+  @override
+  String get clientProfileRequired => 'Ce champ est obligatoire.';
+
+  @override
+  String get clientProfileInvalidEmail =>
+      'Saisissez une adresse e-mail valide.';
 }

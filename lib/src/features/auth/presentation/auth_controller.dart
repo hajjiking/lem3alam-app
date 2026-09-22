@@ -7,9 +7,11 @@ import '../../../core/networking/dio_provider.dart';
 import '../../../core/storage/token_storage.dart';
 import '../data/auth_repository_impl.dart';
 import '../domain/auth_repository.dart';
+import '../domain/user.dart';
 import 'auth_state.dart';
 
-final authControllerProvider = NotifierProvider<AuthController, AuthState>(AuthController.new);
+final authControllerProvider =
+    NotifierProvider<AuthController, AuthState>(AuthController.new);
 
 class AuthController extends Notifier<AuthState> {
   var _bootstrapped = false;
@@ -38,7 +40,29 @@ class AuthController extends Notifier<AuthState> {
       state = AuthState(status: AuthStatus.authenticated, user: me);
     } catch (_) {
       // #region debug-point A:bootstrap-auth-failed
-      (() { try { final client = HttpClient(); client.postUrl(Uri.parse('http://127.0.0.1:7778/event')).then((req) { req.headers.contentType = ContentType.json; req.write(jsonEncode({'sessionId': 'tasker-tasks-crash', 'runId': 'pre-fix', 'hypothesisId': 'A', 'location': 'auth_controller.dart:27', 'msg': '[DEBUG] bootstrap failed and clearing session', 'data': {'statusBefore': state.status.name}, 'ts': DateTime.now().millisecondsSinceEpoch})); return req.close(); }).then((res) => res.drain<void>()).whenComplete(client.close).catchError((_) {}); } catch (_) {} })();
+      (() {
+        try {
+          final client = HttpClient();
+          client
+              .postUrl(Uri.parse('http://127.0.0.1:7778/event'))
+              .then((req) {
+                req.headers.contentType = ContentType.json;
+                req.write(jsonEncode({
+                  'sessionId': 'tasker-tasks-crash',
+                  'runId': 'pre-fix',
+                  'hypothesisId': 'A',
+                  'location': 'auth_controller.dart:27',
+                  'msg': '[DEBUG] bootstrap failed and clearing session',
+                  'data': {'statusBefore': state.status.name},
+                  'ts': DateTime.now().millisecondsSinceEpoch
+                }));
+                return req.close();
+              })
+              .then((res) => res.drain<void>())
+              .whenComplete(client.close)
+              .catchError((_) {});
+        } catch (_) {}
+      })();
       // #endregion
       await tokenStorage.clear();
       state = AuthState.unauthenticated;
@@ -52,7 +76,32 @@ class AuthController extends Notifier<AuthState> {
 
   Future<void> expireSession() async {
     // #region debug-point A:expire-session
-    (() { try { final client = HttpClient(); client.postUrl(Uri.parse('http://127.0.0.1:7778/event')).then((req) { req.headers.contentType = ContentType.json; req.write(jsonEncode({'sessionId': 'tasker-tasks-crash', 'runId': 'pre-fix', 'hypothesisId': 'A', 'location': 'auth_controller.dart:37', 'msg': '[DEBUG] expireSession invoked', 'data': {'statusBefore': state.status.name, 'role': state.user?.role}, 'ts': DateTime.now().millisecondsSinceEpoch})); return req.close(); }).then((res) => res.drain<void>()).whenComplete(client.close).catchError((_) {}); } catch (_) {} })();
+    (() {
+      try {
+        final client = HttpClient();
+        client
+            .postUrl(Uri.parse('http://127.0.0.1:7778/event'))
+            .then((req) {
+              req.headers.contentType = ContentType.json;
+              req.write(jsonEncode({
+                'sessionId': 'tasker-tasks-crash',
+                'runId': 'pre-fix',
+                'hypothesisId': 'A',
+                'location': 'auth_controller.dart:37',
+                'msg': '[DEBUG] expireSession invoked',
+                'data': {
+                  'statusBefore': state.status.name,
+                  'role': state.user?.role
+                },
+                'ts': DateTime.now().millisecondsSinceEpoch
+              }));
+              return req.close();
+            })
+            .then((res) => res.drain<void>())
+            .whenComplete(client.close)
+            .catchError((_) {});
+      } catch (_) {}
+    })();
     // #endregion
     await tokenStorage.clear();
     state = AuthState.unauthenticated;
@@ -82,5 +131,14 @@ class AuthController extends Notifier<AuthState> {
   Future<void> logout() async {
     await authRepository.logout();
     state = AuthState.unauthenticated;
+  }
+
+  void updateUser(User user) {
+    final current = state.user;
+    if (state.status == AuthStatus.authenticated &&
+        current?.id == user.id &&
+        current?.role == user.role) {
+      state = AuthState(status: AuthStatus.authenticated, user: user);
+    }
   }
 }
